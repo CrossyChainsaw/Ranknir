@@ -7,11 +7,13 @@ import json
 from api import getClan
 from api import getPlayerStats
 from keep_alive import keep_alive
-from OrderTeamName import ArrangeTeamName
+from order_teamname import ArrangeTeamName
 
 # VARIABLES
-skywardImageLink = os.environ['IMG_LINK']
-eloChannel = 976552050953437194
+skyward_image_link = os.environ['IMG_LINK']
+elo_channel = 976552050953437194
+test_channel = 973594560368373820
+using_channel = elo_channel
 skywardCurrentRatings = []
 skywardPeakRatings = []
 skywardCurrentTeamNames = []
@@ -30,12 +32,12 @@ async def start(ctx):
   loop.start()
 
 
-# PRINT
-#get all players
-json_object = json.loads(getClan().content) # request
-allPLayersInSkyward = json_object["clan"];
 
 def GetPlayersElo():
+  #GET ALL PLAYERS
+  json_object = json.loads(getClan().content) # request
+  allPLayersInSkyward = json_object["clan"];
+  
   num = 0
   for player in allPLayersInSkyward:
     num += 1
@@ -59,7 +61,6 @@ def GetPlayersElo():
 
       # ORDER TEAMNAME
       bestCurrentTeam = ArrangeTeamName(bestTeam) # error
-      print('ordered: ' + bestCurrentTeam)
           
       # ADD ALL VALUES TO ARRAYS
       if bestCurrentTeam.startswith("bestCurrentTeam is undefined"):
@@ -108,8 +109,8 @@ async def loop():
   SortPlayersElo()
   
   # SEND SKYWARD IMAGE
-  channel = bot.get_channel(eloChannel)  
-  msg1 = await channel.send(skywardImageLink) # send 1
+  channel = bot.get_channel(using_channel)  
+  msg1 = await channel.send(skyward_image_link) # send 1
   print("sent image")
 
   # SEND CLAN XP
@@ -117,7 +118,7 @@ async def loop():
   _clanExp = json_object["clan_xp"]
   
   embed2=discord.Embed(title="Skyward", description="Total Exp: " + str(_clanExp), color=0x289fb4)
-  channel = bot.get_channel(eloChannel)  
+  channel = bot.get_channel(using_channel)  
   msg2 = await channel.send(embed=embed2) # send 2
   print("sent clan xp")
 
@@ -127,7 +128,7 @@ async def loop():
   for (current, peak, currentTeam) in zip(skywardCurrentRatingsSorted, skywardPeakRatingsSorted, skywardCurrentTeamsSorted):
     embed3.description += "**" + str(num) + ". " + currentTeam + "**: **current:** " + str(current) + " **peak:** " + str(peak) + '\n'
     num+=1
-  channel = bot.get_channel(eloChannel)  
+  channel = bot.get_channel(using_channel)  
   msg3 = await channel.send(embed=embed3) # send 3
   
   # DELETE MESSAGES
