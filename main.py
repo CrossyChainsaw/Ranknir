@@ -11,6 +11,7 @@ from OrderTeamName import ArrangeTeamName
 
 # VARIABLES
 skywardImageLink = os.environ['IMG_LINK']
+eloChannel = 976552050953437194
 skywardCurrentRatings = []
 skywardPeakRatings = []
 skywardCurrentTeamNames = []
@@ -107,7 +108,7 @@ async def loop():
   SortPlayersElo()
   
   # SEND SKYWARD IMAGE
-  channel = bot.get_channel(976552050953437194)  
+  channel = bot.get_channel(eloChannel)  
   msg1 = await channel.send(skywardImageLink) # send 1
   print("sent image")
 
@@ -116,7 +117,7 @@ async def loop():
   _clanExp = json_object["clan_xp"]
   
   embed2=discord.Embed(title="Skyward", description="Total Exp: " + str(_clanExp), color=0x289fb4)
-  channel = bot.get_channel(976552050953437194)  
+  channel = bot.get_channel(eloChannel)  
   msg2 = await channel.send(embed=embed2) # send 2
   print("sent clan xp")
 
@@ -126,7 +127,7 @@ async def loop():
   for (current, peak, currentTeam) in zip(skywardCurrentRatingsSorted, skywardPeakRatingsSorted, skywardCurrentTeamsSorted):
     embed3.description += "**" + str(num) + ". " + currentTeam + "**: **current:** " + str(current) + " **peak:** " + str(peak) + '\n'
     num+=1
-  channel = bot.get_channel(976552050953437194)  
+  channel = bot.get_channel(eloChannel)  
   msg3 = await channel.send(embed=embed3) # send 3
   
   # DELETE MESSAGES
