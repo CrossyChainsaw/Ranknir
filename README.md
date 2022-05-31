@@ -1,5 +1,7 @@
 # Ranknir
-Shows 2v2 elo for all your clan members.
+A discord bot written for a Brawlhalla clan named 'Skyward'
+
+Shows a list with all your members and their 2v2 elo.
 
 *example*
 
