@@ -114,29 +114,42 @@ async def loop():
 
     # SEND SKYWARD IMAGE
     channel = bot.get_channel(using_channel)
-    msg1 = await channel.send(skyward_image_link)  # send 1
-    print("sent image")
 
     # SEND CLAN XP
     json_object = json.loads(getClan().content)  # request
-    _clanExp = json_object["clan_xp"]
-
+    try:
+        _clanExp = json_object["clan_xp"]
+    except:
+        print('TOO MANY REQUESTS')
+        _clanExp = 'ERROR 429: TOO MANY REQUESTS'
     embed2 = discord.Embed(
         title="Skyward", description="Total Exp: " + str(_clanExp), color=0x289fb4)
-    channel = bot.get_channel(using_channel)
-    msg2 = await channel.send(embed=embed2)  # send 2
-    print("sent clan xp")
 
     # SEND MEMBERS ELO
     embed3 = discord.Embed(description="", color=0x289fb4)
+    embed4 = discord.Embed(description="", color=0x289fb4)
     num = 1
     for (current, peak, currentTeam) in zip(skywardCurrentRatingsSorted, skywardPeakRatingsSorted, skywardCurrentTeamsSorted):
-        embed3.description += "**" + \
-            str(num) + ". " + currentTeam + "**: **current:** " + \
-            str(current) + " **peak:** " + str(peak) + '\n'
+        if num <= 25:
+            embed3.description += "**" + \
+                str(num) + ". " + currentTeam + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+        else:
+            embed4.description += "**" + \
+                str(num) + ". " + currentTeam + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
         num += 1
     channel = bot.get_channel(using_channel)
+
+    # SEND MESSAGES
+    msg1 = await channel.send(skyward_image_link)  # send 1
+    print("sent image")
+    msg2 = await channel.send(embed=embed2)  # send 2
+    print("sent clan xp")
     msg3 = await channel.send(embed=embed3)  # send 3
+    print('sent members elo 25/50')
+    msg4 = await channel.send(embed=embed4)  # send 3
+    print('sent members elo 50/50')
 
     # DELETE MESSAGES
     skywardCurrentRatings.clear()

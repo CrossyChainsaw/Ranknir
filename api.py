@@ -1,6 +1,7 @@
 import os
 import requests
 import time
+from secrets import get_keys
 
 # VARIABLES
 skyward_clan_id = "84648"
@@ -13,13 +14,13 @@ using_clan = skyward_clan_id
 
 def getClan():
     time.sleep(0.10)  # 0.10 might be possible
-    return requests.get("https://api.brawlhalla.com/clan/" + using_clan + "/?api_key=" + os.environ['API_KEY'])
+    return requests.get("https://api.brawlhalla.com/clan/" + using_clan + "/?api_key=" + get_keys(1))
 
 
 def getPlayerStats(brawlhalla_id):
     time.sleep(0.10)
     return requests.get("https://api.brawlhalla.com/player/" +
-                        str(brawlhalla_id) + "/ranked?api_key=" + os.environ['API_KEY'])
+                        str(brawlhalla_id) + "/ranked?api_key=" + get_keys(1))
 
 # test api
 # https://api.brawlhalla.com/player/7364605/ranked?api_key=
