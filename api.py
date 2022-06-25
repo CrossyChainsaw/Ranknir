@@ -18,7 +18,7 @@ def getClan():
 
 
 def getPlayerStats(brawlhalla_id):
-    time.sleep(0.10)
+    time.sleep(10)
     return requests.get("https://api.brawlhalla.com/player/" +
                         str(brawlhalla_id) + "/ranked?api_key=" + get_keys(1))
 

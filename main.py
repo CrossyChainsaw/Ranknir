@@ -1,4 +1,5 @@
 import os
+from pydoc import classname
 from secrets import get_keys
 import discord
 from discord.ext import commands
@@ -10,22 +11,21 @@ from api import getPlayerStats
 from keep_alive import keep_alive
 from order_teamname import ArrangeTeamName
 
-# VARIABLES
 skyward_image_link = 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png'
 elo_channel = 976552050953437194
 test_channel = 973594560368373820
-using_channel = test_channel
-skywardCurrentRatings = []
-skywardPeakRatings = []
-skywardCurrentTeamNames = []
+using_channel = elo_channel
+first_time = True
+clan = []
+clan_members = []
+clan_current_2v2_ratings = []
+clan_peak_2v2_ratings = []
+clan_2v2_teamnames = []
+clan_current_2v2_ratings_sorted = []
+clan_peak_2v2_ratings_sorted = []
+clan_2v2_teamnames_sorted = []
 
-skywardCurrentRatingsSorted = []
-skywardPeakRatingsSorted = []
-skywardCurrentTeamsSorted = []
-
-
-# COMMANDS
-bot = commands.Bot(command_prefix=['r'])
+bot = commands.Bot(command_prefix=['r', 'R'])
 
 
 @commands.has_role('DevOps')
@@ -34,16 +34,28 @@ async def start(ctx):
     loop.start()
 
 
-def GetPlayersElo():
-    # GET ALL PLAYERS
-    json_object = json.loads(getClan().content)  # request
-    allPLayersInSkyward = json_object["clan"]
+def get_clan():
+    global clan
+    try:
+        clan = json.loads(getClan().content)  # request
+    except:
+        clan = []
 
+
+def get_clan_members():
+    global clan_members
+    try:
+        clan_members = clan['clan']
+    except:
+        clan_members = []
+
+
+def Save2v2Elo():
     num = 0
-    for player in allPLayersInSkyward:
+    for player in clan_members:
         num += 1
         try:
-            all2v2Teams = json.loads(getPlayerStats(player["brawlhalla_id"]).content)[
+            all_my_2v2_teams = json.loads(getPlayerStats(player["brawlhalla_id"]).content)[
                 "2v2"]  # request
 
             # FIND BEST TEAM CURRENT ELO
@@ -51,17 +63,13 @@ def GetPlayersElo():
             bestCurrent = -1
             bestPeak = -1
 
-            for team in all2v2Teams:
+            for team in all_my_2v2_teams:
                 rating = team["rating"]
                 peak = team["peak_rating"]
                 if rating > bestCurrent:
                     bestCurrent = rating
                     bestPeak = peak
-                    bestTeam = team
                     bestCurrentTeam = team["teamname"]
-
-            # ORDER TEAMNAME
-            # bestCurrentTeam = ArrangeTeamName(bestTeam)  # error
 
             # ADD ALL VALUES TO ARRAYS
             if bestCurrentTeam.startswith("bestCurrentTeam is undefined"):
@@ -71,18 +79,18 @@ def GetPlayersElo():
             print(bestCurrentTeam)
             print("current: " + str(bestCurrent))
             print("peak: " + str(bestPeak))
-            skywardCurrentTeamNames.append(bestCurrentTeam)
-            skywardCurrentRatings.append(bestCurrent)
-            skywardPeakRatings.append(bestPeak)
+            clan_2v2_teamnames.append(bestCurrentTeam)
+            clan_current_2v2_ratings.append(bestCurrent)
+            clan_peak_2v2_ratings.append(bestPeak)
 
         except:
             currentResult = "**" + \
                 str(num) + ". " + player["name"] + \
                 "**: **current:**" + " -1" + " **peak:**" + " -1"
 
-            skywardCurrentTeamNames.append(player["name"])
-            skywardCurrentRatings.append(-1)
-            skywardPeakRatings.append(-1)
+            clan_2v2_teamnames.append(player["name"])
+            clan_current_2v2_ratings.append(-1)
+            clan_peak_2v2_ratings.append(-1)
 
             print(currentResult)
     time.sleep(1)
@@ -90,46 +98,45 @@ def GetPlayersElo():
 
 def SortPlayersElo():
     print('start sorting players elo...')
-    while len(skywardCurrentRatings) > 0:
+    while len(clan_current_2v2_ratings) > 0:
         index = -1
         bestIndex = 0
         highestCurrentRating = -2
-        for (current, peak, teamCurrent) in zip(skywardCurrentRatings, skywardPeakRatings, skywardCurrentTeamNames):
+        for (current, peak, teamCurrent) in zip(clan_current_2v2_ratings, clan_peak_2v2_ratings, clan_2v2_teamnames):
             index += 1
             if current > highestCurrentRating:
                 highestCurrentRating = current
                 bestIndex = index
-        skywardCurrentRatingsSorted.append(
-            skywardCurrentRatings.pop(bestIndex))
-        skywardPeakRatingsSorted.append(skywardPeakRatings.pop(bestIndex))
-        skywardCurrentTeamsSorted.append(
-            skywardCurrentTeamNames.pop(bestIndex))
+        clan_current_2v2_ratings_sorted.append(
+            clan_current_2v2_ratings.pop(bestIndex))
+        clan_peak_2v2_ratings_sorted.append(
+            clan_peak_2v2_ratings.pop(bestIndex))
+        clan_2v2_teamnames_sorted.append(
+            clan_2v2_teamnames.pop(bestIndex))
     print('done sorting')
 
 
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=5)
 async def loop():
-    GetPlayersElo()
+    get_clan()
+    global clan
+    get_clan_members()
+    global clan_members
+    Save2v2Elo()
     SortPlayersElo()
-
-    # SEND SKYWARD IMAGE
-    channel = bot.get_channel(using_channel)
-
-    # SEND CLAN XP
-    json_object = json.loads(getClan().content)  # request
-    try:
-        _clanExp = json_object["clan_xp"]
-    except:
-        print('TOO MANY REQUESTS')
-        _clanExp = 'ERROR 429: TOO MANY REQUESTS'
+    global first_time
+    global msg1
+    global msg2
+    global msg3
+    global msg4
+    embed1 = discord.Embed(description="skyward image", color=0x289fb4)
     embed2 = discord.Embed(
-        title="Skyward", description="Total Exp: " + str(_clanExp), color=0x289fb4)
-
-    # SEND MEMBERS ELO
+        title="Skyward", description="Total Exp: " + str(clan['clan_xp']), color=0x289fb4)
     embed3 = discord.Embed(description="", color=0x289fb4)
     embed4 = discord.Embed(description="", color=0x289fb4)
+    global num
     num = 1
-    for (current, peak, currentTeam) in zip(skywardCurrentRatingsSorted, skywardPeakRatingsSorted, skywardCurrentTeamsSorted):
+    for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan_2v2_teamnames_sorted):
         if num <= 25:
             embed3.description += "**" + \
                 str(num) + ". " + currentTeam + "**: **current:** " + \
@@ -139,35 +146,37 @@ async def loop():
                 str(num) + ". " + currentTeam + "**: **current:** " + \
                 str(current) + " **peak:** " + str(peak) + '\n'
         num += 1
+    if first_time:
+        await send_embeds(embed1=embed1, embed2=embed2, embed3=embed3, embed4=embed4)
+        first_time = False
+
+    time.sleep(2500)
+
+    await delete_embeds(msg1=msg1, msg2=msg2, msg3=msg3, msg4=msg4)
+    await send_embeds(embed1=embed1, embed2=embed2, embed3=embed3, embed4=embed4)
+
+
+async def send_embeds(embed1, embed2, embed3, embed4):
+    global msg1
+    global msg2
+    global msg3
+    global msg4
     channel = bot.get_channel(using_channel)
-
-    # SEND MESSAGES
     msg1 = await channel.send(skyward_image_link)  # send 1
-    print("sent image")
+    print("sent 1")
     msg2 = await channel.send(embed=embed2)  # send 2
-    print("sent clan xp")
+    print("sent 2")
     msg3 = await channel.send(embed=embed3)  # send 3
-    print('sent members elo 25/50')
+    print('sent 3')
     msg4 = await channel.send(embed=embed4)  # send 3
-    print('sent members elo 50/50')
+    print('sent 4')
 
-    # DELETE MESSAGES
-    skywardCurrentRatings.clear()
-    skywardPeakRatings.clear()
-    skywardCurrentRatingsSorted.clear()
-    skywardPeakRatingsSorted.clear()
-    skywardCurrentTeamsSorted.clear()
 
-    time.sleep(2000)
-
+async def delete_embeds(msg1, msg2, msg3, msg4):
     await msg1.delete()
     await msg2.delete()
     await msg3.delete()
+    await msg4.delete()
 
 keep_alive()
 bot.run(get_keys(0))
-
-# extra if peak and current is same team just show in one line?
-# logic for sorting, if starts with player[name] nothing else yk
-# get player id of the teammate and do request for name ez
-# then do line 2
