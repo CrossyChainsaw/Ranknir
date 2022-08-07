@@ -1,6 +1,6 @@
 import os
+import os
 from pydoc import classname
-from secrets import get_keys
 import discord
 from discord.ext import commands
 from discord.ext import tasks
@@ -27,6 +27,14 @@ clan_2v2_teamnames_sorted = []
 
 bot = commands.Bot(command_prefix=['r', 'R'])
 
+@bot.event
+async def on_ready():
+  print(f'We have logged in as {bot.user}')
+  log_channel = bot.get_channel(973594560368373820)
+  await log_channel.send("I'm back online!")
+  while True:
+    await loop()
+    time.sleep(2500)
 
 @commands.has_role('DevOps')
 @bot.command(name='start', help='starts bruh')
@@ -116,7 +124,6 @@ def SortPlayersElo():
     print('done sorting')
 
 
-@tasks.loop(seconds=5)
 async def loop():
     get_clan()
     global clan
@@ -146,22 +153,16 @@ async def loop():
                 str(num) + ". " + currentTeam + "**: **current:** " + \
                 str(current) + " **peak:** " + str(peak) + '\n'
         num += 1
-    if first_time:
         await send_embeds(embed1=embed1, embed2=embed2, embed3=embed3, embed4=embed4)
-        first_time = False
-
-    time.sleep(2500)
-
-    await delete_embeds(msg1=msg1, msg2=msg2, msg3=msg3, msg4=msg4)
-    await send_embeds(embed1=embed1, embed2=embed2, embed3=embed3, embed4=embed4)
 
 
 async def send_embeds(embed1, embed2, embed3, embed4):
+    channel = bot.get_channel(using_channel)
+    await channel.purge(limit=10)  
     global msg1
     global msg2
     global msg3
     global msg4
-    channel = bot.get_channel(using_channel)
     msg1 = await channel.send(skyward_image_link)  # send 1
     print("sent 1")
     msg2 = await channel.send(embed=embed2)  # send 2
@@ -179,4 +180,4 @@ async def delete_embeds(msg1, msg2, msg3, msg4):
     await msg4.delete()
 
 keep_alive()
-bot.run(get_keys(0))
+bot.run(bot.run(get_keys(0))
