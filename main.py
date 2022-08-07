@@ -364,12 +364,12 @@ async def poop():
     global msg2
     global msg3
     global msg4
-    embed1 = discord.Embed(description="skyward image", color=0x289fb4)
     embed2 = discord.Embed(title="Skyward",
                            description="Total Exp: " + str(clan['clan_xp']),
                            color=0x289fb4)
     embed3 = discord.Embed(description="", color=0x289fb4)
     embed4 = discord.Embed(description="", color=0x289fb4)
+    embed5 = discord.Embed(description="", color=0x289fb4)
     global num
     num = 1
     print("current: " + str(len(clan_current_2v2_ratings_sorted)))
@@ -378,22 +378,26 @@ async def poop():
     for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted,
                                             clan_peak_2v2_ratings_sorted,
                                             clan_2v2_teamnames_sorted):
-        if num <= 25:
+        if num <= 20:
             embed3.description += "**" + \
                 str(num) + ". " + currentTeam + "**: **current:** " + \
                 str(current) + " **peak:** " + str(peak) + '\n'
-        else:
+        elif num <= 40:
             embed4.description += "**" + \
                 str(num) + ". " + currentTeam + "**: **current:** " + \
                 str(current) + " **peak:** " + str(peak) + '\n'
+        else:
+            embed5.description += "**" + \
+                str(num) + ". " + currentTeam + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
         num += 1
-    await send_embeds(embed1=embed1,
-                      embed2=embed2,
+    await send_embeds(embed2=embed2,
                       embed3=embed3,
-                      embed4=embed4)
+                      embed4=embed4,
+                      embed5=embed5)
 
 
-async def send_embeds(embed1, embed2, embed3, embed4):
+async def send_embeds(embed2, embed3, embed4, embed5):
     channel = bot.get_channel(using_channel)
     await channel.purge(limit=10)
 
@@ -407,8 +411,12 @@ async def send_embeds(embed1, embed2, embed3, embed4):
     print('sent 3')
 
     if len(embed4.description) > 1:
-        await channel.send(embed=embed4)  # send 3
+        await channel.send(embed=embed4)  # send 4
         print('sent 4')
+
+    if len(embed5.description) > 1:
+        await channel.send(embed=embed5)  # send 5
+        print('sent 5')
 
 
 keep_alive()
