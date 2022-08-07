@@ -10,7 +10,7 @@ type `rstart` in any channel. Ranknir bot should send a list of all your clan me
 
 ![image](https://user-images.githubusercontent.com/74303221/174410542-5cc12557-41ab-472e-aa63-5164ff9a78a5.png)
 
-## Bot Stopped
+## Bot Offline
 If the bot randomly stops updating, it got a ban from discord. This happens because my bot is hosted on a server together with multiple bots on the same IP. if any of the bots there get an IP ban, my bot gets taken down as well. This also stops the loop, so you will have to use the command `rstart` again to restart it.
 
 ## Ranknir Profile Picture
