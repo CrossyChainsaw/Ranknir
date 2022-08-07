@@ -1,4 +1,4 @@
-# Ranknir (REPLIT IS MORE UP TO DATE RN)
+# Ranknir
 A discord bot written for a Brawlhalla clan named Skyward.
 
 ## How to use
