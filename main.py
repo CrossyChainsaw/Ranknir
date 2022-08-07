@@ -40,12 +40,6 @@ async def on_ready():
         print('done waiting')
 
 
-@commands.has_role('DevOps')
-@bot.command(name='start', help='starts bruh')
-async def start(ctx):
-    poop.start()
-
-
 def get_clan():
     global clan
     try:
