@@ -12,12 +12,12 @@ using_clan = skyward_clan_id
 # METHODS
 
 
-def getClan():
+def fetch_clan():
     time.sleep(0.10)  # 0.10 might be possible
     return requests.get("https://api.brawlhalla.com/clan/" + using_clan + "/?api_key=" + get_keys(1))
 
 
-def getPlayerStats(brawlhalla_id):
+def fetch_player_ranked_stats(brawlhalla_id):
     time.sleep(10)
     return requests.get("https://api.brawlhalla.com/player/" +
                         str(brawlhalla_id) + "/ranked?api_key=" + get_keys(1))
