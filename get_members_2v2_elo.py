@@ -4,16 +4,16 @@ import time
 from api import fetch_clan, fetch_player_ranked_stats
 
 
-def get_clan():
+def get_clan(clan_id):
     try:
-        clan = json.loads(fetch_clan().content)  # request
+        clan = json.loads(fetch_clan(clan_id).content)  # request
     except:
         clan = []
     return clan
 
 
-def get_clan_members():
-    clan = get_clan()
+def get_clan_members(clan_id):
+    clan = get_clan(clan_id)
     try:
         clan_members = clan['clan']
 
@@ -30,9 +30,9 @@ def get_clan_members():
     return return_values
 
 
-def get_members_2v2_elo():
+def get_members_2v2_elo(clan_id):
     # get clan and clan members
-    return_values = get_clan_members()
+    return_values = get_clan_members(clan_id)
     clan_members = return_values[0]
     clan = return_values[1]
 

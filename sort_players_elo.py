@@ -2,9 +2,9 @@ from pickletools import read_unicodestring1
 from get_members_2v2_elo import get_members_2v2_elo
 
 
-def sort_players_elo():
+def sort_players_elo(clan_id):
     # get 2v2 teams, current and peak elo's
-    returned_values = get_members_2v2_elo()
+    returned_values = get_members_2v2_elo(clan_id)
     clan_2v2_teamnames = returned_values[0]
     clan_current_2v2_ratings = returned_values[1]
     clan_peak_2v2_ratings = returned_values[2]
