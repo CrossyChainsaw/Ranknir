@@ -1,3 +1,4 @@
+from secrets import get_keys
 import os
 from pydoc import classname
 import re
@@ -63,7 +64,7 @@ async def main(clan_id, channel_id, clan_image, clan_color):
     clan = return_values[3]
 
     print(str(clan_2v2_teamnames_sorted))
-  
+    
     # prepare embeds - make this a diff method
     embed2 = discord.Embed(title=clan['clan_name'],
                            description="Total Exp: " + str(clan['clan_xp']),
