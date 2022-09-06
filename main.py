@@ -27,6 +27,12 @@ insomnia_clan_id = '1919781'
 insomnia_color = 0x301834
 insomnia_image = "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png"
 
+# Pandation
+pandation_elo_channel_id = 1016402549491912794
+pandation_clan_id = '1702413'
+pandation_color = 0x212226
+pandation_image = "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg"
+
 # Testing
 test_channel_id = 973594560368373820
 
@@ -41,10 +47,11 @@ async def on_ready():
     skyward_log_channel_id = bot.get_channel(973594560368373820)
     await skyward_log_channel_id.send("I'm back online!")
     while True:
-        await main(insomnia_clan_id, insomnia_elo_channel_id, insomnia_image, insomnia_color)
+        await main(pandation_clan_id, pandation_elo_channel_id, pandation_image, pandation_color)
         wait(2500)
         await main(insomnia_clan_id, insomnia_elo_channel_id, insomnia_image, insomnia_color)
         wait(2500)
+        await main(skyward_clan_id, skyward_elo_channel_id, skyward_image, skyward_color)
 
 
 async def main(clan_id, channel_id, clan_image, clan_color):
@@ -55,6 +62,8 @@ async def main(clan_id, channel_id, clan_image, clan_color):
     clan_peak_2v2_ratings_sorted = return_values[2]
     clan = return_values[3]
 
+    print(str(clan_2v2_teamnames_sorted))
+  
     # prepare embeds - make this a diff method
     embed2 = discord.Embed(title=clan['clan_name'],
                            description="Total Exp: " + str(clan['clan_xp']),
@@ -64,9 +73,7 @@ async def main(clan_id, channel_id, clan_image, clan_color):
     embed5 = discord.Embed(description="", color=clan_color)
     global num
     num = 1
-    for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted,
-                                            clan_peak_2v2_ratings_sorted,
-                                            clan_2v2_teamnames_sorted):
+    for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan_2v2_teamnames_sorted):
         if num <= 20:
             embed3.description += "**" + \
                 str(num) + ". " + currentTeam + "**: **current:** " + \
