@@ -33,6 +33,12 @@ pandation_clan_id = '1702413'
 pandation_color = 0x212226
 pandation_image = "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg"
 
+# Test Clan
+blossom_elo_channel_id = 973594560368373820
+blossom_clan_id = '1998475'
+blossom_color = 0xfebdff
+blossom_image = "this_clan_has_no_image"
+
 # Testing
 test_channel_id = 973594560368373820
 
@@ -41,29 +47,35 @@ test_channel_id = 973594560368373820
 
 bot = commands.Bot(command_prefix=['r', 'R'])
 
+
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
     skyward_log_channel_id = bot.get_channel(973594560368373820)
     await skyward_log_channel_id.send("I'm back online!")
     while True:
-        await main(pandation_clan_id, pandation_elo_channel_id, pandation_image, pandation_color)
+        #await main(blossom_clan_id, blossom_elo_channel_id, blossom_image, blossom_color, sorting_method="peak")
+        #wait(2500)
+        await main(pandation_clan_id, pandation_elo_channel_id,
+                   pandation_image, pandation_color, sorting_method="peak")
         wait(2500)
-        await main(insomnia_clan_id, insomnia_elo_channel_id, insomnia_image, insomnia_color)
+        await main(insomnia_clan_id, insomnia_elo_channel_id, insomnia_image,
+                   insomnia_color, sorting_method="current")
         wait(2500)
-        await main(skyward_clan_id, skyward_elo_channel_id, skyward_image, skyward_color)
+        await main(skyward_clan_id, skyward_elo_channel_id, skyward_image,
+                   skyward_color, sorting_method="current")
 
 
-async def main(clan_id, channel_id, clan_image, clan_color):
+async def main(clan_id, channel_id, clan_image, clan_color, sorting_method):
     # get teams, current and peak elo's sorted
-    return_values = sort_players_elo(clan_id)
+    return_values = sort_players_elo(clan_id, sorting_method)
     clan_2v2_teamnames_sorted = return_values[0]
     clan_current_2v2_ratings_sorted = return_values[1]
     clan_peak_2v2_ratings_sorted = return_values[2]
     clan = return_values[3]
 
     print(str(clan_2v2_teamnames_sorted))
-  
+
     # prepare embeds - make this a diff method
     embed2 = discord.Embed(title=clan['clan_name'],
                            description="Total Exp: " + str(clan['clan_xp']),
@@ -73,7 +85,9 @@ async def main(clan_id, channel_id, clan_image, clan_color):
     embed5 = discord.Embed(description="", color=clan_color)
     global num
     num = 1
-    for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan_2v2_teamnames_sorted):
+    for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted,
+                                            clan_peak_2v2_ratings_sorted,
+                                            clan_2v2_teamnames_sorted):
         if num <= 20:
             embed3.description += "**" + \
                 str(num) + ". " + currentTeam + "**: **current:** " + \
@@ -91,7 +105,9 @@ async def main(clan_id, channel_id, clan_image, clan_color):
                       embed3=embed3,
                       embed4=embed4,
                       embed5=embed5,
-                      bot=bot, channel_id=channel_id, clan_image=clan_image)
+                      bot=bot,
+                      channel_id=channel_id,
+                      clan_image=clan_image)
 
     # clear embeds for some reason
     clan_current_2v2_ratings_sorted.clear()
