@@ -6,6 +6,8 @@ from keep_alive import keep_alive
 from send_embeds import send_embeds
 from sort_elo import sort_teams_elo, sort_players_elo
 from wait import wait
+from turn import get_turn, next_turn, reset_turn
+import json
 
 # Skyward
 skyward_2v2_elo_channel_id = 976552050953437194
@@ -27,7 +29,8 @@ pandation_clan_id = '1702413'
 pandation_color = 0x212226
 pandation_image = "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg"
 
-# Test Clan
+# Blossom | Test Clan
+blossom_1v1_elo_channel_id = 973594560368373820
 blossom_2v2_elo_channel_id = 973594560368373820
 blossom_clan_id = '1998475'
 blossom_color = 0xfebdff
@@ -41,23 +44,28 @@ test_channel_id = 973594560368373820
 
 bot = commands.Bot(command_prefix=['r', 'R'])
 
-
 @bot.event
 async def on_ready():
+    # I'm back online!
     print(f'We have logged in as {bot.user}')
     skyward_log_channel_id = bot.get_channel(973594560368373820)
     await skyward_log_channel_id.send("I'm back online!")
+  
+    # main, send 1v1 / 2v2 elo list
     while True:
+      turn = get_turn()
+      print("current turn: " + str(turn))
+      if turn == 0:
         await main_1v1(pandation_clan_id, pandation_1v1_elo_channel_id, pandation_image, pandation_color, sorting_method="peak")
-        wait(2500)
-        await main_1v1(insomnia_clan_id, insomnia_2v2_elo_channel_id, insomnia_image, insomnia_color, sorting_method="current")
-        wait(2500)
-        await main_2v2(insomnia_clan_id, insomnia_2v2_elo_channel_id, insomnia_image, insomnia_color, sorting_method="current")
-        wait(2500)
+      elif turn == 1:
         await main_2v2(pandation_clan_id, pandation_2v2_elo_channel_id, pandation_image, pandation_color, sorting_method="peak")
-        wait(2500)
-        await main_2v2(skyward_clan_id, skyward_2v2_elo_channel_id, skyward_image,
-                   skyward_color, sorting_method="current")
+      elif turn == 2:
+        await main_2v2(insomnia_clan_id, insomnia_2v2_elo_channel_id, insomnia_image, insomnia_color, sorting_method="current")
+      elif turn == 3:
+        await main_2v2(skyward_clan_id, skyward_2v2_elo_channel_id, skyward_image, skyward_color, sorting_method="current")
+        reset_turn()
+      next_turn()
+      wait(2500)
 
 async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
   # get players elo sorted
@@ -104,11 +112,7 @@ async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
 
 async def main_2v2(clan_id, channel_id, clan_image, clan_color, sorting_method):
     # get teams, current and peak elo's sorted
-    return_values = sort_teams_elo(clan_id, sorting_method)
-    clan_2v2_teamnames_sorted = return_values[0]
-    clan_current_2v2_ratings_sorted = return_values[1]
-    clan_peak_2v2_ratings_sorted = return_values[2]
-    clan = return_values[3]
+    clan_2v2_teamnames_sorted, clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan = sort_teams_elo(clan_id, sorting_method)
 
     print(str(clan_2v2_teamnames_sorted))
 
@@ -137,13 +141,7 @@ async def main_2v2(clan_id, channel_id, clan_image, clan_color, sorting_method):
                 str(num) + ". " + currentTeam + "**: **current:** " + \
                 str(current) + " **peak:** " + str(peak) + '\n'
         num += 1
-    await send_embeds(embed2=embed2,
-                      embed3=embed3,
-                      embed4=embed4,
-                      embed5=embed5,
-                      bot=bot,
-                      channel_id=channel_id,
-                      clan_image=clan_image)
+    await send_embeds(embed2=embed2, embed3=embed3, embed4=embed4, embed5=embed5, bot=bot, channel_id=channel_id, clan_image=clan_image)
 
     # clear embeds for some reason
     clan_current_2v2_ratings_sorted.clear()
