@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 from keep_alive import keep_alive
 from send_embeds import send_embeds
-from sort_elo import sort_teams_elo, sort_players_elo
+from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
 import json
@@ -28,6 +28,9 @@ pandation_2v2_elo_channel_id = 1016402549491912794
 pandation_clan_id = '1702413'
 pandation_color = 0x212226
 pandation_image = "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg"
+
+# Pandace
+pandace_clan_id = '1868949'
 
 # Blossom | Test Clan
 blossom_1v1_elo_channel_id = 973594560368373820
@@ -56,7 +59,12 @@ async def on_ready():
       turn = get_turn()
       print("current turn: " + str(turn))
       if turn == 0:
-        await main_1v1(pandation_clan_id, pandation_1v1_elo_channel_id, pandation_image, pandation_color, sorting_method="peak")
+        await main_1v1_multi(pandation_clan_id, 
+                             pandace_clan_id, 
+                             pandation_1v1_elo_channel_id, 
+                             pandation_image, 
+                             pandation_color, 
+                             sorting_method="peak")
       elif turn == 1:
         await main_2v2(pandation_clan_id, pandation_2v2_elo_channel_id, pandation_image, pandation_color, sorting_method="peak")
       elif turn == 2:
@@ -148,6 +156,56 @@ async def main_2v2(clan_id, channel_id, clan_image, clan_color, sorting_method):
     clan_peak_2v2_ratings_sorted.clear()
     clan_2v2_teamnames_sorted.clear()
 
+async def main_1v1_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_color, sorting_method):
+  # get players elo sorted
+  names_sorted, current_sorted, peak_sorted, clan_1, clan_2 = sort_players_elo_multi(clan_id_1, clan_id_2, sorting_method=sorting_method)
+
+  # prepare embeds - make this a diff method
+  embed2 = discord.Embed(title=clan_1['clan_name'] + " & " + clan_2['clan_name'], description= clan_1['clan_name'] + " Exp: " + str(clan_1['clan_xp']) + "\n" + clan_2['clan_name'] + " Exp: " + str(clan_2['clan_xp']) + "\nTotal Exp: " + str(clan_1['clan_xp'] + clan_2['clan_xp']), color=clan_color)
+  embed3 = discord.Embed(description="", color=clan_color)
+  embed4 = discord.Embed(description="", color=clan_color)
+  embed5 = discord.Embed(description="", color=clan_color)
+  embed6 = discord.Embed(description="", color=clan_color)
+  embed7 = discord.Embed(description="", color=clan_color)
+  global num
+  num = 1
+  
+  print(names_sorted)
+  print(current_sorted)
+  print(peak_sorted)
+  
+  for (name, current, peak) in zip(names_sorted, current_sorted, peak_sorted):
+    if num <= 20:
+            embed3.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + str(current) + " **peak:** " + str(peak) + '\n'
+    elif num <= 40:
+            embed4.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+    elif num  <= 60:
+            embed5.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+    elif num  <= 80:
+            embed6.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+    else:
+            embed7.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+    
+    num += 1
+  await send_embeds(embed2=embed2, embed3=embed3, embed4=embed4,
+                      embed5=embed5, embed6=embed6, embed7=embed7,
+                      bot=bot,
+                      channel_id=channel_id,
+                      clan_image=clan_image)
+
+    # clear embeds for some reason, lol
+  names_sorted.clear()
+  current_sorted.clear()
+  peak_sorted.clear()
 
 keep_alive()
 bot.run(os.environ['BOT_KEY'])
