@@ -73,12 +73,7 @@ def sort_teams_elo(clan_id, sorting_method):
                 clan_2v2_teamnames_new.pop(bestIndex))
     print('done sorting')
     # Return all values
-    return_values = []
-    return_values.append(clan_2v2_teamnames_sorted)
-    return_values.append(clan_current_2v2_ratings_sorted)
-    return_values.append(clan_peak_2v2_ratings_sorted)
-    return_values.append(clan)
-    return return_values
+    return clan_2v2_teamnames_sorted, clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan
 
 
 def sort_players_elo(clan_id, sorting_method):

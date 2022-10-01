@@ -46,18 +46,18 @@ def get_members_1v1_elo(clan_id):
       clan_members_name.append(player["name"])
       clan_members_current.append(player["rating"])
       clan_members_peak.append(player["peak_rating"])
-      print(str(num) + ': ' + player["name"])
+
+      print(str(num) + ". " + player["name"])
       print("current: " + str(player["rating"]))
       print("peak: " + str(player["peak_rating"]))
-      print(' ')
     except:
       clan_members_name.append(member["name"])
       clan_members_current.append(-1)
       clan_members_peak.append(-1)
-      print(str(num) + ': ' + member["name"])
-      print("current: " + str(-1))
-      print("peak: " + str(-1))
-      print(' ')
+
+      print(str(num) + ". " + member['name'])
+      print("current: " + "-1")
+      print("peak: " + "-1")
     num += 1
   
   # return values
