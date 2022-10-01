@@ -134,9 +134,9 @@ def sort_players_elo(clan_id, sorting_method):
 def sort_players_elo_multi(clan_id_1, clan_id_2, sorting_method):
   # get all players
   print("getting clan 1")
-  clan_members_name_2, clan_members_current_2, clan_members_peak_2, clan_dont_care = get_members_1v1_elo(clan_id_2)
-  print("getting clan 2")
   clan_members_name_1, clan_members_current_1, clan_members_peak_1, clan = get_members_1v1_elo(clan_id_1)
+  print("getting clan 2")
+  clan_members_name_2, clan_members_current_2, clan_members_peak_2, clan_dont_care = get_members_1v1_elo(clan_id_2)
 
   clan_members_name = []
   clan_members_current = []

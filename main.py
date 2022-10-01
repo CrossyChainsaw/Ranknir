@@ -6,7 +6,6 @@ from send_embeds import send_embeds
 from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
-import json
 
 # Skyward
 skyward_2v2_elo_channel_id = 976552050953437194
@@ -27,6 +26,7 @@ pandation_2v2_elo_channel_id = 1016402549491912794
 pandation_clan_id = '1702413'
 pandation_color = 0x212226
 pandation_image = "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg"
+
 
 # Pandace
 pandace_clan_id = '1868949'
@@ -160,7 +160,7 @@ async def main_1v1_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_colo
   names_sorted, current_sorted, peak_sorted, clan_1, clan_2 = sort_players_elo_multi(clan_id_1, clan_id_2, sorting_method=sorting_method)
 
   # prepare embeds - make this a diff method
-  embed2 = discord.Embed(title=clan_1['clan_name'] + " & " + clan_2['clan_name'], description= clan_1['clan_name'] + " Exp: " + str(clan_1['clan_xp']) + "\n" + clan_2['clan_name'] + " Exp: " + str(clan_2['clan_xp']) + "\nTotal Exp: " + str(clan_1['clan_xp'] + clan_2['clan_xp']), color=clan_color)
+  embed2 = discord.Embed(title=clan_1['clan_name'] + " & " + clan_2['clan_name'], description= clan_1['clan_name'] + " Exp: " + str(clan_1['clan_xp']) + "\n" + clan_2['clan_name'] + " Exp: " + str(clan_2['clan_xp']) + "\nTotal Exp: " + str(int(clan_1['clan_xp']) + int(clan_2['clan_xp'])), color=clan_color)
   embed3 = discord.Embed(description="", color=clan_color)
   embed4 = discord.Embed(description="", color=clan_color)
   embed5 = discord.Embed(description="", color=clan_color)
