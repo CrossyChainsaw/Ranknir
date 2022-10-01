@@ -29,16 +29,17 @@ def get_clan_members(clan_id):
     return clan_members, clan
 
 def get_members_1v1_elo(clan_id):
+  print('t')
   # get clan and clan members
   clan_members, clan = get_clan_members(clan_id)
-
+  print('y')
   # get elos
   clan_members_name = []
   clan_members_current = []
   clan_members_peak = []
   
 
-
+  print(clan_members)
   num = 1
   for member in clan_members:
     try:
