@@ -38,8 +38,19 @@ def get_members_1v1_elo(clan_id):
   clan_members_current = []
   clan_members_peak = []
   
-
   print(clan_members)
+  
+  try: 
+    with open('./' + clan['clan_name'] + '_ps4_players.json') as file:
+      ps4_players = json.load(file)
+
+      # add all ps4 players to the other clan members
+      while len(ps4_players) > 0:
+        clan_members.append(ps4_players.pop(0))
+      print(clan_members)
+  except:
+    print(clan['clan_name'] + " doesn't have any ps4 players")
+  
   num = 1
   for member in clan_members:
     try:
