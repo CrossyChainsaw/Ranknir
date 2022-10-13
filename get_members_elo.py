@@ -144,9 +144,4 @@ def get_members_2v2_elo(clan_id, sorting_method):
             clan_peak_2v2_ratings.append(-1)
 
             print(currentResult)
-    return_values = []
-    return_values.append(clan_2v2_teamnames)
-    return_values.append(clan_current_2v2_ratings)
-    return_values.append(clan_peak_2v2_ratings)
-    return_values.append(clan)
-    return return_values
+    return clan_2v2_teamnames, clan_current_2v2_ratings, clan_peak_2v2_ratings, clan
