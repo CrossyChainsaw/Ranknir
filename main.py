@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from keep_alive import keep_alive
 from send_embeds import send_embeds
-from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi
+from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi, sort_teams_elo_multi
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
 
@@ -36,6 +36,12 @@ blossom_2v2_elo_channel_id = 973594560368373820
 blossom_clan_id = '1998475'
 blossom_color = 0xfebdff
 blossom_image = "this_clan_has_no_image"
+
+# Dair
+dair_2v2_elo_channel_id = 1029669276363280414
+dair_clan_id = '1357965'
+dair_color = 0x349feb
+dair_image = 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png'
 
 # Testing
 test_channel_id = 973594560368373820
@@ -77,6 +83,12 @@ async def on_ready():
                            insomnia_color,
                            sorting_method="current")
         elif turn == 3:
+            await main_2v2(dair_clan_id,
+                           dair_2v2_elo_channel_id,
+                           dair_image,
+                           dair_color,
+                           sorting_method="current")
+        elif turn == 4:
             await main_2v2(skyward_clan_id,
                            skyward_2v2_elo_channel_id,
                            skyward_image,
@@ -218,6 +230,64 @@ async def main_1v1_multi(clan_id_1, clan_id_2, channel_id, clan_image,
     print(names_sorted)
     print(current_sorted)
     print(peak_sorted)
+
+    for (name, current, peak) in zip(names_sorted, current_sorted,
+                                     peak_sorted):
+        if num <= 20:
+            embed3.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + str(current) + " **peak:** " + str(peak) + '\n'
+        elif num <= 40:
+            embed4.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+        elif num <= 60:
+            embed5.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+        elif num <= 80:
+            embed6.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+        else:
+            embed7.description += "**" + \
+                str(num) + ". " + name + "**: **current:** " + \
+                str(current) + " **peak:** " + str(peak) + '\n'
+
+        num += 1
+    await send_embeds(embed2=embed2,
+                      embed3=embed3,
+                      embed4=embed4,
+                      embed5=embed5,
+                      embed6=embed6,
+                      embed7=embed7,
+                      bot=bot,
+                      channel_id=channel_id,
+                      clan_image=clan_image)
+
+    # clear embeds for some reason, lol
+    names_sorted.clear()
+    current_sorted.clear()
+    peak_sorted.clear()
+
+async def main_2v2_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_color, sorting_method):
+    # get players elo sorted
+    names_sorted, current_sorted, peak_sorted, clan_1, clan_2 = sort_teams_elo_multi(
+        clan_id_1, clan_id_2, sorting_method=sorting_method)
+
+    # prepare embeds - make this a diff method
+    embed2 = discord.Embed(
+        title=clan_1['clan_name'] + " & " + clan_2['clan_name'],
+        description=clan_1['clan_name'] + " Exp: " + str(clan_1['clan_xp']) +
+        "\n" + clan_2['clan_name'] + " Exp: " + str(clan_2['clan_xp']) +
+        "\nTotal Exp: " + str(int(clan_1['clan_xp']) + int(clan_2['clan_xp'])),
+        color=clan_color)
+    embed3 = discord.Embed(description="", color=clan_color)
+    embed4 = discord.Embed(description="", color=clan_color)
+    embed5 = discord.Embed(description="", color=clan_color)
+    embed6 = discord.Embed(description="", color=clan_color)
+    embed7 = discord.Embed(description="", color=clan_color)
+    global num
+    num = 1
 
     for (name, current, peak) in zip(names_sorted, current_sorted,
                                      peak_sorted):
