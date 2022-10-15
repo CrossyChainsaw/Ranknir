@@ -163,7 +163,7 @@ async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
   # send embeds
   await send_embeds(embed2=embed2, embed3=embed3, embed4=embed4, embed5=embed5, embed6=embed6, embed7=embed7, bot=bot, channel_id=channel_id, clan_image=clan_image)
 
-  # clear embeds
+  # clear arrays
   names_sorted.clear()
   current_sorted.clear()
   peak_sorted.clear()
@@ -171,44 +171,14 @@ async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
 
 async def main_2v2(clan_id, channel_id, clan_image, clan_color,
                    sorting_method):
-    # get teams, current and peak elo's sorted
-    clan_2v2_teamnames_sorted, clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan = sort_teams_elo(
-        clan_id, sorting_method)
+  # get teams, current and peak elo's sorted
+  teamnames_sorted, current_sorted, peak_sorted, clan = sort_teams_elo(
+      clan_id, sorting_method)
 
-    print(str(clan_2v2_teamnames_sorted))
+  # prepare embeds
+  embed2, embed3, embed4, embed5, embed6, embed7 = prepare_embeds(clan, teamnames_sorted, current_sorted, peak_sorted, clan_color)
 
-    # prepare embeds - make this a diff method
-    embed2 = discord.Embed(title=clan['clan_name'],
-                           description="Total Exp: " + str(clan['clan_xp']),
-                           color=clan_color)
-    embed3 = discord.Embed(description="", color=clan_color)
-    embed4 = discord.Embed(description="", color=clan_color)
-    embed5 = discord.Embed(description="", color=clan_color)
-    embed6 = discord.Embed(description="", color=clan_color)
-    embed7 = discord.Embed(description="", color=clan_color)
-
-
-
-                     
-    global num
-    num = 1
-    for (current, peak, currentTeam) in zip(clan_current_2v2_ratings_sorted,
-                                            clan_peak_2v2_ratings_sorted,
-                                            clan_2v2_teamnames_sorted):
-        if num <= 20:
-            embed3.description += "**" + \
-                str(num) + ". " + currentTeam + "**: **current:** " + \
-                str(current) + " **peak:** " + str(peak) + '\n'
-        elif num <= 40:
-            embed4.description += "**" + \
-                str(num) + ". " + currentTeam + "**: **current:** " + \
-                str(current) + " **peak:** " + str(peak) + '\n'
-        else:
-            embed5.description += "**" + \
-                str(num) + ". " + currentTeam + "**: **current:** " + \
-                str(current) + " **peak:** " + str(peak) + '\n'
-        num += 1
-    await send_embeds(embed2=embed2,
+  await send_embeds(embed2=embed2,
                       embed3=embed3,
                       embed4=embed4,
                       embed5=embed5,
@@ -218,10 +188,10 @@ async def main_2v2(clan_id, channel_id, clan_image, clan_color,
                       channel_id=channel_id,
                       clan_image=clan_image)
 
-    # clear embeds for some reason
-    clan_current_2v2_ratings_sorted.clear()
-    clan_peak_2v2_ratings_sorted.clear()
-    clan_2v2_teamnames_sorted.clear()
+  # clear arrays
+  current_sorted.clear()
+  peak_sorted.clear()
+  teamnames_sorted.clear()
 
 
 async def main_1v1_multi(clan_id_1, clan_id_2, channel_id, clan_image,
