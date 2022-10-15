@@ -97,9 +97,9 @@ async def on_ready():
                            dair_color,
                            sorting_method="current")
         elif turn == 4:
-            await main_2v2_multi(test_clan_id,
-                           boo_clan_id,
-                           test_channel_id,
+            await main_2v2_multi(pandation_clan_id,
+                           pandace_clan_id,
+                           pandation_2v2_elo_channel_id,
                            pandation_image,
                            pandation_color,
                            sorting_method="peak")
