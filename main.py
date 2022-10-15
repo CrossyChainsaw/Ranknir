@@ -20,6 +20,9 @@ insomnia_clan_id = '1919781'
 insomnia_color = 0x301834
 insomnia_image = "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png"
 
+# Parasomnia
+parasomnia_clan_id = '1927502'
+
 # Pandation
 pandation_1v1_elo_channel_id = 990292557386899527
 pandation_2v2_elo_channel_id = 1016402549491912794
@@ -43,8 +46,12 @@ dair_clan_id = '1357965'
 dair_color = 0x349feb
 dair_image = 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png'
 
+# BOO
+boo_clan_id = '2'
+
 # Testing
 test_channel_id = 973594560368373820
+test_clan_id = '7'
 
 # insomnia_clan_id, insomnia_elo_channel_id, insomnia_image
 # skyward_clan_id, skyward_elo_channel_id, skyward_image
@@ -89,6 +96,20 @@ async def on_ready():
                            dair_color,
                            sorting_method="current")
         elif turn == 4:
+            await main_2v2_multi(test_clan_id,
+                           boo_clan_id,
+                           test_channel_id,
+                           pandation_image,
+                           pandation_color,
+                           sorting_method="peak")
+        elif turn == 5:
+            await main_1v1_multi(insomnia_clan_id,
+                           parasomnia_clan_id,
+                           insomnia_1v1_elo_channel_id,
+                           insomnia_image,
+                           insomnia_color,
+                           sorting_method="peak")
+        elif turn == 6:
             await main_2v2(skyward_clan_id,
                            skyward_2v2_elo_channel_id,
                            skyward_image,
@@ -270,7 +291,8 @@ async def main_1v1_multi(clan_id_1, clan_id_2, channel_id, clan_image,
     peak_sorted.clear()
 
 async def main_2v2_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_color, sorting_method):
-    # get players elo sorted
+    
+  # get players elo sorted
     names_sorted, current_sorted, peak_sorted, clan_1, clan_2 = sort_teams_elo_multi(
         clan_id_1, clan_id_2, sorting_method=sorting_method)
 
@@ -326,6 +348,7 @@ async def main_2v2_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_colo
     names_sorted.clear()
     current_sorted.clear()
     peak_sorted.clear()
+
 
 
 keep_alive()

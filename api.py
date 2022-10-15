@@ -7,8 +7,6 @@ lilly_clan_id = '864398'
 poopy_blender_clan_id = '1923622'
 
 # METHODS
-
-
 def fetch_clan(clan_id):
     time.sleep(0.10)  # 0.10 might be possible
     return requests.get("https://api.brawlhalla.com/clan/" + clan_id + "/?api_key=" + os.environ['API_KEY'])

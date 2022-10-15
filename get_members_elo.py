@@ -11,6 +11,7 @@ def get_clan(clan_id):
         clan = json.loads(fetch_clan(clan_id).content)  # request
     except:
         clan = []
+        print("couldn't fetch clan data of clan " + str(clan_id))
     return clan
 
 

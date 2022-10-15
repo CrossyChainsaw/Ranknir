@@ -5,11 +5,7 @@ from get_members_elo import get_members_2v2_elo, get_members_1v1_elo
 
 def sort_teams_elo(clan_id, sorting_method):
     # get 2v2 teams, current and peak elo's
-    returned_values = get_members_2v2_elo(clan_id, sorting_method)
-    clan_2v2_teamnames_old = returned_values[0]
-    clan_current_2v2_ratings_old = returned_values[1]
-    clan_peak_2v2_ratings_old = returned_values[2]
-    clan = returned_values[3]
+    clan_2v2_teamnames_old, clan_current_2v2_ratings_old,  clan_peak_2v2_ratings_old, clan = get_members_2v2_elo(clan_id, sorting_method)
 
     # remove duplicates
     print('removing duplicate values...')
@@ -76,19 +72,56 @@ def sort_teams_elo(clan_id, sorting_method):
     return clan_2v2_teamnames_sorted, clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan
 
 
-def sort_teams_elo_multi(clan_id, sorting_method): #not done yet
-    
+def sort_teams_elo_multi(clan_id_1, clan_id_2, sorting_method): #not done yet
+
+  print("clan_id_1: " + str(clan_id_1))
+  print("clan_id_2: " + str(clan_id_2))
+  
   # get 2v2 teams, current and peak elo's
-    clan_2v2_teamnames_old, clan_current_2v2_ratings_old, clan_peak_2v2_ratings_old, clan = get_members_2v2_elo(clan_id, sorting_method)
+  clan_2v2_teamnames_1, clan_current_2v2_ratings_1, clan_peak_2v2_ratings_1, clan = get_members_2v2_elo(clan_id_1, sorting_method)
 
-    # remove duplicates
-    print('removing duplicate values...')
+  print('all teamnames for clan 1')
+  for player in clan_2v2_teamnames_1:
+    print(player)
+  
+  clan_2v2_teamnames_2, clan_current_2v2_ratings_2, clan_peak_2v2_ratings_2, clan_dont_care = get_members_2v2_elo(clan_id_2, sorting_method)
 
-    clan_2v2_teamnames_new = []
-    clan_current_2v2_ratings_new = []
-    clan_peak_2v2_ratings_new = []
+  print('all teamnames for clan 2')
+  for player in clan_2v2_teamnames_2:
+    print(player)
 
-    for (current, peak, team_name) in zip(clan_current_2v2_ratings_old,
+  print("clan_teamnames_1: " + str(len(clan_2v2_teamnames_1)))
+  print("clan_teamnames_2: " + str(len(clan_2v2_teamnames_2)))
+
+  # Add both clan arrays together
+  clan_2v2_teamnames_old = []
+  clan_current_2v2_ratings_old = []
+  clan_peak_2v2_ratings_old =[]
+  
+  while len(clan_2v2_teamnames_1) > 0:
+    clan_2v2_teamnames_old.append(clan_2v2_teamnames_1.pop(0))
+    clan_current_2v2_ratings_old.append(clan_current_2v2_ratings_1.pop(0))
+    clan_peak_2v2_ratings_old.append(clan_peak_2v2_ratings_1.pop(0))
+
+  print('start popping clan 2 names')
+  print('currently: ' + str(len(clan_2v2_teamnames_2)))
+  while len(clan_2v2_teamnames_2) > 0:
+    clan_2v2_teamnames_old.append(clan_2v2_teamnames_2.pop(0))
+    clan_current_2v2_ratings_old.append(clan_current_2v2_ratings_2.pop(0))
+    clan_peak_2v2_ratings_old.append(clan_peak_2v2_ratings_2.pop(0))
+
+  print(clan_2v2_teamnames_old)
+  print(clan_current_2v2_ratings_old)
+  print(clan_peak_2v2_ratings_old)
+  
+  # remove duplicates
+  print('removing duplicate values...')
+
+  clan_2v2_teamnames_new = []
+  clan_current_2v2_ratings_new = []
+  clan_peak_2v2_ratings_new = []
+
+  for (current, peak, team_name) in zip(clan_current_2v2_ratings_old,
                                           clan_peak_2v2_ratings_old,
                                           clan_2v2_teamnames_old):
         if team_name not in clan_2v2_teamnames_new:
@@ -96,13 +129,13 @@ def sort_teams_elo_multi(clan_id, sorting_method): #not done yet
             clan_current_2v2_ratings_new.append(current)
             clan_peak_2v2_ratings_new.append(peak)
 
-    # sort players elo
-    clan_current_2v2_ratings_sorted = []
-    clan_peak_2v2_ratings_sorted = []
-    clan_2v2_teamnames_sorted = []
+  # sort players elo
+  clan_current_2v2_ratings_sorted = []
+  clan_peak_2v2_ratings_sorted = []
+  clan_2v2_teamnames_sorted = []
 
-    print('start sorting players elo...')
-    if sorting_method == "current":
+  print('start sorting players elo...')
+  if sorting_method == "current":
         while len(clan_current_2v2_ratings_new) > 0:
             index = -1
             bestIndex = 0
@@ -122,7 +155,7 @@ def sort_teams_elo_multi(clan_id, sorting_method): #not done yet
             clan_2v2_teamnames_sorted.append(
                 clan_2v2_teamnames_new.pop(bestIndex))
 
-    if sorting_method == "peak":
+  if sorting_method == "peak":
         while len(clan_current_2v2_ratings_new) > 0:
             index = -1
             bestIndex = 0
@@ -141,9 +174,9 @@ def sort_teams_elo_multi(clan_id, sorting_method): #not done yet
                 clan_peak_2v2_ratings_new.pop(bestIndex))
             clan_2v2_teamnames_sorted.append(
                 clan_2v2_teamnames_new.pop(bestIndex))
-    print('done sorting')
-    # Return all values
-    return clan_2v2_teamnames_sorted, clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan
+  print('done sorting')
+  # Return all values
+  return clan_2v2_teamnames_sorted, clan_current_2v2_ratings_sorted, clan_peak_2v2_ratings_sorted, clan, clan_dont_care
 
 
 def sort_players_elo(clan_id, sorting_method):
@@ -202,6 +235,7 @@ def sort_players_elo(clan_id, sorting_method):
 
 
 def sort_players_elo_multi(clan_id_1, clan_id_2, sorting_method):
+  
   # get all players
   print("getting clan 1")
   clan_members_name_1, clan_members_current_1, clan_members_peak_1, clan = get_members_1v1_elo(clan_id_1)
