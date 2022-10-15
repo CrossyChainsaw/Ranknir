@@ -2,7 +2,7 @@ import os
 import discord
 from discord.ext import commands
 from keep_alive import keep_alive
-from send_embeds import send_embeds
+from embed import send_embeds
 from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi, sort_teams_elo_multi
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
@@ -85,38 +85,32 @@ async def on_ready():
                            insomnia_color,
                            sorting_method="peak")
         elif turn == 2:
-            await main_2v2(insomnia_clan_id,
-                           insomnia_2v2_elo_channel_id,
-                           insomnia_image,
-                           insomnia_color,
-                           sorting_method="current")
-        elif turn == 3:
             await main_2v2(dair_clan_id,
                            dair_2v2_elo_channel_id,
                            dair_image,
                            dair_color,
                            sorting_method="current")
-        elif turn == 4:
+        elif turn == 3:
             await main_2v2_multi(pandation_clan_id,
                            pandace_clan_id,
                            pandation_2v2_elo_channel_id,
                            pandation_image,
                            pandation_color,
                            sorting_method="peak")
-        elif turn == 5:
+        elif turn == 4:
             await main_1v1_multi(insomnia_clan_id,
                            parasomnia_clan_id,
                            insomnia_1v1_elo_channel_id,
                            insomnia_image,
                            insomnia_color,
                            sorting_method="peak")
-        elif turn == 6:
+        elif turn == 5:
             await main_1v1(test_clan_id,
                            test_channel_id,
                            insomnia_image,
                            insomnia_color,
                            sorting_method="peak")
-        elif turn == 7:
+        elif turn == 6:
             await main_2v2(skyward_clan_id,
                            skyward_2v2_elo_channel_id,
                            skyward_image,
