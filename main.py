@@ -184,7 +184,7 @@ def prepare_embeds_multi(clan_1, clan_2, names_sorted, current_sorted, peak_sort
       embed7.description += "**" + \
             str(num) + ". " + name + "**: current: **" + str(current) + "** peak: **" + str(peak) + '**\n'
 
-      num += 1
+    num += 1
   return embed2, embed3, embed4, embed5, embed6, embed7
 async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
   # get players elo sorted
