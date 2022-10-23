@@ -45,8 +45,8 @@ async def on_ready():
         turn = get_turn()
         print("current turn: " + str(turn))
         if turn == 0:
-            await main_1v1_multi(pandation.clan_id,
-                                 pandace.clan_id,
+            await main_1v1_crazy([pandation.clan_id,
+                                 pandace.clan_id],
                                  pandation.channel_1v1_id,
                                  pandation.image,
                                  pandation.color,
@@ -75,12 +75,6 @@ async def on_ready():
             await main_1v1_crazy([insomnia.clan_id,
                            parasomnia.clan_id, hypnosia.clan_id],
                            insomnia.channel_1v1_id,
-                           insomnia.image,
-                           insomnia.color,
-                           sorting_method="peak")
-        elif turn == 5:
-            await main_1v1(unsung_zeroes_clan_id,
-                           test_channel_id,
                            insomnia.image,
                            insomnia.color,
                            sorting_method="peak")
@@ -145,6 +139,7 @@ def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_co
       if count == 21:
         embed_array.append(embed)
         count = 0
+    embed_array.append(embed)
     return embed2, embed_array
 
 def prepare_embeds(clan, names_sorted, current_sorted, peak_sorted, clan_color):
