@@ -38,7 +38,7 @@ def get_clans(clan_id_array):
   
 def get_ps4_players(clan, clan_members):
   try: 
-    with open('./' + clan['clan_name'] + '_ps4_players.json') as file:
+    with open('./ps4_players/' + clan['clan_name'] + '_ps4_players.json') as file:
       ps4_players = json.load(file)
       print("Amount of ps4 players in " + clan['clan_name'] + ": " + str(len(ps4_players)))
       while len(ps4_players) > 0:

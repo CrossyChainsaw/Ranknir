@@ -14,56 +14,14 @@ from get_members_elo import get_clans
 skyward = Clan("NO ACCESS", 976552050953437194, '84648', 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
 insomnia = Clan(988484998799716423, 1006780905131614280, '1919781', 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
 parasomnia = Clan("N/A", "N/A", '1927502', "N/A", "N/A")
+hypnosia = Clan("N/A", "N/A", '2022800', "N/A", "N/A")
 pandation = Clan(990292557386899527, 1016402549491912794, '1702413', 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
 pandace = Clan("N/A", "N/A", '1868949', "N/A", "N/A")
 dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb, 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
-
-# Skyward
-skyward_2v2_elo_channel_id = 976552050953437194
-skyward_clan_id = '84648'
-skyward_color = 0x289fb4
-skyward_image = 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png'
-
-# Insomnia
-insomnia_1v1_elo_channel_id = 988484998799716423
-insomnia_2v2_elo_channel_id = 1006780905131614280
-insomnia_clan_id = '1919781'
-insomnia_color = 0x301834
-insomnia_image = "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png"
-
-# Parasomnia
-parasomnia_clan_id = '1927502'
-
-# Hypnosia
-hypnosia_clan_id = '2022800'
-
-# Pandation
-pandation_1v1_elo_channel_id = 990292557386899527
-pandation_2v2_elo_channel_id = 1016402549491912794
-pandation_clan_id = '1702413'
-pandation_color = 0x212226
-pandation_image = "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg"
-
-# Pandace
-pandace_clan_id = '1868949'
-
-# Blossom | Test Clan
-blossom_1v1_elo_channel_id = 973594560368373820
-blossom_2v2_elo_channel_id = 973594560368373820
-blossom_clan_id = '1998475'
-blossom_color = 0xfebdff
-blossom_image = "this_clan_has_no_image"
-
-# Dair
-dair_2v2_elo_channel_id = 1029669276363280414
-dair_clan_id = '1357965'
-dair_color = 0x349feb
-dair_image = 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png'
+blossom = Clan(973594560368373820, 973594560368373820, '1998475', 0xfebdff, "N/A")
 
 # Testing
-boo_clan_id = '2'
 test_channel_id = 973594560368373820
-unsung_zeroes_clan_id = '7'
 wanak1n_clan_id = '1363653'
 stop_teleporting_clan_id = '2021163'
 idiosyncrasy_clan_id = '2023963'
@@ -86,44 +44,44 @@ async def on_ready():
         turn = get_turn()
         print("current turn: " + str(turn))
         if turn == 0:
-            await main_1v1_multi(pandation_clan_id,
-                                 pandace_clan_id,
-                                 pandation_1v1_elo_channel_id,
-                                 pandation_image,
-                                 pandation_color,
+            await main_1v1_multi(pandation.clan_id,
+                                 pandace.clan_id,
+                                 pandation.channel_1v1_id,
+                                 pandation.image,
+                                 pandation.color,
                                  sorting_method="peak")
         elif turn == 1:
-            await main_2v2_multi(insomnia_clan_id,
-                           parasomnia_clan_id,
-                           insomnia_2v2_elo_channel_id,
-                           insomnia_image,
-                           insomnia_color,
+            await main_2v2_multi(insomnia.clan_id,
+                           parasomnia.clan_id,
+                           insomnia.channel_2v2_id,
+                           insomnia.image,
+                           insomnia.color,
                            sorting_method="peak")
         elif turn == 2:
-            await main_2v2(dair_clan_id,
-                           dair_2v2_elo_channel_id,
-                           dair_image,
-                           dair_color,
+            await main_2v2(dair.clan_id,
+                           dair.channel_2v2_id,
+                           dair.image,
+                           dair.color,
                            sorting_method="current")
         elif turn == 3:
-            await main_2v2_multi(pandation_clan_id,
-                           pandace_clan_id,
-                           pandation_2v2_elo_channel_id,
-                           pandation_image,
-                           pandation_color,
+            await main_2v2_multi(pandation.clan_id,
+                           pandace.clan_id,
+                           pandation.channel_2v2_id,
+                           pandation.image,
+                           pandation.color,
                            sorting_method="peak")
         elif turn == 4:
-            await main_1v1_crazy([insomnia_clan_id,
-                           parasomnia_clan_id, hypnosia_clan_id],
-                           insomnia_1v1_elo_channel_id,
-                           insomnia_image,
-                           insomnia_color,
+            await main_1v1_crazy([insomnia.clan_id,
+                           parasomnia.clan_id, hypnosia.clan_id],
+                           insomnia.channel_1v1_id,
+                           insomnia.image,
+                           insomnia.color,
                            sorting_method="peak")
         elif turn == 5:
             await main_1v1(unsung_zeroes_clan_id,
                            test_channel_id,
-                           insomnia_image,
-                           insomnia_color,
+                           insomnia.image,
+                           insomnia.color,
                            sorting_method="peak")
             reset_turn()
         next_turn()
