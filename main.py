@@ -3,10 +3,21 @@ import os
 import discord
 from discord.ext import commands
 from keep_alive import keep_alive
-from embed import send_embeds
-from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi, sort_teams_elo_multi
+from embed import send_embeds, send_embeds2
+from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi, sort_teams_elo_multi, sort_elo_1v1
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
+from clan import Clan
+from get_members_elo import get_clans
+
+#TODO FIX PREAPRE EMBEDS
+
+skyward = Clan("NO ACCESS", 976552050953437194, '84648', 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
+insomnia = Clan(988484998799716423, 1006780905131614280, '1919781', 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
+parasomnia = Clan("N/A", "N/A", '1927502', "N/A", "N/A")
+pandation = Clan(990292557386899527, 1016402549491912794, '1702413', 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
+pandace = Clan("N/A", "N/A", '1868949', "N/A", "N/A")
+dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb, 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
 
 # Skyward
 skyward_2v2_elo_channel_id = 976552050953437194
@@ -23,6 +34,9 @@ insomnia_image = "https://cdn.discordapp.com/attachments/967468594285924382/1006
 
 # Parasomnia
 parasomnia_clan_id = '1927502'
+
+# Hypnosia
+hypnosia_clan_id = '2022800'
 
 # Pandation
 pandation_1v1_elo_channel_id = 990292557386899527
@@ -47,12 +61,13 @@ dair_clan_id = '1357965'
 dair_color = 0x349feb
 dair_image = 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png'
 
-# BOO
-boo_clan_id = '2'
-
 # Testing
+boo_clan_id = '2'
 test_channel_id = 973594560368373820
-test_clan_id = '7'
+unsung_zeroes_clan_id = '7'
+wanak1n_clan_id = '1363653'
+stop_teleporting_clan_id = '2021163'
+idiosyncrasy_clan_id = '2023963'
 
 # insomnia_clan_id, insomnia_elo_channel_id, insomnia_image
 # skyward_clan_id, skyward_elo_channel_id, skyward_image
@@ -99,27 +114,80 @@ async def on_ready():
                            pandation_color,
                            sorting_method="peak")
         elif turn == 4:
-            await main_1v1_multi(insomnia_clan_id,
-                           parasomnia_clan_id,
+            await main_1v1_crazy([insomnia_clan_id,
+                           parasomnia_clan_id, hypnosia_clan_id],
                            insomnia_1v1_elo_channel_id,
                            insomnia_image,
                            insomnia_color,
                            sorting_method="peak")
         elif turn == 5:
-            await main_1v1(test_clan_id,
+            await main_1v1(unsung_zeroes_clan_id,
                            test_channel_id,
                            insomnia_image,
                            insomnia_color,
                            sorting_method="peak")
-        elif turn == 6:
-            await main_2v2(skyward_clan_id,
-                           skyward_2v2_elo_channel_id,
-                           skyward_image,
-                           skyward_color,
-                           sorting_method="current")
             reset_turn()
         next_turn()
         wait(2500)
+def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_color):
+
+  
+  
+  if len(clan_array) == 1:
+    embed2 = discord.Embed(title=clan_array[0]['clan_name'], description="Total Exp: " + str(clan_array[0]['clan_xp']), color=clan_color)
+  elif len(clan_array) > 1:
+    embed2 = discord.Embed(
+      title="", description="", color=clan_color)
+
+
+    
+    # Title
+    count = 0
+    for clan in clan_array:
+      if count == 0:
+        embed2.title += clan['clan_name'] 
+      else:
+        embed2.title += " & " + clan_array[count]['clan_name']
+      count+=1
+
+    # Description
+    count = 0
+    for clan in clan_array:
+      if count == 0:
+        embed2.description += clan['clan_name'] + " Exp: " + str(clan['clan_xp']) 
+      else:
+        embed2.description += "\n" + clan_array[count]['clan_name'] + " Exp: " + str(clan_array[1]['clan_xp'])
+      count+=1
+
+    print('hi ')
+    # total xp in desc.
+    total_xp = 0
+    i = 0
+    while i < count:
+      total_xp += int(clan_array[i]['clan_xp'])
+      i+=1
+    embed2.description += "\nTotal Exp: " + str(total_xp)
+    
+    
+
+    embed_array = []
+    global rank
+    rank = 1
+    count = 0
+
+    print(len(names))
+    for (name, current, peak) in zip(names, current_ratings, peak_ratings):
+      if count == 0:
+        embed = discord.Embed(description="", color=clan_color)
+      if count <= 20:
+          embed.description += "**" + \
+              str(rank) + ". " + name + "**: current: **" + str(current) + "** peak: **" + str(peak) + '**\n'
+      rank += 1
+      count += 1
+      if count == 21:
+        embed_array.append(embed)
+        count = 0
+    return embed2, embed_array
 
 def prepare_embeds(clan, names_sorted, current_sorted, peak_sorted, clan_color):
   embed2 = discord.Embed(title=clan['clan_name'], description="Total Exp: " + str(clan['clan_xp']), color=clan_color)
@@ -190,7 +258,6 @@ def prepare_embeds_multi(clan_1, clan_2, names_sorted, current_sorted, peak_sort
 async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
   # get players elo sorted
   names_sorted, current_sorted, peak_sorted, clan = sort_players_elo(clan_id, sorting_method=sorting_method)
-
   # prepare embeds
   embed2, embed3, embed4, embed5, embed6, embed7 = prepare_embeds(clan, names_sorted, current_sorted, peak_sorted, clan_color)
 
@@ -209,6 +276,7 @@ async def main_2v2(clan_id, channel_id, clan_image, clan_color,
   teamnames_sorted, current_sorted, peak_sorted, clan = sort_teams_elo(
       clan_id, sorting_method)
 
+  print('start preparing embeds')
   # prepare embeds
   embed2, embed3, embed4, embed5, embed6, embed7 = prepare_embeds(clan, teamnames_sorted, current_sorted, peak_sorted, clan_color)
 
@@ -272,6 +340,28 @@ async def main_2v2_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_colo
   names_sorted.clear()
   current_sorted.clear()
   peak_sorted.clear()
+
+
+async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sorting_method):
+
+  # get players elo sorted
+  names, current_ratings, peak_ratings = sort_elo_1v1(clan_id_array, sorting_method)
+  print(names)
+  
+  clans = get_clans(clan_id_array)
+
+  embed2, embed_array = prepare_embeds_new(clans , names, current_ratings, peak_ratings, clan_color)
+  
+  await send_embeds2(embed2, embed_array,
+                    bot=bot,
+                    channel_id=channel_id,
+                    clan_image=clan_image)
+
+  # clear arrays
+  names.clear()
+  current_ratings.clear()
+  peak_ratings.clear()
+
 
 
 
