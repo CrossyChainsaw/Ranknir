@@ -2,7 +2,6 @@ elo_channel = 976552050953437194
 test_channel = 973594560368373820
 using_channel = elo_channel
 
-
 async def send_embeds(embed2, embed3, embed4, embed5, embed6, embed7, bot, channel_id, clan_image):
 
     # Get channel
@@ -43,3 +42,27 @@ async def send_embeds(embed2, embed3, embed4, embed5, embed6, embed7, bot, chann
     if len(embed7.description) > 1:
         await channel.send(embed=embed7)
         print('sent 7')
+
+async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
+
+    # Get channel
+    channel = bot.get_channel(channel_id)
+
+    # Remove last 10 messages in channel
+    await channel.purge(limit=10)
+
+    # Send Embed 1
+    await channel.send(clan_image)
+    print("sent 1")
+
+    # Send Embed 2
+    await channel.send(embed=embed2)
+    print("sent 2")
+
+    num = 3
+    for embed in embed_array:
+      # Send Embed (if possible)
+      if len(embed.description) > 0:
+          await channel.send(embed=embed)
+          print('sent ' + str(num))
+      num += 1
