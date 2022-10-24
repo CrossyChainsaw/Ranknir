@@ -207,20 +207,6 @@ def prepare_embeds_multi(clan_1, clan_2, names_sorted, current_sorted, peak_sort
 
     num += 1
   return embed2, embed3, embed4, embed5, embed6, embed7
-async def main_1v1(clan_id, channel_id, clan_image, clan_color, sorting_method):
-  # get players elo sorted
-  names_sorted, current_sorted, peak_sorted, clan = sort_players_elo(clan_id, sorting_method=sorting_method)
-  # prepare embeds
-  embed2, embed3, embed4, embed5, embed6, embed7 = prepare_embeds(clan, names_sorted, current_sorted, peak_sorted, clan_color)
-
-  # send embeds
-  await send_embeds(embed2=embed2, embed3=embed3, embed4=embed4, embed5=embed5, embed6=embed6, embed7=embed7, bot=bot, channel_id=channel_id, clan_image=clan_image)
-
-  # clear arrays
-  names_sorted.clear()
-  current_sorted.clear()
-  peak_sorted.clear()
-
 
 async def main_2v2(clan_id, channel_id, clan_image, clan_color,
                    sorting_method):
@@ -247,29 +233,6 @@ async def main_2v2(clan_id, channel_id, clan_image, clan_color,
   peak_sorted.clear()
   teamnames_sorted.clear()
 
-
-async def main_1v1_multi(clan_id_1, clan_id_2, channel_id, clan_image,
-                         clan_color, sorting_method):
-  # get players elo sorted
-  names_sorted, current_sorted, peak_sorted, clan_1, clan_2 = sort_players_elo_multi(
-      clan_id_1, clan_id_2, sorting_method=sorting_method)
-
-  embed2, embed3, embed4, embed5, embed6, embed7 = prepare_embeds_multi(clan_1, clan_2, names_sorted, current_sorted, peak_sorted, clan_color)
-                         
-  await send_embeds(embed2=embed2,
-                    embed3=embed3,
-                    embed4=embed4,
-                    embed5=embed5,
-                    embed6=embed6,
-                    embed7=embed7,
-                    bot=bot,
-                    channel_id=channel_id,
-                    clan_image=clan_image)
-
-  # clear arrays
-  names_sorted.clear()
-  current_sorted.clear()
-  peak_sorted.clear()
 
 async def main_2v2_multi(clan_id_1, clan_id_2, channel_id, clan_image, clan_color, sorting_method):
     
