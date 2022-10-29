@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 from keep_alive import keep_alive
 from embed import send_embeds, send_embeds2
-from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi, sort_teams_elo_multi, sort_elo_1v1
+from sort_elo import sort_teams_elo, sort_players_elo, sort_players_elo_multi, sort_teams_elo_multi, sort_elo_1v1, sort_2v2_elo
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
 from clan import Clan
@@ -24,8 +24,8 @@ blossom = Clan(973594560368373820, 973594560368373820, '1998475', 0xfebdff, "N/A
 # Testing
 test_channel_id = 973594560368373820
 wanak1n_clan_id = '1363653'
-stop_teleporting_clan_id = '2021163'
-idiosyncrasy_clan_id = '2023963'
+test2_clan_id = '2021161'
+idiosyncrasy_clan_id = '2023962'
 
 # insomnia_clan_id, insomnia_elo_channel_id, insomnia_image
 # skyward_clan_id, skyward_elo_channel_id, skyward_image
@@ -52,24 +52,31 @@ async def on_ready():
                                  pandation.color,
                                  sorting_method="peak")
         elif turn == 1:
-            await main_2v2_multi(insomnia.clan_id,
-                           parasomnia.clan_id,
+            await main_2v2_crazy([insomnia.clan_id,
+                           parasomnia.clan_id, hypnosia.clan_id],
                            insomnia.channel_2v2_id,
                            insomnia.image,
                            insomnia.color,
                            sorting_method="peak")
         elif turn == 2:
-            await main_2v2(dair.clan_id,
+            await main_2v2_crazy([dair.clan_id],
                            dair.channel_2v2_id,
                            dair.image,
                            dair.color,
                            sorting_method="current")
         elif turn == 3:
-            await main_2v2_multi(pandation.clan_id,
-                           pandace.clan_id,
+            await main_2v2_crazy([pandation.clan_id,
+                           pandace.clan_id],
                            pandation.channel_2v2_id,
                            pandation.image,
                            pandation.color,
+                           sorting_method="peak")
+        elif turn == 21:
+            await main_2v2_crazy([wanak1n_clan_id,
+                           test2_clan_id, idiosyncrasy_clan_id],
+                           test_channel_id,
+                           insomnia.image,
+                           insomnia.color,
                            sorting_method="peak")
         elif turn == 4:
             await main_1v1_crazy([insomnia.clan_id,
@@ -263,9 +270,11 @@ async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
   # get players elo sorted
   names, current_ratings, peak_ratings = sort_elo_1v1(clan_id_array, sorting_method)
   print(names)
-  
+
+  # get clans
   clans = get_clans(clan_id_array)
 
+  # prep embeds
   embed2, embed_array = prepare_embeds_new(clans , names, current_ratings, peak_ratings, clan_color)
   
   await send_embeds2(embed2, embed_array,
@@ -279,6 +288,25 @@ async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
   peak_ratings.clear()
 
 
+
+
+async def main_2v2_crazy(clan_id_array, channel_id, clan_image, clan_color, sorting_method):
+  
+  # get players elo sorted
+  names, current_ratings, peak_ratings = sort_2v2_elo(clan_id_array, sorting_method)
+
+  # get clans
+  clans = get_clans(clan_id_array)
+
+  # prep embeds
+  embed2, embed_array = prepare_embeds_new(clans, names, current_ratings, peak_ratings, clan_color)
+
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=channel_id, clan_image=clan_image)
+  
+  # clear arrays
+  names.clear()
+  current_ratings.clear()
+  peak_ratings.clear()
 
 
 keep_alive()
