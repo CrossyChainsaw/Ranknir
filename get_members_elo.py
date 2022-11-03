@@ -31,9 +31,11 @@ def get_clan_members(clan_id):
     return clan_members, clan
 
 def get_clans(clan_id_array):
+  print('created clan array')
   clans = []
   for clan_id in clan_id_array:
     clans.append(get_clan(clan_id))
+  print("returning clan array")
   return clans
   
 def get_ps4_players(clan, clan_members):
@@ -136,7 +138,14 @@ def get_members_2v2_elo(clan_id, sorting_method):
                   bestCurrent = rating
                   bestPeak = peak
                   bestCurrentTeam = team["teamname"]
-          
+        
+        # Format best current team
+        name_plus = bestCurrentTeam.find('+')
+        name_length = len(bestCurrentTeam)
+        name_1 = bestCurrentTeam[0:name_plus]
+        name_2 = bestCurrentTeam[name_plus+1:name_length]
+        full_name = name_1 + ' + ' + name_2 
+        print(full_name) 
 
         # ADD ALL VALUES TO ARRAYS
         if bestCurrentTeam.startswith("bestCurrentTeam is undefined"):
