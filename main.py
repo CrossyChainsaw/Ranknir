@@ -85,7 +85,7 @@ async def on_ready():
                            sorting_method="peak")
             reset_turn()
         next_turn()
-        wait(2500)
+        #wait(2500)
 def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_color):
 
   print('start preparing embeds')

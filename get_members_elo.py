@@ -144,8 +144,9 @@ def get_members_2v2_elo(clan_id, sorting_method):
         name_length = len(bestCurrentTeam)
         name_1 = bestCurrentTeam[0:name_plus]
         name_2 = bestCurrentTeam[name_plus+1:name_length]
-        full_name = name_1 + ' + ' + name_2 
-        print(full_name) 
+        full_name = name_1 + ' **+** ' + name_2 
+        print(full_name)
+        bestCurrentTeam = full_name
 
         # ADD ALL VALUES TO ARRAYS
         if bestCurrentTeam.startswith("bestCurrentTeam is undefined"):
