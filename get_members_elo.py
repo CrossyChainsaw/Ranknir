@@ -31,9 +31,11 @@ def get_clan_members(clan_id):
     return clan_members, clan
 
 def get_clans(clan_id_array):
+  print('created clan array')
   clans = []
   for clan_id in clan_id_array:
     clans.append(get_clan(clan_id))
+  print("returning clan array")
   return clans
   
 def get_ps4_players(clan, clan_members):
