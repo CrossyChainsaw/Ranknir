@@ -125,6 +125,9 @@ def get_members_2v2_elo(clan_id, sorting_method):
                   bestCurrent = rating
                   bestPeak = peak
                   bestCurrentTeam = team["teamname"]
+
+
+                
         elif sorting_method == "peak":
                         # FIND BEST TEAM PEAK ELO
           bestCurrentTeam = "bestCurrentTeam is undefined"
@@ -149,7 +152,7 @@ def get_members_2v2_elo(clan_id, sorting_method):
         bestCurrentTeam = full_name
 
         # ADD ALL VALUES TO ARRAYS
-        if bestCurrentTeam.startswith("bestCurrentTeam is undefined"):
+        if bestCurrentTeam.startswith("bestCurrentTeam is undefine"):
             bestCurrent = -1
             bestPeak = -1
             bestCurrentTeam = player["name"]

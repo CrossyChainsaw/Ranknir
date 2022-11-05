@@ -99,6 +99,7 @@ def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_co
     
     embed2 = discord.Embed(title=clan_array[0]['clan_name'], description="Total Exp: " + str(clan_array[0]['clan_xp']), color=clan_color)
     print('h')
+    
   elif len(clan_array) > 1:
     embed2 = discord.Embed(
       title="", description="", color=clan_color)
@@ -137,10 +138,12 @@ def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_co
   global rank
   rank = 1
   count = 0
+  embed = discord.Embed(description="", color=clan_color)
   
   print(len(names))
   for (name, current, peak) in zip(names, current_ratings, peak_ratings):
     if count == 0:
+      print('creating dc embed')
       embed = discord.Embed(description="", color=clan_color)
     if count <= 20:
         embed.description += "**" + \
