@@ -1,0 +1,358 @@
+{
+    "clan_id": 1357965,
+    "clan_name": "Dair",
+    "clan_create_date": 1609151553,
+    "clan_xp": "3180713",
+    "clan": [
+        {
+            "brawlhalla_id": 6746620,
+            "name": "SiB | Sgrape",
+            "rank": "Leader",
+            "join_date": 1656780578,
+            "xp": 78662
+        },
+        {
+            "brawlhalla_id": 4070196,
+            "name": "Goofy",
+            "rank": "Officer",
+            "join_date": 1656782361,
+            "xp": 105094
+        },
+        {
+            "brawlhalla_id": 23890819,
+            "name": "Benjihypp\u00c3\u00a4\u00c3\u00a4j\u00c3\u00a4",
+            "rank": "Member",
+            "join_date": 1656786527,
+            "xp": 52599
+        },
+        {
+            "brawlhalla_id": 35664307,
+            "name": "yum",
+            "rank": "Member",
+            "join_date": 1656842131,
+            "xp": 81980
+        },
+        {
+            "brawlhalla_id": 59561496,
+            "name": "Cheese",
+            "rank": "Member",
+            "join_date": 1656848208,
+            "xp": 61815
+        },
+        {
+            "brawlhalla_id": 29109995,
+            "name": "SiLver",
+            "rank": "Member",
+            "join_date": 1656857493,
+            "xp": 46392
+        },
+        {
+            "brawlhalla_id": 8948682,
+            "name": "VNM | Devolos",
+            "rank": "Member",
+            "join_date": 1656875188,
+            "xp": 57044
+        },
+        {
+            "brawlhalla_id": 7974814,
+            "name": "ZAW;",
+            "rank": "Member",
+            "join_date": 1656880761,
+            "xp": 59980
+        },
+        {
+            "brawlhalla_id": 454666,
+            "name": "Zabulon",
+            "rank": "Member",
+            "join_date": 1657047191,
+            "xp": 40612
+        },
+        {
+            "brawlhalla_id": 5671092,
+            "name": "Skeldra",
+            "rank": "Member",
+            "join_date": 1657473993,
+            "xp": 41916
+        },
+        {
+            "brawlhalla_id": 9070717,
+            "name": "TragicX7",
+            "rank": "Member",
+            "join_date": 1657581252,
+            "xp": 27236
+        },
+        {
+            "brawlhalla_id": 8275242,
+            "name": "Jhonny",
+            "rank": "Member",
+            "join_date": 1658174887,
+            "xp": 46064
+        },
+        {
+            "brawlhalla_id": 5503396,
+            "name": "MRB",
+            "rank": "Member",
+            "join_date": 1658345270,
+            "xp": 64873
+        },
+        {
+            "brawlhalla_id": 7159263,
+            "name": "PCS | Shadra - Baguette senpai",
+            "rank": "Member",
+            "join_date": 1658395590,
+            "xp": 60632
+        },
+        {
+            "brawlhalla_id": 3013356,
+            "name": "oszcar",
+            "rank": "Member",
+            "join_date": 1658856944,
+            "xp": 123507
+        },
+        {
+            "brawlhalla_id": 69630716,
+            "name": "sage (npc)",
+            "rank": "Member",
+            "join_date": 1659274583,
+            "xp": 171123
+        },
+        {
+            "brawlhalla_id": 26084391,
+            "name": ".diline",
+            "rank": "Member",
+            "join_date": 1660910171,
+            "xp": 35602
+        },
+        {
+            "brawlhalla_id": 70022787,
+            "name": "SiB | ma2st4er5",
+            "rank": "Officer",
+            "join_date": 1660934058,
+            "xp": 78709
+        },
+        {
+            "brawlhalla_id": 5111230,
+            "name": "SiB | WelFe",
+            "rank": "Member",
+            "join_date": 1660938600,
+            "xp": 45957
+        },
+        {
+            "brawlhalla_id": 7364605,
+            "name": "CrossyChainsaw",
+            "rank": "Member",
+            "join_date": 1660940056,
+            "xp": 35388
+        },
+        {
+            "brawlhalla_id": 83366016,
+            "name": "Whis'o Lantern",
+            "rank": "Member",
+            "join_date": 1661004909,
+            "xp": 68399
+        },
+        {
+            "brawlhalla_id": 3995547,
+            "name": "PCS | iiTzHairu!?",
+            "rank": "Member",
+            "join_date": 1661858269,
+            "xp": 17524
+        },
+        {
+            "brawlhalla_id": 3221385,
+            "name": "El Eldad",
+            "rank": "Member",
+            "join_date": 1661870719,
+            "xp": 61409
+        },
+        {
+            "brawlhalla_id": 42572878,
+            "name": "xFabio",
+            "rank": "Member",
+            "join_date": 1661871499,
+            "xp": 23218
+        },
+        {
+            "brawlhalla_id": 79329873,
+            "name": "ian",
+            "rank": "Member",
+            "join_date": 1662154023,
+            "xp": 85303
+        },
+        {
+            "brawlhalla_id": 38970073,
+            "name": "incubus \u00e2\u0080\u00a0 lovely \u00e1\u0083\u00a6",
+            "rank": "Member",
+            "join_date": 1662691135,
+            "xp": 45217
+        },
+        {
+            "brawlhalla_id": 3615467,
+            "name": "Neru",
+            "rank": "Member",
+            "join_date": 1662902127,
+            "xp": 20909
+        },
+        {
+            "brawlhalla_id": 3137185,
+            "name": "Koldborg",
+            "rank": "Member",
+            "join_date": 1663349822,
+            "xp": 14275
+        },
+        {
+            "brawlhalla_id": 47862404,
+            "name": "beangod but spooky!?!??!",
+            "rank": "Member",
+            "join_date": 1663951591,
+            "xp": 32680
+        },
+        {
+            "brawlhalla_id": 8622656,
+            "name": "Kermit",
+            "rank": "Member",
+            "join_date": 1664017341,
+            "xp": 2277
+        },
+        {
+            "brawlhalla_id": 6847340,
+            "name": "BurgerkingCandycrush",
+            "rank": "Member",
+            "join_date": 1664041040,
+            "xp": 23750
+        },
+        {
+            "brawlhalla_id": 6504314,
+            "name": "Duugu.",
+            "rank": "Member",
+            "join_date": 1664042128,
+            "xp": 19974
+        },
+        {
+            "brawlhalla_id": 3764805,
+            "name": "SiB Lil'Fox <3",
+            "rank": "Member",
+            "join_date": 1664121970,
+            "xp": 13826
+        },
+        {
+            "brawlhalla_id": 74555864,
+            "name": "twitch.tv\/carnagebh",
+            "rank": "Member",
+            "join_date": 1664288403,
+            "xp": 21599
+        },
+        {
+            "brawlhalla_id": 40660695,
+            "name": "twitch.tv\/friendlyherobrn",
+            "rank": "Member",
+            "join_date": 1664659336,
+            "xp": 12467
+        },
+        {
+            "brawlhalla_id": 89744260,
+            "name": "Mitchel <3",
+            "rank": "Member",
+            "join_date": 1664737065,
+            "xp": 7535
+        },
+        {
+            "brawlhalla_id": 27713922,
+            "name": "Kim!",
+            "rank": "Member",
+            "join_date": 1664811653,
+            "xp": 20266
+        },
+        {
+            "brawlhalla_id": 10374431,
+            "name": "TheLeo",
+            "rank": "Member",
+            "join_date": 1665221627,
+            "xp": 23862
+        },
+        {
+            "brawlhalla_id": 9626815,
+            "name": "Rasdos",
+            "rank": "Member",
+            "join_date": 1665238575,
+            "xp": 21502
+        },
+        {
+            "brawlhalla_id": 8201224,
+            "name": "Blackout",
+            "rank": "Member",
+            "join_date": 1665252220,
+            "xp": 3627
+        },
+        {
+            "brawlhalla_id": 84499165,
+            "name": "Kaizaar",
+            "rank": "Member",
+            "join_date": 1665337809,
+            "xp": 13240
+        },
+        {
+            "brawlhalla_id": 45276584,
+            "name": "Veritas",
+            "rank": "Member",
+            "join_date": 1665337810,
+            "xp": 16746
+        },
+        {
+            "brawlhalla_id": 4639959,
+            "name": "SLR",
+            "rank": "Member",
+            "join_date": 1665590047,
+            "xp": 4956
+        },
+        {
+            "brawlhalla_id": 9924575,
+            "name": "Guinni",
+            "rank": "Member",
+            "join_date": 1665841305,
+            "xp": 8201
+        },
+        {
+            "brawlhalla_id": 4101132,
+            "name": "Qan*",
+            "rank": "Member",
+            "join_date": 1666091092,
+            "xp": 12638
+        },
+        {
+            "brawlhalla_id": 45059135,
+            "name": "Tosin",
+            "rank": "Member",
+            "join_date": 1666380855,
+            "xp": 8466
+        },
+        {
+            "brawlhalla_id": 41855064,
+            "name": "hooligan445",
+            "rank": "Member",
+            "join_date": 1666480988,
+            "xp": 18025
+        },
+        {
+            "brawlhalla_id": 29869987,
+            "name": "Grisker",
+            "rank": "Member",
+            "join_date": 1666800899,
+            "xp": 4373
+        },
+        {
+            "brawlhalla_id": 5371312,
+            "name": "Bushi",
+            "rank": "Member",
+            "join_date": 1667058664,
+            "xp": 1316
+        },
+        {
+            "brawlhalla_id": 7280983,
+            "name": "teddy <3",
+            "rank": "Member",
+            "join_date": 1667324984,
+            "xp": 2969
+        }
+    ]
+}

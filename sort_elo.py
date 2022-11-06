@@ -39,7 +39,7 @@ def sort_2v2_elo(clan_id_array, sorting_method):
 
   print('start sorting players elo...')
   if sorting_method == "current":
-        while len(current_ratings_sorted) > 0:
+        while len(current_ratings_new) > 0:
             index = -1
             bestIndex = 0
             highestCurrentRating = -2
@@ -69,6 +69,8 @@ def sort_2v2_elo(clan_id_array, sorting_method):
   print('done sorting')
   
   # Return all values
+  print('teamnames amount (in sort_elo)')
+  print(len(teamnames_sorted))
   return teamnames_sorted, current_ratings_sorted, peak_ratings_sorted
 
 

@@ -76,7 +76,7 @@ async def on_ready():
                            test_channel_id,
                            insomnia.image,
                            insomnia.color,
-                           sorting_method="peak")
+                           sorting_method="current")
         elif turn == 4:
             await main_1v1_crazy([insomnia.clan_id,
                            parasomnia.clan_id, hypnosia.clan_id],
@@ -85,8 +85,8 @@ async def on_ready():
                            insomnia.color,
                            sorting_method="peak")
             reset_turn()
-        next_turn()
-        #wait(2500)
+        #next_turn()
+        wait(2500)
 def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_color):
 
   print('start preparing embeds')
