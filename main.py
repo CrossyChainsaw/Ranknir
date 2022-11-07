@@ -20,6 +20,8 @@ pandation = Clan(990292557386899527, 1016402549491912794, '1702413', 0x212226, "
 pandace = Clan("N/A", "N/A", '1868949', "N/A", "N/A")
 dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb, 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
 blossom = Clan(973594560368373820, 973594560368373820, '1998475', 0xfebdff, "N/A")
+Cybers = Clan(1039202472536834108, 1039202527398334514, '1983079', 0xD10000, " ")
+Cybers_II = Clan("N/A", "N/A", '1983274', "N/A", "N/A")
 
 # Testing
 test_channel_id = 973594560368373820
@@ -84,9 +86,23 @@ async def on_ready():
                            insomnia.image,
                            insomnia.color,
                            sorting_method="peak")
+        elif turn == 5:
+            await main_1v1_crazy([Cybers.clan_id,
+                           Cybers_II.clan_id],
+                           Cybers.channel_1v1_id,
+                           Cybers.image,
+                           Cybers.color,
+                           sorting_method="current")
+        elif turn == 6:
+            await main_2v2_crazy([Cybers.clan_id,
+                           Cybers_II.clan_id],
+                           Cybers.channel_2v2_id,
+                           Cybers.image,
+                           Cybers.color,
+                           sorting_method="current")
             reset_turn()
-        #next_turn()
-        wait(2500)
+        next_turn()
+        #wait(2500)
 def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_color):
 
   print('start preparing embeds')
