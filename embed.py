@@ -10,9 +10,12 @@ async def send_embeds(embed2, embed3, embed4, embed5, embed6, embed7, bot, chann
     # Remove last 10 messages in channel
     await channel.purge(limit=10)
 
-    # Send Embed 1
-    await channel.send(clan_image)
-    print("sent 1")
+    # Send Image
+    try:
+      await channel.send(clan_image)
+      print("sent 1")
+    except:
+      print('no image provided')
 
     # Send Embed 2
     await channel.send(embed=embed2)
@@ -51,9 +54,12 @@ async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
     # Remove last 10 messages in channel
     await channel.purge(limit=10)
 
-    # Send Embed 1
-    await channel.send(clan_image)
-    print("sent 1")
+    # Send Image
+    try:
+      await channel.send(clan_image)
+      print("sent 1")
+    except:
+      print('no image provided')
 
     # Send Embed 2
     await channel.send(embed=embed2)
