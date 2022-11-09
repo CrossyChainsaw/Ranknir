@@ -6,7 +6,7 @@ from embed import send_embeds2
 from sort_elo import sort_elo_1v1, sort_2v2_elo
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
-from clan import Clan
+from Classes.clan import Clan
 from get_members_elo import get_clans
 
 #TODO FIX PREAPRE EMBEDS
@@ -59,7 +59,7 @@ async def on_ready():
                            sorting_method="current")
         elif turn == 1:
             await main_1v1_crazy([Pandation.clan_id,
-                                 Pandace.clan_id, Panhalla.clan_id, PanhaIIa.clan_id],
+                                 Pandace.clan_id],
                                  Pandation.channel_1v1_id,
                                  Pandation.image,
                                  Pandation.color,
@@ -98,7 +98,7 @@ async def on_ready():
                            Cybers.channel_1v1_id,
                            Cybers.image,
                            Cybers.color,
-                           sorting_method="current")
+                           sorting_method="peak")
         elif turn == 6:
             await main_2v2_crazy([Cybers.clan_id,
                            Cybers_II.clan_id],
@@ -123,8 +123,7 @@ def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_co
     print('h')
     
   elif len(clan_array) > 1:
-    embed2 = discord.Embed(
-      title="", description="", color=clan_color)
+    embed2 = discord.Embed(title="", description="", color=clan_color)
     
     # Title
     count = 0
@@ -190,10 +189,7 @@ async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
   # prep embeds
   embed2, embed_array = prepare_embeds_new(clans , names, current_ratings, peak_ratings, clan_color)
   
-  await send_embeds2(embed2, embed_array,
-                    bot=bot,
-                    channel_id=channel_id,
-                    clan_image=clan_image)
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=channel_id, clan_image=clan_image)
 
   # clear arrays
   names.clear()

@@ -1,3 +1,5 @@
+from wait import wait
+
 elo_channel = 976552050953437194
 test_channel = 973594560368373820
 using_channel = elo_channel
@@ -51,8 +53,8 @@ async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
     # Get channel
     channel = bot.get_channel(channel_id)
 
-    # Remove last 10 messages in channel
-    await channel.purge(limit=10)
+    # Remove last 20 messages in channel
+    await channel.purge(limit=20)
 
     # Send Image
     try:
@@ -71,4 +73,5 @@ async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
       if len(embed.description) > 0:
           await channel.send(embed=embed)
           print('sent ' + str(num))
+          wait(0.5)
       num += 1
