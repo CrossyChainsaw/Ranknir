@@ -2,13 +2,13 @@ from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
-from keep_alive import keep_alive
-from embed import send_embeds2
-from sort_elo import sort_elo_1v1, sort_2v2_elo
-from wait import wait
-from turn import get_turn, next_turn, reset_turn
-from Classes.clan import Clan
-from get_members_elo import get_clans
+from modules.keep_alive import keep_alive
+from modules.embed import send_embeds2, prepare_embeds_new
+from modules.sort_elo import sort_elo_1v1, sort_2v2_elo
+from modules.wait import wait
+from modules.turn import get_turn, next_turn, reset_turn
+from modules.get_members_elo import get_clans
+from classes.clan import Clan
 
 #TODO FIX PREAPRE EMBEDS
 
@@ -109,74 +109,7 @@ async def on_ready():
                            sorting_method="current")
             reset_turn()
         next_turn()
-        #wait(2500)
-def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_color):
-
-  print('start preparing embeds')
-  print('clan array')
-  print(len(clan_array))
-  print('')
-  print(clan_array[0])
-  
-  if len(clan_array) == 1:
-    
-    embed2 = discord.Embed(title=clan_array[0]['clan_name'], description="Total Exp: " + str(clan_array[0]['clan_xp']), color=clan_color)
-    print('h')
-    
-  elif len(clan_array) > 1:
-    embed2 = discord.Embed(title="", description="", color=clan_color)
-    
-    # Title
-    count = 0
-    for clan in clan_array:
-      if count == 0:
-        embed2.title += clan['clan_name'] 
-      else:
-        embed2.title += " & " + clan_array[count]['clan_name']
-      count+=1
-
-    print('test')
-    # Description
-    count = 0
-    for clan in clan_array:
-      if count == 0:
-        embed2.description += clan['clan_name'] + " Exp: " + str(clan['clan_xp']) 
-      else:
-        embed2.description += "\n" + clan_array[count]['clan_name'] + " Exp: " + str(clan_array[count]['clan_xp'])
-      count+=1
-
-    print('hi ')
-    # total xp in desc.
-    total_xp = 0
-    i = 0
-    while i < count:
-      total_xp += int(clan_array[i]['clan_xp'])
-      i+=1
-    embed2.description += "\nTotal Exp: " + str(total_xp)
-    
-    
-
-  embed_array = []
-  global rank
-  rank = 1
-  count = 0
-  embed = discord.Embed(description="", color=clan_color)
-  
-  print(len(names))
-  for (name, current, peak) in zip(names, current_ratings, peak_ratings):
-    if count == 0:
-      print('creating dc embed')
-      embed = discord.Embed(description="", color=clan_color)
-    if count <= 20:
-        embed.description += "**" + \
-            str(rank) + ". " + name + "**: current: **" + str(current) + "** peak: **" + str(peak) + '**\n'
-    rank += 1
-    count += 1
-    if count == 21:
-      embed_array.append(embed)
-      count = 0
-  embed_array.append(embed)
-  return embed2, embed_array
+        wait(300)
 
 async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sorting_method):
 

@@ -1,4 +1,4 @@
-from get_members_elo import get_members_2v2_elo, get_members_1v1_elo
+from modules.get_members_elo import get_members_2v2_elo, get_members_1v1_elo
 
 # todo (should)
 # turn sorting elo into method and use single one in both 1v1 and 2v2

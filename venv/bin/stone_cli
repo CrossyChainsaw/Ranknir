@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+
+import sys
+from Modules.Azure import Azure
+from Modules.GCP import GCP
+
+def usage():
+    print("""
+        Learning Python
+        -h For help
+        -az For Azure
+        -gcp For Google Cloud Platform
+    """)
+
+def switch(function):
+    azure = Azure()
+    gcp = GCP()
+    try:
+        funcoes = {"-gcp":gcp.criar_vm,
+                    "-az":azure.criar_vm,               
+                    "-h":usage}
+
+        return funcoes[function]
+    except Exception as e:
+        print("Invalid arg")
+        
+try:
+    switch(sys.argv[1])()
+except Exception as e:
+    print("Only one arg", e)

@@ -1,7 +1,5 @@
 import json
-import re
-import time
-from api import fetch_clan, fetch_player_ranked_stats
+from modules.api import fetch_clan, fetch_player_ranked_stats
 
 # todo (should)
 # remove stupid arrays for return values
