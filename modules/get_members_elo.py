@@ -45,7 +45,6 @@ def get_ps4_players(clan, clan_members):
         clan_members.append(ps4_players.pop(0))
   except:
     print(clan['clan_name'] + " doesn't have any ps4 players")
-  print(clan_members)
   return clan_members
 
 def get_members_1v1_elo(clan_id):
@@ -147,7 +146,6 @@ def get_members_2v2_elo(clan_id, sorting_method):
         name_1 = bestCurrentTeam[0:name_plus]
         name_2 = bestCurrentTeam[name_plus+1:name_length]
         full_name = name_1 + ' **+** ' + name_2 
-        print(full_name)
         bestCurrentTeam = full_name
 
         # ADD ALL VALUES TO ARRAYS
