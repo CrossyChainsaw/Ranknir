@@ -7,19 +7,25 @@ from embed import send_embeds2
 from sort_elo import sort_elo_1v1, sort_2v2_elo
 from wait import wait
 from turn import get_turn, next_turn, reset_turn
-from clan import Clan
+from Classes.clan import Clan
 from get_members_elo import get_clans
 
 #TODO FIX PREAPRE EMBEDS
 
-skyward = Clan("NO ACCESS", 976552050953437194, '84648', 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
-insomnia = Clan(988484998799716423, 1006780905131614280, '1919781', 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
-parasomnia = Clan("N/A", "N/A", '1927502', "N/A", "N/A")
-hypnosia = Clan("N/A", "N/A", '2022800', "N/A", "N/A")
-pandation = Clan(990292557386899527, 1016402549491912794, '1702413', 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
-pandace = Clan("N/A", "N/A", '1868949', "N/A", "N/A")
-dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb, 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
-blossom = Clan(973594560368373820, 973594560368373820, '1998475', 0xfebdff, "N/A")
+Skyward = Clan("NO ACCESS", 976552050953437194, '84648', 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
+
+lnsomnia = Clan(988484998799716423, 1006780905131614280, '1919781', 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
+Parasomnia = Clan("N/A", "N/A", '1927502', "N/A", "N/A")
+Hypnosia = Clan("N/A", "N/A", '2022800', "N/A", "N/A")
+
+Pandation = Clan(990292557386899527, 1016402549491912794, '1702413', 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
+Pandace = Clan("N/A", "N/A", '1868949', "N/A", "N/A")
+Panhalla = Clan("N/A", "N/A", '1709279', "N/A", "N/A")
+PanhaIIa = Clan("N/A", "N/A", '1722822', "N/A", "N/A")
+
+
+Dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb,        'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
+
 Cybers = Clan(1039202472536834108, 1039202527398334514, '1983079', 0xD10000, " ")
 Cybers_II = Clan("N/A", "N/A", '1983274', "N/A", "N/A")
 
@@ -47,52 +53,53 @@ async def on_ready():
         turn = get_turn()
         print("current turn: " + str(turn))
         if turn == 0:
-            await main_1v1_crazy([pandation.clan_id,
-                                 pandace.clan_id],
-                                 pandation.channel_1v1_id,
-                                 pandation.image,
-                                 pandation.color,
-                                 sorting_method="peak")
-        elif turn == 1:
-            await main_2v2_crazy([insomnia.clan_id,
-                           parasomnia.clan_id, hypnosia.clan_id],
-                           insomnia.channel_2v2_id,
-                           insomnia.image,
-                           insomnia.color,
-                           sorting_method="peak")
-        elif turn == 2:
-            await main_2v2_crazy([dair.clan_id],
-                           dair.channel_2v2_id,
-                           dair.image,
-                           dair.color,
+            await main_2v2_crazy([Dair.clan_id],
+                           Dair.channel_2v2_id,
+                           Dair.image,
+                           Dair.color,
                            sorting_method="current")
+        elif turn == 1:
+            await main_1v1_crazy([Pandation.clan_id,
+                                 Pandace.clan_id],
+                                 Pandation.channel_1v1_id,
+                                 Pandation.image,
+                                 Pandation.color,
+                                 sorting_method="peak")
+        elif turn == 2:
+            await main_2v2_crazy([Pandation.clan_id,
+                           Pandace.clan_id],
+                           Pandation.channel_2v2_id,
+                           Pandation.image,
+                           Pandation.color,
+                           sorting_method="peak")
         elif turn == 3:
-            await main_2v2_crazy([pandation.clan_id,
-                           pandace.clan_id],
-                           pandation.channel_2v2_id,
-                           pandation.image,
-                           pandation.color,
+            await main_2v2_crazy([lnsomnia.clan_id,
+                           Parasomnia.clan_id, Hypnosia.clan_id],
+                           lnsomnia.channel_2v2_id,
+                           lnsomnia.image,
+                           lnsomnia.color,
+                           sorting_method="peak")
+
+        elif turn == 4:
+            await main_1v1_crazy([lnsomnia.clan_id,
+                           Parasomnia.clan_id, Hypnosia.clan_id],
+                           lnsomnia.channel_1v1_id,
+                           lnsomnia.image,
+                           lnsomnia.color,
                            sorting_method="peak")
         elif turn == 21:
             await main_2v2_crazy([wanak1n_clan_id],
                            test_channel_id,
-                           insomnia.image,
-                           insomnia.color,
+                           lnsomnia.image,
+                           lnsomnia.color,
                            sorting_method="current")
-        elif turn == 4:
-            await main_1v1_crazy([insomnia.clan_id,
-                           parasomnia.clan_id, hypnosia.clan_id],
-                           insomnia.channel_1v1_id,
-                           insomnia.image,
-                           insomnia.color,
-                           sorting_method="peak")
         elif turn == 5:
             await main_1v1_crazy([Cybers.clan_id,
                            Cybers_II.clan_id],
                            Cybers.channel_1v1_id,
                            Cybers.image,
                            Cybers.color,
-                           sorting_method="current")
+                           sorting_method="peak")
         elif turn == 6:
             await main_2v2_crazy([Cybers.clan_id,
                            Cybers_II.clan_id],
@@ -117,8 +124,7 @@ def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_co
     print('h')
     
   elif len(clan_array) > 1:
-    embed2 = discord.Embed(
-      title="", description="", color=clan_color)
+    embed2 = discord.Embed(title="", description="", color=clan_color)
     
     # Title
     count = 0
@@ -184,10 +190,7 @@ async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
   # prep embeds
   embed2, embed_array = prepare_embeds_new(clans , names, current_ratings, peak_ratings, clan_color)
   
-  await send_embeds2(embed2, embed_array,
-                    bot=bot,
-                    channel_id=channel_id,
-                    clan_image=clan_image)
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=channel_id, clan_image=clan_image)
 
   # clear arrays
   names.clear()
