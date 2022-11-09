@@ -18,6 +18,14 @@ yarl = ">=1.0,<2.0"
 speedups = ["aiodns", "brotlipy", "cchardet"]
 
 [[package]]
+name = "arthurstonecli"
+version = "0.1"
+description = "Cria a infraestrutura automatizada"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "async-timeout"
 version = "3.0.1"
 description = "Timeout context manager for asyncio programs"
@@ -272,10 +280,11 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d62c0160fecc441c29925c9208399428cbfca335cc260d4641e14823265cb969"
+content-hash = "82fe9da436e3bbfa06fb1620fbce7f28e977664c870c328bba6e4c9fabc2e9ee"
 
 [metadata.files]
 aiohttp = []
+arthurstonecli = []
 async-timeout = []
 attrs = []
 certifi = []

@@ -1,0 +1,18 @@
+Metadata-Version: 2.1
+Name: arthurstonecli
+Version: 0.1
+Summary: Cria a infraestrutura automatizada
+Home-page: https://github.com/Arthurmpc
+Author: Arthur Machado
+Author-email: arthurmachado44@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+
+### Stone CLI 
+
+cria tudo na Stone sem a burocracia chata :parrot: :snake:
+

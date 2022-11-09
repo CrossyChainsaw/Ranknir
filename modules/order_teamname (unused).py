@@ -1,5 +1,4 @@
-from api import fetch_player_ranked_stats
-from api import fetch_clan
+from modules.api import fetch_player_ranked_stats, fetch_clan
 import json
 
 
