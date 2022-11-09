@@ -1,3 +1,4 @@
+from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
