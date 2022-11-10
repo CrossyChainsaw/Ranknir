@@ -60,14 +60,14 @@ async def on_ready():
                            sorting_method="current")
         elif turn == 1:
             await main_1v1_crazy([Pandation.clan_id,
-                                 Pandace.clan_id],
+                                 Pandace.clan_id, Panhalla.clan_id, PanhaIIa.clan_id],
                                  Pandation.channel_1v1_id,
                                  Pandation.image,
                                  Pandation.color,
                                  sorting_method="peak")
         elif turn == 2:
             await main_2v2_crazy([Pandation.clan_id,
-                           Pandace.clan_id],
+                           Pandace.clan_id, Panhalla.clan_id, PanhaIIa.clan_id],
                            Pandation.channel_2v2_id,
                            Pandation.image,
                            Pandation.color,
