@@ -27,6 +27,9 @@ Dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb,        'https
 
 Cybers = Clan(1039202472536834108, 1039202527398334514, '1983079', 0xD10000, " ")
 Cybers_II = Clan("N/A", "N/A", '1983274', "N/A", "N/A")
+Xybers = Clan("N/A", "N/A", '2041304', "N/A", "N/A")
+
+Cherimoya = Clan(1042189651118674010, "N/A", '2024340', 0x19eb8f, " ")
 
 # Testing
 test_channel_id = 973594560368373820
@@ -94,18 +97,30 @@ async def on_ready():
                            sorting_method="current")
         elif turn == 5:
             await main_1v1_crazy([Cybers.clan_id,
-                           Cybers_II.clan_id],
+                           Cybers_II.clan_id, Xybers.clan_id],
                            Cybers.channel_1v1_id,
                            Cybers.image,
                            Cybers.color,
                            sorting_method="peak")
         elif turn == 6:
             await main_2v2_crazy([Cybers.clan_id,
-                           Cybers_II.clan_id],
+                           Cybers_II.clan_id, Xybers.clan_id],
                            Cybers.channel_2v2_id,
                            Cybers.image,
                            Cybers.color,
                            sorting_method="current")
+        elif turn == 7:
+          await main_2v2_crazy([Skyward.clan_id],
+                           Skyward.channel_2v2_id,
+                           Skyward.image,
+                           Skyward.color,
+                           sorting_method="current")
+        elif turn == 8:
+            await main_1v1_crazy([Cherimoya.clan_id],
+                           Cherimoya.channel_1v1_id,
+                           Cherimoya.image,
+                           Cherimoya.color,
+                           sorting_method="peak")
             reset_turn()
         next_turn()
         wait(300)
