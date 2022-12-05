@@ -17,5 +17,5 @@ Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in
 - Elo list can be sorted on current or on peak elo
 - Can be sent without an clan image
 
-# Hosting
-Bot is being hosted on repl.it
+# Add this bot to your server
+dm me -> CrossyChainsaw#1706
