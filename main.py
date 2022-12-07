@@ -2,7 +2,7 @@ from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
-from modules.keep_alive import keep_alive
+#from modules.keep_alive import keep_alive
 from modules.embed import send_embeds2, prepare_embeds_new
 from modules.sort_elo import sort_elo_1v1, sort_2v2_elo
 from modules.wait import wait
@@ -41,8 +41,9 @@ test3_clan_id = '2023962'
 # insomnia_clan_id, insomnia_elo_channel_id, insomnia_image
 # skyward_clan_id, skyward_elo_channel_id, skyward_image
 
-bot = commands.Bot(command_prefix=['r', 'R'])
-
+intents = discord.Intents().all()
+bot = commands.Bot(command_prefix=['r', 'R'], intents=intents)
+turn = 6
 
 @bot.event
 async def on_ready():
@@ -53,7 +54,8 @@ async def on_ready():
 
     # main, send 1v1 / 2v2 elo list
     while True:
-        turn = get_turn()
+        #turn = get_turn()
+        global turn
         print("current turn: " + str(turn))
         if turn == 0:
             await main_2v2_crazy([Dair.clan_id],
@@ -123,8 +125,11 @@ async def on_ready():
                            Cherimoya.color,
                            sorting_method="peak")
             reset_turn()
-        next_turn()
-        wait(300)
+        turn += 1
+        if turn > 8:
+            turn = 0
+        #next_turn()
+        #wait(300)
 
 async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sorting_method):
 
@@ -167,5 +172,5 @@ async def main_2v2_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
   peak_ratings.clear()
 
 
-keep_alive()
-bot.run(os.environ['BOT_KEY'])
+#keep_alive()
+bot.run("OTc2NTcxNzYyMTAxODc4ODk0.G6H0Gz.G7H0oPRDj-p5yJTOCP7L_vkAk7Pu0tRZw1M30k")

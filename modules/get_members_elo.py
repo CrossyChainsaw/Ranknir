@@ -1,51 +1,7 @@
 import json
-from modules.api import fetch_clan, fetch_player_ranked_stats
-
-# todo (should)
-# remove stupid arrays for return values
-
-def get_clan(clan_id):
-    try:
-        clan = json.loads(fetch_clan(clan_id).content)  # request
-    except:
-        clan = []
-        print("couldn't fetch clan data of clan " + str(clan_id))
-    return clan
-
-
-def get_clan_members(clan_id):
-    clan = get_clan(clan_id)
-    try:
-        clan_members = clan['clan']
-
-        # test process with only 3 clan members
-        #with open('./test_data.json') as f:
-          #clan_members = json.load(f)
-    except:
-        print("ERROR: couldn't get clan members, returned empty array")
-        clan_members = []
-
-    # return values
-    return clan_members, clan
-
-def get_clans(clan_id_array):
-  print('created clan array')
-  clans = []
-  for clan_id in clan_id_array:
-    clans.append(get_clan(clan_id))
-  print("returning clan array")
-  return clans
-  
-def get_ps4_players(clan, clan_members):
-  try: 
-    with open('data/ps4_players/' + clan['clan_name'] + '_ps4_players.json') as file:
-      ps4_players = json.load(file)
-      print("Amount of ps4 players in " + clan['clan_name'] + ": " + str(len(ps4_players)))
-      while len(ps4_players) > 0:
-        clan_members.append(ps4_players.pop(0))
-  except:
-    print(clan['clan_name'] + " doesn't have any ps4 players")
-  return clan_members
+from modules.api import fetch_player_ranked_stats
+from modules.clan import get_clan_members
+from modules.ps4_players import get_ps4_players
 
 def get_members_1v1_elo(clan_id):
 
@@ -64,7 +20,7 @@ def get_members_1v1_elo(clan_id):
   num = 1
   for member in clan_members:
     try:
-      player = json.loads(fetch_player_ranked_stats(member["brawlhalla_id"]).content)
+      player = fetch_player_ranked_stats(member["brawlhalla_id"])
       
       clan_members_name.append(player["name"])
       clan_members_current.append(player["rating"])
@@ -106,8 +62,7 @@ def get_members_2v2_elo(clan_id, sorting_method):
   for player in clan_members:
     num += 1
     try:
-        all_my_2v2_teams = json.loads(
-            fetch_player_ranked_stats(player["brawlhalla_id"]).content)["2v2"]  # request
+        all_my_2v2_teams = fetch_player_ranked_stats(player["brawlhalla_id"])["2v2"]
 
         if sorting_method == "current":
           
