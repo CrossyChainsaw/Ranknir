@@ -121,4 +121,4 @@ def sort_elo_1v1(clan_id_array, sorting_method):
   # return values
   return player_names_sorted, current_ratings_sorted, peak_ratings_sorted
 
-  
+
