@@ -1,48 +1,39 @@
 import os
 import discord
 from discord.ext import commands
-#from modules.keep_alive import keep_alive
+from modules.keep_alive import keep_alive
 from modules.embed import send_embeds2, prepare_embeds_new
 from modules.sort_elo import sort_elo_1v1, sort_2v2_elo
 from modules.wait import wait
 from modules.turn import get_turn, next_turn, reset_turn
-from modules.get_members_elo import get_clans
+from modules.clan import get_clans_data
 from classes.clan import Clan
 
 #TODO FIX PREAPRE EMBEDS
 
-Skyward = Clan("NO ACCESS", 976552050953437194, '84648', 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
+Skyward = Clan("NO ACCESS", 976552050953437194, ['84648'], 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
 
-lnsomnia = Clan(988484998799716423, 1006780905131614280, '1919781', 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
-Parasomnia = Clan("N/A", "N/A", '1927502', "N/A", "N/A")
-Hypnosia = Clan("N/A", "N/A", '2022800', "N/A", "N/A")
+lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id = '1919781', '1927502', '2022800'
+lnsomnia = Clan(988484998799716423, 1006780905131614280, [lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id] , 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
 
-Pandation = Clan(990292557386899527, 1016402549491912794, '1702413', 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
-Pandace = Clan("N/A", "N/A", '1868949', "N/A", "N/A")
-Panhalla = Clan("N/A", "N/A", '1709279', "N/A", "N/A")
-PanhaIIa = Clan("N/A", "N/A", '1722822', "N/A", "N/A")
+Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
+Pandation = Clan(990292557386899527, 1016402549491912794, [Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id], 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
 
 
-Dair = Clan("NO ACCESS", 1029669276363280414, '1357965', 0x349feb,        'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
+Dair = Clan("NO ACCESS", 1029669276363280414, ['1357965'], 0x349feb,        'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
 
-Cybers = Clan(1039202472536834108, 1039202527398334514, '1983079', 0xD10000, " ")
-Cybers_II = Clan("N/A", "N/A", '1983274', "N/A", "N/A")
-Xybers = Clan("N/A", "N/A", '2041304', "N/A", "N/A")
+Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id = '1983079', '1983274', '2041304'
+Cybers = Clan(1039202472536834108, 1039202527398334514, [Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id], 0xD10000, " ")
 
-Cherimoya = Clan(1042189651118674010, "N/A", '2024340', 0x19eb8f, " ")
+Cherimoya = Clan(1042189651118674010, "N/A", ['2024340'], 0x19eb8f, " ")
 
 # Testing
-test_channel_id = 973594560368373820
-wanak1n_clan_id = '1363653'
-test2_clan_id = '2021161'
-test3_clan_id = '2023962'
-
-# insomnia_clan_id, insomnia_elo_channel_id, insomnia_image
-# skyward_clan_id, skyward_elo_channel_id, skyward_image
+wanak1n_clan_id, test2_clan_id, test3_clan_id = '1363653', '2021161', '2023962'
+test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id, test2_clan_id, test3_clan_id], 0xD10000, " ")
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r', 'R'], intents=intents)
-turn = 6
+turn = 0
 
 @bot.event
 async def on_ready():
@@ -57,72 +48,25 @@ async def on_ready():
         global turn
         print("current turn: " + str(turn))
         if turn == 0:
-            await main_2v2_crazy([Dair.clan_id],
-                           Dair.channel_2v2_id,
-                           Dair.image,
-                           Dair.color,
-                           sorting_method="current")
+            await main_2v2_crazy(Dair, sorting_method="current")
         elif turn == 1:
-            await main_1v1_crazy([Pandation.clan_id,
-                                 Pandace.clan_id, Panhalla.clan_id, PanhaIIa.clan_id],
-                                 Pandation.channel_1v1_id,
-                                 Pandation.image,
-                                 Pandation.color,
-                                 sorting_method="peak")
+            await main_1v1_crazy(Pandation, sorting_method="peak")
         elif turn == 2:
-            await main_2v2_crazy([Pandation.clan_id,
-                           Pandace.clan_id, Panhalla.clan_id, PanhaIIa.clan_id],
-                           Pandation.channel_2v2_id,
-                           Pandation.image,
-                           Pandation.color,
-                           sorting_method="peak")
+            await main_2v2_crazy(Pandation, sorting_method="peak")
         elif turn == 3:
-            await main_2v2_crazy([lnsomnia.clan_id,
-                           Parasomnia.clan_id, Hypnosia.clan_id],
-                           lnsomnia.channel_2v2_id,
-                           lnsomnia.image,
-                           lnsomnia.color,
-                           sorting_method="peak")
-
+            await main_2v2_crazy(lnsomnia, sorting_method="peak")
         elif turn == 4:
-            await main_1v1_crazy([lnsomnia.clan_id,
-                           Parasomnia.clan_id, Hypnosia.clan_id],
-                           lnsomnia.channel_1v1_id,
-                           lnsomnia.image,
-                           lnsomnia.color,
-                           sorting_method="peak")
+            await main_1v1_crazy(lnsomnia, sorting_method="peak")
         elif turn == 21:
-            await main_2v2_crazy([wanak1n_clan_id],
-                           test_channel_id,
-                           lnsomnia.image,
-                           lnsomnia.color,
-                           sorting_method="current")
+            await main_2v2_crazy(test_clan, sorting_method="current")
         elif turn == 5:
-            await main_1v1_crazy([Cybers.clan_id,
-                           Cybers_II.clan_id, Xybers.clan_id],
-                           Cybers.channel_1v1_id,
-                           Cybers.image,
-                           Cybers.color,
-                           sorting_method="peak")
+            await main_1v1_crazy(Cybers, sorting_method="peak")
         elif turn == 6:
-            await main_2v2_crazy([Cybers.clan_id,
-                           Cybers_II.clan_id, Xybers.clan_id],
-                           Cybers.channel_2v2_id,
-                           Cybers.image,
-                           Cybers.color,
-                           sorting_method="current")
+            await main_2v2_crazy(Cybers, sorting_method="current")
         elif turn == 7:
-          await main_2v2_crazy([Skyward.clan_id],
-                           Skyward.channel_2v2_id,
-                           Skyward.image,
-                           Skyward.color,
-                           sorting_method="current")
+          await main_2v2_crazy(Skyward, sorting_method="current")
         elif turn == 8:
-            await main_1v1_crazy([Cherimoya.clan_id],
-                           Cherimoya.channel_1v1_id,
-                           Cherimoya.image,
-                           Cherimoya.color,
-                           sorting_method="peak")
+            await main_1v1_crazy(Cherimoya, sorting_method="peak")
             reset_turn()
         turn += 1
         if turn > 8:
@@ -130,40 +74,37 @@ async def on_ready():
         #next_turn()
         #wait(300)
 
-async def main_1v1_crazy(clan_id_array, channel_id, clan_image, clan_color, sorting_method):
+async def main_1v1_crazy(clan, sorting_method):
 
   # get players elo sorted
-  names, current_ratings, peak_ratings = sort_elo_1v1(clan_id_array, sorting_method)
+  names, current_ratings, peak_ratings = sort_elo_1v1(clan.id_array, sorting_method)
   print(names)
 
   # get clans
-  clans = get_clans(clan_id_array)
+  clans_data = get_clans_data(clan.id_array)
 
   # prep embeds
-  embed2, embed_array = prepare_embeds_new(clans , names, current_ratings, peak_ratings, clan_color)
+  embed2, embed_array = prepare_embeds_new(clans_data , names, current_ratings, peak_ratings, clan.color)
   
-  await send_embeds2(embed2, embed_array, bot=bot, channel_id=channel_id, clan_image=clan_image)
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=clan.channel_2v2_id, clan_image=clan.image)
 
   # clear arrays
   names.clear()
   current_ratings.clear()
   peak_ratings.clear()
 
+async def main_2v2_crazy(clan, sorting_method):
 
-
-
-async def main_2v2_crazy(clan_id_array, channel_id, clan_image, clan_color, sorting_method):
-  
   # get players elo sorted
-  names, current_ratings, peak_ratings = sort_2v2_elo(clan_id_array, sorting_method)
+  names, current_ratings, peak_ratings = sort_2v2_elo(clan.id_array, sorting_method)
 
   # get clans
-  clans = get_clans(clan_id_array)
+  clans = get_clans_data(clan.id_array)
 
   # prep embeds
-  embed2, embed_array = prepare_embeds_new(clans, names, current_ratings, peak_ratings, clan_color)
+  embed2, embed_array = prepare_embeds_new(clans, names, current_ratings, peak_ratings, clan.color)
 
-  await send_embeds2(embed2, embed_array, bot=bot, channel_id=channel_id, clan_image=clan_image)
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=clan.channel_1v1_id, clan_image=clan.image)
   
   # clear arrays
   names.clear()
@@ -171,5 +112,5 @@ async def main_2v2_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
   peak_ratings.clear()
 
 
-#keep_alive()
-bot.run("OTc2NTcxNzYyMTAxODc4ODk0.G6H0Gz.G7H0oPRDj-p5yJTOCP7L_vkAk7Pu0tRZw1M30k")
+keep_alive()
+bot.run(os.environ["BOT_KEY"])

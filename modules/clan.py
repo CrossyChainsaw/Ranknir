@@ -8,7 +8,7 @@ def get_clan(clan_id):
         print("couldn't fetch clan data of clan " + str(clan_id))
     return clan
 
-def get_clans(clan_id_array):
+def get_clans_data(clan_id_array):
   clans = []
   for clan_id in clan_id_array:
     clans.append(get_clan(clan_id))
