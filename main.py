@@ -173,4 +173,4 @@ async def main_2v2_crazy(clan_id_array, channel_id, clan_image, clan_color, sort
 
 
 #keep_alive()
-bot.run("OTc2NTcxNzYyMTAxODc4ODk0.G6H0Gz.G7H0oPRDj-p5yJTOCP7L_vkAk7Pu0tRZw1M30k")
+bot.run(os.environ["BOT_KEY"])
