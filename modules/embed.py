@@ -5,9 +5,15 @@ from modules.wait import wait
 
 async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
 
+    print('id')
+    print(channel_id)
+  
     # Get channel
     channel = bot.get_channel(channel_id)
 
+    print('channel')
+    print(channel)
+  
     # Remove last 20 messages in channel
     await channel.purge(limit=20)
 
