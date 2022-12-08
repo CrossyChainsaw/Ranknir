@@ -4,8 +4,9 @@ from discord.ext import commands
 from modules.keep_alive import keep_alive
 from modules.embed import send_embeds2, prepare_embeds_new
 from modules.sort_elo import sort_elo_1v1, sort_2v2_elo
-from modules.wait import wait
-from modules.turn import get_turn, next_turn, reset_turn
+#from modules.wait import wait
+#from modules.turn import get_turn, next_turn
+from modules.turn import reset_turn
 from modules.clan import get_clans_data
 from classes.clan import Clan
 
@@ -17,7 +18,7 @@ lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id = '1919781', '1927502', '
 lnsomnia = Clan(988484998799716423, 1006780905131614280, [lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id] , 0x301834, "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png")
 
 Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
-Pandation = Clan(990292557386899527, 1016402549491912794, [Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id], 0x212226, "https://cdn.discordapp.com/attachments/954800788130136064/1016402444810453012/logo_final.jpg")
+Pandation = Clan(990292557386899527, 1016402549491912794, [Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id], 0x212226, "https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif")
 
 
 Dair = Clan("NO ACCESS", 1029669276363280414, ['1357965'], 0x349feb,        'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png')
@@ -33,7 +34,7 @@ test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id, test2
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r', 'R'], intents=intents)
-turn = 0
+turn = 8
 
 @bot.event
 async def on_ready():
@@ -86,7 +87,7 @@ async def main_1v1_crazy(clan, sorting_method):
   # prep embeds
   embed2, embed_array = prepare_embeds_new(clans_data , names, current_ratings, peak_ratings, clan.color)
   
-  await send_embeds2(embed2, embed_array, bot=bot, channel_id=clan.channel_2v2_id, clan_image=clan.image)
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=clan.channel_1v1_id, clan_image=clan.image)
 
   # clear arrays
   names.clear()
