@@ -1,3 +1,4 @@
+from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
@@ -112,6 +113,5 @@ async def main_2v2_crazy(clan, sorting_method):
   current_ratings.clear()
   peak_ratings.clear()
 
-
-keep_alive()
+#keep_alive()
 bot.run(os.environ["BOT_KEY"])
