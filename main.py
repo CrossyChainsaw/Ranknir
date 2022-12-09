@@ -1,3 +1,4 @@
+from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
@@ -121,25 +122,5 @@ async def main_2v2_crazy(clan, sorting_method):
   current_ratings.clear()
   peak_ratings.clear()
 
-
-
-async def main_1v1_server(server, sorting_method):
-  # get players elo sorted
-  names, current_ratings, peak_ratings = sort_elo_1v1_server(server.id_array, sorting_method)
-  print(names)
-
-  # get clans
-  server_data = get_clans_data(server.id_array)
-
-  # prep embeds
-  embed2, embed_array = prepare_embeds_new(server_data, names, current_ratings, peak_ratings, server.color)
-  
-  await send_embeds2(embed2, embed_array, bot=bot, channel_id=server.channel_1v1_id, clan_image=server.image)
-
-  # clear arrays
-  names.clear()
-  current_ratings.clear()
-  peak_ratings.clear()
-  
 #keep_alive()
 bot.run(os.environ["BOT_KEY"])
