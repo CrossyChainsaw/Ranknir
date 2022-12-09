@@ -3,15 +3,16 @@ import discord
 from discord.ext import commands
 from modules.keep_alive import keep_alive
 from modules.embed import send_embeds2, prepare_embeds_new
-from modules.sort_elo import sort_elo_1v1, sort_2v2_elo
+from modules.sort_elo import sort_elo_1v1, sort_2v2_elo, sort_elo_1v1_server
 #from modules.wait import wait
 #from modules.turn import get_turn, next_turn
 from modules.turn import reset_turn
 from modules.clan import get_clans_data
-from classes.clan import Clan
+from classes.clan import Clan, Server
 
 #TODO FIX PREAPRE EMBEDS
 
+# Clans
 Skyward = Clan("NO ACCESS", 976552050953437194, ['84648'], 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
 
 lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id = '1919781', '1927502', '2022800'
@@ -27,6 +28,12 @@ Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id = '1983079', '1983274', '20413
 Cybers = Clan(1039202472536834108, 1039202527398334514, [Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id], 0xD10000, " ")
 
 Cherimoya = Clan(1042189651118674010, "N/A", ['2024340'], 0x19eb8f, " ")
+
+Fanfare = Clan("N/A", 1049668480061943818, ['1311457'], 0x8affc9, "https://cdn.discordapp.com/attachments/1049743980180541440/1049986047045533736/Fbanner.png")
+
+
+# Servers
+Brawlhalla_NL = Server(1050114658566152262, 1047987261905584128, 'color', 'image')
 
 # Testing
 wanak1n_clan_id, test2_clan_id, test3_clan_id = '1363653', '2021161', '2023962'
@@ -68,9 +75,11 @@ async def on_ready():
           await main_2v2_crazy(Skyward, sorting_method="current")
         elif turn == 8:
             await main_1v1_crazy(Cherimoya, sorting_method="peak")
+        elif turn == 9:
+            await main_2v2_crazy(Fanfare, sorting_method="peak")
             reset_turn()
         turn += 1
-        if turn > 8:
+        if turn > 9:
             turn = 0
         #next_turn()
         #wait(300)
@@ -113,5 +122,24 @@ async def main_2v2_crazy(clan, sorting_method):
   peak_ratings.clear()
 
 
-keep_alive()
+
+async def main_1v1_server(server, sorting_method):
+  # get players elo sorted
+  names, current_ratings, peak_ratings = sort_elo_1v1_server(server.id_array, sorting_method)
+  print(names)
+
+  # get clans
+  server_data = get_clans_data(server.id_array)
+
+  # prep embeds
+  embed2, embed_array = prepare_embeds_new(server_data, names, current_ratings, peak_ratings, server.color)
+  
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=server.channel_1v1_id, clan_image=server.image)
+
+  # clear arrays
+  names.clear()
+  current_ratings.clear()
+  peak_ratings.clear()
+  
+#keep_alive()
 bot.run(os.environ["BOT_KEY"])
