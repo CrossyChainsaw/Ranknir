@@ -1,3 +1,4 @@
+from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
@@ -125,8 +126,6 @@ async def main_2v2_crazy(clan, sorting_method):
   names.clear()
   current_ratings.clear()
   peak_ratings.clear()
-
-
 
 async def main_1v1_server(server, sorting_method):
   # update data
