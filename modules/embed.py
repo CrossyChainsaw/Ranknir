@@ -5,9 +5,11 @@ from modules.wait import wait
 
 async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
 
-    print('id')
+    #print('id')
+    print('look------------')
     print(channel_id)
-  
+
+    print(bot)
     # Get channel
     channel = bot.get_channel(channel_id)
 
@@ -94,6 +96,36 @@ def prepare_embeds_new(clan_array, names, current_ratings, peak_ratings, clan_co
     if count == 0:
       print('creating dc embed')
       embed = discord.Embed(description="", color=clan_color)
+    if count <= 20:
+        embed.description += "**" + \
+            str(rank) + ". " + name + "**: current: **" + str(current) + "** peak: **" + str(peak) + '**\n'
+    rank += 1
+    count += 1
+    if count == 21:
+      embed_array.append(embed)
+      count = 0
+  embed_array.append(embed)
+  return embed2, embed_array
+
+def prepare_embeds_new_server(server, names, current_ratings, peak_ratings, clan_color):
+
+  print('start preparing embeds')
+  print('clan array')
+  print('')
+  
+  embed2 = discord.Embed(title=server.name, color=server.color)
+  
+  embed_array = []
+  global rank
+  rank = 1
+  count = 0
+  embed = discord.Embed(description="", color=server.color)
+  
+  print(len(names))
+  for (name, current, peak) in zip(names, current_ratings, peak_ratings):
+    if count == 0:
+      print('creating dc embed')
+      embed = discord.Embed(description="", color=server.color)
     if count <= 20:
         embed.description += "**" + \
             str(rank) + ". " + name + "**: current: **" + str(current) + "** peak: **" + str(peak) + '**\n'

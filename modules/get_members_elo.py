@@ -2,6 +2,9 @@ import json
 from modules.api import fetch_player_ranked_stats
 from modules.clan import get_clan_members
 from modules.ps4_players import get_ps4_players
+from modules.server import get_server_players
+
+# remove clan_id dependency for server logic
 
 def get_members_1v1_elo(clan_id):
 
@@ -129,3 +132,44 @@ def get_members_2v2_elo(clan_id, sorting_method):
   print('teamnames amount (in get_members_elo)')
   print(len(clan_2v2_teamnames))
   return clan_2v2_teamnames, clan_current_2v2_ratings, clan_peak_2v2_ratings, clan
+
+def get_members_1v1_elo_server(server):# get clan and clan members
+  
+  server_members = []
+
+  # get ps4 players
+  server_members = get_server_players(server, server_members)
+
+  # define elo arrays
+  server_members_name = []
+  server_members_current = []
+  server_members_peak = []
+
+  # get everyone's rank stats
+  num = 1
+  for member in server_members:
+    print("member")
+    print(member)
+    try:
+      player = fetch_player_ranked_stats(member["brawlhalla_id"])
+      
+      server_members_name.append(player["name"])
+      server_members_current.append(player["rating"])
+      server_members_peak.append(player["peak_rating"])
+
+      print(str(num) + ". " + player["name"])
+      print("current: " + str(player["rating"]))
+      print("peak: " + str(player["peak_rating"]))
+    except:
+      server_members_name.append(member["name"])
+      server_members_current.append(-1)
+      server_members_peak.append(-1)
+
+      print(str(num) + ". " + member['name'])
+      print("current: " + "-1")
+      print("peak: " + "-1")
+    num += 1
+  
+  # return values
+  return server_members_name, server_members_current, server_members_peak
+    
