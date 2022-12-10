@@ -16,7 +16,7 @@ def fetch_clan(clan_id):
 
 
 def fetch_player_ranked_stats(brawlhalla_id):
-  time.sleep(8.5)
+  time.sleep(10)
   json_object = requests.get("https://api.brawlhalla.com/player/" +
                         str(brawlhalla_id) + "/ranked?api_key="+os.environ['API_KEY'])
   return json.loads(json_object.content)

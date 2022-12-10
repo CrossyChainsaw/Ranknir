@@ -2,16 +2,18 @@ from secrets import get_keys
 import os
 import discord
 from discord.ext import commands
-from modules.keep_alive import keep_alive
-from modules.embed import send_embeds2, prepare_embeds_new
+#from modules.keep_alive import keep_alive
+from modules.embed import send_embeds2, prepare_embeds_new, prepare_embeds_new_server
 from modules.sort_elo import sort_elo_1v1, sort_2v2_elo, sort_elo_1v1_server
-#from modules.wait import wait
-#from modules.turn import get_turn, next_turn
+from modules.wait import wait
+from modules.turn import get_turn, next_turn
 from modules.turn import reset_turn
 from modules.clan import get_clans_data
-from classes.clan import Clan, Server
+from classes.clan import Clan
+from classes.server import Server
+from modules.get_members_elo import get_members_1v1_elo_server
 
-#TODO FIX PREAPRE EMBEDS
+#TODO FIX Prepare EMBEDS
 
 # Clans
 Skyward = Clan("NO ACCESS", 976552050953437194, ['84648'], 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png')
@@ -34,28 +36,29 @@ Fanfare = Clan("N/A", 1049668480061943818, ['1311457'], 0x8affc9, "https://cdn.d
 
 
 # Servers
-Brawlhalla_NL = Server(1050114658566152262, 1047987261905584128, 'color', 'image')
+Brawlhalla_NL = Server("Brawlhalla NL", 1050114658566152262, 1047987261905584128, 0xff6404, ' ', "data/server/NL Brawlhalla/NL Brawlhalla_players.json")
 
 # Testing
 wanak1n_clan_id, test2_clan_id, test3_clan_id = '1363653', '2021161', '2023962'
 test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id, test2_clan_id, test3_clan_id], 0xD10000, " ")
 
+#Code
+
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r', 'R'], intents=intents)
-turn = 8
+#turn = 10
 
 @bot.event
 async def on_ready():
     # I'm back online!
     print(f'We have logged in as {bot.user}')
-    skyward_log_channel_id = bot.get_channel(973594560368373820)
-    await skyward_log_channel_id.send("I'm back online!")
 
     # main, send 1v1 / 2v2 elo list
     while True:
-        #turn = get_turn()
-        global turn
+        turn = get_turn()
+        #global turn
         print("current turn: " + str(turn))
+      
         if turn == 0:
             await main_2v2_crazy(Dair, sorting_method="current")
         elif turn == 1:
@@ -78,12 +81,14 @@ async def on_ready():
             await main_1v1_crazy(Cherimoya, sorting_method="peak")
         elif turn == 9:
             await main_2v2_crazy(Fanfare, sorting_method="peak")
+        elif turn > 9:
+            await main_1v1_server(Brawlhalla_NL, sorting_method="current")  
             reset_turn()
-        turn += 1
-        if turn > 9:
-            turn = 0
-        #next_turn()
-        #wait(300)
+        # turn += 1
+        # if turn > 10:
+        #     turn = 0
+        next_turn()
+        wait(5)
 
 async def main_1v1_crazy(clan, sorting_method):
 
@@ -115,12 +120,32 @@ async def main_2v2_crazy(clan, sorting_method):
   # prep embeds
   embed2, embed_array = prepare_embeds_new(clans, names, current_ratings, peak_ratings, clan.color)
 
-  await send_embeds2(embed2, embed_array, bot=bot, channel_id=clan.channel_1v1_id, clan_image=clan.image)
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=clan.channel_2v2_id, clan_image=clan.image)
   
   # clear arrays
   names.clear()
   current_ratings.clear()
   peak_ratings.clear()
 
+async def main_1v1_server(server, sorting_method):
+  # update data
+  server.update_data()
+  
+  # get players elo
+  names, current_ratings, peak_ratings  = get_members_1v1_elo_server(server)
+  
+  # sort players elo
+  names_sorted, current_ratings_sorted, peak_ratings_sorted = sort_elo_1v1_server(server, sorting_method, names, current_ratings, peak_ratings)
+  print(names_sorted)
+
+  embed2, embed_array = prepare_embeds_new_server(server, names_sorted, current_ratings_sorted, peak_ratings_sorted, server.color)
+  
+  await send_embeds2(embed2, embed_array, bot=bot, channel_id=server.channel_1v1_id, clan_image=server.image)
+
+  # clear arrays
+  names_sorted.clear()
+  current_ratings_sorted.clear()
+  peak_ratings_sorted.clear()
+  
 #keep_alive()
 bot.run(os.environ["BOT_KEY"])

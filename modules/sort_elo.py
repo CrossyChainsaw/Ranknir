@@ -114,31 +114,21 @@ def sort_elo_1v1(clan_id_array, sorting_method):
     player_names_sorted.append(player_names_all.pop(best_index))
     current_ratings_sorted.append(current_ratings_all.pop(best_index))
     peak_ratings_sorted.append(peak_ratings_all.pop(best_index))
-
-    print("6")
-    print(player_names_sorted)
     
   # return values
   return player_names_sorted, current_ratings_sorted, peak_ratings_sorted
 
 
 
-def sort_elo_1v1_server(server, sorting_method):
+def sort_elo_1v1_server(server, sorting_method, player_names, current_ratings, peak_ratings):
 
-  # get all values from all clans in the array
-  player_names_all = []
-  current_ratings_all = []
-  peak_ratings_all = []
-  
-  count=0
-  for clan_id in clan_id_array:
-    player_names, current_ratings, peak_ratings, clan = get_members_1v1_elo(clan_id_array[count])
-    
-    while len(player_names) > 0:
-      player_names_all.append(player_names.pop(0))
-      current_ratings_all.append(current_ratings.pop(0))
-      peak_ratings_all.append(peak_ratings.pop(0))
-    count+=1
+  # player_names_all, current_ratings_all, peak_ratings_all  = get_members_1v1_elo_server(server)
+
+  # get all players
+  player_data = server.get_players_data()
+  for user in player_data:
+    print('not implemented')
+    # get server member elo
 
   # sort players elo
   player_names_sorted = []
@@ -146,11 +136,11 @@ def sort_elo_1v1_server(server, sorting_method):
   peak_ratings_sorted = []
 
   print('start sorting players elo...')   
-  while len(player_names_all) > 0:
+  while len(player_names) > 0:
     index = -1
     best_index = 0
     best_rating = -1
-    for (name, current, peak) in zip(player_names_all, current_ratings_all, peak_ratings_all):
+    for (name, current, peak) in zip(player_names, current_ratings, peak_ratings):
       index += 1
       if sorting_method == "current":
         if current > best_rating:
@@ -160,9 +150,9 @@ def sort_elo_1v1_server(server, sorting_method):
         if peak > best_rating:
           best_rating = peak
           best_index = index
-    player_names_sorted.append(player_names_all.pop(best_index))
-    current_ratings_sorted.append(current_ratings_all.pop(best_index))
-    peak_ratings_sorted.append(peak_ratings_all.pop(best_index))
+    player_names_sorted.append(player_names.pop(best_index))
+    current_ratings_sorted.append(current_ratings.pop(best_index))
+    peak_ratings_sorted.append(peak_ratings.pop(best_index))
 
     print("6")
     print(player_names_sorted)
