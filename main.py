@@ -129,8 +129,11 @@ async def main_2v2_crazy(clan, sorting_method):
 
 async def main_1v1_server(server, sorting_method):
   # update data
-  server.update_data()
-  
+  try:
+    server.update_data()
+  except:
+    print("couldn't update data, make sure Dadabase is running")
+    
   # get players elo
   names, current_ratings, peak_ratings  = get_members_1v1_elo_server(server)
   
@@ -148,4 +151,4 @@ async def main_1v1_server(server, sorting_method):
   peak_ratings_sorted.clear()
   
 #keep_alive()
-bot.run(os.environ["BOT_KEY"])
+bot.run(os.environ["TEST_BOT_KEY"])
