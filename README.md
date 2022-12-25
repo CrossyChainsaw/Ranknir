@@ -1,5 +1,9 @@
 # Ranknir
-Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. Ranknir is currently active in the following clan servers: Skyward, Pandation, Insomnia, Dair, Cybers, Tews, Cherimoya, Fanfare and Fawaka 
+Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
+
+Ranknir is currently active in the following clan servers: Skyward, Pandation, lnsomnia, Dair, Cybers, Tews, Cherimoya, Fanfare, Fawaka and Brawlhalla NL
+
+Ranknir processes the following clans: Skyward, Pandation, Pandace, Panhalla, PanhaIIa, lnsomnia, Parasomnia, Hypnosia, Dair, Cybers, Cybers II, Xybers, Tews, Tews II, Cherimoya, Fanfare and Fawaka
 
 ### 1v1 list example
 
