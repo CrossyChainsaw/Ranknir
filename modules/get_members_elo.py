@@ -6,13 +6,14 @@ from modules.server import get_server_players
 
 # remove clan_id dependency for server logic
 
-def get_members_1v1_elo(clan_repl):
+def get_members_1v1_elo(clan_repl, clan_name):
+  print(clan_name)
   name_array = []
   current_array = []
   peak_array = []
   
   # ps4 players
-  ps4_players = get_ps4_players(clan_repl)
+  ps4_players = get_ps4_players(clan_repl, clan_name)
   name, current, peak = __get_clan_members_elo_1v1(ps4_players)
   while len(name) > 0:
     name_array.append(name.pop(0))
@@ -32,13 +33,13 @@ def get_members_1v1_elo(clan_repl):
   return players
 
   
-def get_members_2v2_elo(clan_repl, sorting_method):
+def get_members_2v2_elo(clan_repl, sorting_method, clan_name):
   teamname_array = []
   current_array = []
   peak_array = []
   
   # ps4 players
-  ps4_players = get_ps4_players(clan_repl)
+  ps4_players = get_ps4_players(clan_repl, clan_name)
   teamname, current, peak = __get_clan_members_elo_2v2(ps4_players, sorting_method)
   while len(teamname) > 0:
     teamname_array.append(teamname.pop(0))
