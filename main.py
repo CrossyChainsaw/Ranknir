@@ -11,7 +11,7 @@ from modules.clan import get_clans_data
 from classes.clan import Clan
 from classes.server import Server
 from modules.get_members_elo import get_members_1v1_elo_server, get_members_1v1_elo, get_members_2v2_elo
-from data.clan_data import Skyward, Pandation, lnsomnia, test_clan, Cybers, Cherimoya, Excalibur, Fanfare, Tews, Fawaka
+from data.clan_data import Skyward, Pandation, lnsomnia, test_clan, Cybers, Cherimoya, Excalibur, Fanfare, Tews, Fawaka, Dair
 from data.server_data import Brawlhalla_NL
 
 #TODO FIX Prepare EMBEDS
@@ -32,8 +32,7 @@ async def on_ready():
         print("current turn: " + str(turn))
 
         if turn == 0:
-          print('not today')
-            #await main_2v2_crazy(Dair, sorting_method="current")
+            await main_2v2_crazy(Dair, sorting_method="current")
         elif turn == 1:
             await main_1v1_crazy(Pandation, sorting_method="peak")
         elif turn == 2:
@@ -48,8 +47,8 @@ async def on_ready():
             await main_1v1_crazy(Cybers, sorting_method="peak")
         elif turn == 6:
             await main_2v2_crazy(Cybers, sorting_method="current")
-        #elif turn == 7:
-            #await main_2v2_crazy(Skyward, sorting_method="current")
+        elif turn == 7:
+            await main_2v2_crazy(Skyward, sorting_method="current")
         elif turn == 8:
             await main_1v1_crazy(Cherimoya, sorting_method="peak")
         elif turn == 9:
