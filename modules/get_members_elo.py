@@ -6,54 +6,36 @@ from modules.server import get_server_players
 
 # remove clan_id dependency for server logic
 
-def get_members_1v1_elo(clan_id):
-
-  # get clan and clan members
-  clan_members, clan = get_clan_members(clan_id)
-
-  # get ps4 players
-  clan_members = get_ps4_players(clan, clan_members)
-
-  # define elo arrays
-  clan_members_name = []
-  clan_members_current = []
-  clan_members_peak = []
-
-  # get everyone's rank stats
-  num = 1
-  for member in clan_members:
-    try:
-      player = fetch_player_ranked_stats(member["brawlhalla_id"])
-      
-      clan_members_name.append(player["name"])
-      clan_members_current.append(player["rating"])
-      clan_members_peak.append(player["peak_rating"])
-
-      print(str(num) + ". " + player["name"])
-      print("current: " + str(player["rating"]))
-      print("peak: " + str(player["peak_rating"]))
-    except:
-      clan_members_name.append(member["name"])
-      clan_members_current.append(-1)
-      clan_members_peak.append(-1)
-
-      print(str(num) + ". " + member['name'])
-      print("current: " + "-1")
-      print("peak: " + "-1")
-    num += 1
+def get_members_1v1_elo(clan_repl):
   
-  # return values
-  return clan_members_name, clan_members_current, clan_members_peak, clan
+  name_array = []
+  current_array = []
+  peak_array = []
+
+  # get ps4 players
+  
+  for clan_id in clan_repl.id_array:
+    clan_members = get_clan_members(clan_id)
+    name, current, peak = __get_clan_members_elo(clan_members)
+    while len(name) > 0:
+      name_array.append(name.pop(0))
+      current_array.append(current.pop(0))
+      peak_array.append(peak.pop(0))
+  
+  players = [name_array, current_array, peak_array]
+  return players
     
 
 
-def get_members_2v2_elo(clan_id, sorting_method):
+def get_members_2v2_elo(clan_repl, clan_id, sorting_method):
     
   # get clan and clan members
   clan_members, clan = get_clan_members(clan_id)
 
+  print(clan_members)
+  
   # get ps4 players
-  clan_members = get_ps4_players(clan, clan_members)
+  clan_members = get_ps4_players(clan_repl, clan, clan_members)
 
   # Define elo arrays
   clan_2v2_teamnames = []
@@ -173,3 +155,38 @@ def get_members_1v1_elo_server(server):# get clan and clan members
   # return values
   return server_members_name, server_members_current, server_members_peak
     
+
+
+def __get_clan_members_elo(clan_members):
+  print(clan_members)
+  print('--------------------------------')
+  # define elo arrays
+  clan_members_name = []
+  clan_members_current = []
+  clan_members_peak = []  
+  
+  num = 1
+  for member in clan_members:
+    print(member)
+    try:
+      player = fetch_player_ranked_stats(member["brawlhalla_id"])
+      
+      clan_members_name.append(player["name"])
+      clan_members_current.append(player["rating"])
+      clan_members_peak.append(player["peak_rating"])
+
+      print(str(num) + ". " + player["name"])
+      print("current: " + str(player["rating"]))
+      print("peak: " + str(player["peak_rating"]))
+    except:
+      clan_members_name.append(member["name"])
+      clan_members_current.append(-1)
+      clan_members_peak.append(-1)
+
+      print(str(num) + ". " + member['name'])
+      print("current: " + "-1")
+      print("peak: " + "-1")
+    num += 1
+    
+  # return values
+  return clan_members_name, clan_members_current, clan_members_peak

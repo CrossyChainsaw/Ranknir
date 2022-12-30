@@ -1,8 +1,9 @@
 import json
+from modules.api import get_ps4_players_api
 
-def get_ps4_players(clan, clan_members):
+def get_ps4_players(clan_repl, clan, clan_members):
   try: 
-    ps4_players = __get_ps4_players_data(clan)
+    ps4_players = get_ps4_players_api(clan_repl.server_id)
     print("Amount of ps4 players in " + clan['clan_name'] + ": " + str(len(ps4_players)))
     while len(ps4_players) > 0:
       clan_members.append(ps4_players.pop(0))
