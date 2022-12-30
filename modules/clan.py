@@ -21,5 +21,5 @@ def get_clan_members(clan_id):
     except:
         print("ERROR: couldn't get clan members, returned empty array")
         clan_members = []
-    return clan_members, clan
+    return clan_members
 

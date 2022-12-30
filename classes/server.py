@@ -17,7 +17,7 @@ class Server:
       return json.load(file)
   
   def update_data(self):
-    json_object = requests.get("https://Dadabase.kaangogcay.repl.co/get_links/api_key="+os.environ['API_KEY_DADABASE'])
+    json_object = requests.get("http://game-node01.jetstax.com:27046//get_links/api_key="+os.environ['API_KEY_DADABASE'])
     data = json.loads(json_object.content)  
     with open(self.DATA_LOCATION, 'w') as file:
       json.dump(data, file)
