@@ -21,7 +21,7 @@ def fetch_player_ranked_stats(brawlhalla_id):
   return json.loads(json_object.content)
 
 def get_ps4_players_api(id):
-  json_object = requests.get("https://Dadabase.kaangogcay.repl.co/get_ps4_players/api_key="+os.environ['API_KEY_DADABASE']+'?id=' + id)
+  json_object = requests.get("http://game-node01.jetstax.com:27046//get_ps4_players/api_key="+os.environ['API_KEY_DADABASE']+'?id=' + id)
   data = json.loads(json_object.content)  
   return data['ps4_players']
 # test api

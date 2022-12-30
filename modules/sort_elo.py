@@ -3,27 +3,11 @@ from modules.get_members_elo import get_members_2v2_elo, get_members_1v1_elo
 # todo (should)
 # turn sorting elo into method and use single one in both 1v1 and 2v2
 
-def sort_2v2_elo(clan_repl, sorting_method):
-
-  clan_id_array = clan_repl.id_array
-  
-  # get all values from all clans in the array
-  teamnames_all = []
-  current_ratings_all = []
-  peak_ratings_all = []
-  
-  for clan_id in clan_id_array:
-    # get 2v2 teams, current and peak elo's
-    teamnames, current_ratings, peak_ratings, _ = get_members_2v2_elo(clan_repl, clan_id, sorting_method)
-      
-    while len(teamnames) > 0:
-      teamnames_all.append(teamnames.pop(0))
-      current_ratings_all.append(current_ratings.pop(0))
-      peak_ratings_all.append(peak_ratings.pop(0))
-  
-  # remove duplicates
+def sort_2v2_elo(clan_repl, players_sorted, sorting_method):
   print('removing duplicate values...')
-
+  print(players_sorted[0])
+  teamnames_all, current_ratings_all, peak_ratings_all = players_sorted[0], players_sorted[1], players_sorted[2]
+  
   teamnames_new = []
   current_ratings_new = []
   peak_ratings_new = []
@@ -71,9 +55,8 @@ def sort_2v2_elo(clan_repl, sorting_method):
   print('done sorting')
   
   # Return all values
-  print('teamnames amount (in sort_elo)')
-  print(len(teamnames_sorted))
-  return teamnames_sorted, current_ratings_sorted, peak_ratings_sorted
+  players_sorted = [teamnames_sorted, current_ratings_sorted, peak_ratings_sorted]
+  return players_sorted
 
 
 def sort_elo_1v1(clan_repl, players, sorting_method):

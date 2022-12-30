@@ -46,5 +46,5 @@ Fawaka = Clan(1056365850510245899, "N/A", ['2058295'], 0xffa500, " ", '105519401
 
 # Testing
 wanak1n_clan_id, test2_clan_id, test3_clan_id = '1363653', '2021161', '2023962'
-test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id, test2_clan_id, test3_clan_id],
+test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id],
                  0xD10000, " ", '705783420189671458')

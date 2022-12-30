@@ -9,7 +9,7 @@ async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
   print(channel)
 
   # Remove last 20 messages in channel
-  await channel.purge(limit=2)
+  await channel.purge(limit=15)
 
   # Send Image
   try:

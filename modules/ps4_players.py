@@ -1,15 +1,14 @@
 import json
 from modules.api import get_ps4_players_api
 
-def get_ps4_players(clan_repl, clan, clan_members):
+def get_ps4_players(clan_repl):
+  ps4_players = {}
   try: 
     ps4_players = get_ps4_players_api(clan_repl.server_id)
-    print("Amount of ps4 players in " + clan['clan_name'] + ": " + str(len(ps4_players)))
-    while len(ps4_players) > 0:
-      clan_members.append(ps4_players.pop(0))
+    print("Amount of ps4 players in this clan: " + str(len(ps4_players)))
   except:
-    print(clan['clan_name'] + " doesn't have any ps4 players")
-  return clan_members
+    print("This clan doesn't have any ps4 players")
+  return ps4_players
 
 def __get_ps4_players_data(clan):
     with open('data/ps4_players/' + clan['clan_name'] + '_ps4_players.json') as file:

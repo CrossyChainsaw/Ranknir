@@ -10,7 +10,7 @@ from modules.turn import reset_turn
 from modules.clan import get_clans_data
 from classes.clan import Clan
 from classes.server import Server
-from modules.get_members_elo import get_members_1v1_elo_server, get_members_1v1_elo
+from modules.get_members_elo import get_members_1v1_elo_server, get_members_1v1_elo, get_members_2v2_elo
 from data.clan_data import Skyward, Pandation, lnsomnia, test_clan, Cybers, Cherimoya, Excalibur, Fanfare, Tews, Fawaka
 from data.server_data import Brawlhalla_NL
 
@@ -43,7 +43,7 @@ async def on_ready():
         elif turn == 4:
             await main_1v1_crazy(lnsomnia, sorting_method="peak")
         elif turn == 21:
-            await main_1v1_crazy(test_clan, sorting_method="current")
+            await main_2v2_crazy(test_clan, sorting_method="peak")
         elif turn == 5:
             await main_1v1_crazy(Cybers, sorting_method="peak")
         elif turn == 6:
@@ -72,51 +72,27 @@ async def on_ready():
 
 
 async def main_1v1_crazy(clan, sorting_method):
-
-    # get players elo
     players = get_members_1v1_elo(clan)
-
-    # sort elo
     players_sorted = sort_elo_1v1(clan, players, sorting_method)
-
-    # get clans
     clan_data_array = get_clans_data(clan.id_array)
-
-    # prep embeds
     embed2, embed_array = prepare_embeds_new(clan_data_array, players_sorted, clan.color)
-
     await send_embeds2(embed2,
                        embed_array,
                        bot=bot,
                        channel_id=clan.channel_1v1_id,
                        clan_image=clan.image)
 
-
 async def main_2v2_crazy(clan, sorting_method):
-
-    # get players
-    # get members elo
-    # get players elo sorted
-    names, current_ratings, peak_ratings = sort_2v2_elo(
-        clan, sorting_method)
-
-    # get clans
+    players = get_members_2v2_elo(clan, sorting_method)
+    players_sorted = sort_2v2_elo(clan, players, sorting_method)
+    print(players_sorted[0])
     clans = get_clans_data(clan.id_array)
-
-    # prep embeds
-    embed2, embed_array = prepare_embeds_new(clans, names, current_ratings,
-                                             peak_ratings, clan.color)
-
+    embed2, embed_array = prepare_embeds_new(clans, players_sorted, clan.color)
     await send_embeds2(embed2,
                        embed_array,
                        bot=bot,
                        channel_id=clan.channel_2v2_id,
                        clan_image=clan.image)
-
-    # clear arrays
-    names.clear()
-    current_ratings.clear()
-    peak_ratings.clear()
 
 
 async def main_1v1_server(server, sorting_method):
@@ -152,4 +128,4 @@ async def main_1v1_server(server, sorting_method):
 
 
 #keep_alive()
-#bot.run(os.environ["BOT_KEY"])
+bot.run(os.environ["BOT_KEY"])
