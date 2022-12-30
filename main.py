@@ -1,3 +1,4 @@
+from secrets import get_keys
 import os
 import discord
 from discord.ext import commands, tasks
@@ -119,12 +120,6 @@ async def main_1v1_server(server, sorting_method):
                        bot=bot,
                        channel_id=server.channel_1v1_id,
                        clan_image=server.image)
-
-    # clear arrays
-    names_sorted.clear()
-    current_ratings_sorted.clear()
-    peak_ratings_sorted.clear()
-
-
+  
 #keep_alive()
 bot.run(os.environ["BOT_KEY"])
