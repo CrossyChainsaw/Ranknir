@@ -1,20 +1,15 @@
 from classes.clan import Clan
 
-Skyward = Clan(
-    "NO ACCESS", 976552050953437194, ['84648'], 0x289fb4,
-    'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png',
-    '705783420189671458')
+Skyward = Clan("NO ACCESS", 976552050953437194, ['84648'], 0x289fb4, 'https://cdn.discordapp.com/attachments/841405262023884820/841405879496212530/Skyward-1.png', '705783420189671458')
 
 lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id = '1919781', '1927502', '2022800'
-lnsomnia = Clan(
-    988484998799716423, 1006780905131614280,
+lnsomnia = Clan(988484998799716423, 1006780905131614280,
     [lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id], 0x301834,
     "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png",
     '971836983951372298')
 
 Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
-Pandation = Clan(
-    990292557386899527, 1016402549491912794,
+Pandation = Clan(990292557386899527, 1016402549491912794,
     [Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id],
     0x212226,
     "https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif",

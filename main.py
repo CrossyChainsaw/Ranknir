@@ -66,14 +66,14 @@ async def on_ready():
         elif turn > 14:
             await main_1v1_server(Brawlhalla_NL, sorting_method="current")
             reset_turn()
-        #next_turn()
+        next_turn()
         wait(5)
 
 
 async def main_1v1_crazy(clan, sorting_method):
-    players = get_members_1v1_elo(clan)
-    players_sorted = sort_elo_1v1(clan, players, sorting_method)
     clan_data_array = get_clans_data(clan.id_array)
+    players = get_members_1v1_elo(clan, clan_data_array[0]['clan_name'])
+    players_sorted = sort_elo_1v1(clan, players, sorting_method)
     embed2, embed_array = prepare_embeds_new(clan_data_array, players_sorted, clan.color)
     await send_embeds2(embed2,
                        embed_array,
@@ -82,11 +82,11 @@ async def main_1v1_crazy(clan, sorting_method):
                        clan_image=clan.image)
 
 async def main_2v2_crazy(clan, sorting_method):
-    players = get_members_2v2_elo(clan, sorting_method)
+    clan_data_array = get_clans_data(clan.id_array)
+    players = get_members_2v2_elo(clan, sorting_method, clan_data_array[0]['clan_name'])
     players_sorted = sort_2v2_elo(clan, players, sorting_method)
     print(players_sorted[0])
-    clans = get_clans_data(clan.id_array)
-    embed2, embed_array = prepare_embeds_new(clans, players_sorted, clan.color)
+    embed2, embed_array = prepare_embeds_new(clan_data_array, players_sorted, clan.color)
     await send_embeds2(embed2,
                        embed_array,
                        bot=bot,
@@ -126,5 +126,5 @@ async def main_1v1_server(server, sorting_method):
     peak_ratings_sorted.clear()
 
 
-#keep_alive()
+keep_alive()
 bot.run(os.environ["BOT_KEY"])
