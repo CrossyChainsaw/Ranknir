@@ -19,9 +19,11 @@ Ranknir processes the following clans: Skyward, Pandation, Pandace, Panhalla, Pa
 
 # Functionalities
 - Multiple clans can be put in one list
-- PS4 players can be added
+- Console players can be added
 - Elo list can be sorted on current or on peak elo
-- Can be sent without an clan image
+- Can be sent with and without an clan image
+- Member count can be shown
+- Clan xp can be shown
 
 ## Add this bot to your server
 dm me -> [CrossyChainsaw#1706](https://discord.com/channels/@me/413070742591373314)
