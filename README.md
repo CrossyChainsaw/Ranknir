@@ -17,13 +17,16 @@ Ranknir processes the following clans: Skyward, Pandation, Pandace, Panhalla, Pa
 ![image](https://user-images.githubusercontent.com/74303221/200958576-e0c3bdc4-058d-4864-94ec-0813d55af4e0.png)
 ![image](https://user-images.githubusercontent.com/74303221/200958738-2e744e83-6c8f-42db-a11d-2593ec63a3ac.png)
 
-# Functionalities
-- Multiple clans can be put in one list
-- Console players can be added
-- Elo list can be sorted on current or on peak elo
-- Can be sent with and without an clan image
-- Member count can be shown
-- Clan xp can be shown
+## Functionalities
+- Send 1v1 clan elo list of a clan
+- Send 2v2 clan elo list of a clan
+- Send 1v1 clan elo list of multiple clans that belong together
+- Send 2v2 clan elo list of multiple clans that belong together
+- Send 1v1 elo list of linked members inside of a discord server
+- Each list can be sorted on either current elo or peak elo
+- Member Count can be shown if wanted
+- Clan XP can be shown if wanted
+- Add console players to your elo lists (with the help of [Dadabase](https://github.com/Skyward-Brawlhalla/Dadabase))
 
 ## Add this bot to your server
 dm me -> [CrossyChainsaw#1706](https://discord.com/channels/@me/413070742591373314)
