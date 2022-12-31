@@ -11,6 +11,7 @@ def get_members_1v1_elo(clan_repl, clan_name):
   name_array = []
   current_array = []
   peak_array = []
+  console_player_amount = 0
   
   # ps4 players
   ps4_players = get_ps4_players(clan_repl, clan_name)
@@ -19,6 +20,7 @@ def get_members_1v1_elo(clan_repl, clan_name):
     name_array.append(name.pop(0))
     current_array.append(current.pop(0))
     peak_array.append(peak.pop(0))
+  console_player_amount = len(ps4_players)
 
   # clan members
   for clan_id in clan_repl.id_array:
@@ -30,13 +32,14 @@ def get_members_1v1_elo(clan_repl, clan_name):
       peak_array.append(peak.pop(0))
   
   players = [name_array, current_array, peak_array]
-  return players
+  return players, console_player_amount
 
   
 def get_members_2v2_elo(clan_repl, sorting_method, clan_name):
   teamname_array = []
   current_array = []
   peak_array = []
+  console_player_amount = 0
   
   # ps4 players
   ps4_players = get_ps4_players(clan_repl, clan_name)
@@ -45,6 +48,7 @@ def get_members_2v2_elo(clan_repl, sorting_method, clan_name):
     teamname_array.append(teamname.pop(0))
     current_array.append(current.pop(0))
     peak_array.append(peak.pop(0))
+  console_player_amount = len(ps4_players)
   
   # get clan and clan members
   for clan_id in clan_repl.id_array:
@@ -59,7 +63,7 @@ def get_members_2v2_elo(clan_repl, sorting_method, clan_name):
   #clan_members = get_ps4_players(clan_repl, clan, clan_members)
   print(teamname)
   players = [teamname_array, current_array, peak_array]
-  return players
+  return players, console_player_amount
 
 def get_members_1v1_elo_server(server):# get clan and clan members
   
@@ -104,8 +108,6 @@ def get_members_1v1_elo_server(server):# get clan and clan members
 
 
 def __get_clan_members_elo_1v1(clan_members):
-  print(clan_members)
-  print('--------------------------------')
   # define elo arrays
   clan_members_name = []
   clan_members_current = []
@@ -113,7 +115,6 @@ def __get_clan_members_elo_1v1(clan_members):
   
   num = 1
   for member in clan_members:
-    print(member)
     try:
       player = fetch_player_ranked_stats(member["brawlhalla_id"])
       

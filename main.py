@@ -14,7 +14,15 @@ from modules.get_members_elo import get_members_1v1_elo_server, get_members_1v1_
 from data.clan_data import Skyward, Pandation, lnsomnia, test_clan, Cybers, Cherimoya, Excalibur, Fanfare, Tews, Fawaka, Dair
 from data.server_data import Brawlhalla_NL
 
-#TODO FIX Prepare EMBEDS
+# CHANGE BACK TO 12
+# CHANGE BACK TO 12
+# CHANGE BACK TO 12
+# CHANGE BACK TO 12
+
+# CHANGE BACK TO 12
+# CHANGE BACK TO 12
+# CHANGE BACK TO 12
+# CHANGE BACK TO 12
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r', 'R'], intents=intents)
@@ -38,11 +46,11 @@ async def on_ready():
         elif turn == 2:
             await main_2v2_crazy(Pandation, sorting_method="peak")
         elif turn == 3:
-            await main_2v2_crazy(lnsomnia, sorting_method="peak")
-        elif turn == 4:
             await main_1v1_crazy(lnsomnia, sorting_method="peak")
-        elif turn == 21:
-            await main_2v2_crazy(test_clan, sorting_method="peak")
+        elif turn == 4:
+            await main_2v2_crazy(lnsomnia, sorting_method="peak")
+        elif turn > 20:
+            await main_1v1_crazy(test_clan, sorting_method="peak")
         elif turn == 5:
             await main_1v1_crazy(Cybers, sorting_method="peak")
         elif turn == 6:
@@ -62,8 +70,10 @@ async def on_ready():
         elif turn == 13:
             await main_2v2_crazy(Tews, sorting_method="current")
         elif turn == 14:
+            await main_1v1_crazy(Fawaka, sorting_method="current")
+        elif turn == 15:
             await main_2v2_crazy(Fawaka, sorting_method="current")
-        elif turn > 14:
+        elif turn > 15:
             await main_1v1_server(Brawlhalla_NL, sorting_method="current")
             reset_turn()
         next_turn()
@@ -72,9 +82,9 @@ async def on_ready():
 
 async def main_1v1_crazy(clan, sorting_method):
     clan_data_array = get_clans_data(clan.id_array)
-    players = get_members_1v1_elo(clan, clan_data_array[0]['clan_name'])
+    players, console_player_amount = get_members_1v1_elo(clan, clan_data_array[0]['clan_name'])
     players_sorted = sort_elo_1v1(clan, players, sorting_method)
-    embed2, embed_array = prepare_embeds_new(clan_data_array, players_sorted, clan.color)
+    embed2, embed_array = prepare_embeds_new(clan, clan_data_array, players_sorted)
     await send_embeds2(embed2,
                        embed_array,
                        bot=bot,
@@ -83,10 +93,10 @@ async def main_1v1_crazy(clan, sorting_method):
 
 async def main_2v2_crazy(clan, sorting_method):
     clan_data_array = get_clans_data(clan.id_array)
-    players = get_members_2v2_elo(clan, sorting_method, clan_data_array[0]['clan_name'])
+    players, console_player_amount = get_members_2v2_elo(clan, sorting_method, clan_data_array[0]['clan_name'])
     players_sorted = sort_2v2_elo(clan, players, sorting_method)
     print(players_sorted[0])
-    embed2, embed_array = prepare_embeds_new(clan_data_array, players_sorted, clan.color)
+    embed2, embed_array = prepare_embeds_new(clan, clan_data_array, players_sorted)
     await send_embeds2(embed2,
                        embed_array,
                        bot=bot,
@@ -124,6 +134,7 @@ async def main_1v1_server(server, sorting_method):
     names_sorted.clear()
     current_ratings_sorted.clear()
     peak_ratings_sorted.clear()
+
 
 
 keep_alive()
