@@ -9,7 +9,7 @@ async def send_embeds2(embed2, embed_array, bot, channel_id, clan_image):
     print(channel)
 
     # Remove last FEW messages in channel
-    await channel.purge(limit=1) # CHANGE TO 12
+    await channel.purge(limit=12) # CHANGE TO 12
     # Send Image
     try:
         await channel.send(clan_image)
@@ -117,6 +117,7 @@ def __add_title(clan_array, embed2):
 
 
 def __add_member_count(clan_array, embed2):
+    embed2.description += "\n\n"
     if len(clan_array) == 1:
         embed2.description = '**Member Count\n**'
         embed2.description += "Total: " + str(len(clan_array[0]['clan']))
@@ -143,11 +144,12 @@ def __add_member_count(clan_array, embed2):
             #total_xp += int(clan_array[i]['clan_xp'])
             i += 1
         embed2.description += "\nTotal: " + str(total_member_count)
-        embed2.description += "\n\n"
+        #embed2.description += "\n\n"
         return embed2
 
 
 def __add_xp(clan_array, embed2):
+    embed2.description += "\n\n"  
     if len(clan_array) == 1:
         embed2.description += '**Clan XP\n**'
         embed2.description += "Total: " + str(clan_array[0]['clan_xp'])
@@ -173,5 +175,5 @@ def __add_xp(clan_array, embed2):
             #total_xp += int(clan_array[i]['clan_xp'])
             i += 1
         embed2.description += "\nTotal: " + str(total_xp)
-        embed2.description += "\n\n"
+        #embed2.description += "\n\n"
         return embed2
