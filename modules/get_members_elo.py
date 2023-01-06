@@ -85,19 +85,19 @@ def get_members_1v1_elo_server(server):# get clan and clan members
     try:
       player = fetch_player_ranked_stats(member["brawlhalla_id"])
       
-      server_members_name.append(player["name"])
+      server_members_name.append(player["name"].encode("charmap").decode())
       server_members_current.append(player["rating"])
       server_members_peak.append(player["peak_rating"])
 
-      print(str(num) + ". " + player["name"])
+      print(str(num) + ". " + player["name"].encode("charmap").decode())
       print("current: " + str(player["rating"]))
       print("peak: " + str(player["peak_rating"]))
     except:
-      server_members_name.append(member["name"])
+      server_members_name.append(member["name"].encode("charmap").decode())
       server_members_current.append(-1)
       server_members_peak.append(-1)
 
-      print(str(num) + ". " + member['name'])
+      print(str(num) + ". " + member['name'].encode("charmap").decode())
       print("current: " + "-1")
       print("peak: " + "-1")
     num += 1
@@ -118,19 +118,19 @@ def __get_clan_members_elo_1v1(clan_members):
     try:
       player = fetch_player_ranked_stats(member["brawlhalla_id"])
       
-      clan_members_name.append(player["name"])
+      clan_members_name.append(player["name"].encode("charmap").decode())
       clan_members_current.append(player["rating"])
       clan_members_peak.append(player["peak_rating"])
 
-      print(str(num) + ". " + player["name"])
+      print(str(num) + ". " + player["name"].encode("charmap").decode())
       print("current: " + str(player["rating"]))
       print("peak: " + str(player["peak_rating"]))
     except:
-      clan_members_name.append(member["name"])
+      clan_members_name.append(member["name"].encode("charmap").decode())
       clan_members_current.append(-1)
       clan_members_peak.append(-1)
 
-      print(str(num) + ". " + member['name'])
+      print(str(num) + ". " + member['name'].encode("charmap").decode())
       print("current: " + "-1")
       print("peak: " + "-1")
     num += 1
@@ -160,7 +160,7 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
               if rating > bestCurrent:
                   bestCurrent = rating
                   bestPeak = peak
-                  bestCurrentTeam = team["teamname"]
+                  bestCurrentTeam = team["teamname"].encode("charmap").decode()
 
 
                 
@@ -176,7 +176,7 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
               if peak > bestPeak:
                   bestCurrent = rating
                   bestPeak = peak
-                  bestCurrentTeam = team["teamname"]
+                  bestCurrentTeam = team["teamname"].encode("charmap").decode()
         
         # Format best current team
         name_plus = bestCurrentTeam.find('+')
@@ -190,7 +190,7 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
         if bestCurrentTeam.startswith("bestCurrentTeam is undefine"):
             bestCurrent = -1
             bestPeak = -1
-            bestCurrentTeam = player["name"]
+            bestCurrentTeam = player["name"].encode("charmap").decode()
         print(str(num) + ': ' + bestCurrentTeam)
         print("current: " + str(bestCurrent))
         print("peak: " + str(bestPeak))
@@ -202,19 +202,19 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
     except:
       try:
         currentResult = "**" + \
-            str(num) + ". " + player["name"] + \
+            str(num) + ". " + player["name"].encode("charmap").decode() + \
             "**: **current:**" + " -1" + " **peak:**" + " -1"
 
-        clan_2v2_teamnames.append(player["name"])
+        clan_2v2_teamnames.append(player["name"].encode("charmap").decode())
         clan_current_2v2_ratings.append(-1)
         clan_peak_2v2_ratings.append(-1)
       except:
         #ps4 player format stupid dadabase shizzle :<
         currentResult = "**" + \
-            str(num) + ". " + player["brawlhalla_name"] + \
+            str(num) + ". " + player["brawlhalla_name"].encode("charmap").decode() + \
             "**: **current:**" + " -1" + " **peak:**" + " -1"
 
-        clan_2v2_teamnames.append(player["brawlhalla_name"])
+        clan_2v2_teamnames.append(player["brawlhalla_name"].encode("charmap").decode())
         clan_current_2v2_ratings.append(-1)
         clan_peak_2v2_ratings.append(-1)
 
