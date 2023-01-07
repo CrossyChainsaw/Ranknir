@@ -40,49 +40,49 @@ async def on_ready():
         print("current turn: " + str(turn))
 
         if turn == 0:
-            await main_2v2_crazy(Dair, sorting_method="current")
+            await main_2v2_clan_elo(Dair, sorting_method="current")
         elif turn == 1:
-            await main_1v1_crazy(Pandation, sorting_method="peak")
+            await main_1v1_clan_elo(Pandation, sorting_method="peak")
         elif turn == 2:
-            await main_2v2_crazy(Pandation, sorting_method="peak")
+            await main_2v2_clan_elo(Pandation, sorting_method="peak")
         elif turn == 3:
-            await main_1v1_crazy(lnsomnia, sorting_method="peak")
+            await main_1v1_clan_elo(lnsomnia, sorting_method="peak")
         elif turn == 4:
-            await main_2v2_crazy(lnsomnia, sorting_method="peak")
+            await main_2v2_clan_elo(lnsomnia, sorting_method="peak")
         elif turn > 20:
-            await main_1v1_crazy(test_clan, sorting_method="peak")
+            await main_1v1_clan_elo(test_clan, sorting_method="peak")
         elif turn == 5:
-            await main_1v1_crazy(Cybers, sorting_method="peak")
+            await main_1v1_clan_elo(Cybers, sorting_method="peak")
         elif turn == 6:
-            await main_2v2_crazy(Cybers, sorting_method="current")
+            await main_2v2_clan_elo(Cybers, sorting_method="current")
         elif turn == 7:
-            await main_2v2_crazy(Skyward, sorting_method="current")
+            await main_2v2_clan_elo(Skyward, sorting_method="current")
         elif turn == 8:
-            await main_1v1_crazy(Cherimoya, sorting_method="peak")
+            await main_1v1_clan_elo(Cherimoya, sorting_method="peak")
         elif turn == 9:
-            await main_1v1_crazy(Excalibur, sorting_method="peak")
+            await main_1v1_clan_elo(Excalibur, sorting_method="peak")
         elif turn == 10:
-            await main_2v2_crazy(Excalibur, sorting_method="peak")
+            await main_2v2_clan_elo(Excalibur, sorting_method="peak")
         elif turn == 11:
-            await main_2v2_crazy(Fanfare, sorting_method="peak")
+            await main_2v2_clan_elo(Fanfare, sorting_method="peak")
         elif turn == 12:
-            await main_1v1_crazy(Tews, sorting_method="current")
+            await main_1v1_clan_elo(Tews, sorting_method="current")
         elif turn == 13:
-            await main_2v2_crazy(Tews, sorting_method="current")
+            await main_2v2_clan_elo(Tews, sorting_method="current")
         elif turn == 14:
-            await main_1v1_crazy(Fawaka, sorting_method="current")
+            await main_1v1_clan_elo(Fawaka, sorting_method="current")
         elif turn == 15:
-            await main_2v2_crazy(Fawaka, sorting_method="current")
+            await main_2v2_clan_elo(Fawaka, sorting_method="current")
         elif turn > 15:
-            await main_1v1_server(Brawlhalla_NL, sorting_method="current")
+            await main_1v1_server_elo(Brawlhalla_NL, sorting_method="current")
             reset_turn()
         next_turn()
         wait(5)
 
 
-async def main_1v1_crazy(clan, sorting_method):
+async def main_1v1_clan_elo(clan, sorting_method):
     clan_data_array = get_clans_data(clan.id_array)
-    players, console_player_amount = get_members_1v1_elo(clan, clan_data_array[0]['clan_name'])
+    players, console_player_amount = get_members_1v1_elo(clan, clan_data_array[0]['clan_name'], sorting_method)
     players_sorted = sort_elo_1v1(clan, players, sorting_method)
     embed2, embed_array = prepare_embeds_new(clan, clan_data_array, players_sorted, console_player_amount)
     await send_embeds2(embed2,
@@ -91,7 +91,7 @@ async def main_1v1_crazy(clan, sorting_method):
                        channel_id=clan.channel_1v1_id,
                        clan_image=clan.image)
 
-async def main_2v2_crazy(clan, sorting_method):
+async def main_2v2_clan_elo(clan, sorting_method):
     clan_data_array = get_clans_data(clan.id_array)
     players, console_player_amount = get_members_2v2_elo(clan, sorting_method, clan_data_array[0]['clan_name'])
     players_sorted = sort_2v2_elo(clan, players, sorting_method)
@@ -104,7 +104,7 @@ async def main_2v2_crazy(clan, sorting_method):
                        clan_image=clan.image)
 
 
-async def main_1v1_server(server, sorting_method):
+async def main_1v1_server_elo(server, sorting_method):
     # update data
     try:
         server.update_data()
