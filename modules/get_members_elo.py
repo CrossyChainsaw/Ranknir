@@ -3,35 +3,61 @@ from modules.api import fetch_player_ranked_stats
 from modules.clan import get_clan_members
 from modules.ps4_players import get_ps4_players
 from modules.server import get_server_players
+from modules.legend import get_best_legend_elo
 
-# remove clan_id dependency for server logic
-
-def get_members_1v1_elo(clan_repl, clan_name):
+def get_members_1v1_elo(clan_repl, clan_name, sorting_method):
   print(clan_name)
   name_array = []
   current_array = []
   peak_array = []
+  #legend_array = [] - if you wanna add legend names to legend elo list uncomment this and everything else and make it work with the rest in main.py
   console_player_amount = 0
   
-  # ps4 players
+  # get ps4 players
   ps4_players = get_ps4_players(clan_repl, clan_name)
-  name, current, peak = __get_clan_members_elo_1v1(ps4_players)
+  
+  # Get ps4 players' elo
+  if clan_repl.elo_type == 'general':
+    name, current, peak = __get_clan_members_elo_1v1(ps4_players)
+  elif clan_repl.elo_type == 'legend':
+    #name, current, peak, legend = get_best_legend_elo(ps4_players)
+    name, current, peak = get_best_legend_elo(ps4_players, sorting_method)
+
+  # transfer all values into the arrays
   while len(name) > 0:
     name_array.append(name.pop(0))
     current_array.append(current.pop(0))
     peak_array.append(peak.pop(0))
+    # if clan_repl.elo_type == 'legend':
+    #   legend_array.append(legend.pop(0))
   console_player_amount = len(ps4_players)
 
-  # clan members
+  # for each clan...
   for clan_id in clan_repl.id_array:
+    # get clan members
     clan_members = get_clan_members(clan_id)
-    name, current, peak = __get_clan_members_elo_1v1(clan_members)
+    
+    # get clan members' elo
+    if clan_repl.elo_type == 'general':
+      name, current, peak = __get_clan_members_elo_1v1(clan_members)
+    elif clan_repl.elo_type == 'legend':
+      #name, current, peak, legend = get_best_legend_elo(clan_members, sorting_method)
+      name, current, peak = get_best_legend_elo(clan_members, sorting_method)
+      
     while len(name) > 0:
       name_array.append(name.pop(0))
       current_array.append(current.pop(0))
       peak_array.append(peak.pop(0))
-  
+      # if clan_repl.elo_type == 'legend':
+      #   legend_array.append(legend.pop(0))
+
+  # decide correct return
+  # if clan_repl.elo_type == 'general':
+  #   players = [name_array, current_array, peak_array]
+  # elif clan_repl.elo_type == 'legend':
+  #   players = [name_array, current_array, peak_array, legend_array]
   players = [name_array, current_array, peak_array]
+
   return players, console_player_amount
 
   
