@@ -98,8 +98,8 @@ def get_members_1v1_elo_server(server):# get clan and clan members
       server_members_peak.append(-1)
 
       print(str(num) + ". " + member['name'].encode("charmap").decode())
-      print("current: " + "-1")
-      print("peak: " + "-1")
+      print("current: " + "0")
+      print("peak: " + "0")
     num += 1
   
   # return values
@@ -131,8 +131,8 @@ def __get_clan_members_elo_1v1(clan_members):
       clan_members_peak.append(-1)
 
       print(str(num) + ". " + member['name'].encode("charmap").decode())
-      print("current: " + "-1")
-      print("peak: " + "-1")
+      print("current: " + "0")
+      print("peak: " + "0")
     num += 1
     
   # return values
@@ -203,7 +203,7 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
       try:
         currentResult = "**" + \
             str(num) + ". " + player["name"].encode("charmap").decode() + \
-            "**: **current:**" + " -1" + " **peak:**" + " -1"
+            "**: **current:**" + " N/A" + " **peak:**" + " N/A"
 
         clan_2v2_teamnames.append(player["name"].encode("charmap").decode())
         clan_current_2v2_ratings.append(-1)
