@@ -15,6 +15,6 @@ def next_turn():
     json.dump(new_turn_data, file)
 
 def reset_turn():
-  new_turn_data = {"turn": 0}
+  new_turn_data = {"turn": -1}
   with open(TURN_SWITCH_JSON_LOCATION, 'w') as file:
     json.dump(new_turn_data, file)
