@@ -84,7 +84,7 @@ async def main_1v1_crazy(clan, sorting_method):
     clan_data_array = get_clans_data(clan.id_array)
     players, console_player_amount = get_members_1v1_elo(clan, clan_data_array[0]['clan_name'])
     players_sorted = sort_elo_1v1(clan, players, sorting_method)
-    embed2, embed_array = prepare_embeds_new(clan, clan_data_array, players_sorted)
+    embed2, embed_array = prepare_embeds_new(clan, clan_data_array, players_sorted, console_player_amount)
     await send_embeds2(embed2,
                        embed_array,
                        bot=bot,
