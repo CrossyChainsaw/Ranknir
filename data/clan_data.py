@@ -9,7 +9,7 @@ lnsomnia = Clan(988484998799716423, 1006780905131614280,
     '971836983951372298')
 
 Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
-Pandation = Clan(990292557386899527, 1016402549491912794,
+Pandation = Clan(1062036908567433326, 1062037113153003570,
     [Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id],
     0x212226,
     "https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif",
@@ -21,7 +21,7 @@ Dair = Clan(
     '793113149041147934')
 
 Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id = '1983079', '1983274', '2041304'
-Cybers = Clan(1039202472536834108, 1039202527398334514,
+Cybers = Clan(1062818147608043640, 1062818053936644129,
               [Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id], 0xD10000,
               " ", '1005510941590437959')
 
@@ -37,7 +37,7 @@ Tews = Clan(955483557931925514, 1056187762983845960, ['527406', '1374400'], 0xff
 
 Excalibur = Clan(1026158147175460894, 1057424977508442163, ['8'], 0xb1dfff, 'https://cdn.discordapp.com/attachments/980176551729578055/1059308040697958420/excalibur-banner.png', '1026046742656983062')
 
-Fawaka = Clan(1056365850510245899, 1058156738647429240, ['2060072'], 0xffa500, " ", '1055194013176705094', xp='show', elo_type='legend')
+Fawaka = Clan(1056365850510245899, 1058156738647429240, ['2060072'], 0xffa500, " ", '1055194013176705094', xp='show')
 
 # Testing
 wanak1n_clan_id, test2_clan_id, test3_clan_id = '1363653', '2021161', '2023962'

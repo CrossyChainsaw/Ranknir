@@ -143,7 +143,6 @@ def __get_clan_members_elo_1v1(clan_members):
   for member in clan_members:
     try:
       player = fetch_player_ranked_stats(member["brawlhalla_id"])
-      
       clan_members_name.append(player["name"].encode("charmap").decode())
       clan_members_current.append(player["rating"])
       clan_members_peak.append(player["peak_rating"])
@@ -152,13 +151,22 @@ def __get_clan_members_elo_1v1(clan_members):
       print("current: " + str(player["rating"]))
       print("peak: " + str(player["peak_rating"]))
     except:
-      clan_members_name.append(member["name"].encode("charmap").decode())
-      clan_members_current.append(-1)
-      clan_members_peak.append(-1)
-
-      print(str(num) + ". " + member['name'].encode("charmap").decode())
-      print("current: " + "0")
-      print("peak: " + "0")
+      try:
+        clan_members_name.append(member["name"].encode("charmap").decode())
+        clan_members_current.append(-1)
+        clan_members_peak.append(-1)
+  
+        print(str(num) + ". " + member['name'].encode("charmap").decode())
+        print("current: " + "0")
+        print("peak: " + "0")
+      except:
+        clan_members_name.append(member["brawlhalla_name"].encode("charmap").decode())
+        clan_members_current.append(-1)
+        clan_members_peak.append(-1)
+  
+        print(str(num) + ". " + member['brawlhalla_name'].encode("charmap").decode())
+        print("current: " + "0")
+        print("peak: " + "0")
     num += 1
     
   # return values
