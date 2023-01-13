@@ -29,4 +29,4 @@ Ranknir processes the following clans: Skyward, Pandation, Pandace, Panhalla, Pa
 - Add console players to your elo lists (with the help of [Dadabase](https://github.com/Skyward-Brawlhalla/Dadabase))
 
 ## Add this bot to your server
-dm me -> [CrossyChainsaw#1706](https://discord.com/channels/@me/413070742591373314)
+- As if right now there are too many servers Ranknir is active in. Accepting more clans would slow down the process for everyone so I stopped accepting clans for now.
