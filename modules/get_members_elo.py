@@ -119,11 +119,11 @@ def get_members_1v1_elo_server(server):# get clan and clan members
       print("current: " + str(player["rating"]))
       print("peak: " + str(player["peak_rating"]))
     except:
-      server_members_name.append(member["name"].encode("charmap").decode())
-      server_members_current.append(-1)
-      server_members_peak.append(-1)
+      #server_members_name.append(member["brawlhalla_name"].encode("charmap").decode())
+      #server_members_current.append(0)
+      #server_members_peak.append(0)
 
-      print(str(num) + ". " + member['name'].encode("charmap").decode())
+      print(str(num) + ". " + member['brawlhalla_name'].encode("charmap").decode())
       print("current: " + "0")
       print("peak: " + "0")
     num += 1
@@ -153,8 +153,8 @@ def __get_clan_members_elo_1v1(clan_members):
     except:
       try:
         clan_members_name.append(member["name"].encode("charmap").decode())
-        clan_members_current.append(-1)
-        clan_members_peak.append(-1)
+        clan_members_current.append(0)
+        clan_members_peak.append(0)
   
         print(str(num) + ". " + member['name'].encode("charmap").decode())
         print("current: " + "0")
@@ -240,8 +240,8 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
             "**: **current:**" + " N/A" + " **peak:**" + " N/A"
 
         clan_2v2_teamnames.append(player["name"].encode("charmap").decode())
-        clan_current_2v2_ratings.append(-1)
-        clan_peak_2v2_ratings.append(-1)
+        clan_current_2v2_ratings.append(0)
+        clan_peak_2v2_ratings.append(0)
       except:
         #ps4 player format stupid dadabase shizzle :<
         currentResult = "**" + \
@@ -249,8 +249,8 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
             "**: **current:**" + " -1" + " **peak:**" + " -1"
 
         clan_2v2_teamnames.append(player["brawlhalla_name"].encode("charmap").decode())
-        clan_current_2v2_ratings.append(-1)
-        clan_peak_2v2_ratings.append(-1)
+        clan_current_2v2_ratings.append(0)
+        clan_peak_2v2_ratings.append(0)
 
         print(currentResult)
   return clan_2v2_teamnames, clan_current_2v2_ratings, clan_peak_2v2_ratings
