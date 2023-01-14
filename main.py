@@ -49,8 +49,8 @@ async def on_ready():
             await main_1v1_clan_elo(lnsomnia, sorting_method="peak")
         elif turn == 4:
             await main_2v2_clan_elo(lnsomnia, sorting_method="peak")
-        elif turn > 20:
-            await main_1v1_clan_elo(test_clan, sorting_method="peak")
+        elif turn >= 21:
+            await main_2v2_clan_elo(test_clan, sorting_method="peak")
         elif turn == 5:
             await main_1v1_clan_elo(Cybers, sorting_method="peak")
         elif turn == 6:
