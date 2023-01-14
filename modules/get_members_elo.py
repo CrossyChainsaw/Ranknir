@@ -18,7 +18,7 @@ def get_members_1v1_elo(clan_repl, clan_name, sorting_method):
   
   # Get ps4 players' elo
   if clan_repl.elo_type == 'general':
-    name, current, peak = __get_clan_members_elo_1v1(ps4_players)
+    name, current, peak = __get_clan_members_elo_1v1(clan_repl, ps4_players)
   elif clan_repl.elo_type == 'legend':
     #name, current, peak, legend = get_best_legend_elo(ps4_players)
     name, current, peak = get_best_legend_elo(ps4_players, sorting_method)
@@ -39,7 +39,7 @@ def get_members_1v1_elo(clan_repl, clan_name, sorting_method):
     
     # get clan members' elo
     if clan_repl.elo_type == 'general':
-      name, current, peak = __get_clan_members_elo_1v1(clan_members)
+      name, current, peak = __get_clan_members_elo_1v1(clan_repl, clan_members)
     elif clan_repl.elo_type == 'legend':
       #name, current, peak, legend = get_best_legend_elo(clan_members, sorting_method)
       name, current, peak = get_best_legend_elo(clan_members, sorting_method)
@@ -133,7 +133,7 @@ def get_members_1v1_elo_server(server):# get clan and clan members
     
 
 
-def __get_clan_members_elo_1v1(clan_members):
+def __get_clan_members_elo_1v1(clan_repl, clan_members):
   # define elo arrays
   clan_members_name = []
   clan_members_current = []
@@ -143,30 +143,45 @@ def __get_clan_members_elo_1v1(clan_members):
   for member in clan_members:
     try:
       player = fetch_player_ranked_stats(member["brawlhalla_id"])
+      if player["name"] == "":
+        raise ValueError('Empty Brawlhalla name')
       clan_members_name.append(player["name"].encode("charmap").decode())
       clan_members_current.append(player["rating"])
       clan_members_peak.append(player["peak_rating"])
 
       print(str(num) + ". " + player["name"].encode("charmap").decode())
+      print("id: " + str(member['brawlhalla_id']))
       print("current: " + str(player["rating"]))
       print("peak: " + str(player["peak_rating"]))
     except:
-      try:
-        clan_members_name.append(member["name"].encode("charmap").decode())
-        clan_members_current.append(0)
-        clan_members_peak.append(0)
-  
-        print(str(num) + ". " + member['name'].encode("charmap").decode())
-        print("current: " + "0")
-        print("peak: " + "0")
-      except:
-        clan_members_name.append(member["brawlhalla_name"].encode("charmap").decode())
-        clan_members_current.append(-1)
-        clan_members_peak.append(-1)
-  
-        print(str(num) + ". " + member['brawlhalla_name'].encode("charmap").decode())
-        print("current: " + "0")
-        print("peak: " + "0")
+      if clan_repl.no_elo_players == 'show':
+        try:
+          clan_members_name.append(member["name"].encode("charmap").decode())
+          clan_members_current.append(0)
+          clan_members_peak.append(0)
+    
+          print(str(num) + ". " + member['name'].encode("charmap").decode())
+          print("current: " + "0")
+          print("peak: " + "0")
+        except:
+          clan_members_name.append(member["brawlhalla_name"].encode("charmap").decode())
+          clan_members_current.append(0)
+          clan_members_peak.append(0)
+    
+          print(str(num) + ". " + member['brawlhalla_name'].encode("charmap").decode())
+          print("current: " + "0")
+          print("peak: " + "0")
+      elif clan_repl.no_elo_players == 'hide':
+        try:
+          print(str(num) + ". " + member['name'].encode("charmap").decode())
+          print("current: " + "0")
+          print("peak: " + "0")
+          print('(not showing)')
+        except:
+          print(str(num) + ". " + member['brawlhalla_name'].encode("charmap").decode())
+          print("current: " + "0")
+          print("peak: " + "0")
+          print('(not showing)')
     num += 1
     
   # return values
@@ -185,8 +200,8 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
           
           # FIND BEST TEAM CURRENT ELO
           bestCurrentTeam = "bestCurrentTeam is undefined"
-          bestCurrent = -1
-          bestPeak = -1
+          bestCurrent = 0
+          bestPeak = 0
 
           for team in all_my_2v2_teams:
               rating = team["rating"]
@@ -201,8 +216,8 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
         elif sorting_method == "peak":
                         # FIND BEST TEAM PEAK ELO
           bestCurrentTeam = "bestCurrentTeam is undefined"
-          bestCurrent = -1
-          bestPeak = -1
+          bestCurrent = 0
+          bestPeak = 0
 
           for team in all_my_2v2_teams:
               rating = team["rating"]
@@ -222,8 +237,8 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
 
         # ADD ALL VALUES TO ARRAYS
         if bestCurrentTeam.startswith("bestCurrentTeam is undefine"):
-            bestCurrent = -1
-            bestPeak = -1
+            bestCurrent = 0
+            bestPeak = 0
             bestCurrentTeam = player["name"].encode("charmap").decode()
         print(str(num) + ': ' + bestCurrentTeam)
         print("current: " + str(bestCurrent))
@@ -246,7 +261,7 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
         #ps4 player format stupid dadabase shizzle :<
         currentResult = "**" + \
             str(num) + ". " + player["brawlhalla_name"].encode("charmap").decode() + \
-            "**: **current:**" + " -1" + " **peak:**" + " -1"
+            "**: **current:**" + " 0" + " **peak:**" + " 0"
 
         clan_2v2_teamnames.append(player["brawlhalla_name"].encode("charmap").decode())
         clan_current_2v2_ratings.append(0)

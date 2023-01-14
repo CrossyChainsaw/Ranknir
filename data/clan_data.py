@@ -39,7 +39,9 @@ Excalibur = Clan(1026158147175460894, 1057424977508442163, ['8'], 0xb1dfff, 'htt
 
 Fawaka = Clan(1056365850510245899, 1058156738647429240, ['2060072'], 0xffa500, " ", '1055194013176705094', xp='show')
 
+
+
 # Testing
 wanak1n_clan_id, test2_clan_id, test3_clan_id = '1363653', '2021161', '2023962'
-test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id, test2_clan_id],
-                 0xD10000, " ", '705783420189671458', member_count='show', xp='show', format='A', elo_type='legend')
+test_clan = Clan(973594560368373820, 973594560368373820, [wanak1n_clan_id],
+                 0xD10000, " ", '705783420189671458', member_count='show', xp='show', format='A', elo_type='general', no_elo_players='show')
