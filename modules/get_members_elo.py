@@ -69,7 +69,7 @@ def get_members_2v2_elo(clan_repl, sorting_method, clan_name):
   
   # ps4 players
   ps4_players = get_ps4_players(clan_repl, clan_name)
-  teamname, current, peak = __get_clan_members_elo_2v2(ps4_players, sorting_method)
+  teamname, current, peak = __get_clan_members_elo_2v2(clan_repl, ps4_players, sorting_method)
   while len(teamname) > 0:
     teamname_array.append(teamname.pop(0))
     current_array.append(current.pop(0))
@@ -79,7 +79,7 @@ def get_members_2v2_elo(clan_repl, sorting_method, clan_name):
   # get clan and clan members
   for clan_id in clan_repl.id_array:
     clan_members = get_clan_members(clan_id)
-    teamname, current, peak = __get_clan_members_elo_2v2(clan_members, sorting_method)
+    teamname, current, peak = __get_clan_members_elo_2v2(clan_repl, clan_members, sorting_method)
     while len(teamname) > 0:
       teamname_array.append(teamname.pop(0))
       current_array.append(current.pop(0))
@@ -186,7 +186,7 @@ def __get_clan_members_elo_1v1(clan_repl, clan_members):
     
   # return values
   return clan_members_name, clan_members_current, clan_members_peak
-def __get_clan_members_elo_2v2(clan_members, sorting_method):
+def __get_clan_members_elo_2v2(clan_repl, clan_members, sorting_method):
   clan_2v2_teamnames = []
   clan_current_2v2_ratings = []
   clan_peak_2v2_ratings = []
@@ -215,7 +215,7 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
                 
         elif sorting_method == "peak":
                         # FIND BEST TEAM PEAK ELO
-          bestCurrentTeam = "bestCurrentTeam is undefined"
+          bestCurrentTeam = "??"
           bestCurrent = 0
           bestPeak = 0
 
@@ -234,12 +234,15 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
         name_2 = bestCurrentTeam[name_plus+1:name_length]
         full_name = name_1 + ' **+** ' + name_2 
         bestCurrentTeam = full_name
+        print(bestCurrentTeam)
 
         # ADD ALL VALUES TO ARRAYS
-        if bestCurrentTeam.startswith("bestCurrentTeam is undefine"):
-            bestCurrent = 0
-            bestPeak = 0
-            bestCurrentTeam = player["name"].encode("charmap").decode()
+        if bestCurrentTeam.startswith("?"):
+          if clan_repl.no_elo_players == 'hide':
+            raise ValueError("don't show name")
+          bestCurrent = 0
+          bestPeak = 0
+          bestCurrentTeam = player["name"].encode("charmap").decode()
         print(str(num) + ': ' + bestCurrentTeam)
         print("current: " + str(bestCurrent))
         print("peak: " + str(bestPeak))
@@ -247,25 +250,26 @@ def __get_clan_members_elo_2v2(clan_members, sorting_method):
         clan_2v2_teamnames.append(bestCurrentTeam)
         clan_current_2v2_ratings.append(bestCurrent)
         clan_peak_2v2_ratings.append(bestPeak)
-
     except:
       try:
-        currentResult = "**" + \
-            str(num) + ". " + player["name"].encode("charmap").decode() + \
-            "**: **current:**" + " N/A" + " **peak:**" + " N/A"
-
-        clan_2v2_teamnames.append(player["name"].encode("charmap").decode())
-        clan_current_2v2_ratings.append(0)
-        clan_peak_2v2_ratings.append(0)
+        if clan_repl.no_elo_players == 'show':
+          currentResult = "**" + \
+              str(num) + ". " + player["name"].encode("charmap").decode() + \
+              "**: **current:**" + " N/A" + " **peak:**" + " N/A"
+  
+          clan_2v2_teamnames.append(player["name"].encode("charmap").decode())
+          clan_current_2v2_ratings.append(0)
+          clan_peak_2v2_ratings.append(0)
       except:
-        #ps4 player format stupid dadabase shizzle :<
-        currentResult = "**" + \
-            str(num) + ". " + player["brawlhalla_name"].encode("charmap").decode() + \
-            "**: **current:**" + " 0" + " **peak:**" + " 0"
-
-        clan_2v2_teamnames.append(player["brawlhalla_name"].encode("charmap").decode())
-        clan_current_2v2_ratings.append(0)
-        clan_peak_2v2_ratings.append(0)
-
-        print(currentResult)
+        if clan_repl.no_elo_players == 'show':
+          #ps4 player format stupid dadabase shizzle :<
+          currentResult = "**" + \
+              str(num) + ". " + player["brawlhalla_name"].encode("charmap").decode() + \
+              "**: **current:**" + " 0" + " **peak:**" + " 0"
+  
+          clan_2v2_teamnames.append(player["brawlhalla_name"].encode("charmap").decode())
+          clan_current_2v2_ratings.append(0)
+          clan_peak_2v2_ratings.append(0)
+  
+          print(currentResult)
   return clan_2v2_teamnames, clan_current_2v2_ratings, clan_peak_2v2_ratings

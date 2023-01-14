@@ -1,7 +1,7 @@
 import discord
 from modules.wait import wait
 
-PURGE_LIMIT = 12 # CHANGE THIS ONE BACK TO 12 BEFORE LAUNCH
+PURGE_LIMIT = 0 # CHANGE THIS ONE BACK TO 12 BEFORE LAUNCH
 
 
 # Public
