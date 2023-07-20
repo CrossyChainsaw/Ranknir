@@ -139,6 +139,9 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
 
     # Remove last FEW messages in channel
     await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
+
+    time.sleep(1)
+
     # Send Image
     try:
         await channel.send(clan.image)
@@ -146,13 +149,13 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     except:
         print('NO IMAGE PROVIDED')
 
-    time.sleep(0.5)
+    time.sleep(1)
 
     # Send Embed
     await channel.send(embed=embed_title)
     print("sent title embed")
 
-    time.sleep(0.5)
+    time.sleep(1)
 
     num = 1
     for embed in embed_array:
@@ -160,5 +163,5 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
         if len(embed.description) > 0:
             await channel.send(embed=embed)
             print('sent player embed: ' + str(num))
-            time.sleep(0.5)
+            time.sleep(1)
         num += 1

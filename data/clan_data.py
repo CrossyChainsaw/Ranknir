@@ -77,9 +77,7 @@ sword = Clan(1099992497624727634,
 
 # Testing
 test2_clan_id, test3_clan_id = '2021161', '2023962'
-test_clan = Clan(973594560368373820,
-                 973594560368373820, [test3_clan_id],
-                 0xD10000,
+test_clan = Clan(1131552899378466887, 1131552913160937513, [test3_clan_id], 0xD10000,
                  " ",
                  '705783420189671458',
                  member_count='show',
