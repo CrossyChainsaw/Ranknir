@@ -5,10 +5,10 @@ from modules.get_players import get_console_players, get_server_players
 from modules.clan import get_clan_data
 
 
-def get_players_elo_1v1(players):
+async def get_players_elo_1v1(players):
     player_object_array = []
     for player in players:
-        player_ranked_stats = fetch_player_ranked_stats(
+        player_ranked_stats = await fetch_player_ranked_stats(
             player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(
             player_ranked_stats)
@@ -16,11 +16,24 @@ def get_players_elo_1v1(players):
     return player_object_array
 
 
-def get_players_elo_1v1_and_2v2(clan, players):
+async def get_players_elo_2v2(clan, players):
+
+    team_object_array = []
+    for player in players:
+        player_ranked_stats = await fetch_player_ranked_stats(
+            player['brawlhalla_id'])
+        team_object = __extract_player_stats_into_team_object_2v2(
+            clan, player_ranked_stats)
+        team_object_array.append(team_object)
+        print(team_object.name, team_object.current, team_object.peak)
+    return team_object_array
+
+
+async def get_players_elo_1v1_and_2v2(clan, players):
     player_object_array = []
     team_object_array = []
     for player in players:
-        player_ranked_stats = fetch_player_ranked_stats(
+        player_ranked_stats = await fetch_player_ranked_stats(
             player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(
             player_ranked_stats)
@@ -28,6 +41,7 @@ def get_players_elo_1v1_and_2v2(clan, players):
         team_object = __extract_player_stats_into_team_object_2v2(
             clan, player_ranked_stats)
         team_object_array.append(team_object)
+        print(player_object.name)
     return player_object_array, team_object_array
 
 
@@ -84,19 +98,6 @@ def __find_best_team(clan, player):
                 best_peak = peak
                 best_team = team["teamname"].encode("charmap").decode()
     return Team(best_team, best_current, best_peak)
-
-
-def get_players_elo_2v2(clan, players):
-
-    team_object_array = []
-    for player in players:
-        player_ranked_stats = fetch_player_ranked_stats(
-            player['brawlhalla_id'])
-        team_object = __extract_player_stats_into_team_object_2v2(
-            clan, player_ranked_stats)
-        team_object_array.append(team_object)
-        print(team_object.name, team_object.current, team_object.peak)
-    return team_object_array
 
 
 def __give_empty_name_a_placeholder_name(player_name):

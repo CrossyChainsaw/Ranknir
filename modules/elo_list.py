@@ -12,7 +12,7 @@ async def clan_console_mix_1v1_elo_list(clan, bot):
     all_players_array = []
     # Get Console Players
     console_players = get_console_players(clan.server_id)
-    all_players_array.append(get_players_elo_1v1(console_players))
+    all_players_array.append(await get_players_elo_1v1(console_players))
     # Get Clan
     clan_data_array = []
     for clan_id in clan.id_array:
@@ -21,7 +21,7 @@ async def clan_console_mix_1v1_elo_list(clan, bot):
         clan_data_array.append(clan_data)
         # Get Clan Players
         clan_players = clan_data['clan']
-        all_players_array.append(get_players_elo_1v1(clan_players))
+        all_players_array.append(await get_players_elo_1v1(clan_players))
     # Restructure the array with all players
     all_players_array_restructured = __fix_structure(all_players_array)
     all_players_sorted = sort_elo(clan, all_players_array_restructured)
@@ -35,7 +35,7 @@ async def clan_console_mix_2v2_elo_list(clan, bot):
     all_teams_array = []
     # Get Console Players
     console_players = get_console_players(clan.server_id)
-    all_teams_array.append(get_players_elo_2v2(clan, console_players))
+    all_teams_array.append(await get_players_elo_2v2(clan, console_players))
     # Get Clan
     clan_data_array = []
     for clan_id in clan.id_array:
@@ -44,7 +44,7 @@ async def clan_console_mix_2v2_elo_list(clan, bot):
         clan_data_array.append(clan_data)
         # Get Clan Players
         clan_players = clan_data['clan']
-        all_teams_array.append(get_players_elo_2v2(clan, clan_players))
+        all_teams_array.append(await get_players_elo_2v2(clan, clan_players))
     # Restructure the array with all players
     all_teams_array_restructured = __fix_structure(all_teams_array)
     all_teams_sorted = sort_elo(clan, all_teams_array_restructured)
@@ -58,7 +58,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
     all_teams_array = []
 
     console_players = get_console_players(clan.server_id)
-    console_players_elo, console_teams_elo = get_players_elo_1v1_and_2v2(
+    console_players_elo, console_teams_elo = await get_players_elo_1v1_and_2v2(
         clan, console_players)
     all_players_array.append(console_players_elo)
     all_teams_array.append(console_teams_elo)
@@ -70,7 +70,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
         clan_data_array.append(clan_data)
         # Get Clan Players
         clan_players = clan_data['clan']
-        clan_players_elo, clan_teams_elo = get_players_elo_1v1_and_2v2(
+        clan_players_elo, clan_teams_elo = await get_players_elo_1v1_and_2v2(
             clan, clan_players)
         all_players_array.append(clan_players_elo)
         all_teams_array.append(clan_teams_elo)
@@ -93,7 +93,7 @@ async def server_1v1_elo_list(server, bot):
     print("Server 1v1 elo list for " + server.name)
     __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
-    all_players_array = get_players_elo_1v1(brawlhalla_nl_players)
+    all_players_array = await get_players_elo_1v1(brawlhalla_nl_players)
     all_players_sorted = sort_elo(server, all_players_array)
     embed_title, embed_array = prepare_embeds_server(
         server, all_players_sorted)
@@ -104,7 +104,7 @@ async def server_2v2_elo_list(server, bot):
     print("Server 2v2 elo list for " + server.name)
     __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
-    all_teams_array = get_players_elo_2v2(server, brawlhalla_nl_players)
+    all_teams_array = await get_players_elo_2v2(server, brawlhalla_nl_players)
     all_teams_sorted = sort_elo(server, all_teams_array)
     embed_title, embed_array = prepare_embeds_server(server, all_teams_sorted)
     await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
@@ -112,10 +112,10 @@ async def server_2v2_elo_list(server, bot):
 
 async def server_1v1_and_2v2_elo_list(server, bot):
     print("Server 1v1 and 2v2 elo list for " + server.name)
-    # __try_update_data(server)
+    __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
 
-    all_players_array, all_teams_array = get_players_elo_1v1_and_2v2(
+    all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(
         server, brawlhalla_nl_players)
 
     all_players_sorted = sort_elo(server, all_players_array)
@@ -135,9 +135,6 @@ def __try_update_data(server):
         server.update_data()
     except:
         print("couldn't update data, make sure Dadabase is running")
-
-
-# move this to get_elo.py?
 
 
 def __fix_structure(all_players_array):
