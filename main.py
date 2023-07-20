@@ -15,7 +15,8 @@ bot = commands.Bot(command_prefix=['!r', '!R'], intents=intents)
 async def on_ready():
     # I'm back online!
     print(f'We have logged in as {bot.user}')
-    await server_1v1_and_2v2_elo_list(Brawlhalla_NL, bot)
+    # await server_1v1_and_2v2_elo_list(Brawlhalla_NL, bot)
+    await clan_console_mix_1v1_and_2v2_elo_list(test_clan, bot)
     # await clan_console_mix_1v1_and_2v2_elo_list(Obsessive, bot)
     # await server_2v2_elo_list(Brawlhalla_NL, bot)
     # await clan_console_mix_2v2_elo_list(test_clan, bot) # i hope this works
@@ -29,4 +30,6 @@ async def command_ping(ctx):
 
 
 # keep_alive()
-bot.run(Xos().environ[1])
+bot.run(Xos().environ[2])
+
+# fix 1v1 and 2v2 in clans now it just does requests for everything but we can halve with get_players_elo_1v1_and_2v2

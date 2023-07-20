@@ -16,7 +16,7 @@ def get_players_elo_1v1(players):
     return player_object_array
 
 
-def get_players_elo_1v1_and_2v2(players):
+def get_players_elo_1v1_and_2v2(clan, players):
     player_object_array = []
     team_object_array = []
     for player in players:
@@ -26,7 +26,7 @@ def get_players_elo_1v1_and_2v2(players):
             player_ranked_stats)
         player_object_array.append(player_object)
         team_object = __extract_player_stats_into_team_object_2v2(
-            player_ranked_stats)
+            clan, player_ranked_stats)
         team_object_array.append(team_object)
     return player_object_array, team_object_array
 

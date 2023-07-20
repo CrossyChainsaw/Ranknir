@@ -1,4 +1,4 @@
-from modules.get_elo import get_players_elo_1v1, get_players_elo_2v2
+from modules.get_elo import get_players_elo_1v1, get_players_elo_2v2, get_players_elo_1v1_and_2v2
 from modules.get_players import get_server_players
 from modules.sort_elo import sort_elo
 from modules.embed import send_embeds, prepare_embeds_clan_mix_console, prepare_embeds_server
@@ -58,8 +58,10 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
     all_teams_array = []
 
     console_players = get_console_players(clan.server_id)
-    all_players_array.append(get_players_elo_1v1(console_players))
-    all_teams_array.append(get_players_elo_2v2(clan, console_players))
+    console_players_elo, console_teams_elo = get_players_elo_1v1_and_2v2(
+        clan, console_players)
+    all_players_array.append(console_players_elo)
+    all_teams_array.append(console_teams_elo)
 
     clan_data_array = []
     for clan_id in clan.id_array:
@@ -68,8 +70,10 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
         clan_data_array.append(clan_data)
         # Get Clan Players
         clan_players = clan_data['clan']
-        all_players_array.append(get_players_elo_1v1(clan_players))
-        all_teams_array.append(get_players_elo_2v2(clan, clan_players))
+        clan_players_elo, clan_teams_elo = get_players_elo_1v1_and_2v2(
+            clan, clan_players)
+        all_players_array.append(clan_players_elo)
+        all_teams_array.append(clan_teams_elo)
     all_players_array_restructured = __fix_structure(all_players_array)
     all_teams_array_restructured = __fix_structure(all_teams_array)
 
@@ -111,8 +115,8 @@ async def server_1v1_and_2v2_elo_list(server, bot):
     # __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
 
-    all_players_array = get_players_elo_1v1(brawlhalla_nl_players)
-    all_teams_array = get_players_elo_2v2(server, brawlhalla_nl_players)
+    all_players_array, all_teams_array = get_players_elo_1v1_and_2v2(
+        server, brawlhalla_nl_players)
 
     all_players_sorted = sort_elo(server, all_players_array)
     all_teams_sorted = sort_elo(server, all_teams_array)
