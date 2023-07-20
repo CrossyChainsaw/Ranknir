@@ -7,9 +7,9 @@ Ranknir is currently active in the following clan servers: Skyward, Pandation, C
 Has been active in: Insomnia, Fanfare, Fawaka, Dair
 
 ### Clans
-Ranknir processes the following clans: Skyward, Pandation, Pandace, Panhalla, PanhaIIa, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Tews, Tews II, Cherimoya, Excalibur and Obsessive
+Ranknir processes the following clans: Pandation, Pandace, Panhalla, PanhaIIa, Tews, Tews II, Excalibur and Obsessive
 
-Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair
+Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward
 
 ### 1v1 list example
 
