@@ -1,9 +1,9 @@
 import discord
+import os
 from discord.ext import commands
 from modules.keep_alive import keep_alive
 from modules.ping import ping
 from modules.elo_list import clan_console_mix_1v1_elo_list, server_1v1_elo_list, clan_console_mix_2v2_elo_list, server_2v2_elo_list, clan_console_mix_1v1_and_2v2_elo_list, server_1v1_and_2v2_elo_list
-from classes.Xos import Xos
 from data.clan_data import test_clan, Obsessive, Pandation, Excalibur, Tews, Frost, sword
 from data.server_data import Brawlhalla_NL, Test_Server
 from modules.turn import next_turn, get_turn, reset_turn
@@ -43,5 +43,5 @@ async def command_ping(ctx):
     await ping(ctx)
 
 
-# keep_alive()
-bot.run(Xos().environ[2])
+keep_alive()
+bot.run(os.environ['RANKNIR_TOKEN'])

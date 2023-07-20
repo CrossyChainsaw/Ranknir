@@ -1,7 +1,7 @@
 import json
 import os
 import requests
-from classes.Xos import Xos
+import os
 
 
 class Server:
@@ -22,7 +22,7 @@ class Server:
 
     def update_data(self):
         json_object = requests.get(
-            "http://game-node01.jetstax.com:27046//get_links/api_key="+Xos().environ[3])
+            "http://game-node01.jetstax.com:27046//get_links/api_key="+os.environ['DADABASE_API_KEY'])
         data = json.loads(json_object.content)
         with open(self.DATA_LOCATION, 'w') as file:
             json.dump(data, file)

@@ -158,10 +158,11 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     time.sleep(1)
 
     num = 1
+    print('embed_array length: ' + str(len(embed_array)))
     for embed in embed_array:
         # Send Embed (if possible)
         if len(embed.description) > 0:
             await channel.send(embed=embed)
             print('sent player embed: ' + str(num))
-            time.sleep(1)
+            time.sleep(5)
         num += 1
