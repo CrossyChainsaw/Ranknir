@@ -22,6 +22,8 @@ async def on_ready():
         turn = get_turn()
         print("current turn: " + str(turn))
 
+        turn = 1
+
         if turn == 1:
             await clan_console_mix_1v1_and_2v2_elo_list(Pandation, bot)
         elif turn == 2:
@@ -34,9 +36,11 @@ async def on_ready():
             await clan_console_mix_1v1_and_2v2_elo_list(Frost, bot)
         elif turn == 6:
             await clan_console_mix_1v1_elo_list(sword, bot)
-        elif turn >= 7:
+        elif turn == 7:
             await server_1v1_and_2v2_elo_list(Brawlhalla_NL, bot)
-            reset_turn()
+            # reset_turn()
+        elif turn == 8:
+            await clan_console_mix_1v1_and_2v2_elo_list(test_clan, bot)
         # next_turn()
 
 

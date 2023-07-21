@@ -11,7 +11,7 @@ async def clan_console_mix_1v1_elo_list(clan, bot):
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
     all_players_array = []
     # Get Console Players
-    console_players = get_console_players(clan.server_id)
+    console_players = get_console_players(clan)
     all_players_array.append(await get_players_elo_1v1(console_players))
     # Get Clan
     clan_data_array = []
@@ -34,7 +34,7 @@ async def clan_console_mix_2v2_elo_list(clan, bot):
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
     all_teams_array = []
     # Get Console Players
-    console_players = get_console_players(clan.server_id)
+    console_players = get_console_players(clan)
     all_teams_array.append(await get_players_elo_2v2(clan, console_players))
     # Get Clan
     clan_data_array = []
@@ -57,11 +57,9 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
     all_players_array = []
     all_teams_array = []
 
-    console_players = get_console_players(clan.server_id)
+    console_players = get_console_players(clan)
     console_players_elo, console_teams_elo = await get_players_elo_1v1_and_2v2(
         clan, console_players)
-    all_players_array.append(console_players_elo)
-    all_teams_array.append(console_teams_elo)
 
     clan_data_array = []
     for clan_id in clan.id_array:
@@ -74,6 +72,10 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
             clan, clan_players)
         all_players_array.append(clan_players_elo)
         all_teams_array.append(clan_teams_elo)
+
+    all_players_array.append(console_players_elo)
+    all_teams_array.append(console_teams_elo)
+
     all_players_array_restructured = __fix_structure(all_players_array)
     all_teams_array_restructured = __fix_structure(all_teams_array)
 

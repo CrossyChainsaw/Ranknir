@@ -14,7 +14,6 @@ API_WAIT_TIME = 10
 
 def fetch_clan(clan_id):
     time.sleep(API_WAIT_TIME)  # 0.10 might be possible
-    print(clan_id)
     json_object = requests.get(
         "https://api.brawlhalla.com/clan/" + str(clan_id) + "/?api_key=" + os.environ[0])
     return json.loads(json_object.content)
@@ -29,7 +28,7 @@ async def fetch_player_ranked_stats(brawlhalla_id):
 
 def fetch_console_players(id):
     json_object = requests.get(
-        "http://game-node01.jetstax.com:27046//get_ps4_players/api_key="+os.environ[0]+'?id=' + str(id))
+        "http://game-node01.jetstax.com:27046//get_ps4_players/api_key="+os.environ[3]+'?id=' + str(id))
     data = json.loads(json_object.content)
     return data['ps4_players']
 

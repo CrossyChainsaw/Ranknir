@@ -1,28 +1,28 @@
 from classes.Player import Player
 from classes.Team import Team
 from modules.api import fetch_player_ranked_stats
-from modules.get_players import get_console_players, get_server_players
-from modules.clan import get_clan_data
 
 # There are different functions for 1v1, 2v2 and 1v1&2v2. I made an extra one for 1v1&2v2 because it halves the api requests.
 
 
 async def get_players_elo_1v1(clan, players):
     player_object_array = []
-    for player in players:
+    for i, player in enumerate(players):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(
             player_ranked_stats)
         if __check_if_name_is_blank(clan, player_object):
             continue
         player_object_array.append(player_object)
+        print('%s %s/%s' % (clan.name, str(i+1), str(len(players))))
+        print('1s: ' + player_object.name)
     return player_object_array
 
 
 async def get_players_elo_2v2(clan, players):
 
     team_object_array = []
-    for player in players:
+    for i, player in enumerate(players):
         player_ranked_stats = await fetch_player_ranked_stats(
             player['brawlhalla_id'])
         team_object = __extract_player_stats_into_team_object_2v2(
@@ -30,7 +30,8 @@ async def get_players_elo_2v2(clan, players):
         if __check_if_name_is_blank(clan, team_object):
             continue
         team_object_array.append(team_object)
-        print(team_object.name, team_object.current, team_object.peak)
+        print('%s %s/%s' % (clan.name, str(i+1), str(len(players))))
+        print('2s: ' + team_object.name)
     return team_object_array
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
@@ -39,9 +40,8 @@ async def get_players_elo_2v2(clan, players):
 async def get_players_elo_1v1_and_2v2(clan, players):
     player_object_array = []
     team_object_array = []
-    for player in players:
-        player_ranked_stats = await fetch_player_ranked_stats(
-            player['brawlhalla_id'])
+    for i, player in enumerate(players):
+        player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(
             player_ranked_stats)
         team_object = __extract_player_stats_into_team_object_2v2(
@@ -50,6 +50,7 @@ async def get_players_elo_1v1_and_2v2(clan, players):
             continue
         player_object_array.append(player_object)
         team_object_array.append(team_object)
+        print('%s %s/%s' % (clan.name, str(i+1), str(len(players))))
         print('1s: ' + player_object.name)
         print('2s: ' + team_object.name)
     return player_object_array, team_object_array
