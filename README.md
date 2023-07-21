@@ -31,7 +31,7 @@ Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, 
 - Each list can be sorted on either current elo or peak elo
 - Member Count can be shown if wanted
 - Clan XP can be shown if wanted
-- ~you can choose to not show people in the list who haven't played ranked yet~ (temporary not working)
+- you can choose to not show people in the list who haven't played ranked yet
 - Add console players to your elo lists (with the help of [Dadabase](https://github.com/Skyward-Brawlhalla/Dadabase))
 
 ## Add this bot to your server
