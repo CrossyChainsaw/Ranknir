@@ -1,11 +1,13 @@
 import json
-import os
 import requests
 from classes.Xos import Xos
 
 
+os = Xos()
+
+
 class Server:
-    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, image, sorting_method, data_location):
+    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, image, sorting_method, data_location, no_elo_players='hide'):
         self.name = name
         self.channel_1v1_id = channel_1v1_id
         self.channel_2v2_id = channel_2v2_id
@@ -14,6 +16,7 @@ class Server:
         self.image = image
         self.sorting_method = sorting_method
         self.DATA_LOCATION = data_location
+        self.no_elo_players = no_elo_players  # hide / show
 
     def get_players_data(self):
         print("getting players from: " + self.DATA_LOCATION)
@@ -22,7 +25,7 @@ class Server:
 
     def update_data(self):
         json_object = requests.get(
-            "http://game-node01.jetstax.com:27046//get_links/api_key="+Xos().environ[3])
+            "http://game-node01.jetstax.com:27046//get_links/api_key="+os.environ[3])
         data = json.loads(json_object.content)
         with open(self.DATA_LOCATION, 'w') as file:
             json.dump(data, file)

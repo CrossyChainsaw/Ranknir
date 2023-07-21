@@ -112,7 +112,7 @@ async def server_2v2_elo_list(server, bot):
 
 async def server_1v1_and_2v2_elo_list(server, bot):
     print("Server 1v1 and 2v2 elo list for " + server.name)
-    __try_update_data(server)
+    # __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
 
     all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(

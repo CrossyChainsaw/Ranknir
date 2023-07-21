@@ -1,7 +1,7 @@
 import discord
 import time
 
-PURGE_LIMIT = 12
+PURGE_LIMIT = 0  # 12
 
 
 def prepare_embeds_clan_mix_console(clan, players_sorted, clan_data_array, console_player_amount):
@@ -62,6 +62,42 @@ def prepare_embeds_server(server, players_sorted):
             count = 0
     embed_array.append(embed)
     return embed_title, embed_array
+
+
+async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
+    channel = bot.get_channel(channel_id)
+    print('this channel')
+    print(channel)
+
+    # Remove last FEW messages in channel
+    await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
+
+    time.sleep(1)
+
+    # Send Image
+    try:
+        await channel.send(clan.image)
+        print("sent clan image")
+    except:
+        print('NO IMAGE PROVIDED')
+
+    time.sleep(1)
+
+    # Send Embed
+    await channel.send(embed=embed_title)
+    print("sent title embed")
+
+    time.sleep(1)
+
+    num = 1
+    print('embed_array length: ' + str(len(embed_array)))
+    for embed in embed_array:
+        # Send Embed (if possible)
+        if len(embed.description) > 0:
+            await channel.send(embed=embed)
+            print('sent player embed: ' + str(num))
+            time.sleep(5)
+        num += 1
 
 
 def __add_title(clan_data_array, embed2):
@@ -130,39 +166,3 @@ def __add_xp(clan_data_array, embed2):
             count += 1
         embed2.description += "\nTotal: " + str(total_xp)
         return embed2
-
-
-async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
-    channel = bot.get_channel(channel_id)
-    print('this channel')
-    print(channel)
-
-    # Remove last FEW messages in channel
-    await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
-
-    time.sleep(1)
-
-    # Send Image
-    try:
-        await channel.send(clan.image)
-        print("sent clan image")
-    except:
-        print('NO IMAGE PROVIDED')
-
-    time.sleep(1)
-
-    # Send Embed
-    await channel.send(embed=embed_title)
-    print("sent title embed")
-
-    time.sleep(1)
-
-    num = 1
-    print('embed_array length: ' + str(len(embed_array)))
-    for embed in embed_array:
-        # Send Embed (if possible)
-        if len(embed.description) > 0:
-            await channel.send(embed=embed)
-            print('sent player embed: ' + str(num))
-            time.sleep(5)
-        num += 1

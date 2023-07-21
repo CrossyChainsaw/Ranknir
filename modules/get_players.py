@@ -1,4 +1,3 @@
-import json
 from modules.api import fetch_console_players, fetch_clan
 
 # get console playeres
