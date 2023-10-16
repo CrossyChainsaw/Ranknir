@@ -5,7 +5,7 @@ import json
 import asyncio
 
 # VARIABLES
-API_WAIT_TIME = 10
+API_WAIT_TIME = 10 # 10
 
 # METHODS
 
