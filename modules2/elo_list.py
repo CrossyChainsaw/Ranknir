@@ -7,6 +7,8 @@ from modules2.get_players import get_console_players
 from modules2.clan import get_clan_data
 
 
+########################## CLAN & CONSOLE #########################
+
 async def clan_console_mix_1v1_elo_list(clan, bot):
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
     all_players_array = []
@@ -102,6 +104,9 @@ async def server_1v1_elo_list(server, bot):
     await send_embeds(embed_title, embed_array, bot, server, server.channel_1v1_id)
 
 
+############################### SERVER ##############################
+
+
 async def server_2v2_elo_list(server, bot):
     print("Server 2v2 elo list for " + server.name)
     __try_update_data(server)
@@ -130,6 +135,8 @@ async def server_1v1_and_2v2_elo_list(server, bot):
     embed_title, embed_array = prepare_embeds_server(server, all_teams_sorted)
     await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
 
+
+############################ USEFULL FUNCTIONS ##############################
 
 def __try_update_data(server):
     print("updating data...")

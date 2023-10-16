@@ -1,5 +1,5 @@
-# Last Update: 27/09/2023 16:28
-# Way Ahead of master
+# Last Update: 16/10/2023
+# Way Ahead of master as always
 
 import discord
 import os
@@ -9,7 +9,7 @@ from modules2.ping import ping
 from modules2.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, server_1v1_and_2v2_elo_list
 from data.clan_data import test_clan, Obsessive, Pandation, Excalibur, Tews, Tews1, Frost, sword, ChinaT0wn, Skyward, GuiIIotine
 from data.server_data import Brawlhalla_NL
-from modules2.turn import next_turn, get_turn, reset_turn
+from modules2.turn import next_turn, get_turn, reset_turn, prev_turn
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R'], intents=intents)
@@ -37,9 +37,14 @@ async def on_ready():
       await server_1v1_and_2v2_elo_list(Brawlhalla_NL, bot)
     elif turn == 8:
       await clan_console_mix_1v1_and_2v2_elo_list(ChinaT0wn, bot)
+      
+    elif turn == 69:
+      await clan_console_mix_1v1_and_2v2_elo_list(test_clan, bot)
+      prev_turn()
     elif turn == 101:
       print("Entered Debugging")
       break;
+      
     elif turn == 9:
       await clan_console_mix_1v1_and_2v2_elo_list(GuiIIotine, bot)
       reset_turn()
