@@ -18,7 +18,7 @@ lnsomnia = Clan('lsomnia',
 Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
 
 Pandation = Clan('Pandation',
-                 1095227387127537725, 1095227419138457720,
+                 1164181564423426079, 1164181602243457125,
                  [Pandation_clan_id, Pandace_clan_id,
                      Panhalla_clan_id, PanhaIIa_clan_id],
                  0x212226,
