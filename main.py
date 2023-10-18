@@ -6,13 +6,14 @@ import os
 from discord.ext import commands
 from modules2.keep_alive import keep_alive
 from modules2.ping import ping
+from modules2.spit_fire import spit_fire
 from modules2.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, server_1v1_and_2v2_elo_list
 from data.clan_data import test_clan, Obsessive, Pandation, Excalibur, Tews, Tews1, Frost, sword, ChinaT0wn, Skyward, GuiIIotine
 from data.server_data import Brawlhalla_NL
 from modules2.turn import next_turn, get_turn, reset_turn, prev_turn
 
 intents = discord.Intents().all()
-bot = commands.Bot(command_prefix=['r!', 'R'], intents=intents)
+bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 
 
 @bot.event
@@ -54,6 +55,10 @@ async def on_ready():
 @bot.command(name='ping')
 async def command_ping(ctx):
   await ping(ctx)
+
+@bot.command(name='spit')
+async def command_spit_fire(ctx):
+  await spit_fire(bot)
 
 keep_alive()
 bot.run(os.environ['RANKNIR_TOKEN'])
