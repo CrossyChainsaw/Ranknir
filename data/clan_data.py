@@ -18,12 +18,12 @@ lnsomnia = Clan('lsomnia',
 Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
 
 Pandation = Clan('Pandation',
-                 1095227387127537725, 1095227419138457720,
+                 1164181564423426079, 1164181602243457125,
                  [Pandation_clan_id, Pandace_clan_id,
                      Panhalla_clan_id, PanhaIIa_clan_id],
                  0x212226,
                  "https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif",
-                 '889594104873377812')
+                 '889594104873377812', sorting_method='peak')
 
 Dair = Clan('Dair',
             "NO ACCESS", 1029669276363280414, ['1357965'], 0x349feb,
