@@ -1,5 +1,5 @@
 class Clan:
-    def __init__(self, name, channel_1v1_id, channel_2v2_id, id_array, color, image, server_id, sorting_method='current', member_count='show', xp='hide', format='A', elo_type='general', no_elo_players='hide'):
+    def __init__(self, name, channel_1v1_id, channel_2v2_id, id_array, color, image, server_id, sorting_method='current', member_count='show', xp='hide', format='A', elo_type='general', no_elo_players='hide', channel_rotating_id = "NO ACCESS"):
         self.name = name
         self.channel_1v1_id = channel_1v1_id
         self.channel_2v2_id = channel_2v2_id
@@ -15,3 +15,4 @@ class Clan:
         self.format = format                  # A / B
         self.elo_type = elo_type              # general / legend
         self.no_elo_players = no_elo_players  # show / hide
+        self.channel_rotating_id = channel_rotating_id # id

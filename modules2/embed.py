@@ -187,13 +187,13 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     except:
         print('NO IMAGE PROVIDED')
 
-    time.sleep(1)
+    time.sleep(2)
 
     # Send Embed
     await channel.send(embed=embed_title)
     print("sent title embed")
 
-    time.sleep(1)
+    time.sleep(2)
 
     num = 1
     print('embed_array length: ' + str(len(embed_array)))
