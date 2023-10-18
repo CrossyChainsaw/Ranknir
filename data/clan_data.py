@@ -23,7 +23,7 @@ Pandation = Clan('Pandation',
                      Panhalla_clan_id, PanhaIIa_clan_id],
                  0x212226,
                  "https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif",
-                 '889594104873377812', sorting_method='peak')
+                 '889594104873377812', sorting_method='peak', channel_rotating_id=1164251976633159682)
 
 Dair = Clan('Dair',
             "NO ACCESS", 1029669276363280414, ['1357965'], 0x349feb,
@@ -109,4 +109,5 @@ test_clan = Clan('test_clan', test_channel_1, test_channel_1, [test2_clan_id], 0
                  format='A',
                  elo_type='general',
                  no_elo_players='show',
-                sorting_method='current')
+                sorting_method='current',
+                channel_rotating_id=test_channel_1)
