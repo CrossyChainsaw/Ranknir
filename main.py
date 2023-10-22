@@ -1,5 +1,6 @@
 # Last Update: 16/10/2023
 # Way Ahead of master as always
+# last added: way to individual elo
 
 import discord
 import os
@@ -11,6 +12,7 @@ from modules2.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v
 from data.clan_data import test_clan, Obsessive, Pandation, Excalibur, Tews, Tews1, Frost, sword, ChinaT0wn, Skyward, GuiIIotine
 from data.server_data import Brawlhalla_NL
 from modules2.turn import next_turn, get_turn, reset_turn, prev_turn
+from modules2.all_legends_elo import send_all_legends_elo
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
@@ -31,7 +33,7 @@ async def on_ready():
     elif turn == 2:
       await clan_console_mix_1v1_and_2v2_elo_list(Excalibur, bot)
     elif turn == 3:
-      await clan_console_mix_1v1_and_2v2_elo_list(Tews, bot)
+      await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Tews, bot)
     elif turn == 5:
       await clan_console_mix_1v1_and_2v2_elo_list(Frost, bot)
     elif turn == 7:
@@ -49,6 +51,7 @@ async def on_ready():
     elif turn == 9:
       await clan_console_mix_1v1_and_2v2_elo_list(GuiIIotine, bot)
       reset_turn()
+      await send_all_legends_elo(7364605, bot)
     next_turn()
 
 

@@ -29,8 +29,7 @@ async def clan_console_mix_1v1_elo_list(clan, bot):
   # Restructure the array with all players
   all_player_objects_array_restructured = __fix_structure(
     all_player_objects_array)
-  all_player_objects_array_sorted = sort_elo(
-    clan, all_player_objects_array_restructured)
+  all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
   embed_title, embed_array = prepare_embeds_clan_mix_console(
     clan,
     all_player_objects_array_sorted,
@@ -60,7 +59,7 @@ async def clan_console_mix_2v2_elo_list(clan, bot):
   # Restructure the array with all players
   all_team_objects_array_restructured = __fix_structure(all_team_objects_array)
   all_team_objects_array_sorted = sort_elo(
-    clan, all_team_objects_array_restructured)
+    clan.sorting_method, all_team_objects_array_restructured)
   embed_title, embed_array = prepare_embeds_clan_mix_console(
     clan,
     all_team_objects_array_sorted,
@@ -93,8 +92,8 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
   all_player_objects_array_restructured = __fix_structure(all_player_objects_array)
   all_team_objects_array_restructured = __fix_structure(all_team_objects_array)
   # Sort Players and Teams
-  all_player_objects_array_sorted = sort_elo(clan, all_player_objects_array_restructured)
-  all_team_objects_array_sorted = sort_elo(clan, all_team_objects_array_restructured)
+  all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
+  all_team_objects_array_sorted = sort_elo(clan.sorting_method, all_team_objects_array_restructured)
   # Send 1v1 Elo List
   embed_title, embed_array = prepare_embeds_clan_mix_console(
     clan,
@@ -138,9 +137,9 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan, bot):
   all_team_objects_array_restructured = __fix_structure(all_team_objects_array)
   all_rotating_objects_array_restructured = __fix_structure(all_rotating_objects_array)
   # Sort Players and Teams
-  all_player_objects_array_sorted = sort_elo(clan, all_player_objects_array_restructured)
-  all_team_objects_array_sorted = sort_elo(clan, all_team_objects_array_restructured)
-  all_rotating_objects_array_sorted = sort_elo(clan, all_rotating_objects_array_restructured)
+  all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
+  all_team_objects_array_sorted = sort_elo(clan.sorting_method, all_team_objects_array_restructured)
+  all_rotating_objects_array_sorted = sort_elo(clan.sorting_method, all_rotating_objects_array_restructured)
   # Send 1v1 Elo List
   embed_title, embed_array = prepare_embeds_clan_mix_console(
     clan,
@@ -174,7 +173,7 @@ async def server_1v1_elo_list(server, bot):
   __try_update_data(server)
   brawlhalla_nl_players = get_server_players(server)
   all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players)
-  all_player_objects_sorted = sort_elo(server, all_player_objects_array)
+  all_player_objects_sorted = sort_elo(server.sorting_method, all_player_objects_array)
   embed_title, embed_array = prepare_embeds_server(server, all_player_objects_sorted)
   await send_embeds(embed_title, embed_array, bot, server,
                     server.channel_1v1_id)
@@ -185,7 +184,7 @@ async def server_2v2_elo_list(server, bot):
   __try_update_data(server)
   brawlhalla_nl_players = get_server_players(server)
   _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players)
-  all_team_objects_sorted = sort_elo(server, all_teams_array)
+  all_team_objects_sorted = sort_elo(server.sorting_method, all_teams_array)
   embed_title, embed_array = prepare_embeds_server(server, all_team_objects_sorted)
   await send_embeds(embed_title, embed_array, bot, server,
                     server.channel_2v2_id)
@@ -199,8 +198,8 @@ async def server_1v1_and_2v2_elo_list(server, bot):
   all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(
     server, brawlhalla_nl_players)
   # Sort Elo
-  all_players_sorted = sort_elo(server, all_players_array)
-  all_teams_sorted = sort_elo(server, all_teams_array)
+  all_players_sorted = sort_elo(server.sorting_method, all_players_array)
+  all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
   # Send 1v1 Elo List
   embed_title, embed_array = prepare_embeds_server(server, all_players_sorted)
   await send_embeds(embed_title, embed_array, bot, server,
