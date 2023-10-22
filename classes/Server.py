@@ -4,7 +4,7 @@ import os
 
 
 class Server:
-    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, image, sorting_method, data_location, no_elo_players='hide'):
+    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, image, sorting_method, data_location, no_elo_players='hide', channel_rotating_id="NO ACCESS"):
         self.name = name
         self.channel_1v1_id = channel_1v1_id
         self.channel_2v2_id = channel_2v2_id
@@ -13,7 +13,10 @@ class Server:
         self.image = image
         self.sorting_method = sorting_method
         self.DATA_LOCATION = data_location
+
+        # Optional
         self.no_elo_players = no_elo_players  # hide / show
+        self.channel_rotating_id = channel_rotating_id # id
 
     def get_players_data(self):
         print("getting players from: " + self.DATA_LOCATION)

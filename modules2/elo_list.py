@@ -209,6 +209,27 @@ async def server_1v1_and_2v2_elo_list(server, bot):
   await send_embeds(embed_title, embed_array, bot, server,
                     server.channel_2v2_id)
 
+async def server_1v1_and_2v2_and_rotating_elo_list(server, bot):
+  print("Server 1v1 and 2v2 elo list for " + server.name)
+  __try_update_data(server)
+  brawlhalla_nl_players = get_server_players(server)
+  # Get Elo
+  all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, brawlhalla_nl_players)
+  # Sort Elo
+  all_players_sorted = sort_elo(server.sorting_method, all_players_array)
+  all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
+  all_rotating_array = sort_elo(server.sorting_method, all_rotating_array)
+  # Send 1v1 Elo List
+  embed_title, embed_array = prepare_embeds_server(server, all_players_sorted)
+  await send_embeds(embed_title, embed_array, bot, server,
+                    server.channel_1v1_id)
+  # Send 2v2 Elo List
+  embed_title, embed_array = prepare_embeds_server(server, all_teams_sorted)
+  await send_embeds(embed_title, embed_array, bot, server,
+                    server.channel_2v2_id)
+  # Send Rotating Elo List
+  embed_title, embed_array = prepare_embeds_server(server, all_rotating_array)
+  await send_embeds(embed_title, embed_array, bot, server, server.channel_rotating_id)
 
 ############################ USEFULL FUNCTIONS ##############################
 
