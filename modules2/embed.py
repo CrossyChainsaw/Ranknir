@@ -1,5 +1,4 @@
 import discord
-import time
 import asyncio
 
 PURGE_LIMIT = 12  # 12
@@ -73,7 +72,7 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     # Remove last FEW messages in channel
     await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
 
-    asyncio.sleep(3)
+    await asyncio.sleep(3)
 
     # Send Image
     try:
@@ -82,13 +81,13 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     except:
         print('NO IMAGE PROVIDED')
 
-    asyncio.sleep(3)
+    await asyncio.sleep(3)
 
     # Send Embed
     await channel.send(embed=embed_title)
     print("sent title embed")
 
-    asyncio.sleep(3)
+    await asyncio.sleep(3)
 
     num = 1
     print('embed_array length: ' + str(len(embed_array)))
@@ -97,7 +96,7 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
         if len(embed.description) > 0:
             await channel.send(embed=embed)
             print('sent player embed: ' + str(num))
-            asyncio.sleep(5)
+            await asyncio.sleep(5)
         num += 1
 
 
@@ -168,40 +167,4 @@ def __add_xp(clan_data_array, embed2):
         embed2.description += "\nTotal: " + str(total_xp)
         return embed2
 
-
-
-async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
-    channel = bot.get_channel(channel_id)
-    print('this channel')
-    print(channel)
-
-    # Remove last FEW messages in channel
-    await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
-
-    time.sleep(1)
-
-    # Send Image
-    try:
-        await channel.send(clan.image)
-        print("sent clan image")
-    except:
-        print('NO IMAGE PROVIDED')
-
-    time.sleep(2)
-
-    # Send Embed
-    await channel.send(embed=embed_title)
-    print("sent title embed")
-
-    time.sleep(2)
-
-    num = 1
-    print('embed_array length: ' + str(len(embed_array)))
-    for embed in embed_array:
-        # Send Embed (if possible)
-        if len(embed.description) > 0:
-            await channel.send(embed=embed)
-            print('sent player embed: ' + str(num))
-            time.sleep(5)
-        num += 1
 
