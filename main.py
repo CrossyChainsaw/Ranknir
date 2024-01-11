@@ -3,18 +3,19 @@
 # last added: way to individual elo
 
 import discord
-import os
+from classes.Xos import Xos
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 from modules2.keep_alive import keep_alive
 from modules2.ping import ping
 from modules2.spit_fire import spit_fire
 from modules2.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
-from data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, ChinaT0wn, GuiIIotine, KryptX
+from data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, ChinaT0wn, KryptX, Empire_United
 from data.server_data import Brawlhalla_NL
 from modules2.turn import next_turn, get_turn, reset_turn, prev_turn
 from modules2.all_legends_elo import send_all_legends_elo
 from modules2.leave_server import leave_server
+os = Xos()
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
@@ -42,7 +43,7 @@ async def on_ready():
         elif turn == 4:
             await server_1v1_and_2v2_and_rotating_elo_list(Brawlhalla_NL, bot)
         elif turn == 5:
-            await clan_console_mix_1v1_and_2v2_elo_list(ChinaT0wn, bot)
+            await clan_console_mix_1v1_and_2v2_elo_list(Empire_United, bot)
         elif turn == 6:
             await clan_console_mix_1v1_and_2v2_elo_list(KryptX, bot)
         elif turn == 7:
@@ -81,4 +82,4 @@ async def leave_server_command(ctx, server_id):
     await leave_server(bot, ctx, server_id)
 
 keep_alive()
-bot.run(os.environ['RANKNIR_BOT_KEY'])
+bot.run(os.environ[1])

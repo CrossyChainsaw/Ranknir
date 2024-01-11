@@ -21,10 +21,6 @@ Pandation = Clan('Pandation',
                  '889594104873377812', sorting_method='peak', channel_rotating_id=1164251976633159682)
 
 
-
-
-
-
 Tews = Clan('Tews',
             955483557931925514, 1056187762983845960, [
                 '527406', '1374400', '537048'], 0xff8a0f, "https://cdn.discordapp.com/attachments/837763218311086080/1056185356329955468/Tews_logo.png",
@@ -37,43 +33,43 @@ Excalibur = Clan('Excalibur',
                  '1026046742656983062')
 
 
-
-Frost = Clan('Frost', 1093898006299934781,
-             1093898340657275040, ['12'],
+Frost = Clan('Frost',
+             1093898006299934781,
+             1093898340657275040,
+             ['12'],
              0x30cff1,
              " ",
              '1055194013176705094',
              member_count='show',
              xp='show',
              no_elo_players='show',
-            sorting_method='peak')
+             sorting_method='peak')
 
 
-ChinaT0wn = Clan('ChinaT0WN', 1138496398648680448, 1138496419737641043, ['852076', '2196616'], 0xc83c24, 'https://cdn.discordapp.com/attachments/1135969580032991283/1136255987976765450/image-removebg-preview_13.png', '835249346345697311', sorting_method='current', member_count='show', xp='hide')
+ChinaT0wn = Clan('ChinaT0WN', 1138496398648680448, 1138496419737641043, [
+                 '852076', '2196616'], 0xc83c24, 'https://cdn.discordapp.com/attachments/1135969580032991283/1136255987976765450/image-removebg-preview_13.png', '835249346345697311', sorting_method='current', member_count='show', xp='hide')
 
 
-GuiIIotine_ID = '1687208'
-Guillotine_II_ID = '2222886'
-GuiIIotine = Clan('Guillotine', 
-                  1156588287167832144, 
-                  1156588325998690304, 
-                  [GuiIIotine_ID], 
-                  0x595cd6, 'https://cdn.discordapp.com/attachments/1082718906235486258/1156592665262047242/gif-Guillo-cloud.gif?ex=6515885b&is=651436db&hm=c2346a9b7dd8a789ccc6c9226cab43b53d325b646f62f97e6be95b98bc49588b&', 
-                  '1081937667975024721', 
-                  sorting_method='peak', 
-                  member_count='show', 
-                  xp='hide')
+KryptX = Clan('KryptX',
+              1165795979744784484,
+              1165796021952069702,
+              ['2240544', '2244341'],
+              0x570de9, '',
+              '1162733824527048774',
+              sorting_method='current',
+              member_count='show',
+              xp='show')
 
-
-KryptX = Clan('KryptX', 
-                  1165795979744784484, 
-                  1165796021952069702, 
-                  ['2240544', '2244341'], 
-                  0x570de9, '', 
-                  '1162733824527048774', 
-                  sorting_method='current', 
-                  member_count='show', 
-                  xp='show')
+Empire_United = Clan('Empire United',
+                     1195088887664627772,
+                     "NO ACCESS",
+                     ['2063244'],
+                     0x43c9b8,
+                     'https://cdn.discordapp.com/attachments/948699404003573780/1195101104267071589/EMP_Mascot_Avatar_TURQ.png',
+                     '1057780084582387793',
+                     sorting_method='current',
+                     member_count='show',
+                     xp='show')
 
 # Testing
 test2_clan_id, test3_clan_id = '2021161', '2023962'
@@ -87,10 +83,8 @@ test_clan = Clan('test_clan', test_channel_1, test_channel_1, [test2_clan_id], 0
                  format='A',
                  elo_type='general',
                  no_elo_players='show',
-                sorting_method='current',
-                channel_rotating_id=test_channel_1)
-
-
+                 sorting_method='current',
+                 channel_rotating_id=test_channel_1)
 
 
 ########################## LEFT SERVERS ##########################
@@ -98,28 +92,28 @@ test_clan = Clan('test_clan', test_channel_1, test_channel_1, [test2_clan_id], 0
 lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id = '1919781', '1927502', '2022800'
 lsomnia_img = "https://cdn.discordapp.com/attachments/967468594285924382/1006783742179823646/Insomnia_Logo_Concept_Purple.png"
 lnsomnia = Clan('lsomnia',
-                988484998799716423, 
+                988484998799716423,
                 1006780905131614280,
-                [lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id], 
+                [lnsomnia_clan_id, Parasomnia_clan_id, Hypnosia_clan_id],
                 0x301834,
                 lsomnia_img,
                 '971836983951372298')
 
 
 Fanfare = Clan('Fanfare',
-   "N/A", 
-   1049668480061943818, 
-   ['1311457'], 
-   0x8affc9,
-   "https://cdn.discordapp.com/attachments/1049743980180541440/1049986047045533736/Fbanner.png",
-   '803438055230406717')
+               "N/A",
+               1049668480061943818,
+               ['1311457'],
+               0x8affc9,
+               "https://cdn.discordapp.com/attachments/1049743980180541440/1049986047045533736/Fbanner.png",
+               '803438055230406717')
 
 
 Dair_img = 'https://cdn.discordapp.com/attachments/994165604602880031/1024740143015399424/unknown.png'
 Dair = Clan('Dair',
-            "NO ACCESS", 
-            1029669276363280414, 
-            ['1357965'], 
+            "NO ACCESS",
+            1029669276363280414,
+            ['1357965'],
             0x349feb,
             Dair_img,
             '793113149041147934')
@@ -127,26 +121,26 @@ Dair = Clan('Dair',
 
 Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id, Cybers_Academy = '1983079', '1983274', '2041304', '2072355'
 Cybers = Clan('Cybers',
-              1062818147608043640, 
+              1062818147608043640,
               1062818053936644129,
               [Cybers_clan_id, Cybers_II_clan_id, Xybers_clan_id, Cybers_Academy],
-              0xD10000, 
-              " ", 
+              0xD10000,
+              " ",
               '1005510941590437959')
 
 
-Cherimoya = Clan('Cherimoya', 
-   1042189651118674010, 
-   "N/A", 
-   ['2024340'], 
-   0x19eb8f, 
-   " ",
-   '1032624646073372782')
+Cherimoya = Clan('Cherimoya',
+                 1042189651118674010,
+                 "N/A",
+                 ['2024340'],
+                 0x19eb8f,
+                 " ",
+                 '1032624646073372782')
 
 
-sword = Clan('sword', 
+sword = Clan('sword',
              1099992497624727634,
-             'NO ACCESS', 
+             'NO ACCESS',
              ['2113139'],
              0x30cff1,
              "",
@@ -154,11 +148,23 @@ sword = Clan('sword',
              no_elo_players='show')
 
 
-Obsessive = Clan('Obsessive', 
-   1070473237848404018,
-   1070473271071490138, 
-   ['2069217', '2083553'],
-   0xffa500,
-   "",
-   '1055194013176705094',
-   xp='show')
+Obsessive = Clan('Obsessive',
+                 1070473237848404018,
+                 1070473271071490138,
+                 ['2069217', '2083553'],
+                 0xffa500,
+                 "",
+                 '1055194013176705094',
+                 xp='show')
+
+GuiIIotine_ID = '1687208'
+Guillotine_II_ID = '2222886'
+GuiIIotine = Clan('Guillotine',
+                  1156588287167832144,
+                  1156588325998690304,
+                  [GuiIIotine_ID],
+                  0x595cd6, 'https://cdn.discordapp.com/attachments/1082718906235486258/1156592665262047242/gif-Guillo-cloud.gif?ex=6515885b&is=651436db&hm=c2346a9b7dd8a789ccc6c9226cab43b53d325b646f62f97e6be95b98bc49588b&',
+                  '1081937667975024721',
+                  sorting_method='peak',
+                  member_count='show',
+                  xp='hide')

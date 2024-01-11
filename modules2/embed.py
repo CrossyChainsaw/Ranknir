@@ -70,6 +70,7 @@ async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     print(channel)
 
     # Remove last FEW messages in channel
+    print('purging...')
     await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
 
     await asyncio.sleep(3)
@@ -166,5 +167,3 @@ def __add_xp(clan_data_array, embed2):
             count += 1
         embed2.description += "\nTotal: " + str(total_xp)
         return embed2
-
-

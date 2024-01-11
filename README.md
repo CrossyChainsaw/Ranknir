@@ -2,14 +2,14 @@
 Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
 
 ### Servers
-Ranknir is currently active in the following clan servers: Pandation, Tews, Excalibur, Obsessive, Brawlhalla NL, Frost and sword
+Ranknir is currently active in the following clan servers: Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United
 
-Has been active in: Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward
+Has been active in: Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, ChinaT0WN
 
 ### Clans
-Ranknir processes the following clans: Pandation, Pandace, Panhalla, PanhaIIa, Tews, Tews II, Excalibur and Obsessive
+Ranknir processes the following clans: Pandation, Pandace, Panhalla, PanhaIIa, Excalibur, Tews, Tews II, Tews Academy, Frost, KryptX, Empire United
 
-Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward
+Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II
 
 ### 1v1 list example
 
@@ -32,7 +32,7 @@ Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, 
 - Member Count can be shown if wanted
 - Clan XP can be shown if wanted
 - you can choose to not show people in the list who haven't played ranked yet
-- Add console players to your elo lists (with the help of [Dadabase](https://github.com/Skyward-Brawlhalla/Dadabase))
+- Add console players to your elo lists
 
 ## Add this bot to your server
 - As if right now there are too many servers Ranknir is active in. Accepting more clans would slow down the process for everyone so I stopped accepting clans for now. I have requested a second API key so it's a matter of time.
