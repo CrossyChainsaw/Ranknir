@@ -2,14 +2,14 @@
 Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
 
 ### Servers
-Ranknir is currently active in the following clan servers: Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United
+Ranknir is currently active in the following clan servers: *Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United*
 
-Has been active in: Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, ChinaT0WN
+Has been active in: *Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, ChinaT0WN*
 
 ### Clans
-Ranknir processes the following clans: Pandation, Pandace, Panhalla, PanhaIIa, Excalibur, Tews, Tews II, Tews Academy, Frost, KryptX, Empire United
+Ranknir processes the following clans: *Pandation, Pandace, Panhalla, PanhaIIa, Excalibur, Tews, Tews II, Tews Academy, Frost, KryptX, Empire United*
 
-Previously also: lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II
+Previously also: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II*
 
 ### 1v1 list example
 
