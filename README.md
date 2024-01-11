@@ -35,4 +35,4 @@ Previously also: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers,
 - Add console players to your elo lists
 
 ## Add this bot to your server
-- As if right now there are too many servers Ranknir is active in. Accepting more clans would slow down the process for everyone so I stopped accepting clans for now. I have requested a second API key so it's a matter of time.
+- Send me a dm over discord -> crossychainsaw
