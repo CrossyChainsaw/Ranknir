@@ -6,7 +6,7 @@ from classes.Xos import Xos
 os = Xos()
 
 # VARIABLES
-API_WAIT_TIME = 9  # 9
+API_WAIT_TIME = 8.5  # 9
 
 # METHODS
 

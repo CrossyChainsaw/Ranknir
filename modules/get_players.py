@@ -1,4 +1,4 @@
-from modules2.api import fetch_console_players, fetch_clan
+from modules.api import fetch_console_players, fetch_clan
 import json
 
 # get console players
@@ -7,19 +7,22 @@ import json
 def get_console_players(clan):
     console_players = {}
     try:
-        #console_players = fetch_console_players(clan.server_id) # Dadabase discontinued
+        # console_players = fetch_console_players(clan.server_id) # Dadabase discontinued
         console_players = __load_ps4_players(clan.server_id)
         print("Console player amount in %s: %s" %
-              (clan.name, str(len(console_players))))
+              (clan.name[0], str(len(console_players))))
     except:
         print("No console players in " + clan.name)
     return console_players
 
+
 DATA_LOCATION = 'data/clans/'
+
+
 def __load_ps4_players(server_id):
-  with open(DATA_LOCATION + str(server_id) + '.json', 'r') as file:
-    data = json.load(file) # error
-    return data['ps4_players']
+    with open(DATA_LOCATION + str(server_id) + '.json', 'r') as file:
+        data = json.load(file)  # error
+        return data['ps4_players']
 
 
 # get server players

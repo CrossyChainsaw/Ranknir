@@ -1,4 +1,4 @@
-from modules2.api import fetch_clan
+from modules.api import fetch_clan
 
 
 async def get_clan_data(clan_id):

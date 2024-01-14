@@ -1,6 +1,6 @@
 from classes.Player import Player
 from classes.Team import Team
-from modules2.api import fetch_player_ranked_stats
+from modules.api import fetch_player_ranked_stats
 
 
 # There are different functions for 1v1, 2v2 and 1v1&2v2. I made an extra one for 1v1&2v2 because it halves the api requests.
@@ -37,7 +37,7 @@ from modules2.api import fetch_player_ranked_stats
 #   return team_object_array
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
-async def get_players_elo_1v1_and_2v2(clan, players):
+async def get_players_elo_1v1_and_2v2(clan, players, subclan_name):
   """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
   player_object_array = []
   team_object_array = []
@@ -53,13 +53,13 @@ async def get_players_elo_1v1_and_2v2(clan, players):
       #continue # for hide no elo player thing
     player_object_array.append(player_object)
     team_object_array.append(team_object)
-    print('%s %s/%s' % (clan.name, str(i + 1), str(len(players))))
+    print('%s %s/%s' % (subclan_name, str(i + 1), str(len(players))))
     print('1s: ' + player_object.name)
     print('2s: ' + team_object.name)
   return player_object_array, team_object_array
 
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan, players):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
   """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
   player_object_array = []
   team_object_array = []
@@ -76,7 +76,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players):
     player_object_array.append(player_object)
     team_object_array.append(team_object)
     rotating_object_array.append(rotating_object)
-    print(f'{clan.name} {i+1}/{len(players)}')
+    print(f'{subclan_name} {i+1}/{len(players)}')
     print('1s: ' + player_object.name)
     print('2s: ' + team_object.name)
     print('rr: ' + rotating_object.name)

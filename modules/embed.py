@@ -66,8 +66,7 @@ def prepare_embeds_server(server, players_sorted):
 
 async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
     channel = bot.get_channel(channel_id)
-    print('this channel')
-    print(channel)
+    print('Target Channel: ' + channel.name)
 
     # Remove last FEW messages in channel
     print('purging...')
