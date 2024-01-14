@@ -1,6 +1,8 @@
-# Last Update: 16/10/2023
+# Last Update: 14/01/2024
 # Way Ahead of master as always
-# last added: way to individual elo
+# last added: Fix #122, Fix #125
+# try to push this to master
+
 
 import discord
 from classes.Xos import Xos
@@ -10,8 +12,9 @@ from modules2.keep_alive import keep_alive
 from modules2.ping import ping
 from modules2.spit_fire import spit_fire
 from modules2.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
-from data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, ChinaT0wn, KryptX, Empire_United
+from data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United
 from data.server_data import Brawlhalla_NL
+from data.player_data import CROSSYCHAINSAW_ID, SHAW_ID, DISCARDS_ID
 from modules2.turn import next_turn, get_turn, reset_turn, prev_turn
 from modules2.all_legends_elo import send_all_legends_elo
 from modules2.leave_server import leave_server
@@ -43,7 +46,7 @@ async def on_ready():
         elif turn == 4:
             await server_1v1_and_2v2_and_rotating_elo_list(Brawlhalla_NL, bot)
         elif turn == 5:
-            await clan_console_mix_1v1_and_2v2_elo_list(Empire_United, bot)
+            await clan_console_mix_1v1_elo_list(Empire_United, bot)
         elif turn == 6:
             await clan_console_mix_1v1_and_2v2_elo_list(KryptX, bot)
         elif turn == 7:
@@ -59,10 +62,9 @@ async def on_ready():
         # Reset Q
         else:
             reset_turn()
-            await send_all_legends_elo(7364605, 1165233774305493012, bot)
-            await send_all_legends_elo(395872, 1166526510526631998, bot)
-            await send_all_legends_elo(4244083, 1166648209368686642, bot)
-            await send_all_legends_elo(15554673, 1173667369160298506, bot)
+            await send_all_legends_elo(CROSSYCHAINSAW_ID, 1165233774305493012, bot)
+            await send_all_legends_elo(SHAW_ID, 1166526510526631998, bot)
+            await send_all_legends_elo(DISCARDS_ID, 1173667369160298506, bot)
         next_turn()
 
 
