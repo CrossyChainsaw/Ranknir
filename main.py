@@ -1,23 +1,20 @@
 # Last Update: 14/01/2024
-# Way Ahead of master as always
-# last added: Fix #122, Fix #125
-# try to push this to master
 
 
 import discord
 from classes.Xos import Xos
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from modules2.keep_alive import keep_alive
-from modules2.ping import ping
-from modules2.spit_fire import spit_fire
-from modules2.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
+from modules.keep_alive import keep_alive
+from modules.ping import ping
+from modules.spit_fire import spit_fire
+from modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
 from data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United
 from data.server_data import Brawlhalla_NL
 from data.player_data import CROSSYCHAINSAW_ID, SHAW_ID, DISCARDS_ID
-from modules2.turn import next_turn, get_turn, reset_turn, prev_turn
-from modules2.all_legends_elo import send_all_legends_elo
-from modules2.leave_server import leave_server
+from modules.turn import next_turn, get_turn, reset_turn, prev_turn
+from modules.all_legends_elo import send_all_legends_elo
+from modules.leave_server import leave_server
 os = Xos()
 
 intents = discord.Intents().all()
@@ -53,7 +50,7 @@ async def on_ready():
             ...  # empty
         # Test Clan
         elif turn == 69:
-            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(test_clan, bot)
+            await clan_console_mix_1v1_elo_list(test_clan, bot)
             prev_turn
         # Debugging
         elif turn == 101:
