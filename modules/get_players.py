@@ -12,7 +12,7 @@ def get_console_players(clan):
         print("Console player amount in %s: %s" %
               (clan.name[0], str(len(console_players))))
     except:
-        print("No console players in " + clan.name)
+        print("No console players in " + clan.name[0])
     return console_players
 
 
