@@ -68,6 +68,18 @@ Empire_United = Clan(['Empire United'],
                      member_count='show',
                      xp='show')
 
+Molly_clan_id = '2285780'
+Molly = Clan(['Molly'],
+             channel_1v1_id=1197756213329395853,
+             channel_2v2_id=1202992989220376626,
+             id_array=[Molly_clan_id],
+             color=0x0090FF,
+             image='https://cdn.discordapp.com/attachments/1196954957035872367/1202991272793481267/molly-bluepurple.jpg',
+             server_id='1160838004546490378',
+             sorting_method='peak',
+             member_count='show',
+             xp='show')
+
 # Testing
 test2_clan_id, test3_clan_id = '2021161', '2023962'
 test_channel_1 = 1131552899378466887
