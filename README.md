@@ -2,10 +2,10 @@
 Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
 
 ### Current Servers
-Ranknir is currently active in the following clan-servers: *Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United, Molly*
+Ranknir is currently active in the following clan-servers: *Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United, M30W Organisation*
 
 ### Current Clans
-Ranknir processes the following clans: *Pandation, Pandace, Panhalla, PanhaIIa, Excalibur, Tews, Tews II, Tews Academy, Frost, KryptX, Empire United, Molly*
+Ranknir processes the following clans: *Pandation, Pandace, Panhalla, PanhaIIa, Excalibur, Tews, Tews II, Tews Academy, Frost, KryptX, Empire United, M30W Organisation*
 
 ### 1v1 list example
 
@@ -33,7 +33,7 @@ Ranknir processes the following clans: *Pandation, Pandace, Panhalla, PanhaIIa, 
 - Send me a dm over discord -> crossychainsaw
 
 ### Server History
-Previous clan-servers: *Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, ChinaT0WN*
+Previous clan-servers: *Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, ChinaT0WN, Molly*
 
 ### Clan History
-Previous clans: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II*
+Previous clans: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly*
