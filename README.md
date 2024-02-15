@@ -1,4 +1,4 @@
-# Ranknir
+# Ranknir x Dadabase
 Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
 
 ### Current Servers
