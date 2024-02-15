@@ -1,6 +1,8 @@
 # Ranknir x Dadabase
 Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
 
+Dadabase is used to add console players and to link brawlhalla account to discord accounts.
+
 ### Current Servers
 Ranknir is currently active in the following clan-servers: *Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United, M30W Organisation*
 
