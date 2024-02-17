@@ -18,7 +18,7 @@ class Server:
         self.image = image
         self.no_elo_players = no_elo_players  # hide / show
         self.channel_rotating_id = channel_rotating_id  # id
-        member_count = 'show'
+        self.member_count = member_count
 
     def get_players_data(self):
         print("getting players from: " + self.DATA_LOCATION)
