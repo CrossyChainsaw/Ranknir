@@ -7,7 +7,7 @@ from Global.Xos import Xos
 os = Xos()
 
 # VARIABLES
-API_WAIT_TIME = 9.5 # 8 possible if only ranknir
+API_WAIT_TIME = 10 # 8 possible if only ranknir
 
 # METHODS
 

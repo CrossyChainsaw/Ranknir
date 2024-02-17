@@ -25,48 +25,48 @@ async def on_ready():
     await channel.send("I'm back online!")
 
     while True:
-        # try:
-        print('getting turn...')
-        turn = get_turn()
-        print("current turn: " + str(turn))
+        try:
+            print('getting turn...')
+            turn = get_turn()
+            print("current turn: " + str(turn))
 
-        # Clans / Servers
-        if turn == 0:
-            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Pandation, bot)
-        elif turn == 1:
-            await clan_console_mix_1v1_and_2v2_elo_list(Excalibur, bot)
-        elif turn == 2:
-            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Tews, bot)
-        elif turn == 3:
-            await clan_console_mix_1v1_and_2v2_elo_list(Frost, bot)
-        elif turn == 4:
-            await server_1v1_and_2v2_and_rotating_elo_list(Brawlhalla_NL, bot)
-        elif turn == 5:
-            await clan_console_mix_1v1_elo_list(Empire_United, bot)
-        elif turn == 6:
-            await clan_console_mix_1v1_and_2v2_elo_list(KryptX, bot)
-        elif turn == 7:
-            await server_1v1_and_2v2_and_rotating_elo_list(M3OW, bot)
-        # Test Clan
-        elif turn == 69:
-            await clan_console_mix_1v1_elo_list(test_clan, bot)
-            prev_turn
-        elif turn == 420:
-            await server_1v1_and_2v2_and_rotating_elo_list(Test_Server, bot)
-            prev_turn
-        # Debugging
-        elif turn == 101:
-            print("Entered Debugging")
-            break
-        # Reset Q
-        else:
-            reset_turn()
-            await send_all_legends_elo(CROSSYCHAINSAW_ID, 1165233774305493012, bot)
-            await send_all_legends_elo(SHAW_ID, 1166526510526631998, bot)
-            await send_all_legends_elo(DISCARDS_ID, 1173667369160298506, bot)
-        next_turn()
-        # except:
-        #     ...
+            # Clans / Servers
+            if turn == 0:
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Pandation, bot)
+            elif turn == 1:
+                await clan_console_mix_1v1_and_2v2_elo_list(Excalibur, bot)
+            elif turn == 2:
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Tews, bot)
+            elif turn == 3:
+                await clan_console_mix_1v1_and_2v2_elo_list(Frost, bot)
+            elif turn == 4:
+                await server_1v1_and_2v2_and_rotating_elo_list(Brawlhalla_NL, bot)
+            elif turn == 5:
+                await clan_console_mix_1v1_elo_list(Empire_United, bot)
+            elif turn == 6:
+                await clan_console_mix_1v1_and_2v2_elo_list(KryptX, bot)
+            elif turn == 7:
+                await server_1v1_and_2v2_and_rotating_elo_list(M3OW, bot)
+            # Test Clan
+            elif turn == 69:
+                await clan_console_mix_1v1_elo_list(test_clan, bot)
+                prev_turn
+            elif turn == 420:
+                await server_1v1_and_2v2_and_rotating_elo_list(Test_Server, bot)
+                prev_turn
+            # Debugging
+            elif turn == 101:
+                print("Entered Debugging")
+                break
+            # Reset Q
+            else:
+                reset_turn()
+                await send_all_legends_elo(CROSSYCHAINSAW_ID, 1165233774305493012, bot)
+                await send_all_legends_elo(SHAW_ID, 1166526510526631998, bot)
+                await send_all_legends_elo(DISCARDS_ID, 1173667369160298506, bot)
+            next_turn()
+        except Exception as e:
+            print(e)
 
 
 @bot.command(name='ping')
