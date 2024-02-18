@@ -23,7 +23,8 @@ class Server:
     def get_players_data(self):
         print("getting players from: " + self.DATA_LOCATION)
         with open(self.DATA_LOCATION) as file:
-            return json.load(file)
+            data = json.load(file)
+            return data
 
     # Deprecated
     def update_data(self):

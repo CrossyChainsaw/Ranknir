@@ -30,12 +30,12 @@ def __load_ps4_players(server_id):
 
 def get_server_players(server):  # server object
     print(server.name)
-    server_players = []
+    server_data = []
     try:
-        server_players = server.get_players_data()
-        print(server_players)
-        print('Amount of players in %s: %s' %
-              (server.name, str(len(server_players))))
+        server_data = server.get_players_data()
+        print(server_data)
+        print(
+            f"Amount of players in {server_data['name']}: {len(server_data['links'])}")
     except:
-        print(str(server.name) + " doesn't have any players")
-    return server_players['links']
+        print(f"{server_data['name']} doesn't have any players")
+    return server_data['links']

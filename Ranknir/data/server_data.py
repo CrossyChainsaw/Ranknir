@@ -21,7 +21,7 @@ Test_Server = Server("Test",
                      channel_rotating_id=1131552899378466887,
                      member_count="show")
 
-M3OW = Server(name="M3OW Elo Leaderboard",
+M3OW = Server(name="M30W Elo Leaderboard",
               channel_1v1_id=1207380613380837416,
               channel_2v2_id=1207374159882223687,
               id=1076670210678992936,
