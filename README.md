@@ -17,16 +17,13 @@ Ranknir is currently active in the following clan-servers: *Pandation, Tews, Exc
 ![image](https://user-images.githubusercontent.com/74303221/200958738-2e744e83-6c8f-42db-a11d-2593ec63a3ac.png)
 
 ## Main Functionalities
-- Send 1v1 clan elo list of a clan
-- Send 2v2 clan elo list of a clan
-- Send 1v1 clan elo list of multiple clans that belong together
-- Send 2v2 clan elo list of multiple clans that belong together
-- Send 1v1 elo list of linked members inside of a discord server
-- Send 2v2 elo list of linked members inside of a discord server
-- Each list can be sorted on either current elo or peak elo
+- Send 1v1 elo list of a clan(s) or server
+- Send 2v2 elo list of a clan(s) or server
+- Send Rotational Gamemode elo list of a clan(s) or server
+- List can be sorted on either current elo or peak elo
 - Member Count can be shown if wanted
 - Clan XP can be shown if wanted
-- Add console players to your elo lists
+- Add console players to your elo lists (or any other player which is not originally in the clan)
 
 ## Add this bot to your server
 - Send me a dm over discord -> crossychainsaw
