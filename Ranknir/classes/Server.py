@@ -20,11 +20,18 @@ class Server:
         self.channel_rotating_id = channel_rotating_id  # id
         self.member_count = member_count
 
-    def get_players_data(self):
-        print("getting players from: " + self.DATA_LOCATION)
+    def get_data(self):
         with open(self.DATA_LOCATION) as file:
             data = json.load(file)
             return data
+
+    def get_server_name(self):
+        server_data = self.get_data()
+        return server_data['name']
+
+    def get_server_title(self):
+        server_data = self.get_data()
+        return server_data['title']
 
     # Deprecated
     def update_data(self):

@@ -184,10 +184,11 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan, bot):
 
 
 async def server_1v1_elo_list(server, bot):
-    print("Server 1v1 elo list for " + server.name)
+    print("Server 1v1 elo list for " + server.get_server_name())
     # __try_update_data(server)
+
     brawlhalla_nl_players = get_server_players(server)
-    all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name[0])
+    all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.get_server_name())
     all_player_objects_sorted = sort_elo(
         server.sorting_method, all_player_objects_array)
     embed_title, embed_array = prepare_embeds_server(
@@ -197,10 +198,9 @@ async def server_1v1_elo_list(server, bot):
 
 
 async def server_2v2_elo_list(server, bot):
-    print("Server 2v2 elo list for " + server.name)
-    # __try_update_data(server)
+    print("Server 2v2 elo list for " + server.get_server_name())
     brawlhalla_nl_players = get_server_players(server)
-    _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name[0])
+    _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.get_server_name())
     all_team_objects_sorted = sort_elo(server.sorting_method, all_teams_array)
     embed_title, embed_array = prepare_embeds_server(
         server, all_team_objects_sorted)
@@ -209,12 +209,11 @@ async def server_2v2_elo_list(server, bot):
 
 
 async def server_1v1_and_2v2_elo_list(server, bot):
-    print("Server 1v1 and 2v2 elo list for " + server.name)
-    # __try_update_data(server)
+    print("Server 1v1 and 2v2 elo list for " + server.get_server_name())
     brawlhalla_nl_players = get_server_players(server)
     # Get Elo
     all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(
-        server, brawlhalla_nl_players, server.name[0])
+        server, brawlhalla_nl_players, server.get_server_name())
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
@@ -230,11 +229,11 @@ async def server_1v1_and_2v2_elo_list(server, bot):
 
 
 async def server_1v1_and_2v2_and_rotating_elo_list(server, bot):
-    print("Server 1v1 and 2v2 and rotating elo list for " + server.name)
-    # __try_update_data(server)
+    print("Server 1v1 and 2v2 and rotating elo list for " +
+          server.get_server_name())
     brawlhalla_nl_players = get_server_players(server)
     # Get Elo
-    all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, brawlhalla_nl_players, server.name[0])
+    all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, brawlhalla_nl_players, server.get_server_name())
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
