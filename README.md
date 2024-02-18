@@ -6,9 +6,6 @@ Dadabase is used to add console players and to link brawlhalla account to discor
 ### Current Servers
 Ranknir is currently active in the following clan-servers: *Pandation, Tews, Excalibur, Brawlhalla NL, Frost, KryptX, Empire United, M30W Organisation*
 
-### Current Clans
-Ranknir processes the following clans: *Pandation, Pandace, Panhalla, PanhaIIa, Excalibur, Tews, Tews II, Tews Academy, Frost, KryptX, Empire United, M30W Organisation*
-
 ### 1v1 list example
 
 ![image](https://user-images.githubusercontent.com/74303221/200958039-ef5eeaf0-f034-4fc0-a5ac-6d585468ec7f.png)
@@ -35,7 +32,7 @@ Ranknir processes the following clans: *Pandation, Pandace, Panhalla, PanhaIIa, 
 - Send me a dm over discord -> crossychainsaw
 
 ### Server History
-Previous clan-servers: *Insomnia, Fanfare, Fawaka, Dair, Cybers, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, ChinaT0WN, Molly*
+Previous clan-servers: *Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly*
 
 ### Clan History
 Previous clans: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly*
