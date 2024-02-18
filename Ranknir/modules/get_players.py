@@ -32,7 +32,7 @@ def get_server_players(server):  # server object
     print(server.name)
     server_data = []
     try:
-        server_data = server.get_players_data()
+        server_data = server.get_data()
         print(server_data)
         print(
             f"Amount of players in {server_data['name']}: {len(server_data['links'])}")

@@ -40,7 +40,7 @@ def prepare_embeds_clan_mix_console(clan, players_sorted, clan_data_array, conso
 
 def prepare_embeds_server(server, players_sorted):
     embed_title = discord.Embed(
-        title=server.name, description='', color=server.color)
+        title=server.get_server_title(), description='', color=server.color)
     if server.member_count == 'show':
         embed_title = __add_member_count(
             [{"clan": []}], embed_title, len(players_sorted))
