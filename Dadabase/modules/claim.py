@@ -54,7 +54,7 @@ async def __update_link(ctx, ranked_stats):
     print(link_data[x])
     link_data[x]['brawlhalla_id'] = user.brawlhalla_id
     link_data[x]['brawlhalla_name'] = user.brawlhalla_name
-    server = Server(ctx.guild.name, link_data)
+    server = Server(ctx.guild.name, ctx.guild.name + " Leaderboard", link_data)
     write_data(DATA_LINKS_LOCATION_SERVER_SINGLE_ID,
                server.__dict__, ctx.guild.id)
     await ctx.channel.send("Updated claimed brawlhalla account to ```brawlhalla_name: "+user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
@@ -87,6 +87,6 @@ def __save_data(user, ctx):
     link_data = read_link_data(
         DATA_LINKS_LOCATION_SERVER_SINGLE_ID, ctx.guild.id)
     link_data.append(user.__dict__)
-    server = Server(ctx.guild.name, link_data)
+    server = Server(ctx.guild.name, ctx.guild.name + " Leaderboard", link_data)
     write_data(DATA_LINKS_LOCATION_SERVER_SINGLE_ID,
                server.__dict__, ctx.guild.id)

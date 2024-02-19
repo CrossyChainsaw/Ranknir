@@ -1,12 +1,1 @@
-{
-    "name": "..",
-    "title": ".. ELO LEADERBOARD YESSIR",
-    "links": [
-        {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgtherealfirstdan",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw"
-        }
-    ]
-}
+{"name": "..", "links": [{"brawlhalla_id": 2, "brawlhalla_name": "bmgtherealfirstdan", "discord_id": 413070742591373314, "discord_name": "crossychainsaw"}, {"brawlhalla_id": 3, "brawlhalla_name": "Chill Penguin X", "discord_id": "3", "discord_name": "h"}]}
