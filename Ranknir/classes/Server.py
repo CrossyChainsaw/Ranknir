@@ -5,7 +5,7 @@ os = Xos()
 
 
 class Server:
-    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, sorting_method, data_location, image="", member_count='show', no_elo_players='hide', channel_rotating_id="NO ACCESS"):
+    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, sorting_method, data_location, image="", member_count='hide', no_elo_players='hide', channel_rotating_id="NO ACCESS"):
         self.name = name
         self.channel_1v1_id = channel_1v1_id
         self.channel_2v2_id = channel_2v2_id
