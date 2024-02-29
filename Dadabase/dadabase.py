@@ -38,11 +38,12 @@ async def claim_command(ctx, brawlhalla_id):
     member = ctx.author
     role_name1 = "M30W"
     role_name2 = "Verified ✔"
+    role_name2 = "M3W"
     
-    if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None:
+    if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None:
         await claim(ctx, brawlhalla_id)
     else:
-        await ctx.send(f'{member.name} does not have either the role "{role_name1}" or the role "{role_name2}"')
+        await ctx.send(f'{member.name} does not have permission to use this command')
 
 
 @claim_command.error
