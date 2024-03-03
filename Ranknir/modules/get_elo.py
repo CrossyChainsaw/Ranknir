@@ -7,47 +7,15 @@ from Ranknir.modules.api import fetch_player_ranked_stats
 
 #################### GET ALL PLAYERS ELO ######################
 
-# Unused
-# async def get_players_elo_1v1(clan, players):
-#   """Gets the elo for each player and `returns` an array of `Player` objects"""
-#   player_object_array = []
-#   for i, player in enumerate(players):
-#       player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-#       player_object = __extract_player_stats_into_player_object_1v1(
-#           player_ranked_stats)
-#       if __check_if_name_is_blank(clan, player_object):
-#           continue
-#       player_object_array.append(player_object)
-#       print('%s %s/%s' % (clan.name, str(i+1), str(len(players))))
-#       print('1s: ' + player_object.name)
-#   return player_object_array
-
-# Unused
-# async def get_players_elo_2v2(clan, players):
-#   """Gets the best team for each player and `returns` an array of `Team` objects"""
-#   team_object_array = []
-#   for i, player in enumerate(players):
-#       player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-#       team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats)
-#       if __check_if_name_is_blank(clan, team_object):
-#           continue
-#       team_object_array.append(team_object)
-#       print('%s %s/%s' % (clan.name, str(i+1), str(len(players))))
-#       print('2s: ' + team_object.name)
-#   return team_object_array
-
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
 async def get_players_elo_1v1_and_2v2(clan, players, subclan_name):
     """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
     player_object_array = []
     team_object_array = []
     for i, player in enumerate(players):
-        player_ranked_stats = await fetch_player_ranked_stats(
-            player['brawlhalla_id'])
-        player_object = __extract_player_stats_into_player_object_1v1(
-            player_ranked_stats)
-        team_object = __extract_player_stats_into_team_object_2v2(
-            clan, player_ranked_stats)
+        player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
+        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats)
+        team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats)
         if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object):
             _ = None
             # continue # for hide no elo player thing
@@ -66,12 +34,9 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
     rotating_object_array = []
     for i, player in enumerate(players):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-        player_object = __extract_player_stats_into_player_object_1v1(
-            player_ranked_stats)
-        team_object = __extract_player_stats_into_team_object_2v2(
-            clan, player_ranked_stats)
-        rotating_object = __extract_player_stats_into_player_object_rotating(
-            player_ranked_stats)
+        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats)
+        team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats)
+        rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats)
         if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object) and __check_if_name_is_blank(clan, rotating_object):
             _ = None  # some bs code for no crash
             # continue # uncomment for hide elo players
