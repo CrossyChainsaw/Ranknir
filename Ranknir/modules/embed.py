@@ -10,8 +10,7 @@ def prepare_embeds_clan_mix_console(clan, players_sorted, clan_data_array, conso
     embed_title = discord.Embed(title='', description='', color=clan.color)
     embed_title = __add_title(clan_data_array, embed_title)
     if clan.member_count == 'show':
-        embed_title = __add_member_count(
-            clan_data_array, embed_title, console_player_amount)
+        embed_title = __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted)
     if clan.xp == 'show':
         embed_title = __add_xp(clan_data_array, embed_title)
     # Variables
@@ -119,12 +118,11 @@ def __add_title(clan_data_array, embed2):
         return embed2
 
 
-def __add_member_count(clan_data_array, embed_title, console_player_amount):
+def __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted):
     embed_title.description += "\n\n"
     if len(clan_data_array) == 1:
         embed_title.description = '**Member Count\n**'
-        embed_title.description += "Total: %s" % (
-            str(len(clan_data_array[0]['clan']) + console_player_amount))
+        embed_title.description += "Total: %s" % (str(len(players_sorted)))
         return embed_title
     if len(clan_data_array) > 1:
         embed_title.description += '**Member Count\n**'
@@ -152,20 +150,23 @@ def __add_xp(clan_data_array, embed2):
     embed2.description += "\n\n"
     if len(clan_data_array) == 1:
         embed2.description += '**Clan XP\n**'
-        embed2.description += "Total: " + str(clan_data_array[0]['clan_xp'])
+        clan_xp = int(clan_data_array[0]['clan_xp'])
+        clan_xp_reformatted = '{:,.0f}'.format(clan_xp)
+        embed2.description += "Total: " + str(clan_xp_reformatted)
+        print(clan_xp_reformatted)
         return embed2
     if len(clan_data_array) > 1:
         embed2.description += '**Clan XP\n**'
         count = 0
         total_xp = 0
         for clan in clan_data_array:
-            clan_xp = int(clan['clan_xp'])
+            clan_xp = int(clan['clan_xp'])  
             total_xp += clan_xp
             if count == 0:
-                embed2.description += clan['clan_name'] + ": " + str(clan_xp)
+                embed2.description += clan['clan_name'] + ": " + str('{:,.0f}'.format(clan_xp))
             else:
-                embed2.description += "\n" + clan_data_array[count][
-                    'clan_name'] + ": " + str(clan_xp)
+                embed2.description += "\n" + clan_data_array[count]['clan_name'] + ": " + str('{:,.0f}'.format(clan_xp))
             count += 1
-        embed2.description += "\nTotal: " + str(total_xp)
+        total_xp_reformatted = '{:,.0f}'.format(total_xp)
+        embed2.description += "\nTotal: " + str(total_xp_reformatted)
         return embed2

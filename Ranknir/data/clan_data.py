@@ -38,11 +38,12 @@ Frost = Clan(['Frost'],
              id_array=['12'],
              color=0x30cff1,
              image="",
-             server_id='1055194013176705094',
+             server_id='167001986359754752',
              member_count='show',
              xp='show',
              no_elo_players='show',
-             sorting_method='peak')
+             sorting_method='peak',
+             has_rm_players=True)
 
 KryptX_clan_id, KryptX_II_clan_id = '2240544', '2244341'
 KryptX = Clan(['KryptX', 'KryptX II'],
@@ -68,18 +69,6 @@ Empire_United = Clan(['Empire United'],
                      member_count='show',
                      xp='show')
 
-Molly_clan_id = '2285780'
-Molly = Clan(['Molly'],
-             channel_1v1_id=1197756213329395853,
-             channel_2v2_id=1202992989220376626,
-             id_array=[Molly_clan_id],
-             color=0x0090FF,
-             image='https://cdn.discordapp.com/attachments/1196954957035872367/1202991272793481267/molly-bluepurple.jpg',
-             server_id='1160838004546490378',
-             sorting_method='peak',
-             member_count='show',
-             xp='show')
-
 Grant_clan_id = '2318827'
 Grant = Clan(['Grant'],
              channel_1v1_id=1211764310301343754,
@@ -99,7 +88,7 @@ test_channel_2 = 1131552913160937513
 test_clan = Clan(name=['test_clan_1', 'test_clan_2'],
                  channel_1v1_id=test_channel_1,
                  channel_2v2_id=test_channel_1,
-                 id_array=[test2_clan_id],
+                 id_array=[test2_clan_id, test2_clan_id],
                  color=0xD10000,
                  image="",
                  server_id='705783420189671458',
@@ -109,10 +98,23 @@ test_clan = Clan(name=['test_clan_1', 'test_clan_2'],
                  elo_type='general',
                  no_elo_players='show',
                  sorting_method='current',
-                 channel_rotating_id=test_channel_1)
+                 channel_rotating_id=test_channel_1,
+                 has_rm_players=True)
 
 
 ########################## LEFT SERVERS ##########################
+
+Molly_clan_id = '2285780'
+Molly = Clan(['Molly'],
+             channel_1v1_id=1197756213329395853,
+             channel_2v2_id=1202992989220376626,
+             id_array=[Molly_clan_id],
+             color=0x0090FF,
+             image='https://cdn.discordapp.com/attachments/1196954957035872367/1202991272793481267/molly-bluepurple.jpg',
+             server_id='1160838004546490378',
+             sorting_method='peak',
+             member_count='show',
+             xp='show')
 
 
 ChinaT0WN = Clan('ChinaT0WN', 1138496398648680448, 1138496419737641043, [
