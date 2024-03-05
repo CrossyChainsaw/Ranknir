@@ -1,11 +1,8 @@
 import json
 from Dadabase.modules.api import fetch_player_ranked_stats
 from Dadabase.classes.User import User
-from Dadabase.modules.data import read_link_data, write_data, read_data
+from Dadabase.modules.data import read_link_data, write_data, read_data, DATA_LINKS_LOCATION_SERVER_SINGLE_ID
 from Dadabase.classes.Server import Server
-
-DATA_LINKS_LOCATION_SERVER_SINGLE_ID = 'Dadabase/data/servers/'
-# DATA_LINKS_LOCATION_SERVER_MULTI_ID = 'data/servers_multi_id/'
 
 
 async def claim(ctx, brawlhalla_id):

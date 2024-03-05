@@ -1,5 +1,5 @@
-from Dadabase.modules.ps4.ps4 import load_data
-from Dadabase.modules.data import read_link_data
+from Dadabase.modules.ps4.ps4_data import load_data
+from Dadabase.modules.data import read_link_data, DATA_LINKS_LOCATION_SERVER_SINGLE_ID
 from threading import Thread
 from flask import Flask, request
 from Global.Xos import Xos
@@ -8,9 +8,6 @@ os = Xos()
 # import os
 
 app = Flask('')
-
-brawlhalla_nl_server_id = 1047987261905584128
-DATA_LINKS_LOCATION_SERVER_SINGLE_ID = 'data/servers/'
 
 
 @app.route('/')

@@ -1,7 +1,5 @@
-from Dadabase.modules.data import read_link_data
+from Dadabase.modules.data import read_link_data, DATA_LINKS_LOCATION_SERVER_SINGLE_ID
 from Dadabase.classes.User import User
-
-DATA_LINKS_LOCATION_SERVER_SINGLE_ID = 'data/servers/'
 
 
 async def check(ctx):

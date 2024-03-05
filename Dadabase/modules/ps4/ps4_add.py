@@ -1,6 +1,6 @@
 import json
 from Dadabase.classes.Account import Account
-from Dadabase.modules.ps4.ps4 import load_data, DATA_LOCATION
+from Dadabase.modules.ps4.ps4_data import load_data, DATA_LOCATION
 
 
 async def ps4_add(ctx, bh_id, bh_name):

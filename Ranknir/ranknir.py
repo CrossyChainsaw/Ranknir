@@ -6,7 +6,7 @@ from Ranknir.modules.keep_alive import keep_alive
 from Ranknir.modules.ping import ping
 from Ranknir.modules.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
-from Ranknir.data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United, Molly, Grant
+from Ranknir.data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United, Grant
 from Ranknir.data.server_data import Brawlhalla_NL, Test_Server, M3OW
 from Ranknir.data.player_data import CROSSYCHAINSAW_ID, SHAW_ID, DISCARDS_ID
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn

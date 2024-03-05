@@ -1,5 +1,5 @@
 import json
-from Dadabase.modules.ps4.ps4 import load_data, DATA_LOCATION
+from Dadabase.modules.ps4.ps4_data import load_data, DATA_LOCATION
 
 
 async def ps4_remove(ctx, bh_id):
