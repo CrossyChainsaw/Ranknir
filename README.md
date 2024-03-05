@@ -4,7 +4,7 @@ Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in
 Dadabase is used to add console players and to link brawlhalla account to discord accounts.
 
 ### Current Servers
-Ranknir is currently active in the following clan-servers: *Pandation (4), Tews (3), Excalibur, Brawlhalla NL, Frost, KryptX (2), Empire United, M30W Organisation, Grant*
+Ranknir is currently active in the following clan-servers: *Pandation (4), Tews (3), Brawlhalla NL, Frost, KryptX (2), Empire United, M30W Organisation, Grant*
 
 ### 1v1 list example
 
@@ -29,7 +29,7 @@ Ranknir is currently active in the following clan-servers: *Pandation (4), Tews 
 - Send me a dm over discord -> crossychainsaw
 
 ### Server History
-Previous clan-servers: *Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly*
+Previous clan-servers: *Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly, Excalibur*
 
 ### Clan History
-Previous clans: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly*
+Previous clans: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly, Excalibur*
