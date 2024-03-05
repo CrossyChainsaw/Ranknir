@@ -23,15 +23,6 @@ Tews = Clan(name=['Tews', 'Tews ll', 'Tews Academy'],
             channel_rotating_id=1164533654047965317)
 
 
-Excalibur = Clan(name=['Excalibur'],
-                 channel_1v1_id=1026158147175460894,
-                 channel_2v2_id=1057424977508442163,
-                 id_array=['8'],
-                 color=0xb1dfff,
-                 image='https://cdn.discordapp.com/attachments/980176551729578055/1097963576716689569/excal-banner2-min.jpg',
-                 server_id='1026046742656983062')
-
-
 Frost = Clan(['Frost'],
              channel_1v1_id=1093898006299934781,
              channel_2v2_id=1093898340657275040,
@@ -103,6 +94,15 @@ test_clan = Clan(name=['test_clan_1', 'test_clan_2'],
 
 
 ########################## LEFT SERVERS ##########################
+
+Excalibur = Clan(name=['Excalibur'],
+                 channel_1v1_id=1026158147175460894,
+                 channel_2v2_id=1057424977508442163,
+                 id_array=['8'],
+                 color=0xb1dfff,
+                 image='https://cdn.discordapp.com/attachments/980176551729578055/1097963576716689569/excal-banner2-min.jpg',
+                 server_id='1026046742656983062')
+
 
 Molly_clan_id = '2285780'
 Molly = Clan(['Molly'],

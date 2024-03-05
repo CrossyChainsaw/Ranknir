@@ -1,4 +1,4 @@
-from Dadabase.modules.ps4.ps4 import load_data
+from Dadabase.modules.ps4.ps4_data import load_data
 import discord
 
 
