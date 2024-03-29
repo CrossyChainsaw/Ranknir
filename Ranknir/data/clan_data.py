@@ -79,7 +79,7 @@ test_channel_2 = 1131552913160937513
 test_clan = Clan(name=['test_clan_1', 'test_clan_2'],
                  channel_1v1_id=test_channel_1,
                  channel_2v2_id=test_channel_1,
-                 id_array=[test2_clan_id, test2_clan_id],
+                 id_array=[test2_clan_id],
                  color=0xD10000,
                  image="",
                  server_id='705783420189671458',

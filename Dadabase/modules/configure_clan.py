@@ -19,5 +19,5 @@ def __edit_data_file(ctx):
             "name": ctx.guild.name,
             "id": str(ctx.guild.id),
             "ps4_players": [],
-            "rm_players": []
+            "al_players": []
         }))

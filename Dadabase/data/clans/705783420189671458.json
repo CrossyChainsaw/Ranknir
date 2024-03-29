@@ -1,11 +1,1 @@
-{
-    "name": "Skyward",
-    "id": "705783420189671458",
-    "ps4_players": [
-        {
-            "brawlhalla_id": "7364605",
-            "brawlhalla_name": "CrossyChainsaw (PC)"
-        }
-    ],
-    "rm_players": [85105581]
-}
+{"name": "Skyward", "id": "705783420189671458", "ps4_players": [], "al_players": [{"brawlhalla_id": "2", "brawlhalla_name": "bmgdan"}]}

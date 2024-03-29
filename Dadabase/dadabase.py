@@ -11,10 +11,10 @@ from Dadabase.modules.ps4.ps4_list import ps4_list
 from Dadabase.modules.ps4.ps4_remove import ps4_remove
 from discord.ext.commands import has_permissions
 from Dadabase.modules.configure_server import configure_server
-from Dadabase.modules.frost_commands.create_player import create_player
-from Dadabase.modules.frost_commands.legend_list import legend_list
-from Dadabase.modules.frost_commands.legend_help import legend_help
 from Dadabase.modules.server.server_add_player import server_add_player
+from Dadabase.modules.remove_players.rmp_add import rmp_add
+from Dadabase.modules.remove_players.rmp_list import rmp_list
+from Dadabase.modules.remove_players.rmp_remove import rmp_remove
 os = Xos()
 
 intents = discord.Intents().all()
@@ -57,11 +57,19 @@ async def claim_command_error(ctx, error):
 async def check_command(ctx):
     await check(ctx)
 
+@has_permissions(administrator=True)
+@bot.command(name='rmpadd')
+async def rmp_add_command(ctx, brawlhalla_id, brawlhalla_name):
+    await rmp_add(ctx, brawlhalla_id, brawlhalla_name)
+
+@bot.command(name='rmplist', aliases=['rmpls'])
+async def rmp_list_command(ctx):
+    await rmp_list(ctx)
 
 @has_permissions(administrator=True)
-@bot.command(name='ps4add')
-async def ps4_add_command(ctx, brawlhalla_id, brawlhalla_name):
-    await ps4_add(ctx, brawlhalla_id, brawlhalla_name)
+@bot.command(name='rmpremove', aliases=['rmprm'])
+async def rmp_remove_command(ctx, brawlhalla_id):
+    await rmp_remove(ctx, brawlhalla_id)
 
 
 @has_permissions(administrator=True)
@@ -69,7 +77,10 @@ async def ps4_add_command(ctx, brawlhalla_id, brawlhalla_name):
 async def server_add_player_command(ctx, brawlhalla_id, discord_id, discord_name):
     await server_add_player(ctx, brawlhalla_id, discord_id, discord_name)
 
-# @has_permissions(administrator=True)
+@has_permissions(administrator=True)
+@bot.command(name='ps4add')
+async def ps4_add_command(ctx, brawlhalla_id, brawlhalla_name):
+    await ps4_add(ctx, brawlhalla_id, brawlhalla_name)
 
 
 @bot.command(name='ps4list', aliases=['ps4ls', 'psls'])

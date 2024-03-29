@@ -7,5 +7,10 @@
             "brawlhalla_name": "CrossyChris (PS4)"
         }
     ],
-    "rm_players": [7013979]
+    "al_players": [
+        {
+            "brawlhalla_id": "7013979",
+            "brawlhalla_name": "CrossyChris"
+        }
+    ]
 }
