@@ -2,7 +2,7 @@ import json
 from Dadabase.modules.ps4.ps4_data import load_data, DATA_LOCATION
 from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
 
-async def rmp_remove(ctx, bh_id):
+async def al_remove(ctx, bh_id):
     data = load_data(ctx.guild.id)
     bh_name = __remove_rm_player(ctx, bh_id, data)
     await ctx.channel.send(bh_name + " was removed")
