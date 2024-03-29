@@ -2,7 +2,7 @@ from Dadabase.modules.ps4.ps4_data import load_data
 from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
 import discord
 
-async def rmp_list(ctx):
+async def al_list(ctx):
     data = load_data(ctx.guild.id)
     msg = __format_msg(data)
     embed = __create_embed(msg)
