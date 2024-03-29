@@ -58,16 +58,16 @@ async def check_command(ctx):
     await check(ctx)
 
 @has_permissions(administrator=True)
-@bot.command(name='rmpadd')
+@bot.command(name='aladd')
 async def rmp_add_command(ctx, brawlhalla_id, brawlhalla_name):
     await rmp_add(ctx, brawlhalla_id, brawlhalla_name)
 
-@bot.command(name='rmplist', aliases=['rmpls'])
+@bot.command(name='allist', aliases=['alist, alls'])
 async def rmp_list_command(ctx):
     await rmp_list(ctx)
 
 @has_permissions(administrator=True)
-@bot.command(name='rmpremove', aliases=['rmprm'])
+@bot.command(name='alremove', aliases=['alrm'])
 async def rmp_remove_command(ctx, brawlhalla_id):
     await rmp_remove(ctx, brawlhalla_id)
 
