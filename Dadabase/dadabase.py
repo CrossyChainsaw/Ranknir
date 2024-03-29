@@ -12,9 +12,9 @@ from Dadabase.modules.ps4.ps4_remove import ps4_remove
 from discord.ext.commands import has_permissions
 from Dadabase.modules.configure_server import configure_server
 from Dadabase.modules.server.server_add_player import server_add_player
-from Dadabase.modules.remove_players.rmp_add import rmp_add
-from Dadabase.modules.remove_players.rmp_list import rmp_list
-from Dadabase.modules.remove_players.rmp_remove import rmp_remove
+from Dadabase.modules.account_linkers.al_add import al_add
+from Dadabase.modules.account_linkers.al_list import al_list
+from Dadabase.modules.account_linkers.al_remove import al_remove
 os = Xos()
 
 intents = discord.Intents().all()
@@ -59,17 +59,17 @@ async def check_command(ctx):
 
 @has_permissions(administrator=True)
 @bot.command(name='aladd')
-async def rmp_add_command(ctx, brawlhalla_id, brawlhalla_name):
-    await rmp_add(ctx, brawlhalla_id, brawlhalla_name)
+async def al_add_command(ctx, brawlhalla_id, brawlhalla_name):
+    await al_add(ctx, brawlhalla_id, brawlhalla_name)
 
 @bot.command(name='allist', aliases=['alist, alls'])
-async def rmp_list_command(ctx):
-    await rmp_list(ctx)
+async def al_list_command(ctx):
+    await al_list(ctx)
 
 @has_permissions(administrator=True)
 @bot.command(name='alremove', aliases=['alrm'])
-async def rmp_remove_command(ctx, brawlhalla_id):
-    await rmp_remove(ctx, brawlhalla_id)
+async def al_remove_command(ctx, brawlhalla_id):
+    await al_remove(ctx, brawlhalla_id)
 
 
 @has_permissions(administrator=True)
