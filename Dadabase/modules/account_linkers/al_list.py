@@ -21,4 +21,4 @@ def __format_msg(data):
 
 
 def __create_embed(msg):
-    return discord.Embed(title="Account Linkers", description="The following players will be removed from the leaderboard, if you wish to make them appear in the leaderboard again, run `d!rmprm id`\n" + msg, color=0x00ff00)
+    return discord.Embed(title="Account Linkers", description="The following players will be removed from the leaderboard, if you wish to make them appear in the leaderboard again, run `d!alrm id`\n" + msg, color=0x00ff00)
