@@ -30,11 +30,11 @@
 
 <div align="center">
   
-1v1 elo leaderboard | 2v2 elo leaderboard | rotational elo leaderboard
+1v1 Elo Leaderboard | 2v2 Elo Leaderboard | Rotational Elo Leaderboard
 :--- | :---: | ---:
-**show member count** | **show clan xp** | **add sub clans**
-**support for organisations** | **support for console players** | **support for Account Linking**
-**manually add players** | **manually remove players** | **commands to ease everything up**
+**Show Member Count** | **Show Clan Xp** | **Add Sub Clans**
+**Support For Organisations** | **Support For Console Players** | **Support For Account Linking**
+**Manually Add Players** | **Manually Remove Players** | **Commands To Ease Everything Up**
 </div>
 
 
