@@ -22,14 +22,24 @@
   <img src="https://github.com/CrossyChainsaw/Ranknir/assets/74303221/1ac40a4e-65de-4eaf-ac5e-49e4a6a90ac6" />
 </p>
 
-## Main Functionalities
-- Send 1v1 elo list of a clan(s) or server
-- Send 2v2 elo list of a clan(s) or server
-- Send Rotational Gamemode elo list of a clan(s) or server
-- List can be sorted on either current elo or peak elo
-- Member Count can be shown if wanted
-- Clan XP can be shown if wanted
-- Add console players to your elo lists (or any other player which is not originally in the clan)
+
+
+
+
+<h1 align="center";size="500px"><b>MAIN FUNCTIONALITIES</b></h1>
+
+<div align="center">
+  
+1v1 elo leaderboard | 2v2 elo leaderboard | rotational elo leaderboard
+:--- | :---: | ---:
+**show member count** | **show clan xp** | **add sub clans**
+**support for organisations** | **support for console players** | **support for Account Linking**
+**manually add players** | **manually remove players** | **commands to ease everything up**
+</div>
+
+
+
+
 
 ## Add this bot to your server
 - Send me a dm over discord -> crossychainsaw
