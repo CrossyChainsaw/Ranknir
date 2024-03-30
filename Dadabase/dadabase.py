@@ -4,7 +4,6 @@ from Global.Xos import Xos
 from Dadabase.modules.claim import claim
 from Dadabase.modules.check import check
 from Dadabase.modules.ping import ping
-from Dadabase.modules.keep_alive import keep_alive
 from Dadabase.modules.configure_clan import configure_clan
 from Dadabase.modules.ps4.ps4_add import ps4_add
 from Dadabase.modules.ps4.ps4_list import ps4_list
