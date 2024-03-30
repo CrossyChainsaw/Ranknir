@@ -19,7 +19,7 @@ def get_console_players(clan):
 def load_rm_players(server_id):
     with open(DATA_LOCATION + str(server_id) + '.json', 'r') as file:
         data = json.load(file)
-        rm_players = data['rm_players']
+        rm_players = data['al_players']
         rm_player_ids = []
         for x in rm_players:
             rm_player_ids.append(int(x["brawlhalla_id"]))
