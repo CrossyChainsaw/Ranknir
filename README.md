@@ -1,20 +1,26 @@
-# Ranknir x Dadabase
-Ranknir is a discord bot that sends all clan members their 1v1 and/or 2v2 elo in a list. 
+<h1 align="center"><b>R A N K N I R</b></h1>
 
-Dadabase is used to add console players and to link brawlhalla account to discord accounts.
+![image (1)](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/9977583d-9edb-4ca8-b50d-5d7f1def4733)
 
-### Current Servers
-Ranknir is currently active in the following clan-servers: *Pandation (4), Tews (3), Brawlhalla NL, Frost, KryptX (2), Empire United, M30W Organisation, Grant*
+<h1 align="center"><b>WHAT IS RANKNIR?</b></h1>
+<p align="center"><b>Ranknir is a discord bot which creates an elo leaderboard out of a Brawlhalla clan or organisation.</b></p>
 
-### 1v1 list example
 
-![image](https://user-images.githubusercontent.com/74303221/200958039-ef5eeaf0-f034-4fc0-a5ac-6d585468ec7f.png)
-![image](https://user-images.githubusercontent.com/74303221/200958471-a685f19a-97c1-47d6-8d25-b8a908dfda4d.png)
+<h1 align="center";size="500px"><b>CURRENTLY ACTIVE IN</b></h1>
+<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla NL, Frost, KryptX (2), Empire United, M30W Organisation, Grant, aura</i></b></p>
 
-### 2v2 list example
 
-![image](https://user-images.githubusercontent.com/74303221/200958576-e0c3bdc4-058d-4864-94ec-0813d55af4e0.png)
-![image](https://user-images.githubusercontent.com/74303221/200958738-2e744e83-6c8f-42db-a11d-2593ec63a3ac.png)
+<h1 align="center";size="500px"><b>1V1 LEADERBOARD EXAMPLE</b></h1>
+
+<p align="center">
+  <img src="https://github.com/CrossyChainsaw/Ranknir/assets/74303221/96634680-4f3d-4899-8d04-05d279352de5" />
+</p>
+
+<h1 align="center";size="500px"><b>2V2 LEADERBOARD EXAMPLE</b></h1>
+
+<p align="center">
+  <img src="https://github.com/CrossyChainsaw/Ranknir/assets/74303221/1ac40a4e-65de-4eaf-ac5e-49e4a6a90ac6" />
+</p>
 
 ## Main Functionalities
 - Send 1v1 elo list of a clan(s) or server
