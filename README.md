@@ -27,7 +27,16 @@
 
 
 <h1 align="center";size="500px"><b>MAIN FUNCTIONALITIES</b></h1>
+<div align="center">
+  
+1V1 ELO LEADERBOARD | 2V2 ELO LEADERBOARD | ROTATIONAL ELO LEADERBOARD
+:--- | :---: | ---:
+**SHOW MEMBER COUNT** | **SHOW CLAN XP** | **ADD SUB CLANS**
+**SUPPORT FOR ORGANISATIONS** | **SUPPORT FOR CONSOLE PLAYERS** | **SUPPORT FOR ACCOUNT LINKING**
+**MANUALLY ADD PLAYERS** | **MANUALLY REMOVE PLAYERS** | **COMMANDS TO EASE EVERYTHING UP**
+</div>
 
+<!--
 <div align="center">
   
 1v1 Elo Leaderboard | 2v2 Elo Leaderboard | Rotational Elo Leaderboard
@@ -36,13 +45,14 @@
 **Support For Organisations** | **Support For Console Players** | **Support For Account Linking**
 **Manually Add Players** | **Manually Remove Players** | **Commands To Ease Everything Up**
 </div>
-
+-->
 
 <h1 align="center";size="500px"><b>ADD THIS BOT TO YOUR SERVER</b></h1>
-<p align="center">Feel free to use my code for your own server. If you can't seem to figure out how please let me know, my discord: crossychainsaw.</p>
+<p align="center"><b>Feel free to use my code for your own server. If you can't seem to figure out how please let me know, my discord: crossychainsaw. Don't be shy I'd really love to help.</b></p>
 
-### Server History
-Previous clan-servers: *Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly, Excalibur*
 
-### Clan History
-Previous clans: *lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly, Excalibur*
+<h2 align="center";size="500px"><b>SERVER HISTORY</b></h2>
+<p align="center"><b><i>Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly, Excalibur</i></b></p>
+
+<h2 align="center";size="500px"><b>CLAN HISTORY</b></h2>
+<p align="center"><b><i>lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly, Excalibur</i></b></p>
