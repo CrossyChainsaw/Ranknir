@@ -38,11 +38,8 @@
 </div>
 
 
-
-
-
-## Add this bot to your server
-- Send me a dm over discord -> crossychainsaw
+<h1 align="center";size="500px"><b>ADD THIS BOT TO YOUR SERVER</b></h1>
+<p align="center">Feel free to use my code for your own server. If you can't seem to figure out how please let me know, my discord: crossychainsaw.</p>
 
 ### Server History
 Previous clan-servers: *Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly, Excalibur*
