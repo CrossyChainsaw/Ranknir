@@ -2,7 +2,6 @@ import discord
 from Global.Xos import Xos
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from Ranknir.modules.keep_alive import keep_alive
 from Ranknir.modules.ping import ping
 from Ranknir.modules.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
