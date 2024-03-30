@@ -40,7 +40,7 @@ def __load_ps4_players(server_id):
 
 
 def get_server_players(server):  # server object
-    print(server.name)
+    print(server.name[0])
     server_data = []
     try:
         server_data = server.get_data()

@@ -2,7 +2,7 @@ from Ranknir.classes.Server import Server
 
 # Servers
 # channel_1v1_id = 1050114658566152262
-Brawlhalla_NL = Server("Brawlhalla Nederland Leaderboard",
+Brawlhalla_NL = Server(["Brawlhalla Nederland Leaderboard"],
                        channel_1v1_id=1050114658566152262,
                        channel_2v2_id=1075022495142400091,
                        id=1047987261905584128,
@@ -11,7 +11,7 @@ Brawlhalla_NL = Server("Brawlhalla Nederland Leaderboard",
                        data_location="Dadabase/data/servers/1047987261905584128.json",
                        channel_rotating_id=1165780126508797953)
 
-Test_Server = Server("Test",
+Test_Server = Server(["Test"],
                      channel_1v1_id=1131552899378466887,
                      channel_2v2_id=1131552899378466887,
                      id=1047987261905584128,
@@ -21,7 +21,7 @@ Test_Server = Server("Test",
                      channel_rotating_id=1131552899378466887,
                      member_count="show")
 
-M3OW = Server(name="M30W Elo Leaderboard",
+M3OW = Server(name=["M30W Elo Leaderboard"],
               channel_1v1_id=1207380613380837416,
               channel_2v2_id=1207374159882223687,
               id=1076670210678992936,
