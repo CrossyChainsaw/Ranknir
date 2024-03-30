@@ -72,6 +72,18 @@ Grant = Clan(['Grant'],
              member_count='show',
              xp='hide')
 
+aura_clan_id = '2309909'
+aura = Clan(['aura'],
+             channel_1v1_id=1217825123080601740,
+             channel_2v2_id=1217825162947461261,
+             id_array=[aura_clan_id],
+             color=0x262626,
+             image='https://cdn.discordapp.com/attachments/1217902214149046313/1217919524049916045/ranking.jpg?ex=66183bf2&is=6605c6f2&hm=7803e38172019bcaa390fd3efb3142c21d0066dd70e9655157fc4b1466dd54a1&',
+             server_id='1215668996012245043',
+             sorting_method='peak',
+             member_count='show',
+             xp='hide')
+
 # Testing
 test2_clan_id, test3_clan_id = '2021161', '2023962'
 test_channel_1 = 1131552899378466887
