@@ -47,7 +47,7 @@
 </div>
 -->
 
-<h1 align="center";size="500px"><b>ADD THIS BOT TO YOUR SERVER</b></h1>
+<h1 align="center";size="500px"><b>ADD RANKNIR TO YOUR SERVER</b></h1>
 <p align="center"><b>Feel free to use my code for your own server. If you can't seem to figure out how please let me know, my discord: crossychainsaw. Don't be shy I'd really love to help.</b></p>
 
 
