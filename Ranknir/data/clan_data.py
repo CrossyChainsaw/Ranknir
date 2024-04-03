@@ -2,8 +2,8 @@ from Ranknir.classes.Clan import Clan
 
 Pandation_clan_id, Pandace_clan_id, Panhalla_clan_id, PanhaIIa_clan_id = '1702413', '1868949', '1709279', '1722822'
 Pandation = Clan(name=['Pandation', 'Pandace', 'Panhalla', 'PanhaIIa'],
-                 channel_1v1_id=1194578650322980865,
-                 channel_2v2_id=1194578766677155910,
+                 channel_1v1_id=1225052181443645500,
+                 channel_2v2_id=1225052340025954354,
                  id_array=[Pandation_clan_id, Pandace_clan_id,
                            Panhalla_clan_id, PanhaIIa_clan_id],
                  color=0x212226,
