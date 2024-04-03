@@ -10,7 +10,7 @@ Pandation = Clan(name=['Pandation', 'Pandace', 'Panhalla', 'PanhaIIa'],
                  image="https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif",
                  server_id='889594104873377812',
                  sorting_method='peak',
-                 channel_rotating_id=1164251976633159682)
+                 channel_rotating_id=1225059050396450957)
 
 Tews_clan_id, Tews_ll_clan_id, Tews_Academy_clan_id = '527406', '1374400', '537048'
 Tews = Clan(name=['Tews', 'Tews ll', 'Tews Academy'],
