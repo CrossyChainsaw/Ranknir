@@ -47,7 +47,7 @@ async def on_ready():
             elif turn == 4:
                 await clan_console_mix_1v1_elo_list(Empire_United, bot)
             elif turn == 5:
-                await clan_console_mix_1v1_and_2v2_elo_list(KryptX, bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(KryptX, bot)
             elif turn == 6:
                 await server_1v1_and_2v2_and_rotating_elo_list(M3OW, bot)
             elif turn == 7:
@@ -73,6 +73,7 @@ async def on_ready():
                 await send_all_legends_elo(DISCARDS_ID, 1173667369160298506, bot)
             next_turn()
         except Exception as e:
+            next_turn()
             print(e)
 
 
