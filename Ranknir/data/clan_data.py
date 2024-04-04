@@ -46,7 +46,8 @@ KryptX = Clan(['KryptX', 'KryptX II'],
               server_id='1162733824527048774',
               sorting_method='current',
               member_count='show',
-              xp='show')
+              xp='show',
+              channel_rotating_id=1225481293010174144 )
 
 Empire_United_clan_id = '2063244'
 Empire_United = Clan(['Empire United'],
@@ -62,8 +63,8 @@ Empire_United = Clan(['Empire United'],
 
 Grant_clan_id = '2318827'
 Grant = Clan(['Grant'],
-             channel_1v1_id=1211764310301343754,
-             channel_2v2_id=1211764991666159646,
+             channel_1v1_id=1225098265117065236,
+             channel_2v2_id=1225098365000482899,
              id_array=[Grant_clan_id],
              color=0x6A7BA0,
              image='https://media.discordapp.net/attachments/1208592123750776883/1208771528326651984/GRANT_HEADER.png?ex=65edb9b6&is=65db44b6&hm=e554afa30340b32c5740c5d26b1b4ed53eb25c570a1a2e3bcb025c84bd953588&=&format=webp&quality=lossless&width=1440&height=480',
@@ -101,7 +102,7 @@ test_clan = Clan(name=['test_clan_1', 'test_clan_2'],
                  elo_type='general',
                  no_elo_players='show',
                  sorting_method='current',
-                 channel_rotating_id=test_channel_1,
+       channel_rotating_id=test_channel_1,
                  has_rm_players=True)
 
 
