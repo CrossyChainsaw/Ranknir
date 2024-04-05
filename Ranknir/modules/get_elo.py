@@ -54,7 +54,6 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
 
 
 def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player):
-    print(player)
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
     if "country" in player:
@@ -186,14 +185,14 @@ def __find_best_team(clan, player):
 
 def __fill_in_empty_name(player_name, player):
     # print('Entered: __give_empty_name_a_placeholder_name()')
-    player_name = __try_get_discord_name(player, player_name)
-    if (player_name) == "":
+    if player_name == "":
+        player_name = __try_get_discord_name(player, player_name)
+    if player_name == "":
         return 'N/A'
     else:
         return player_name
     
 def __try_get_discord_name(player, player_name):
-    print(player)
     if "discord_name" in player:
         return player["discord_name"]
     else:
