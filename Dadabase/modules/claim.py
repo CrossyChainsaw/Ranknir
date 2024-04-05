@@ -6,6 +6,7 @@ from Dadabase.classes.Server import Server
 
 
 async def claim(ctx, brawlhalla_id):
+    print("Entered Claim")
     ranked_stats = __request(brawlhalla_id)
     if (ranked_stats):
         condition = __already_claimed(ctx)

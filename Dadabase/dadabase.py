@@ -32,16 +32,19 @@ async def say(ctx):
 
 @bot.command(name='claim')
 async def claim_command(ctx, brawlhalla_id):
-    print('Someone called claim')
+    print('Someone called claim!')
     
     member = ctx.author
     role_name1 = "M30W"
     role_name2 = "Verified ✔"
-    role_name2 = "M3W"
-    
+    role_name3 = "M3W"
+    print('help')
+
     if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None:
+        print('heldddp')
         await claim(ctx, brawlhalla_id)
     else:
+        print('hhhdd')
         await ctx.send(f'{member.name} does not have permission to use this command')
 
 
@@ -104,25 +107,5 @@ async def configure_clan_command(ctx):
 async def configure_server_command(ctx):
     await configure_server(ctx)
 
-
-@commands.has_role("Special Snowflakes")
-@bot.command(name='createplayer', aliases=['cp'])
-async def create_player_command(ctx, brawlhalla_id_list, nickname):
-    await create_player(ctx, brawlhalla_id_list, nickname)
-
-
-@commands.has_role("Special Snowflakes")
-@bot.command(name='legendlist', aliases=['lls'])
-async def legend_list_command(ctx, legend_id):
-    await legend_list(ctx, legend_id)
-
-
-@bot.command(name='legendhelp', aliases=['lhelp'])
-async def legend_help_command(ctx):
-    await legend_help(ctx)
-
-# keep_alive()
-
-
 def run_dadabase():
-    bot.run(os.environ[3])
+    bot.run(os.environ[2])
