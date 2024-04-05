@@ -59,9 +59,9 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player):
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
     if "country" in player:
         'hello'
-        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'])
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['nationality'])
     else:
-        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], "")
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
     player_object.name = __give_empty_name_a_placeholder_name(
         player_object.name)
     player_object.name = __try_decode(player_object.name)
@@ -90,7 +90,7 @@ def __extract_player_stats_into_player_object_rotating(player):
         name = rotating_stats['name']
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
-    rotating_object = Player(name, rating, peak, "")
+    rotating_object = Player(name, rating, peak)
     rotating_object.name = __give_empty_name_a_placeholder_name(rotating_object.name)
     rotating_object.name = __try_decode(rotating_object.name)
     return rotating_object
@@ -178,7 +178,7 @@ def __find_best_team(clan, player):
         brawl_id_one = best_team["brawlhalla_id_one"]
         brawl_id_two = best_team["brawlhalla_id_two"]
 
-    team_obj = Team(best_team_name, best_current, best_peak, "")
+    team_obj = Team(best_team_name, best_current, best_peak)
     team_obj = __check_order_team_name(player, brawl_id_one, brawl_id_two,
                                        team_obj)
 
