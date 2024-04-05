@@ -186,18 +186,18 @@ def __find_best_team(clan, player):
 
 def __fill_in_empty_name(player_name, player):
     # print('Entered: __give_empty_name_a_placeholder_name()')
-    player_name = __try_get_discord_name(player)
+    player_name = __try_get_discord_name(player, player_name)
     if (player_name) == "":
         return 'N/A'
     else:
         return player_name
     
-def __try_get_discord_name(player):
+def __try_get_discord_name(player, player_name):
     print(player)
     if "discord_name" in player:
         return player["discord_name"]
     else:
-        return ""
+        return player_name
 
 
 
