@@ -93,8 +93,7 @@ async def command_spit_fire(ctx):
 async def leave_server_command(ctx, server_id):
     await leave_server(bot, ctx, server_id)
 
-# keep_alive()
-
 
 def run_ranknir():
-    bot.run(os.environ[1])
+    ...
+    #bot.run(os.environ[1])
