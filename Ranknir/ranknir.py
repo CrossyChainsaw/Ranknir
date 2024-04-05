@@ -95,4 +95,4 @@ async def leave_server_command(ctx, server_id):
 
 
 def run_ranknir():
-    bot.run(os.environ[2])
+    bot.run(os.environ[1])
