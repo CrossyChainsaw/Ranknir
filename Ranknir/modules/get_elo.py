@@ -14,7 +14,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name):
     team_object_array = []
     for i, player in enumerate(players):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats)
+        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats)
         if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object):
             _ = None
@@ -34,7 +34,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
     rotating_object_array = []
     for i, player in enumerate(players):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats)
+        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats)
         rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats)
         if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object) and __check_if_name_is_blank(clan, rotating_object):
@@ -53,11 +53,15 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
 ###################### PUT PLAYER DATA IN PYTHON OBJECTS #######################
 
 
-def __extract_player_stats_into_player_object_1v1(player):
+def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player):
+    print(player)
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
-    player_object = Player(player['name'], player['rating'],
-                           player['peak_rating'])
+    if "country" in player:
+        'hello'
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'])
+    else:
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], "")
     player_object.name = __give_empty_name_a_placeholder_name(
         player_object.name)
     player_object.name = __try_decode(player_object.name)
@@ -86,9 +90,8 @@ def __extract_player_stats_into_player_object_rotating(player):
         name = rotating_stats['name']
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
-    rotating_object = Player(name, rating, peak)
-    rotating_object.name = __give_empty_name_a_placeholder_name(
-        rotating_object.name)
+    rotating_object = Player(name, rating, peak, "")
+    rotating_object.name = __give_empty_name_a_placeholder_name(rotating_object.name)
     rotating_object.name = __try_decode(rotating_object.name)
     return rotating_object
 
@@ -175,7 +178,7 @@ def __find_best_team(clan, player):
         brawl_id_one = best_team["brawlhalla_id_one"]
         brawl_id_two = best_team["brawlhalla_id_two"]
 
-    team_obj = Team(best_team_name, best_current, best_peak)
+    team_obj = Team(best_team_name, best_current, best_peak, "")
     team_obj = __check_order_team_name(player, brawl_id_one, brawl_id_two,
                                        team_obj)
 

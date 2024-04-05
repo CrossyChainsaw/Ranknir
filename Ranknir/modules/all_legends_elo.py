@@ -12,8 +12,7 @@ async def send_all_legends_elo(brawlhalla_id, channel_id, bot):
     legends = ranked_stats['legends']
     legends_ranked_stats = []
     for legend in legends:
-        player = Player(legend['legend_name_key'],
-                        legend['rating'], legend['peak_rating'])
+        player = Player(legend['legend_name_key'],legend['rating'], legend['peak_rating'], "")
         legends_ranked_stats.append(player)
     sorted_legends_ranked_stats = sort_elo('current', legends_ranked_stats)
     embed_title, embed_array = prep_embeds(

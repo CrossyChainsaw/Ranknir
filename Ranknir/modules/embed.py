@@ -52,11 +52,18 @@ def prepare_embeds_server(server, players_sorted):
 
     # Format Embeds
     for player in players_sorted:
+        print(player)
         if count == 0:
             embed = discord.Embed(description="", color=server.color)
         if count <= 20:
-            embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (
-                str(rank), player.name, str(player.current), str(player.peak))
+            #embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (str(rank), player.name, str(player.current), str(player.peak))
+            if player.country == "NL":
+                flag = "<:NL:1225603278927040613>"
+            elif player.country == "BE":
+                flag = "<:BE:1225603306752315392>"
+            else:
+                flag = ""
+            embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
         rank += 1
         count += 1
         if count == 21:

@@ -12,7 +12,7 @@ Brawlhalla_NL = Server(["Brawlhalla Nederland Leaderboard"],
                        channel_rotating_id=1165780126508797953)
 
 Test_Server = Server(["Test"],
-                     channel_1v1_id=1131552899378466887,
+                     channel_1v1_id=1048162813132152833,
                      channel_2v2_id=1131552899378466887,
                      id=1047987261905584128,
                      color=0xff6404,
