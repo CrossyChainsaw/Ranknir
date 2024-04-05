@@ -57,10 +57,25 @@ def prepare_embeds_server(server, players_sorted):
             embed = discord.Embed(description="", color=server.color)
         if count <= 20:
             #embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (str(rank), player.name, str(player.current), str(player.peak))
-            if player.country == "NL":
+            flag_source = player.nationality
+            if flag_source == "NL":
                 flag = "<:NL:1225603278927040613>"
-            elif player.country == "BE":
+            elif flag_source == "BE":
                 flag = "<:BE:1225603306752315392>"
+            elif flag_source == "TR":
+                flag = "<:TR:1225869099477762058>"
+            elif flag_source == "MA":
+                flag = "<:MA:1225869638869454971>"
+            elif flag_source == "ES":
+                flag = "<:ES:1225876346090164325>"
+            elif flag_source == "IQ":
+                flag = "<:IQ:1225876351781961728>"
+            elif flag_source == "VN":
+                flag = "<:VN:1225876347629342771>"
+            elif flag_source == "DO":
+                flag = "<:DO:1225876344269705347>"
+            elif flag_source == "DZ":
+                flag = "<:DZ:1225876350418812948>"
             else:
                 flag = ""
             embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"

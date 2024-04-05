@@ -16,6 +16,6 @@ def read_data(path, id):
 def write_data(path, data, id):
   print('Entered: write_data()')
   with open(path + str(id) + '.json', 'w') as write_file:
-    json.dump(data, write_file)
+    json.dump(data, write_file, indent=4)
 
     
