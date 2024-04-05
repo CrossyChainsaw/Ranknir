@@ -109,4 +109,4 @@ async def configure_server_command(ctx):
 
 def run_dadabase():
     return
-    bot.run(os.environ[2])
+    bot.run(os.environ[3])
