@@ -27,6 +27,23 @@ async def on_ready():
 
 @bot.command(name='ping')
 async def say(ctx):
+    
+
+    import json
+
+    # Read the JSON file
+    with open("Dadabase/data/servers/1047987261905584128.json", "r") as file:
+        data = json.load(file)
+
+    # Add "country" field to each entry
+    for entry in data["links"]:
+        entry["country"] = "NL"
+
+    # Write the modified JSON data back to the file
+    with open("Dadabase/data/servers/1047987261905584128.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+
     await ping(ctx)
 
 
@@ -108,4 +125,4 @@ async def configure_server_command(ctx):
     await configure_server(ctx)
 
 def run_dadabase():
-    bot.run(os.environ[2])
+    bot.run(os.environ[3])
