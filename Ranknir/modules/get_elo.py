@@ -62,8 +62,7 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player):
         player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['nationality'])
     else:
         player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
-    player_object.name = __give_empty_name_a_placeholder_name(
-        player_object.name)
+    player_object.name = __fill_in_empty_name(player_object.name, player)
     player_object.name = __try_decode(player_object.name)
     return player_object
 
@@ -73,7 +72,7 @@ def __extract_player_stats_into_team_object_2v2(clan, player):
     # print('Entered: __extract_player_stats_into_team_object_2v2()')
     team_object = __find_best_team(clan, player)
     team_object.name = __format_teamname(player, team_object)
-    team_object.name = __give_empty_name_a_placeholder_name(team_object.name)
+    team_object.name = __fill_in_empty_name(team_object.name, player)
     team_object.name = __try_decode(team_object.name)
     return team_object
 
@@ -91,7 +90,7 @@ def __extract_player_stats_into_player_object_rotating(player):
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
     rotating_object = Player(name, rating, peak)
-    rotating_object.name = __give_empty_name_a_placeholder_name(rotating_object.name)
+    rotating_object.name = __fill_in_empty_name(rotating_object.name, player)
     rotating_object.name = __try_decode(rotating_object.name)
     return rotating_object
 
@@ -185,12 +184,21 @@ def __find_best_team(clan, player):
     return team_obj
 
 
-def __give_empty_name_a_placeholder_name(player_name):
+def __fill_in_empty_name(player_name, player):
     # print('Entered: __give_empty_name_a_placeholder_name()')
+    player_name = __try_get_discord_name(player)
     if (player_name) == "":
         return 'N/A'
     else:
         return player_name
+    
+def __try_get_discord_name(player):
+    print(player)
+    if "discord_name" in player:
+        return player["discord_name"]
+    else:
+        return ""
+
 
 
 def __check_if_elo_is_zero(clan, player_object):

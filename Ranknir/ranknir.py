@@ -73,7 +73,7 @@ async def on_ready():
                 await send_all_legends_elo(DISCARDS_ID, 1173667369160298506, bot)
             next_turn()
         except Exception as e:
-            next_turn()
+            # next_turn()
             print(e)
 
 
