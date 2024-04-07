@@ -1,6 +1,6 @@
 {
     "name": "Brawlhalla Nederland",
-    "title": "Brawlhalla Benelux Leaderboard",
+    "title": "Brawlhalla Nederland Leaderboard",
     "links": [
         {
             "brawlhalla_id": 55416094,
@@ -344,7 +344,7 @@
             "discord_id": 703268096760086628,
             "discord_name": "kai_bh",
             "country": "BE",
-            "nationality": "NL"
+            "nationality": "JP"
         },
         {
             "brawlhalla_id": 2937124,
@@ -470,7 +470,7 @@
             "brawlhalla_id": 17887310,
             "brawlhalla_name": "tafeltennisfan",
             "discord_id": "5",
-            "discord_name": "17887310",
+            "discord_name": "tafeltennisfan",
             "country": "NL",
             "nationality": "NL"
         },
@@ -720,7 +720,7 @@
             "discord_id": 1124766909833941043,
             "discord_name": "actrue",
             "country": "NL",
-            "nationality": "NL"
+            "nationality": "CW"
         },
         {
             "brawlhalla_id": 3262451,
@@ -737,6 +737,14 @@
             "discord_name": "Cowfish",
             "country": "BE",
             "nationality": "BE"
+        },
+        {
+            "brawlhalla_id": 89744260,
+            "brawlhalla_name": "petronimitchel",
+            "discord_id": 493051320475975708,
+            "discord_name": "petronimitchel1",
+            "country": "NL",
+            "nationality": "IT"
         }
     ]
 }
