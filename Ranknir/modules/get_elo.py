@@ -36,7 +36,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats)
-        rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats)
+        rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player)
         if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object) and __check_if_name_is_blank(clan, rotating_object):
             _ = None  # some bs code for no crash
             # continue # uncomment for hide elo players
@@ -57,7 +57,6 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player):
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
     if "country" in player:
-        'hello'
         player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['nationality'])
     else:
         player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
@@ -76,10 +75,14 @@ def __extract_player_stats_into_team_object_2v2(clan, player):
     return team_object
 
 
-def __extract_player_stats_into_player_object_rotating(player):
+def __extract_player_stats_into_player_object_rotating(player_ranked_stats, player):
     """Takes player data and turns it into a `Player` object (Rotating Ranked)"""
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
-    rotating_stats = player['rotating_ranked']
+    if "country" in player:
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['nationality'])
+    else:
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
+    rotating_stats = player_ranked_stats['rotating_ranked']
     if rotating_stats == []:
         name = ""
         rating = 0
@@ -89,7 +92,7 @@ def __extract_player_stats_into_player_object_rotating(player):
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
     rotating_object = Player(name, rating, peak)
-    rotating_object.name = __fill_in_empty_name(rotating_object.name, player)
+    rotating_object.name = __fill_in_empty_name(rotating_object.name, player_ranked_stats)
     rotating_object.name = __try_decode(rotating_object.name)
     return rotating_object
 
