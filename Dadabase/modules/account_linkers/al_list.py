@@ -1,12 +1,12 @@
-from Dadabase.modules.ps4.ps4_data import load_data
+from Dadabase.modules.console.console_data import load_data
 from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
 import discord
 
-async def al_list(ctx):
-    data = load_data(ctx.guild.id)
+async def al_list(interaction):
+    data = load_data(interaction.guild.id)
     msg = __format_msg(data)
     embed = __create_embed(msg)
-    await ctx.channel.send(embed=embed)
+    await interaction.response.send_message(embed=embed)
 
 
 def __format_msg(data):

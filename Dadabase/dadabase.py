@@ -1,111 +1,122 @@
 import discord
+from discord import app_commands
 from discord.ext import commands
 from Global.Xos import Xos
 from Dadabase.modules.claim import claim
 from Dadabase.modules.check import check
 from Dadabase.modules.ping import ping
 from Dadabase.modules.configure_clan import configure_clan
-from Dadabase.modules.ps4.ps4_add import ps4_add
-from Dadabase.modules.ps4.ps4_list import ps4_list
-from Dadabase.modules.ps4.ps4_remove import ps4_remove
+from Dadabase.modules.console.console_add import console_add
+from Dadabase.modules.console.console_list import console_list
+from Dadabase.modules.console.console_remove import console_remove
 from discord.ext.commands import has_permissions
 from Dadabase.modules.configure_server import configure_server
 from Dadabase.modules.server.server_add_player import server_add_player
 from Dadabase.modules.account_linkers.al_add import al_add
 from Dadabase.modules.account_linkers.al_list import al_list
 from Dadabase.modules.account_linkers.al_remove import al_remove
+from Ranknir.data.server_data import Brawlhalla_NL, M3OW, Test_Server
+from Ranknir.data.clan_data import Pandation, test_clan
 os = Xos()
 
-intents = discord.Intents().all()
-bot = commands.Bot(command_prefix=['d!'], intents=intents)
+intents = discord.Intents.default()
+client = discord.Client(intents=intents)
+tree = app_commands.CommandTree(client)
 
+server_based_server_ids = [Brawlhalla_NL.id, M3OW.id, Test_Server.id]
+clan_based_server_ids = [Pandation.server_id, test_clan.server_id]
 
-@bot.event
+all_server_ids = server_based_server_ids.copy()
+all_server_ids.extend(clan_based_server_ids)
+
+@client.event
 async def on_ready():
-    print(f'We have logged in as {bot.user}')
+    print(f'We have logged in as {client.user}')
 
 
-@bot.command(name='ping')
-async def say(ctx):
-    await ping(ctx)
+@tree.command(name='ping')
+async def ping_command(interaction):
+    await ping(interaction)
 
 
-@bot.command(name='claim')
-async def claim_command(ctx, brawlhalla_id):
+@tree.command(name='claim', description='Link your Brawlhalla account to Discord')
+async def claim_command(interaction, brawlhalla_id:int):
     print('Someone called claim!')
     
-    member = ctx.author
+    member = interaction.user
     role_name1 = "M30W"
     role_name2 = "Verified ✔"
     role_name3 = "M3W"
     print('help')
 
     if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None:
-        print('heldddp')
-        await claim(ctx, brawlhalla_id)
+        await claim(interaction, brawlhalla_id)
     else:
-        print('hhhdd')
-        await ctx.send(f'{member.name} does not have permission to use this command')
+        await interaction.send(f'{member.name} does not have permission to use this command')
 
 
-@claim_command.error
-async def claim_command_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('format your message like the following\n`'+bot.command_prefix[0]+'claim brawlhalla_id`')
-
-
-# @commands.has_role("Verified ✔")
-@bot.command(name='check')
+@tree.command(name='check', description='Check your linked Brawlhalla account')
 async def check_command(ctx):
     await check(ctx)
 
-@has_permissions(administrator=True)
-@bot.command(name='aladd')
-async def al_add_command(ctx, brawlhalla_id, brawlhalla_name):
-    await al_add(ctx, brawlhalla_id, brawlhalla_name)
-
-@bot.command(name='allist', aliases=['alist, alls'])
-async def al_list_command(ctx):
-    await al_list(ctx)
 
 @has_permissions(administrator=True)
-@bot.command(name='alremove', aliases=['alrm'])
-async def al_remove_command(ctx, brawlhalla_id):
-    await al_remove(ctx, brawlhalla_id)
+@tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
+async def al_add_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
+    await al_add(interaction, brawlhalla_id, brawlhalla_name)
+
+
+@tree.command(name='account_linkers_list', description='List all Account Linkers')
+async def al_list_command(interaction):
+    await al_list(interaction)
 
 
 @has_permissions(administrator=True)
-@bot.command(name='serveraddplayer', aliases=['sadplayer', 'sap'])
-async def server_add_player_command(ctx, brawlhalla_id, discord_id, discord_name):
+@tree.command(name='remove_account_linker', description='Remove an Account Linker')
+async def al_remove_command(interaction, brawlhalla_id:int):
+    await al_remove(interaction, brawlhalla_id)
+
+
+@has_permissions(administrator=True)
+@tree.command(name='add_server_player', description='Manually add a player to the server leaderboard')
+async def server_add_player_command(ctx, brawlhalla_id:int, discord_id:int, discord_name:str):
     await server_add_player(ctx, brawlhalla_id, discord_id, discord_name)
 
-@has_permissions(administrator=True)
-@bot.command(name='ps4add')
-async def ps4_add_command(ctx, brawlhalla_id, brawlhalla_name):
-    await ps4_add(ctx, brawlhalla_id, brawlhalla_name)
-
-
-@bot.command(name='ps4list', aliases=['ps4ls', 'psls'])
-async def ps4_list_command(ctx):
-    await ps4_list(ctx)
-
 
 @has_permissions(administrator=True)
-@bot.command(name='ps4remove', aliases=['ps4rm'])
-async def ps4_remove_command(ctx, brawlhalla_id):
-    await ps4_remove(ctx, brawlhalla_id)
+@tree.command(name='add_console_player', description='Add a console player')
+async def console_add_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
+    await console_add(interaction, brawlhalla_id, brawlhalla_name)
+
+
+@tree.command(name='console_player_list', description='List all console players')
+async def console_list_command(interaction):
+    await console_list(interaction)
 
 
 @has_permissions(administrator=True)
-@bot.command(name='configureclan', aliases=['configclan'])
-async def configure_clan_command(ctx):
-    await configure_clan(ctx)
+@tree.command(name='remove_console_player', description='Remove a console player')
+async def console_remove_command(interaction, brawlhalla_id:int):
+    await console_remove(interaction, brawlhalla_id)
 
 
 @has_permissions(administrator=True)
-@bot.command(name='configureserver', aliases=['configserver'])
-async def configure_server_command(ctx):
-    await configure_server(ctx)
+@tree.command(name='configure_clan', description='Generate a file with clan data for the current clan server')
+async def configure_clan_command(interaction):
+    await configure_clan(interaction)
+
+
+@has_permissions(administrator=True)
+@tree.command(name='configure_server', description='Generate a file with clan data for the current server')
+async def configure_server_command(interaction):
+    await configure_server(interaction)
+
+
+# sync everything up
+@client.event
+async def on_ready():
+    await tree.sync()
+    print("Bot is ready!")
 
 def run_dadabase():
-    bot.run(os.environ[3])
+    client.run(os.environ[2])

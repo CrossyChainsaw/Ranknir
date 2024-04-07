@@ -1,12 +1,12 @@
 import random
 
-async def ping(ctx):
+async def ping(interaction):
   num = random.randrange(0, 8192)
   if num == 1:
     msg = ("bong")
   else:
     msg = ('pong')
-  await ctx.channel.send(msg)
+  await interaction.response.send_message(msg)
 
   
   
