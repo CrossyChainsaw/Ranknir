@@ -7,24 +7,24 @@ from Dadabase.classes.Server import Server
 DATA_LINKS_LOCATION_SERVER_SINGLE_ID = 'Dadabase/data/servers/'
 
 
-async def server_add_player(ctx, brawlhalla_id, discord_id, discord_name):
+async def server_add_player(interaction, brawlhalla_id, discord_id, discord_name):
     ranked_stats = __request(brawlhalla_id)
     if (ranked_stats):
-        condition = __already_claimed(ctx, discord_id)
+        condition = __already_claimed(interaction, discord_id)
         if condition == True:
             print('updating link')
-            await __update_link(ctx, ranked_stats, discord_id, discord_name)
+            await __update_link(interaction, ranked_stats, discord_id, discord_name)
         else:
-            await __add_link(ctx, ranked_stats, discord_id, discord_name)
+            await __add_link(interaction, ranked_stats, discord_id, discord_name)
     else:
-        await ctx.channel.send("Account with `brawlhalla_id: "+brawlhalla_id+"` does not exist or hasn't played ranked yet")
+        await interaction.response.send_message("Account with `brawlhalla_id: "+brawlhalla_id+"` does not exist or hasn't played ranked yet")
 
 
-def __already_claimed(ctx, discord_id):
+def __already_claimed(interaction, discord_id):
     print('Entered: already_claimed()')
     link_data = []
     link_data = read_link_data(
-        DATA_LINKS_LOCATION_SERVER_SINGLE_ID, ctx.guild.id)
+        DATA_LINKS_LOCATION_SERVER_SINGLE_ID, interaction.guild.id)
     for user in link_data:
         if discord_id == str(user['discord_id']):
             return True
@@ -33,17 +33,17 @@ def __already_claimed(ctx, discord_id):
     # check if dc is linked
 
 
-async def __add_link(ctx, ranked_stats, discord_id, discord_name):
+async def __add_link(interaction, ranked_stats, discord_id, discord_name):
     print('Entered: __add_link()')
-    brawlhalla_name = __save_link(ctx, ranked_stats, discord_id, discord_name)
-    await ctx.channel.send("Added brawlhalla account: " + brawlhalla_name)
+    brawlhalla_name = __save_link(interaction, ranked_stats, discord_id, discord_name)
+    await interaction.response.send_message("Added brawlhalla account: " + brawlhalla_name)
 
 
-async def __update_link(ctx, ranked_stats, discord_id, discord_name):
+async def __update_link(interaction, ranked_stats, discord_id, discord_name):
     print('Entered: __update_link()')
-    user = __create_user(ctx, ranked_stats, discord_id, discord_name)
+    user = __create_user(interaction, ranked_stats, discord_id, discord_name)
     link_data = read_link_data(
-        DATA_LINKS_LOCATION_SERVER_SINGLE_ID, ctx.guild.id)
+        DATA_LINKS_LOCATION_SERVER_SINGLE_ID, interaction.guild.id)
     x = 0
     print('g')
     for link in link_data:
@@ -53,10 +53,10 @@ async def __update_link(ctx, ranked_stats, discord_id, discord_name):
     print(link_data[x])
     link_data[x]['brawlhalla_id'] = user.brawlhalla_id
     link_data[x]['brawlhalla_name'] = user.brawlhalla_name
-    server = Server(ctx.guild.name, ctx.guild.name + " Leaderboard", link_data)
+    server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
     write_data(DATA_LINKS_LOCATION_SERVER_SINGLE_ID,
-               server.__dict__, ctx.guild.id)
-    await ctx.channel.send("Updated brawlhalla account to ```brawlhalla_name: "+user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
+               server.__dict__, interaction.guild.id)
+    await interaction.response.send_message("Updated brawlhalla account to ```brawlhalla_name: "+user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
 
 
 def __request(brawlhalla_id):
@@ -64,14 +64,14 @@ def __request(brawlhalla_id):
     return fetch_player_ranked_stats(brawlhalla_id)
 
 
-def __save_link(ctx, ranked_stats, discord_id, discord_name):
+def __save_link(interaction, ranked_stats, discord_id, discord_name):
     print('Entered: __save_link()')
-    user = __create_user(ctx, ranked_stats, discord_id, discord_name)
-    __save_data(user, ctx)
+    user = __create_user(interaction, ranked_stats, discord_id, discord_name)
+    __save_data(user, interaction)
     return user.brawlhalla_name
 
 
-def __create_user(ctx, ranked_stats, discord_id, discord_name):
+def __create_user(interaction, ranked_stats, discord_id, discord_name):
     print('Entered: __create_user()')
     brawlhalla_id = ranked_stats['brawlhalla_id']
     brawlhalla_name = ranked_stats['name']
@@ -79,11 +79,11 @@ def __create_user(ctx, ranked_stats, discord_id, discord_name):
     return user
 
 
-def __save_data(user, ctx):
+def __save_data(user, interaction):
     print('Entered: __save_data()')
     link_data = read_link_data(
-        DATA_LINKS_LOCATION_SERVER_SINGLE_ID, ctx.guild.id)
+        DATA_LINKS_LOCATION_SERVER_SINGLE_ID, interaction.guild.id)
     link_data.append(user.__dict__)
-    server = Server(ctx.guild.name, ctx.guild.name + " Leaderboard", link_data)
+    server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
     write_data(DATA_LINKS_LOCATION_SERVER_SINGLE_ID,
-               server.__dict__, ctx.guild.id)
+               server.__dict__, interaction.guild.id)

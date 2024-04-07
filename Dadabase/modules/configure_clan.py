@@ -1,16 +1,16 @@
 import json
 
-async def configure_clan(ctx):
+async def configure_clan(interaction):
     try:
-        __create_data_file(ctx)
-        __edit_data_file(ctx)
-        await ctx.channel.send('Succes!')
+        __create_data_file(interaction)
+        __edit_data_file(interaction)
+        await interaction.response.send_message('Succes!')
     except:
-        await ctx.channel.send('Something went wrong...')
+        await interaction.response.send_message('Something went wrong...')
 
 
-def __create_data_file(ctx):
-    open('Dadabase/data/clans/' + str(ctx.guild.id) + '.json', 'x')
+def __create_data_file(interaction):
+    open('Dadabase/data/clans/' + str(interaction.guild.id) + '.json', 'x')
     
     
 def __edit_data_file(ctx):

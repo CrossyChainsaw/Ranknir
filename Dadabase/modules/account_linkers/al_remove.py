@@ -1,20 +1,20 @@
 import json
-from Dadabase.modules.ps4.ps4_data import load_data, DATA_LOCATION
+from Dadabase.modules.console.console_data import load_data, DATA_LOCATION
 from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
 
-async def al_remove(ctx, bh_id):
-    data = load_data(ctx.guild.id)
-    bh_name = __remove_rm_player(ctx, bh_id, data)
-    await ctx.channel.send(bh_name + " was removed")
+async def al_remove(interaction, bh_id):
+    data = load_data(interaction.guild.id)
+    bh_name = __remove_rm_player(interaction, bh_id, data)
+    await interaction.response.send_message(bh_name + " was removed")
 
 
-def __remove_rm_player(ctx, bh_id, data):
+def __remove_rm_player(interaction, bh_id, data):
     bh_name = ""
     index = 0
     for player in data[NAME_FOR_REMOVE_PLAYERS]:
         if player['brawlhalla_id'] == str(bh_id):
             bh_name = data[NAME_FOR_REMOVE_PLAYERS].pop(index)['brawlhalla_name']
-            with open(DATA_LOCATION + str(ctx.guild.id) + '.json', 'w') as file:
+            with open(DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
                 json.dump(data, file)
         index += 1
     return bh_name

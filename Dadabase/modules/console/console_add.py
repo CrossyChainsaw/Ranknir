@@ -1,20 +1,20 @@
 import json
 from Dadabase.classes.Account import Account
 from Dadabase.modules.console.console_data import load_data, DATA_LOCATION
-from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
 
-async def al_add(interaction, bh_id, bh_name):
+
+async def console_add(interaction, bh_id, bh_name):
     if __validate_id(bh_id):
         account = __create_account(bh_id, bh_name)
         data = load_data(interaction.guild.id)
-        __add_al_player(interaction, account, data)
+        __add_ps4_player(interaction, account, data)
         await interaction.response.send_message(bh_name + ' was added')
     else:
         await interaction.response.send_message(str(bh_id) + " is not a valid brawlhalla_id")
 
 
-def __add_al_player(interaction, account, data):
-    data[NAME_FOR_REMOVE_PLAYERS].append(account.__dict__)
+def __add_ps4_player(interaction, account, data):
+    data['ps4_players'].append(account.__dict__)
     with open(DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
         json.dump(data, file)
 
