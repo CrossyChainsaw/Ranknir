@@ -56,12 +56,12 @@ async def claim_command(interaction, brawlhalla_id:int):
     if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None or interaction.guild.id == brawlhalla_hungary_server_id:
         await claim(interaction, brawlhalla_id)
     else:
-        await interaction.send(f'{member.name} does not have permission to use this command')
+        await interaction.response.send_message(f'{member.name} does not have permission to use this command')
 
 
 @tree.command(name='check', description='Check your linked Brawlhalla account')
-async def check_command(ctx):
-    await check(ctx)
+async def check_command(interaction):
+    await check(interaction)
 
 
 @tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
@@ -129,5 +129,5 @@ async def on_ready():
     print("Bot is ready!")
 
 def run_dadabase():
-    # client.run(os.environ[3])
-    client.run(os.environ[2]) # Testing
+    client.run(os.environ[3])
+    # client.run(os.environ[2]) # Testing
