@@ -16,7 +16,7 @@ async def console_add(interaction, bh_id, bh_name):
 def __add_ps4_player(interaction, account, data):
     data['ps4_players'].append(account.__dict__)
     with open(DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
-        json.dump(data, file)
+        json.dump(data, file, indent=4)
 
 
 def __create_account(brawlhalla_id, brawlhalla_name):
