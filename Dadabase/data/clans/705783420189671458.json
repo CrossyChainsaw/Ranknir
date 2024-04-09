@@ -1,7 +1,12 @@
 {
     "name": "Skyward",
     "id": "705783420189671458",
-    "ps4_players": [],
+    "ps4_players": [
+        {
+            "brawlhalla_id": 2,
+            "brawlhalla_name": "bmgdan"
+        }
+    ],
     "al_players": [
         {
             "brawlhalla_id": "2",

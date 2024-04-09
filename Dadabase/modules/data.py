@@ -9,9 +9,9 @@ def read_link_data(path, id):
 
 
 def read_data(path, id):
-  with open(path + str(id) + '.json') as data:
-    the_data = json.load(data)
-    return the_data
+  with open(path + str(id) + '.json') as file:
+    data = json.load(file)
+    return data
 
 def write_data(path, data, id):
   print('Entered: write_data()')

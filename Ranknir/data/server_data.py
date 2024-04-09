@@ -11,6 +11,14 @@ Brawlhalla_NL = Server(["Brawlhalla Nederland Leaderboard"],
                        data_location="Dadabase/data/servers/1047987261905584128.json",
                        channel_rotating_id=1165780126508797953)
 
+Brawlhalla_Hungary = Server(["Brawlhalla Hungary Leaderboard"],
+                       channel_1v1_id=1209633413821108274,
+                       channel_2v2_id=1226931575724179628,
+                       id=1209624739635531857,
+                       color=0xc1253b,
+                       sorting_method="current",
+                       data_location="Dadabase/data/servers/1209624739635531857.json")
+
 Test_Server = Server(["Test"],
                      channel_1v1_id=1048162813132152833,
                      channel_2v2_id=1131552899378466887,
