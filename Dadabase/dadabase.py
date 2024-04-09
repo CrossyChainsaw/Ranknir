@@ -12,6 +12,7 @@ from Dadabase.modules.console.console_remove import console_remove
 from discord.ext.commands import has_permissions
 from Dadabase.modules.configure_server import configure_server
 from Dadabase.modules.server.server_add_player import server_add_player
+from Dadabase.modules.server.server_rm_player import server_rm_player
 from Dadabase.modules.account_linkers.al_add import al_add
 from Dadabase.modules.account_linkers.al_list import al_list
 from Dadabase.modules.account_linkers.al_remove import al_remove
@@ -43,6 +44,7 @@ async def ping_command(interaction):
 async def claim_command(interaction, brawlhalla_id:int):
     print('Someone called claim!')
     
+    # niet netjes broeder
     brawlhalla_hungary_server_id = 1209624739635531857
     member = interaction.user
     role_name1 = "M30W"
@@ -54,12 +56,12 @@ async def claim_command(interaction, brawlhalla_id:int):
     if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None or interaction.guild.id == brawlhalla_hungary_server_id:
         await claim(interaction, brawlhalla_id)
     else:
-        await interaction.send(f'{member.name} does not have permission to use this command')
+        await interaction.response.send_message(f'{member.name} does not have permission to use this command')
 
 
 @tree.command(name='check', description='Check your linked Brawlhalla account')
-async def check_command(ctx):
-    await check(ctx)
+async def check_command(interaction):
+    await check(interaction)
 
 
 @tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
@@ -81,8 +83,14 @@ async def al_remove_command(interaction, brawlhalla_id:int):
 
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
-async def server_add_player_command(ctx, brawlhalla_id:int, discord_id:int, discord_name:str):
+async def server_add_player_command(ctx, brawlhalla_id:int, discord_id:str, discord_name:str):
+    discord_id = int(discord_id)
     await server_add_player(ctx, brawlhalla_id, discord_id, discord_name)
+
+@tree.command(name='remove_server_player', description="(You aren't suposed to run this) Manually removes a player off the server leaderboard")
+@app_commands.checks.has_permissions(administrator=True)
+async def server_remove_player_command(interaction, brawlhalla_id:int):
+    await server_rm_player(interaction, brawlhalla_id)
 
 
 @tree.command(name='add_console_player', description='Add a console player')
@@ -122,3 +130,4 @@ async def on_ready():
 
 def run_dadabase():
     client.run(os.environ[3])
+    # client.run(os.environ[2]) # Testing

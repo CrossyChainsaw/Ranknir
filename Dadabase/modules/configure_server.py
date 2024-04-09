@@ -1,3 +1,5 @@
+import json
+
 async def configure_server(interaction):
     try:
         data_loc = 'servers/'
@@ -14,5 +16,13 @@ def __create_data_file(interaction, loc):
 
 
 def __edit_data_file_server(interaction, loc):
-    file = open('Dadabase/data/' + loc + str(interaction.guild.id) + '.json', 'a')
-    file.write("{\"name\": \"" + interaction.guild.name + "\", \"links\": []}")
+    file_path = 'Dadabase/data/' + loc + str(interaction.guild.id) + '.json'
+    with open(file_path, 'a') as file:
+        guild_data = {
+            "name": interaction.guild.name,
+            "title": interaction.guild.name + " Leaderboard",
+            "links": []
+        }
+        file.write(json.dumps(guild_data, indent=4))
+    # file = open('Dadabase/data/' + loc + str(interaction.guild.id) + '.json', 'a')
+    # file.write("{\"name\": \"" + interaction.guild.name + "\", \"links\": []}")
