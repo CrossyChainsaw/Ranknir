@@ -4,9 +4,9 @@ from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 from Ranknir.modules.ping import ping
 from Ranknir.modules.spit_fire import spit_fire
-from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list
+from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_elo_list
 from Ranknir.data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United, Grant, aura
-from Ranknir.data.server_data import Brawlhalla_NL, Test_Server, M3OW
+from Ranknir.data.server_data import Brawlhalla_NL, Test_Server, M3OW, Brawlhalla_Hungary
 from Ranknir.data.player_data import CROSSYCHAINSAW_ID, SHAW_ID, DISCARDS_ID
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
@@ -53,7 +53,9 @@ async def on_ready():
             elif turn == 7:
                 await clan_console_mix_1v1_and_2v2_elo_list(Grant, bot)
             elif turn == 8:
-                await clan_console_mix_1v1_and_2v2_elo_list(aura, bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(aura, bot)            
+            elif turn == 9:
+                await server_1v1_and_2v2_elo_list(Brawlhalla_Hungary, bot)
             # Test Clan
             elif turn == 69:
                 await clan_console_mix_1v1_elo_list(test_clan, bot)
@@ -69,8 +71,6 @@ async def on_ready():
             else:
                 reset_turn()
                 await send_all_legends_elo(CROSSYCHAINSAW_ID, 1165233774305493012, bot)
-                await send_all_legends_elo(SHAW_ID, 1166526510526631998, bot)
-                await send_all_legends_elo(DISCARDS_ID, 1173667369160298506, bot)
             next_turn()
         except Exception as e:
             # next_turn()
@@ -95,5 +95,4 @@ async def leave_server_command(ctx, server_id):
 
 
 def run_ranknir():
-    ...
-    #bot.run(os.environ[1])
+    bot.run(os.environ[1])

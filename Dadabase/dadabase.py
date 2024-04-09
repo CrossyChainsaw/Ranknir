@@ -43,13 +43,15 @@ async def ping_command(interaction):
 async def claim_command(interaction, brawlhalla_id:int):
     print('Someone called claim!')
     
+    brawlhalla_hungary_server_id = 1209624739635531857
     member = interaction.user
     role_name1 = "M30W"
     role_name2 = "Verified ✔"
     role_name3 = "M3W"
     print('help')
+    print(interaction.guild.id)
 
-    if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None:
+    if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None or interaction.guild.id == brawlhalla_hungary_server_id:
         await claim(interaction, brawlhalla_id)
     else:
         await interaction.send(f'{member.name} does not have permission to use this command')
@@ -60,8 +62,8 @@ async def check_command(ctx):
     await check(ctx)
 
 
-@has_permissions(administrator=True)
 @tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
+@app_commands.checks.has_permissions(administrator=True)
 async def al_add_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
     await al_add(interaction, brawlhalla_id, brawlhalla_name)
 
@@ -71,20 +73,20 @@ async def al_list_command(interaction):
     await al_list(interaction)
 
 
-@has_permissions(administrator=True)
 @tree.command(name='remove_account_linker', description='Remove an Account Linker')
+@app_commands.checks.has_permissions(administrator=True)
 async def al_remove_command(interaction, brawlhalla_id:int):
     await al_remove(interaction, brawlhalla_id)
 
 
-@has_permissions(administrator=True)
-@tree.command(name='add_server_player', description='Manually add a player to the server leaderboard')
+@tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
+@app_commands.checks.has_permissions(administrator=True)
 async def server_add_player_command(ctx, brawlhalla_id:int, discord_id:int, discord_name:str):
     await server_add_player(ctx, brawlhalla_id, discord_id, discord_name)
 
 
-@has_permissions(administrator=True)
 @tree.command(name='add_console_player', description='Add a console player')
+@app_commands.checks.has_permissions(administrator=True)
 async def console_add_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
     await console_add(interaction, brawlhalla_id, brawlhalla_name)
 
@@ -94,20 +96,20 @@ async def console_list_command(interaction):
     await console_list(interaction)
 
 
-@has_permissions(administrator=True)
 @tree.command(name='remove_console_player', description='Remove a console player')
+@app_commands.checks.has_permissions(administrator=True)
 async def console_remove_command(interaction, brawlhalla_id:int):
     await console_remove(interaction, brawlhalla_id)
 
 
-@has_permissions(administrator=True)
-@tree.command(name='configure_clan', description='Generate a file with clan data for the current clan server')
+@tree.command(name='configure_clan', description="(You aren't suposed to run this) Generate a file with clan data for the current clan server")
+@app_commands.checks.has_permissions(administrator=True)
 async def configure_clan_command(interaction):
     await configure_clan(interaction)
 
 
-@has_permissions(administrator=True)
-@tree.command(name='configure_server', description='Generate a file with clan data for the current server')
+@tree.command(name='configure_server', description="(You aren't suposed to run this) Generate a file with clan data for the current server")
+@app_commands.checks.has_permissions(administrator=True)
 async def configure_server_command(interaction):
     await configure_server(interaction)
 
@@ -119,4 +121,4 @@ async def on_ready():
     print("Bot is ready!")
 
 def run_dadabase():
-    client.run(os.environ[2])
+    client.run(os.environ[3])

@@ -12,7 +12,7 @@
         },
         {
             "brawlhalla_id": 7364605,
-            "brawlhalla_name": "KD | CrossyChainsaw LFT 2800+",
+            "brawlhalla_name": "CrossyChainsaw LFT 2400+",
             "discord_id": 413070742591373314,
             "discord_name": "crossychainsaw",
             "country": "NL",
@@ -328,7 +328,7 @@
             "discord_id": 744386272101007431,
             "discord_name": "V\u00f8i\u00d0",
             "country": "NL",
-            "nationality": "NL"
+            "nationality": "ID"
         },
         {
             "brawlhalla_id": 863895,
@@ -737,6 +737,22 @@
             "discord_name": "petronimitchel1",
             "country": "NL",
             "nationality": "IT"
+        },
+        {
+            "brawlhalla_id": 86583212,
+            "brawlhalla_name": "Makena",
+            "discord_id": 43,
+            "discord_name": "Makena",
+            "country": "NL",
+            "nationality": "SR"
+        },
+        {
+            "brawlhalla_id": 94812345,
+            "brawlhalla_name": "TUSk 89",
+            "discord_id": 45,
+            "discord_name": "Tusk 89",
+            "country": "NL",
+            "nationality": "NL"
         }
     ]
 }
