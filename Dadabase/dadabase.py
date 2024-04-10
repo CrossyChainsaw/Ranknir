@@ -129,5 +129,6 @@ async def on_ready():
     print("Bot is ready!")
 
 def run_dadabase():
-    client.run(os.environ[3])
+    # client.run(os.environ[3])
     # client.run(os.environ[2]) # Testing
+    return

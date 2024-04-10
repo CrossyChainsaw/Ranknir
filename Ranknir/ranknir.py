@@ -12,6 +12,7 @@ from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.modules.leave_server import leave_server
 from Ranknir.modules.get_current_order import get_current_order
+from Ranknir.modules.tests.test_elo_list import test_clan_console_mix_1v1_elo_list, test_server_1v1_elo_list
 os = Xos()
 
 intents = discord.Intents().all()
@@ -83,17 +84,27 @@ async def command_ping(ctx):
 
 
 # @bot.command(name='spit')
-# @has_permissions(manage_roles=True, ban_members=True)
 @bot.command(name='spit')
+@has_permissions(manage_roles=True, ban_members=True)
 async def command_spit_fire(ctx):
     await spit_fire(bot)
 
-
 @bot.command(name='leave')
+@has_permissions(manage_roles=True, ban_members=True)
 async def leave_server_command(ctx, server_id):
     await leave_server(bot, ctx, server_id)
 
+@bot.command(name='testclan')
+@has_permissions(manage_roles=True, ban_members=True)
+async def test_clan_elo_list_command(ctx):
+    await test_clan_console_mix_1v1_elo_list(bot, ctx)
+
+@bot.command(name='testserver')
+@has_permissions(manage_roles=True, ban_members=True)
+async def test_server_elo_list_command(ctx):
+    await test_server_1v1_elo_list(bot, ctx)
 
 def run_ranknir():
-    bot.run(os.environ[1])
-    #return
+    # bot.run(os.environ[1])
+    bot.run(os.environ[2]) # Testing
+    return

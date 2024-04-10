@@ -53,6 +53,9 @@ def prepare_embeds_server(server, players_sorted):
     # Format Embeds
     for player in players_sorted:
         print(player)
+        if count == 21:
+            embed_array.append(embed)
+            count = 0
         if count == 0:
             embed = discord.Embed(description="", color=server.color)
         if count <= 20:
@@ -91,9 +94,6 @@ def prepare_embeds_server(server, players_sorted):
             embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
         rank += 1
         count += 1
-        if count == 21:
-            embed_array.append(embed)
-            count = 0
     embed_array.append(embed)
     return embed_title, embed_array
 
