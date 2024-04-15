@@ -70,7 +70,7 @@
         },
         {
             "brawlhalla_id": 7364605,
-            "brawlhalla_name": "CrossyChainsaw",
+            "brawlhalla_name": "broken hand in cast on hotspot",
             "discord_id": 413070742591373314,
             "discord_name": "crossychainsaw"
         },
@@ -241,6 +241,30 @@
             "brawlhalla_name": "m3w vergo",
             "discord_id": 344941572070309889,
             "discord_name": "_vergo"
+        },
+        {
+            "brawlhalla_id": 2614939,
+            "brawlhalla_name": "iEleven",
+            "discord_id": 471408249401507841,
+            "discord_name": "ieleven."
+        },
+        {
+            "brawlhalla_id": 66036550,
+            "brawlhalla_name": "j'essaye de gagner",
+            "discord_id": 437592250277560341,
+            "discord_name": "sakutobh"
+        },
+        {
+            "brawlhalla_id": 6152274,
+            "brawlhalla_name": "M3W | Lexi Bear ~Recruiting!~",
+            "discord_id": 236127985500028928,
+            "discord_name": "_elk"
+        },
+        {
+            "brawlhalla_id": 27492017,
+            "brawlhalla_name": "M30W|JiroToDeath\u00e2\u0084\u00a2",
+            "discord_id": 338427554895757312,
+            "discord_name": "jirotodeath"
         }
     ]
 }

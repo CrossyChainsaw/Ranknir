@@ -106,5 +106,5 @@ async def test_server_elo_list_command(ctx):
 
 def run_ranknir():
     # bot.run(os.environ[1])
-    bot.run(os.environ[2]) # Testing
+    # bot.run(os.environ[2]) # Testing
     return
