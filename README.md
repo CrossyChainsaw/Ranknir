@@ -7,7 +7,7 @@
 
 
 <h1 align="center";size="500px"><b>CURRENTLY ACTIVE IN</b></h1>
-<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla NL, Frost, KryptX (2), Empire United, M30W Organisation, Grant, aura</i></b></p>
+<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla Netherlands, Frost, KryptX (2), Empire United, M30W Organisation, Grant, aura, Brawlhalla Hungary</i></b></p>
 
 
 <h1 align="center";size="500px"><b>1V1 LEADERBOARD EXAMPLE</b></h1>
