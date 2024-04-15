@@ -23,6 +23,29 @@ from Ranknir.data.server_data import Brawlhalla_NL, M3OW, Test_Server
 from Ranknir.data.clan_data import Pandation, test_clan
 os = Xos()
 
+benelux_countries = [    
+    app_commands.Choice(name="Netherlands", value="NL"),
+    app_commands.Choice(name="Belgium", value="BE"),
+    app_commands.Choice(name="Luxembourg", value="LU")]
+all_countries = [
+    app_commands.Choice(name="Netherlands", value="NL"),
+    app_commands.Choice(name="Belgium", value="BE"),
+    app_commands.Choice(name="Luxembourg", value="LU"),
+    app_commands.Choice(name="Turkey", value="TR"),
+    app_commands.Choice(name="Morocco", value="MA"),
+    app_commands.Choice(name="Dominican Republic", value="DO"),
+    app_commands.Choice(name="Spain", value="ES"),
+    app_commands.Choice(name="Vietnam", value="VN"),
+    app_commands.Choice(name="Algeria", value="DZ"),
+    app_commands.Choice(name="Iraq", value="IQ"),
+    app_commands.Choice(name="Suriname", value="SR"),
+    app_commands.Choice(name="Japan", value="JP"),
+    app_commands.Choice(name="Italy", value="IT"),
+    app_commands.Choice(name="Curacao", value="CW"),
+    app_commands.Choice(name="Indonesia", value="ID"),
+    app_commands.Choice(name="Germany", value="DE")]
+
+
 intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
@@ -44,7 +67,11 @@ async def ping_command(interaction):
 
 
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
-async def claim_command(interaction, brawlhalla_id:int):
+@app_commands.describe(country_of_residence="Which country does the player live in?")
+@app_commands.choices(country_of_residence=benelux_countries)
+@app_commands.describe(nationality="Which country does the player live in?")
+@app_commands.choices(nationality=all_countries)
+async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], nationality: app_commands.Choice[str]):
     print('Someone called claim!')
     
     # niet netjes broeder
@@ -57,7 +84,7 @@ async def claim_command(interaction, brawlhalla_id:int):
     print(interaction.guild.id)
 
     if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None or interaction.guild.id == brawlhalla_hungary_server_id:
-        await claim(interaction, brawlhalla_id)
+        await claim(interaction, brawlhalla_id, country_of_residence.value, nationality.value)
     else:
         await interaction.response.send_message(f'{member.name} does not have permission to use this command')
 
@@ -83,6 +110,7 @@ async def al_list_command(interaction):
 async def al_remove_command(interaction, brawlhalla_id:int):
     await al_remove(interaction, brawlhalla_id)
 
+
 @tree.command(name='new', description='new')
 @app_commands.describe(option="This is a description of what the option means")
 @app_commands.choices(option=[
@@ -92,49 +120,17 @@ async def al_remove_command(interaction, brawlhalla_id:int):
 async def server_add_player_command(interaction: discord.Interaction, option: app_commands.Choice[str]):
     await interaction.response.send_message(option.value)
 
+
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(country_of_residence="Which country does the player live in?")
-@app_commands.choices(country_of_residence=[
-        app_commands.Choice(name="Netherlands", value="NL"),
-        app_commands.Choice(name="Belgium", value="BE"),
-        app_commands.Choice(name="Luxembourg", value="LU"),
-        app_commands.Choice(name="Turkey", value="TR"),
-        app_commands.Choice(name="Morocco", value="MA"),
-        app_commands.Choice(name="Dominican Republic", value="DO"),
-        app_commands.Choice(name="Spain", value="ES"),
-        app_commands.Choice(name="Vietnam", value="VN"),
-        app_commands.Choice(name="Algeria", value="DZ"),
-        app_commands.Choice(name="Iraq", value="IQ"),
-        app_commands.Choice(name="Suriname", value="SR"),
-        app_commands.Choice(name="Japan", value="JP"),
-        app_commands.Choice(name="Italy", value="IT"),
-        app_commands.Choice(name="Curacao", value="CW"),
-        app_commands.Choice(name="Indonesia", value="ID"),
-        app_commands.Choice(name="Germany", value="DE"),
-    ])
+@app_commands.choices(country_of_residence=all_countries)
 @app_commands.describe(nationality="Which country does the player live in?")
-@app_commands.choices(nationality=[
-        app_commands.Choice(name="Netherlands", value="NL"),
-        app_commands.Choice(name="Belgium", value="BE"),
-        app_commands.Choice(name="Luxembourg", value="LU"),
-        app_commands.Choice(name="Turkey", value="TR"),
-        app_commands.Choice(name="Morocco", value="MA"),
-        app_commands.Choice(name="Dominican Republic", value="DO"),
-        app_commands.Choice(name="Spain", value="ES"),
-        app_commands.Choice(name="Vietnam", value="VN"),
-        app_commands.Choice(name="Algeria", value="DZ"),
-        app_commands.Choice(name="Iraq", value="IQ"),
-        app_commands.Choice(name="Suriname", value="SR"),
-        app_commands.Choice(name="Japan", value="JP"),
-        app_commands.Choice(name="Italy", value="IT"),
-        app_commands.Choice(name="Curacao", value="CW"),
-        app_commands.Choice(name="Indonesia", value="ID"),
-        app_commands.Choice(name="Germany", value="DE"),
-    ])
+@app_commands.choices(nationality=all_countries)
 async def server_add_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
     discord_id = int(discord_id)
     await server_add_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
+
 
 @tree.command(name='remove_server_player', description="(You aren't suposed to run this) Manually removes a player off the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
@@ -175,7 +171,7 @@ async def configure_server_command(interaction):
 @client.event
 async def on_ready():
     await tree.sync()
-    print("Bot is ready!")
+    print(f'We have logged in as {client.user}')
 
 def run_dadabase():
     # client.run(os.environ[3])
