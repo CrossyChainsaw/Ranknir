@@ -1,3 +1,6 @@
+## hey i was working on #172
+
+
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -80,12 +83,58 @@ async def al_list_command(interaction):
 async def al_remove_command(interaction, brawlhalla_id:int):
     await al_remove(interaction, brawlhalla_id)
 
+@tree.command(name='new', description='new')
+@app_commands.describe(option="This is a description of what the option means")
+@app_commands.choices(option=[
+        app_commands.Choice(name="Option 1", value="1"),
+        app_commands.Choice(name="Option 2", value="2")
+    ])
+async def server_add_player_command(interaction: discord.Interaction, option: app_commands.Choice[str]):
+    await interaction.response.send_message(option.value)
 
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
-async def server_add_player_command(ctx, brawlhalla_id:int, discord_id:str, discord_name:str):
+@app_commands.describe(country_of_residence="Which country does the player live in?")
+@app_commands.choices(country_of_residence=[
+        app_commands.Choice(name="Netherlands", value="NL"),
+        app_commands.Choice(name="Belgium", value="BE"),
+        app_commands.Choice(name="Luxembourg", value="LU"),
+        app_commands.Choice(name="Turkey", value="TR"),
+        app_commands.Choice(name="Morocco", value="MA"),
+        app_commands.Choice(name="Dominican Republic", value="DO"),
+        app_commands.Choice(name="Spain", value="ES"),
+        app_commands.Choice(name="Vietnam", value="VN"),
+        app_commands.Choice(name="Algeria", value="DZ"),
+        app_commands.Choice(name="Iraq", value="IQ"),
+        app_commands.Choice(name="Suriname", value="SR"),
+        app_commands.Choice(name="Japan", value="JP"),
+        app_commands.Choice(name="Italy", value="IT"),
+        app_commands.Choice(name="Curacao", value="CW"),
+        app_commands.Choice(name="Indonesia", value="ID"),
+        app_commands.Choice(name="Germany", value="DE"),
+    ])
+@app_commands.describe(nationality="Which country does the player live in?")
+@app_commands.choices(nationality=[
+        app_commands.Choice(name="Netherlands", value="NL"),
+        app_commands.Choice(name="Belgium", value="BE"),
+        app_commands.Choice(name="Luxembourg", value="LU"),
+        app_commands.Choice(name="Turkey", value="TR"),
+        app_commands.Choice(name="Morocco", value="MA"),
+        app_commands.Choice(name="Dominican Republic", value="DO"),
+        app_commands.Choice(name="Spain", value="ES"),
+        app_commands.Choice(name="Vietnam", value="VN"),
+        app_commands.Choice(name="Algeria", value="DZ"),
+        app_commands.Choice(name="Iraq", value="IQ"),
+        app_commands.Choice(name="Suriname", value="SR"),
+        app_commands.Choice(name="Japan", value="JP"),
+        app_commands.Choice(name="Italy", value="IT"),
+        app_commands.Choice(name="Curacao", value="CW"),
+        app_commands.Choice(name="Indonesia", value="ID"),
+        app_commands.Choice(name="Germany", value="DE"),
+    ])
+async def server_add_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
     discord_id = int(discord_id)
-    await server_add_player(ctx, brawlhalla_id, discord_id, discord_name)
+    await server_add_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
 
 @tree.command(name='remove_server_player', description="(You aren't suposed to run this) Manually removes a player off the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
@@ -130,5 +179,5 @@ async def on_ready():
 
 def run_dadabase():
     # client.run(os.environ[3])
-    # client.run(os.environ[2]) # Testing
+    client.run(os.environ[2]) # Testing
     return

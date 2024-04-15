@@ -1,6 +1,6 @@
 import json
 
-DATA_LINKS_LOCATION_SERVER_SINGLE_ID = 'Dadabase/data/servers/'
+SERVERS_DATA_LOCATION = 'Dadabase/data/servers/'
 
 def read_link_data(path, id):
   with open(path + str(id) + '.json') as data:

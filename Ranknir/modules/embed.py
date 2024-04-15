@@ -89,6 +89,8 @@ def prepare_embeds_server(server, players_sorted):
                 flag = "<:CW:1226200567450435704>"
             elif flag_source == "ID":
                 flag = "<:ID:1226368641985941504>"
+            elif flag_source == "DE":
+                flag = "<:DE:1228355548810842212>"
             else:
                 flag = ""
             embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"

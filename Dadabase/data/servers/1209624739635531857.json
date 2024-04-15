@@ -151,6 +151,24 @@
             "brawlhalla_name": "AJ Styles",
             "discord_id": 49,
             "discord_name": "AJ Styles"
+        },
+        {
+            "brawlhalla_id": 97639933,
+            "brawlhalla_name": "",
+            "discord_id": 51,
+            "discord_name": "csillagszemu"
+        },
+        {
+            "brawlhalla_id": 2129752,
+            "brawlhalla_name": "QB | Mr. Szillaz",
+            "discord_id": 53,
+            "discord_name": "Mr.Szillaz"
+        },
+        {
+            "brawlhalla_id": 105100173,
+            "brawlhalla_name": "l\u00c3\u00b6v\u00c3\u00b6m_a_silvereket",
+            "discord_id": 124,
+            "discord_name": "L\u00f6v\u00f6m_a_silvereket"
         }
     ]
 }
