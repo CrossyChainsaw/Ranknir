@@ -26,7 +26,7 @@ CLAN_DATA = {
 }
 
 CLAN_OBJECT = Clan('test', 1131552899378466887, 1131552899378466887, [0], 0x000000, '', 705783420189671458)
-SERVER_OBJECT = Server('test', 1131552899378466887, 1131552899378466887, 705783420189671458, 0xFFFFFF, 'current', 'Dadabase/data/servers/705783420189671458.json')
+SERVER_OBJECT = Server('test', 1131552899378466887, 1131552899378466887, 705783420189671458, 0xFFFFFF, 'current', 'Dadabase/data/servers/705783420189671458.json', channel_rotating_id=1131552899378466887)
 CLAN_PLAYER_DATA = [{"brawlhalla_id": "12974529", "brawlhalla_name": "CrossyChris (PS4)"}, {"brawlhalla_id": "12974529", "brawlhalla_name": "CrossyChris (PS4)"}]
 PLAYER_OBJECT_DATA = [
     Player('Lionheart', 2200, 2400),

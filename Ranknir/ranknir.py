@@ -6,13 +6,13 @@ from Ranknir.modules.ping import ping
 from Ranknir.modules.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_elo_list
 from Ranknir.data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United, Grant, aura
-from Ranknir.data.server_data import Brawlhalla_NL, Test_Server, M3OW, Brawlhalla_Hungary
+from Ranknir.data.server_data import Brawlhalla_NL, Test_Server, M30W, Brawlhalla_Hungary
 from Ranknir.data.player_data import CROSSYCHAINSAW_ID, SHAW_ID, DISCARDS_ID
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.modules.leave_server import leave_server
 from Ranknir.modules.get_current_order import get_current_order
-from Ranknir.modules.tests.test_elo_list import test_clan_console_mix_1v1_elo_list, test_server_1v1_elo_list
+from Ranknir.modules.tests.test_elo_list import test_clan_console_mix_1v1_elo_list, test_server_1v1_elo_list, test_server_1v1_and_2v2_and_rotating_elo_list
 os = Xos()
 
 intents = discord.Intents().all()
@@ -32,7 +32,7 @@ async def on_ready():
             print("current turn: " + str(turn))
 
             # print order
-            order = [Pandation, Tews, Frost, Brawlhalla_NL, Empire_United, KryptX, M3OW, Grant, aura, Brawlhalla_Hungary]
+            order = [Pandation, Tews, Frost, Brawlhalla_NL, Empire_United, KryptX, M30W, Grant, aura, Brawlhalla_Hungary]
             new_order = get_current_order(order, turn)
             await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=new_order))
 
@@ -50,7 +50,7 @@ async def on_ready():
             elif turn == 5:
                 await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(KryptX, bot)
             elif turn == 6:
-                await server_1v1_and_2v2_and_rotating_elo_list(M3OW, bot)
+                await server_1v1_and_2v2_and_rotating_elo_list(M30W, bot)
             elif turn == 7:
                 await clan_console_mix_1v1_and_2v2_elo_list(Grant, bot)
             elif turn == 8:
@@ -94,15 +94,20 @@ async def command_spit_fire(ctx):
 async def leave_server_command(ctx, server_id):
     await leave_server(bot, ctx, server_id)
 
-@bot.command(name='testclan')
+@bot.command(name='testclan1')
 @has_permissions(manage_roles=True, ban_members=True)
-async def test_clan_elo_list_command(ctx):
+async def test_clan_console_mix_1v1_elo_list_command(ctx):
     await test_clan_console_mix_1v1_elo_list(bot, ctx)
 
-@bot.command(name='testserver')
+@bot.command(name='testserver1')
 @has_permissions(manage_roles=True, ban_members=True)
-async def test_server_elo_list_command(ctx):
+async def test_server_1v1_elo_list_command(ctx):
     await test_server_1v1_elo_list(bot, ctx)
+
+@bot.command(name='testserver3')
+@has_permissions(manage_roles=True, ban_members=True)
+async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
+    await test_server_1v1_and_2v2_and_rotating_elo_list(bot, ctx)
 
 def run_ranknir():
     bot.run(os.environ[1])
