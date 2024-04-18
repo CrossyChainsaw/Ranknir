@@ -1,5 +1,5 @@
 from Ranknir.data.clan_data import Pandation, Tews, KryptX, Grant
-from Ranknir.data.server_data import Brawlhalla_NL, M3OW
+from Ranknir.data.server_data import Brawlhalla_NL, M30W
 
 
 async def spit_fire(bot):
