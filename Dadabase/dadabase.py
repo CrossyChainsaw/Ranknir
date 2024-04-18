@@ -1,24 +1,24 @@
-## hey i was working on #172
+## hey i was refactoring dadabase to be structured like queen spy folderwise
 
 
 import discord
 from discord import app_commands
 from discord.ext import commands
 from Global.Xos import Xos
-from Dadabase.modules.claim import claim
-from Dadabase.modules.check import check
-from Dadabase.modules.ping import ping
-from Dadabase.modules.configure_clan import configure_clan
-from Dadabase.modules.console.console_add import console_add
-from Dadabase.modules.console.console_list import console_list
-from Dadabase.modules.console.console_remove import console_remove
+from Dadabase.commands.claim import claim
+from Dadabase.commands.check import check
+from Dadabase.commands.ping import ping
+from Dadabase.commands.configure_clan import configure_clan
+from Dadabase.commands.add_console_player import add_console_player
+from Dadabase.commands.console_player_list import console_player_list
+from Dadabase.commands.remove_console_player import remove_console_player
 from discord.ext.commands import has_permissions
-from Dadabase.modules.configure_server import configure_server
-from Dadabase.modules.server.server_add_player import server_add_player
-from Dadabase.modules.server.server_rm_player import server_rm_player
-from Dadabase.modules.account_linkers.al_add import al_add
-from Dadabase.modules.account_linkers.al_list import al_list
-from Dadabase.modules.account_linkers.al_remove import al_remove
+from Dadabase.commands.configure_server import configure_server
+from Dadabase.modules.server.add_server_player import add_server_player
+from Dadabase.modules.server.remove_server_player import remove_server_player
+from Dadabase.modules.account_linkers.add_account_linker import add_account_linker
+from Dadabase.commands.account_linker_list import account_linker_list
+from Dadabase.modules.account_linkers.remove_account_linker import remove_account_linker
 from Ranknir.data.server_data import Brawlhalla_NL, M3OW, Test_Server
 from Ranknir.data.clan_data import Pandation, test_clan
 os = Xos()
@@ -43,7 +43,12 @@ all_countries = [
     app_commands.Choice(name="Italy", value="IT"),
     app_commands.Choice(name="Curacao", value="CW"),
     app_commands.Choice(name="Indonesia", value="ID"),
-    app_commands.Choice(name="Germany", value="DE")]
+    app_commands.Choice(name="Germany", value="DE"),
+	app_commands.Choice(name="Canada", value="CA"),
+	app_commands.Choice(name="United States of America", value="US"),
+	app_commands.Choice(name="Brazil", value="BR"),
+	app_commands.Choice(name="Argentina", value="AR"),
+	app_commands.Choice(name="Chile", value="CL")]
 
 
 intents = discord.Intents.default()
@@ -60,16 +65,15 @@ all_server_ids.extend(clan_based_server_ids)
 async def on_ready():
     print(f'We have logged in as {client.user}')
 
-
-@tree.command(name='ping')
-async def ping_command(interaction):
-    await ping(interaction)
+@tree.command(name='check', description='Check your linked Brawlhalla account')
+async def check_command(interaction):
+    await check(interaction)
 
 
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
-@app_commands.describe(country_of_residence="Which country does the player live in?")
-@app_commands.choices(country_of_residence=benelux_countries)
-@app_commands.describe(nationality="Which country does the player live in?")
+@app_commands.describe(country_of_residence="Which country do you live in?")
+@app_commands.choices(country_of_residence=all_countries)
+@app_commands.describe(nationality="What is your nationality?")
 @app_commands.choices(nationality=all_countries)
 async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], nationality: app_commands.Choice[str]):
     print('Someone called claim!')
@@ -88,37 +92,27 @@ async def claim_command(interaction, brawlhalla_id:int, country_of_residence: ap
     else:
         await interaction.response.send_message(f'{member.name} does not have permission to use this command')
 
+@tree.command(name='ping')
+async def ping_command(interaction):
+    await ping(interaction)
 
-@tree.command(name='check', description='Check your linked Brawlhalla account')
-async def check_command(interaction):
-    await check(interaction)
 
 
 @tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
 @app_commands.checks.has_permissions(administrator=True)
-async def al_add_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
-    await al_add(interaction, brawlhalla_id, brawlhalla_name)
+async def add_account_linker_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
+    await add_account_linker(interaction, brawlhalla_id, brawlhalla_name)
 
 
-@tree.command(name='account_linkers_list', description='List all Account Linkers')
-async def al_list_command(interaction):
-    await al_list(interaction)
+@tree.command(name='account_linker_list', description='List all Account Linkers')
+async def account_linker_list_command(interaction):
+    await account_linker_list(interaction)
 
 
 @tree.command(name='remove_account_linker', description='Remove an Account Linker')
 @app_commands.checks.has_permissions(administrator=True)
-async def al_remove_command(interaction, brawlhalla_id:int):
-    await al_remove(interaction, brawlhalla_id)
-
-
-@tree.command(name='new', description='new')
-@app_commands.describe(option="This is a description of what the option means")
-@app_commands.choices(option=[
-        app_commands.Choice(name="Option 1", value="1"),
-        app_commands.Choice(name="Option 2", value="2")
-    ])
-async def server_add_player_command(interaction: discord.Interaction, option: app_commands.Choice[str]):
-    await interaction.response.send_message(option.value)
+async def remove_account_linker_command(interaction, brawlhalla_id:int):
+    await remove_account_linker(interaction, brawlhalla_id)
 
 
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
@@ -127,32 +121,32 @@ async def server_add_player_command(interaction: discord.Interaction, option: ap
 @app_commands.choices(country_of_residence=all_countries)
 @app_commands.describe(nationality="Which country does the player live in?")
 @app_commands.choices(nationality=all_countries)
-async def server_add_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
+async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
     discord_id = int(discord_id)
-    await server_add_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
+    await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
 
 
 @tree.command(name='remove_server_player', description="(You aren't suposed to run this) Manually removes a player off the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
-async def server_remove_player_command(interaction, brawlhalla_id:int):
-    await server_rm_player(interaction, brawlhalla_id)
+async def remove_server_player_command(interaction, brawlhalla_id:int):
+    await remove_server_player(interaction, brawlhalla_id)
 
 
 @tree.command(name='add_console_player', description='Add a console player')
 @app_commands.checks.has_permissions(administrator=True)
-async def console_add_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
-    await console_add(interaction, brawlhalla_id, brawlhalla_name)
+async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
+    await add_console_player(interaction, brawlhalla_id, brawlhalla_name)
 
 
 @tree.command(name='console_player_list', description='List all console players')
-async def console_list_command(interaction):
-    await console_list(interaction)
+async def console_player_list_command(interaction):
+    await console_player_list(interaction)
 
 
 @tree.command(name='remove_console_player', description='Remove a console player')
 @app_commands.checks.has_permissions(administrator=True)
-async def console_remove_command(interaction, brawlhalla_id:int):
-    await console_remove(interaction, brawlhalla_id)
+async def remove_console_player_command(interaction, brawlhalla_id:int):
+    await remove_console_player(interaction, brawlhalla_id)
 
 
 @tree.command(name='configure_clan', description="(You aren't suposed to run this) Generate a file with clan data for the current clan server")
@@ -174,6 +168,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    # client.run(os.environ[3])
-    client.run(os.environ[2]) # Testing
+    client.run(os.environ[3])
+    # client.run(os.environ[2]) # Testing
     return

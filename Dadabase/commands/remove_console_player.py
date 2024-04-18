@@ -1,8 +1,8 @@
 import json
-from Dadabase.modules.console.console_data import load_data, DATA_LOCATION
+from Dadabase.modules.console_data import load_data, DATA_LOCATION
 
 
-async def console_remove(interaction, bh_id):
+async def remove_console_player(interaction, bh_id):
     data = load_data(interaction.guild.id)
     bh_name = __remove_ps4_player(interaction, bh_id, data)
     await interaction.resopnse.send_message(bh_name + " was removed")

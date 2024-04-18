@@ -1,8 +1,8 @@
-from Dadabase.modules.console.console_data import load_data
-from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
+from Dadabase.modules.console_data import load_data
+from Dadabase.modules.account_linker_data import NAME_FOR_REMOVE_PLAYERS
 import discord
 
-async def al_list(interaction):
+async def account_linker_list(interaction):
     data = load_data(interaction.guild.id)
     msg = __format_msg(data)
     embed = __create_embed(msg)

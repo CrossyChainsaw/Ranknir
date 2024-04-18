@@ -1,8 +1,8 @@
 import json
-from Dadabase.modules.console.console_data import load_data, DATA_LOCATION
-from Dadabase.modules.account_linkers.al_data import NAME_FOR_REMOVE_PLAYERS
+from Dadabase.modules.console_data import load_data, DATA_LOCATION
+from Dadabase.modules.account_linker_data import NAME_FOR_REMOVE_PLAYERS
 
-async def al_remove(interaction, bh_id):
+async def remove_account_linker(interaction, bh_id):
     data = load_data(interaction.guild.id)
     bh_name = __remove_rm_player(interaction, bh_id, data)
     await interaction.response.send_message(bh_name + " was removed")

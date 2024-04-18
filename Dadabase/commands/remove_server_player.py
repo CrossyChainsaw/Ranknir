@@ -2,7 +2,7 @@ import json
 from Dadabase.modules.data import read_data, write_data
 DADABASE_SERVER_DATA_FOLDER = "Dadabase/data/servers/"
 
-async def server_rm_player(interaction, brawlhalla_id):
+async def remove_server_player(interaction, brawlhalla_id):
     server_id = interaction.guild.id
     brawlhalla_name = ""
     data = read_data(DADABASE_SERVER_DATA_FOLDER, server_id)

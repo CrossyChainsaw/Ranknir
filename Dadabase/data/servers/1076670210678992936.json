@@ -4,9 +4,11 @@
     "links": [
         {
             "brawlhalla_id": 60269269,
-            "brawlhalla_name": "",
+            "brawlhalla_name": "M30W | frieren <3",
             "discord_id": 673371837782032434,
-            "discord_name": "yurei._."
+            "discord_name": "yurei._.",
+            "country": "US",
+            "nationality": "IT"
         },
         {
             "brawlhalla_id": 26417667,
@@ -70,9 +72,11 @@
         },
         {
             "brawlhalla_id": 7364605,
-            "brawlhalla_name": "broken hand in cast on hotspot",
+            "brawlhalla_name": "CrossyChainsaw LFT 2400+",
             "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw"
+            "discord_name": "crossychainsaw",
+            "country": "NL",
+            "nationality": "TR"
         },
         {
             "brawlhalla_id": 7108006,
@@ -287,6 +291,38 @@
             "brawlhalla_name": "M30W | R Y 0 T",
             "discord_id": 1065004939186802698,
             "discord_name": "r4y_ry0t",
+            "country": "",
+            "nationality": ""
+        },
+        {
+            "brawlhalla_id": 3206422,
+            "brawlhalla_name": "M30W | Yunpyo",
+            "discord_id": 272369923852861440,
+            "discord_name": "yunpyo4869",
+            "country": "",
+            "nationality": ""
+        },
+        {
+            "brawlhalla_id": 6560836,
+            "brawlhalla_name": "M30W | sphynx",
+            "discord_id": 295073416879407104,
+            "discord_name": "notsphynx",
+            "country": "",
+            "nationality": ""
+        },
+        {
+            "brawlhalla_id": 84060148,
+            "brawlhalla_name": "twitch.tv/seakxp",
+            "discord_id": 1059138381696745512,
+            "discord_name": "seakx",
+            "country": "",
+            "nationality": ""
+        },
+        {
+            "brawlhalla_id": 90678238,
+            "brawlhalla_name": "Lamo",
+            "discord_id": 821469455175385118,
+            "discord_name": "lamobh",
             "country": "",
             "nationality": ""
         }

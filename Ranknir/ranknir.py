@@ -32,7 +32,7 @@ async def on_ready():
             print("current turn: " + str(turn))
 
             # print order
-            order = [Pandation, Tews, Frost, Brawlhalla_NL, Empire_United, KryptX, M3OW, Grant, aura]
+            order = [Pandation, Tews, Frost, Brawlhalla_NL, Empire_United, KryptX, M3OW, Grant, aura, Brawlhalla_Hungary]
             new_order = get_current_order(order, turn)
             await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=new_order))
 
@@ -105,6 +105,6 @@ async def test_server_elo_list_command(ctx):
     await test_server_1v1_elo_list(bot, ctx)
 
 def run_ranknir():
-    # bot.run(os.environ[1])
+    bot.run(os.environ[1])
     # bot.run(os.environ[2]) # Testing
     return

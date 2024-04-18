@@ -1,8 +1,8 @@
-from Dadabase.modules.console.console_data import load_data
+from Dadabase.modules.console_data import load_data
 import discord
 
 
-async def console_list(interaction):
+async def console_player_list(interaction):
     data = load_data(interaction.guild.id)
     msg = __format_msg(data)
     embed = __create_embed(msg)

@@ -11,7 +11,7 @@ def __structure_option_if_empty(option):
     except:
         return "NL"
 
-async def server_add_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality):
+async def add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality):
     country_of_residence = __structure_option_if_empty(country_of_residence)
     nationality = __structure_option_if_empty(nationality)
     ranked_stats = __request(brawlhalla_id)
