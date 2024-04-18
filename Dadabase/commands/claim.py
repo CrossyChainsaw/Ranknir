@@ -1,7 +1,7 @@
 import json
 from Dadabase.modules.api import fetch_player_ranked_stats
 from Dadabase.classes.User import User
-from Dadabase.modules.data import read_link_data, write_data, read_data, SERVERS_DATA_LOCATION
+from Dadabase.modules.data_management import read_link_data, write_data, read_data, SERVERS_DATA_LOCATION
 from Dadabase.classes.Server import Server
 
 

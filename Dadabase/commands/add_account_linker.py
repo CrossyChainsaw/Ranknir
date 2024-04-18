@@ -1,12 +1,11 @@
 import json
 from Dadabase.classes.Account import Account
-from Dadabase.modules.console_data import load_data, DATA_LOCATION
-from Dadabase.modules.account_linker_data import NAME_FOR_REMOVE_PLAYERS
+from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION, NAME_FOR_REMOVE_PLAYERS
 
 async def add_account_linker(interaction, bh_id, bh_name):
     if __validate_id(bh_id):
         account = __create_account(bh_id, bh_name)
-        data = load_data(interaction.guild.id)
+        data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
         __add_al_player(interaction, account, data)
         await interaction.response.send_message(bh_name + ' was added')
     else:
@@ -15,7 +14,7 @@ async def add_account_linker(interaction, bh_id, bh_name):
 
 def __add_al_player(interaction, account, data):
     data[NAME_FOR_REMOVE_PLAYERS].append(account.__dict__)
-    with open(DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
+    with open(CLANS_DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
         json.dump(data, file)
 
 

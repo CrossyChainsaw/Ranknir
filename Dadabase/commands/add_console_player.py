@@ -1,12 +1,12 @@
 import json
 from Dadabase.classes.Account import Account
-from Dadabase.modules.console_data import load_data, DATA_LOCATION
+from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION
 
 
 async def add_console_player(interaction, bh_id, bh_name):
     if __validate_id(bh_id):
         account = __create_account(bh_id, bh_name)
-        data = load_data(interaction.guild.id)
+        data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
         __add_ps4_player(interaction, account, data)
         await interaction.response.send_message(bh_name + ' was added')
     else:
@@ -15,7 +15,7 @@ async def add_console_player(interaction, bh_id, bh_name):
 
 def __add_ps4_player(interaction, account, data):
     data['ps4_players'].append(account.__dict__)
-    with open(DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
+    with open(CLANS_DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
         json.dump(data, file, indent=4)
 
 

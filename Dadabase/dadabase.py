@@ -23,11 +23,11 @@ from Ranknir.data.server_data import Brawlhalla_NL, M3OW, Test_Server
 from Ranknir.data.clan_data import Pandation, test_clan
 os = Xos()
 
-benelux_countries = [    
+BENELUX_COUNTRIES = [    
     app_commands.Choice(name="Netherlands", value="NL"),
     app_commands.Choice(name="Belgium", value="BE"),
     app_commands.Choice(name="Luxembourg", value="LU")]
-all_countries = [
+ALL_COUNTRIES = [
     app_commands.Choice(name="Netherlands", value="NL"),
     app_commands.Choice(name="Belgium", value="BE"),
     app_commands.Choice(name="Luxembourg", value="LU"),
@@ -55,15 +55,39 @@ intents = discord.Intents.default()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
 
-server_based_server_ids = [Brawlhalla_NL.id, M3OW.id, Test_Server.id]
-clan_based_server_ids = [Pandation.server_id, test_clan.server_id]
-
-all_server_ids = server_based_server_ids.copy()
-all_server_ids.extend(clan_based_server_ids)
 
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
+
+
+@tree.command(name='account_linker_list', description='List all Account Linkers')
+async def account_linker_list_command(interaction):
+    await account_linker_list(interaction)
+
+
+@tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
+@app_commands.checks.has_permissions(administrator=True)
+async def add_account_linker_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
+    await add_account_linker(interaction, brawlhalla_id, brawlhalla_name)
+
+
+@tree.command(name='add_console_player', description='Add a console player')
+@app_commands.checks.has_permissions(administrator=True)
+async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
+    await add_console_player(interaction, brawlhalla_id, brawlhalla_name)
+
+
+@tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
+@app_commands.checks.has_permissions(administrator=True)
+@app_commands.describe(country_of_residence="Which country does the player live in?")
+@app_commands.choices(country_of_residence=ALL_COUNTRIES)
+@app_commands.describe(nationality="Which country does the player live in?")
+@app_commands.choices(nationality=ALL_COUNTRIES)
+async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
+    discord_id = int(discord_id)
+    await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
+
 
 @tree.command(name='check', description='Check your linked Brawlhalla account')
 async def check_command(interaction):
@@ -72,9 +96,9 @@ async def check_command(interaction):
 
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
 @app_commands.describe(country_of_residence="Which country do you live in?")
-@app_commands.choices(country_of_residence=all_countries)
+@app_commands.choices(country_of_residence=ALL_COUNTRIES)
 @app_commands.describe(nationality="What is your nationality?")
-@app_commands.choices(nationality=all_countries)
+@app_commands.choices(nationality=ALL_COUNTRIES)
 async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], nationality: app_commands.Choice[str]):
     print('Someone called claim!')
     
@@ -92,62 +116,6 @@ async def claim_command(interaction, brawlhalla_id:int, country_of_residence: ap
     else:
         await interaction.response.send_message(f'{member.name} does not have permission to use this command')
 
-@tree.command(name='ping')
-async def ping_command(interaction):
-    await ping(interaction)
-
-
-
-@tree.command(name='add_account_linker', description='Specify a player to remove from the leaderboard')
-@app_commands.checks.has_permissions(administrator=True)
-async def add_account_linker_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
-    await add_account_linker(interaction, brawlhalla_id, brawlhalla_name)
-
-
-@tree.command(name='account_linker_list', description='List all Account Linkers')
-async def account_linker_list_command(interaction):
-    await account_linker_list(interaction)
-
-
-@tree.command(name='remove_account_linker', description='Remove an Account Linker')
-@app_commands.checks.has_permissions(administrator=True)
-async def remove_account_linker_command(interaction, brawlhalla_id:int):
-    await remove_account_linker(interaction, brawlhalla_id)
-
-
-@tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
-@app_commands.checks.has_permissions(administrator=True)
-@app_commands.describe(country_of_residence="Which country does the player live in?")
-@app_commands.choices(country_of_residence=all_countries)
-@app_commands.describe(nationality="Which country does the player live in?")
-@app_commands.choices(nationality=all_countries)
-async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
-    discord_id = int(discord_id)
-    await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
-
-
-@tree.command(name='remove_server_player', description="(You aren't suposed to run this) Manually removes a player off the server leaderboard")
-@app_commands.checks.has_permissions(administrator=True)
-async def remove_server_player_command(interaction, brawlhalla_id:int):
-    await remove_server_player(interaction, brawlhalla_id)
-
-
-@tree.command(name='add_console_player', description='Add a console player')
-@app_commands.checks.has_permissions(administrator=True)
-async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_name:str):
-    await add_console_player(interaction, brawlhalla_id, brawlhalla_name)
-
-
-@tree.command(name='console_player_list', description='List all console players')
-async def console_player_list_command(interaction):
-    await console_player_list(interaction)
-
-
-@tree.command(name='remove_console_player', description='Remove a console player')
-@app_commands.checks.has_permissions(administrator=True)
-async def remove_console_player_command(interaction, brawlhalla_id:int):
-    await remove_console_player(interaction, brawlhalla_id)
-
 
 @tree.command(name='configure_clan', description="(You aren't suposed to run this) Generate a file with clan data for the current clan server")
 @app_commands.checks.has_permissions(administrator=True)
@@ -159,6 +127,34 @@ async def configure_clan_command(interaction):
 @app_commands.checks.has_permissions(administrator=True)
 async def configure_server_command(interaction):
     await configure_server(interaction)
+
+
+@tree.command(name='console_player_list', description='List all console players')
+async def console_player_list_command(interaction):
+    await console_player_list(interaction)
+
+
+@tree.command(name='ping')
+async def ping_command(interaction):
+    await ping(interaction)
+
+
+@tree.command(name='remove_account_linker', description='Remove an Account Linker')
+@app_commands.checks.has_permissions(administrator=True)
+async def remove_account_linker_command(interaction, brawlhalla_id:int):
+    await remove_account_linker(interaction, brawlhalla_id)
+
+
+@tree.command(name='remove_console_player', description='Remove a console player')
+@app_commands.checks.has_permissions(administrator=True)
+async def remove_console_player_command(interaction, brawlhalla_id:int):
+    await remove_console_player(interaction, brawlhalla_id)
+
+
+@tree.command(name='remove_server_player', description="(You aren't suposed to run this) Manually removes a player off the server leaderboard")
+@app_commands.checks.has_permissions(administrator=True)
+async def remove_server_player_command(interaction, brawlhalla_id:int):
+    await remove_server_player(interaction, brawlhalla_id)
 
 
 # sync everything up

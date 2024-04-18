@@ -1,4 +1,4 @@
-from Dadabase.modules.data import read_link_data, SERVERS_DATA_LOCATION
+from Dadabase.modules.data_management import read_link_data, SERVERS_DATA_LOCATION
 from Dadabase.classes.User import User
 
 
