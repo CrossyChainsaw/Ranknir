@@ -1,21 +1,13 @@
-from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION
+from Dadabase.modules.data_management import read_data, DATA_KEY_FOR_CONSOLE_PLAYERS, CLANS_DATA_LOCATION
+from Dadabase.modules.format import format_embed_list
 import discord
 
 
 async def console_player_list(interaction):
-    data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
-    msg = __format_msg(data)
+    clan_data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
+    msg = format_embed_list(clan_data, DATA_KEY_FOR_CONSOLE_PLAYERS)
     embed = __create_embed(msg)
     await interaction.response.send_message(embed=embed)
-
-
-def __format_msg(data):
-    msg = ''
-    count = 1
-    for entry in data['ps4_players']:
-        msg += f"{count}. **id:** {entry['brawlhalla_id']}, **name**: {entry['brawlhalla_name']}\n"
-        count += 1
-    return msg
 
 
 def __create_embed(msg):

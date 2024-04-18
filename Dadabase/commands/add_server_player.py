@@ -9,14 +9,14 @@ def __structure_option_if_empty(option):
         print(option.value)
         return option.value
     except:
-        return "NL"
+        return ""
 
 async def add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality):
     country_of_residence = __structure_option_if_empty(country_of_residence)
     nationality = __structure_option_if_empty(nationality)
-    ranked_stats = __request(brawlhalla_id)
+    ranked_stats = fetch_player_ranked_stats(brawlhalla_id)
     if (ranked_stats):
-        user = __create_user(interaction, ranked_stats, discord_id, discord_name, country_of_residence, nationality)
+        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], discord_id, discord_name, country_of_residence, nationality)
         condition = __already_claimed(interaction, user.discord_id)
         if condition == True:
             await __update_link(interaction, user)
@@ -38,9 +38,8 @@ def __already_claimed(interaction, discord_id):
 
 async def __add_link(interaction, user):
     print('Entered: __add_link()')
-    __save_link(interaction, user)
+    __save_data(interaction, user)
     await interaction.response.send_message(f"Added brawlhalla account: {user.brawlhalla_name} (ID: {user.brawlhalla_id})")
-    
 
 
 async def __update_link(interaction, user):
@@ -60,30 +59,9 @@ async def __update_link(interaction, user):
     await interaction.response.send_message("Updated brawlhalla account to ```brawlhalla_name: "+user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
 
 
-def __request(brawlhalla_id):
-    print('Entered: __request()')
-    return fetch_player_ranked_stats(brawlhalla_id)
-
-
-def __save_link(interaction, user):
-    print('Entered: __save_link()')
-    __save_data(user, interaction)
-    return user.brawlhalla_name
-
-
-def __create_user(interaction, ranked_stats, discord_id, discord_name, country_of_residence, nationality):
-    print('Entered: __create_user()')
-    brawlhalla_id = ranked_stats['brawlhalla_id']
-    brawlhalla_name = ranked_stats['name']
-    user = User(brawlhalla_id, brawlhalla_name, discord_id, discord_name, country_of_residence, nationality)
-    return user
-
-
-def __save_data(user, interaction):
+def __save_data(interaction, user):
     print('Entered: __save_data()')
     link_data = read_link_data(SERVERS_DATA_LOCATION, interaction.guild.id)
     link_data.append(user.__dict__)
     server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
-    print(user)
-    print(server)
     write_data(SERVERS_DATA_LOCATION, server.__dict__, interaction.guild.id)
