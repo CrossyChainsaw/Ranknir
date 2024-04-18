@@ -7,9 +7,9 @@ from Dadabase.classes.Server import Server
 
 async def claim(interaction, brawlhalla_id, country_of_residence, nationality):
     print("Entered Claim")
-    ranked_stats = __request(brawlhalla_id)
+    ranked_stats = fetch_player_ranked_stats(brawlhalla_id)
     if (ranked_stats):
-        user = __create_user(interaction, ranked_stats, country_of_residence, nationality)
+        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], interaction.user.id, interaction.user.name, country_of_residence, nationality)
         condition = __already_claimed(interaction)
         if condition == True:
             print('updating link')
@@ -34,7 +34,7 @@ def __already_claimed(interaction):
 
 async def __add_link(interaction, user):
     print('Entered: __add_link()')
-    brawlhalla_name = __save_link(interaction, user)
+    brawlhalla_name = __save_data(interaction, user)
     await interaction.response.send_message("Claimed brawlhalla account: " + brawlhalla_name)
 
 
@@ -58,32 +58,9 @@ async def __update_link(interaction, user):
 )
 
 
-def __request(brawlhalla_id):
-    print('Entered: __request()')
-    return fetch_player_ranked_stats(brawlhalla_id)
-
-
-def __save_link(interaction, user):
-    print('Entered: __save_link()')
-    __save_data(user, interaction)
-    return user.brawlhalla_name
-
-
-def __create_user(interaction, ranked_stats, country_of_residence, nationality):
-    print('Entered: __create_user()')
-    brawlhalla_id = ranked_stats['brawlhalla_id']
-    brawlhalla_name = ranked_stats['name']
-    discord_id = interaction.user.id
-    discord_name = interaction.user.name
-    user = User(brawlhalla_id, brawlhalla_name, discord_id, discord_name, country_of_residence, nationality)
-    return user
-
-
-def __save_data(user, interaction):
+def __save_data(interaction, user):
     print('Entered: __save_data()')
-    link_data = read_link_data(
-        SERVERS_DATA_LOCATION, interaction.guild.id)
+    link_data = read_link_data(SERVERS_DATA_LOCATION, interaction.guild.id)
     link_data.append(user.__dict__)
     server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
-    write_data(SERVERS_DATA_LOCATION,
-               server.__dict__, interaction.guild.id)
+    write_data(SERVERS_DATA_LOCATION, server.__dict__, interaction.guild.id)
