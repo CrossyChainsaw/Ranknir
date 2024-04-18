@@ -1,10 +1,10 @@
 import json
-from Dadabase.classes.Account import Account
+from Dadabase.classes.BrawlhallaAccount import BrawlhallaAccount
 from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION, NAME_FOR_REMOVE_PLAYERS
 
 async def add_account_linker(interaction, bh_id, bh_name):
     if __validate_id(bh_id):
-        account = __create_account(bh_id, bh_name)
+        account = __create_brawlhalla_account(bh_id, bh_name)
         data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
         __add_al_player(interaction, account, data)
         await interaction.response.send_message(bh_name + ' was added')
@@ -18,8 +18,8 @@ def __add_al_player(interaction, account, data):
         json.dump(data, file)
 
 
-def __create_account(brawlhalla_id, brawlhalla_name):
-    account = Account(brawlhalla_id, brawlhalla_name)
+def __create_brawlhalla_account(brawlhalla_id, brawlhalla_name):
+    account = BrawlhallaAccount(brawlhalla_id, brawlhalla_name)
     return account
 
 def __validate_id(id):

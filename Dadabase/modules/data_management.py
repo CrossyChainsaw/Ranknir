@@ -3,6 +3,7 @@ import json
 SERVERS_DATA_LOCATION = 'Dadabase/data/servers/'
 CLANS_DATA_LOCATION = 'Dadabase/data/clans/'
 NAME_FOR_REMOVE_PLAYERS = 'al_players' # account linkers / remove players / crossplayers
+NAME_FOR_CONSOLE_PLAYERS = 'ps4_players' # console players
 
 def read_link_data(path, id):
   with open(path + str(id) + '.json') as data:

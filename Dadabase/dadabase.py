@@ -1,5 +1,5 @@
 ## hey i was refactoring dadabase to be structured like queen spy folderwise
-
+## and cleaning functions cleaning modules making them more independant
 
 import discord
 from discord import app_commands
@@ -14,11 +14,11 @@ from Dadabase.commands.console_player_list import console_player_list
 from Dadabase.commands.remove_console_player import remove_console_player
 from discord.ext.commands import has_permissions
 from Dadabase.commands.configure_server import configure_server
-from Dadabase.modules.server.add_server_player import add_server_player
-from Dadabase.modules.server.remove_server_player import remove_server_player
-from Dadabase.modules.account_linkers.add_account_linker import add_account_linker
+from Dadabase.commands.add_server_player import add_server_player
+from Dadabase.commands.remove_server_player import remove_server_player
+from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
-from Dadabase.modules.account_linkers.remove_account_linker import remove_account_linker
+from Dadabase.commands.remove_account_linker import remove_account_linker
 from Ranknir.data.server_data import Brawlhalla_NL, M3OW, Test_Server
 from Ranknir.data.clan_data import Pandation, test_clan
 os = Xos()
