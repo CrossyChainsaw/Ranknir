@@ -29,3 +29,15 @@ def add_player_to_clan_data(interaction, data, brawlhalla_account, data_location
     data[key].append(brawlhalla_account.__dict__)
     with open(data_location + str(interaction.guild.id) + '.json', 'w') as file:
         json.dump(data, file, indent=4)
+
+
+def remove_player_from_clan_data(interaction, brawlhalla_id, data, key):
+    """Removes a player from clan data. Used for Console Players and Account Linkers"""
+    bh_name = ""
+    for index, player in enumerate(data[key]):
+        if player['brawlhalla_id'] == str(brawlhalla_id):
+            bh_name = data[key].pop(index)['brawlhalla_name']
+            with open(CLANS_DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
+                json.dump(data, file)
+            break
+    return bh_name

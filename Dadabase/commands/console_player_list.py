@@ -1,5 +1,5 @@
 from Dadabase.modules.data_management import read_data, DATA_KEY_FOR_CONSOLE_PLAYERS, CLANS_DATA_LOCATION
-from Dadabase.modules.format import format_embed_list
+from Dadabase.modules.format_embeds import format_embed_list
 import discord
 
 

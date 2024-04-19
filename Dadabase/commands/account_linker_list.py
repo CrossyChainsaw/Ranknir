@@ -1,5 +1,5 @@
 from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION, DATA_KEY_FOR_ACCOUNT_LINKERS
-from Dadabase.modules.format import format_embed_list
+from Dadabase.modules.format_embeds import format_embed_list
 import discord
 
 async def account_linker_list(interaction):
