@@ -83,7 +83,6 @@ async def command_ping(ctx):
     await ping(ctx)
 
 
-# @bot.command(name='spit')
 @bot.command(name='spit')
 @has_permissions(manage_roles=True, ban_members=True)
 async def command_spit_fire(ctx):
@@ -110,6 +109,6 @@ async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
     await test_server_1v1_and_2v2_and_rotating_elo_list(bot, ctx)
 
 def run_ranknir():
-    bot.run(os.environ[1])
+    # bot.run(os.environ[1])
     # bot.run(os.environ[2]) # Testing
     return
