@@ -3,7 +3,6 @@
 
 import discord
 from discord import app_commands
-from discord.ext import commands
 from Global.Xos import Xos
 from Dadabase.commands.claim import claim
 from Dadabase.commands.check import check
@@ -12,43 +11,19 @@ from Dadabase.commands.configure_clan import configure_clan
 from Dadabase.commands.add_console_player import add_console_player
 from Dadabase.commands.console_player_list import console_player_list
 from Dadabase.commands.remove_console_player import remove_console_player
-from discord.ext.commands import has_permissions
 from Dadabase.commands.configure_server import configure_server
 from Dadabase.commands.add_server_player import add_server_player
 from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
-from Ranknir.data.server_data import Brawlhalla_NL, M30W, Test_Server
-from Ranknir.data.clan_data import Pandation, test_clan
+from Dadabase.modules.data_management import read_all_countries
 os = Xos()
 
 BENELUX_COUNTRIES = [    
     app_commands.Choice(name="Netherlands", value="NL"),
     app_commands.Choice(name="Belgium", value="BE"),
     app_commands.Choice(name="Luxembourg", value="LU")]
-ALL_COUNTRIES = [
-    app_commands.Choice(name="Netherlands", value="NL"),
-    app_commands.Choice(name="Belgium", value="BE"),
-    app_commands.Choice(name="Luxembourg", value="LU"),
-    app_commands.Choice(name="Turkey", value="TR"),
-    app_commands.Choice(name="Morocco", value="MA"),
-    app_commands.Choice(name="Dominican Republic", value="DO"),
-    app_commands.Choice(name="Spain", value="ES"),
-    app_commands.Choice(name="Vietnam", value="VN"),
-    app_commands.Choice(name="Algeria", value="DZ"),
-    app_commands.Choice(name="Iraq", value="IQ"),
-    app_commands.Choice(name="Suriname", value="SR"),
-    app_commands.Choice(name="Japan", value="JP"),
-    app_commands.Choice(name="Italy", value="IT"),
-    app_commands.Choice(name="Curacao", value="CW"),
-    app_commands.Choice(name="Indonesia", value="ID"),
-    app_commands.Choice(name="Germany", value="DE"),
-	app_commands.Choice(name="Canada", value="CA"),
-	app_commands.Choice(name="United States of America", value="US"),
-	app_commands.Choice(name="Brazil", value="BR"),
-	app_commands.Choice(name="Argentina", value="AR"),
-	app_commands.Choice(name="Chile", value="CL")]
 
 
 intents = discord.Intents.default()
@@ -81,9 +56,9 @@ async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(country_of_residence="Which country does the player live in?")
-@app_commands.choices(country_of_residence=ALL_COUNTRIES)
+@app_commands.choices(country_of_residence=read_all_countries())
 @app_commands.describe(nationality="Which country does the player live in?")
-@app_commands.choices(nationality=ALL_COUNTRIES)
+@app_commands.choices(nationality=read_all_countries())
 async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
     discord_id = int(discord_id)
     await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
@@ -96,9 +71,9 @@ async def check_command(interaction):
 
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
 @app_commands.describe(country_of_residence="Which country do you live in?")
-@app_commands.choices(country_of_residence=ALL_COUNTRIES)
+@app_commands.choices(country_of_residence=read_all_countries())
 @app_commands.describe(nationality="What is your nationality?")
-@app_commands.choices(nationality=ALL_COUNTRIES)
+@app_commands.choices(nationality=read_all_countries())
 async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], nationality: app_commands.Choice[str]):
     print('Someone called claim!')
     
@@ -155,7 +130,7 @@ async def remove_console_player_command(interaction, brawlhalla_id:int):
 @app_commands.checks.has_permissions(administrator=True)
 async def remove_server_player_command(interaction, brawlhalla_id:int):
     await remove_server_player(interaction, brawlhalla_id)
-
+    
 
 # sync everything up
 @client.event
@@ -164,6 +139,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(os.environ[3])
-    # client.run(os.environ[2]) # Testing
+    # client.run(os.environ[3])
+    client.run(os.environ[2]) # Testing
     return
