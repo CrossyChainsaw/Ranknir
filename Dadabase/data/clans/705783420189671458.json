@@ -5,12 +5,16 @@
         {
             "brawlhalla_id": 2,
             "brawlhalla_name": "bmgdan"
+        },
+        {
+            "brawlhalla_id": 2,
+            "brawlhalla_name": "bmgdan2"
         }
     ],
     "al_players": [
         {
-            "brawlhalla_id": "2",
-            "brawlhalla_name": "bmgdan"
+            "brawlhalla_id": 2,
+            "brawlhalla_name": "bmgdan2"
         }
     ]
 }

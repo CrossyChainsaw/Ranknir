@@ -5,7 +5,7 @@ from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION, DAT
 async def remove_console_player(interaction, bh_id):
     data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
     bh_name = __remove_console_player_from_data(interaction, bh_id, data)
-    await interaction.resopnse.send_message(bh_name + " was removed")
+    await interaction.response.send_message(bh_name + " was removed")
 
 
 def __remove_console_player_from_data(interaction, bh_id, data):
