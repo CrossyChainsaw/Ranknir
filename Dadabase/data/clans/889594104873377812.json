@@ -1,50 +1,54 @@
 {
-    "name":"Pandation",
-    "id":"889594104873377812",
-    "ps4_players":[
-       {
-          "brawlhalla_id":"12779207",
-          "brawlhalla_name":"higi-chan"
-       },
-       {
-          "brawlhalla_id":"12496336",
-          "brawlhalla_name":"tenshii"
-       },
-       {
-          "brawlhalla_id":"18637158",
-          "brawlhalla_name":"eisenwlf12"
-       },
-       {
-          "brawlhalla_id":"17397563",
-          "brawlhalla_name":"Split39"
-       },
-       {
-          "brawlhalla_id":"42454540",
-          "brawlhalla_name":"Brian_-V11"
-       },
-       {
-          "brawlhalla_id":"14096598",
-          "brawlhalla_name":"Akamex14"
-       },
-       {
-          "brawlhalla_id":"12618511",
-          "brawlhalla_name":"JOSI-IUA_"
-       },
-       {
-          "brawlhalla_id":"16321402",
-          "brawlhalla_name":"t24rude"
-       },
-       {
-          "brawlhalla_id":"13189301",
-          "brawlhalla_name":"MoV-Sah1n"
-       },
-       {
-          "brawlhalla_id":"12206794",
-          "brawlhalla_name":"0SGM"
-       },
-       {
-          "brawlhalla_id":"11971299",
-          "brawlhalla_name":"Lake"
-       }
+    "name": "Pandation",
+    "id": "889594104873377812",
+    "ps4_players": [
+        {
+            "brawlhalla_id": "12779207",
+            "brawlhalla_name": "higi-chan"
+        },
+        {
+            "brawlhalla_id": "12496336",
+            "brawlhalla_name": "tenshii"
+        },
+        {
+            "brawlhalla_id": "18637158",
+            "brawlhalla_name": "eisenwlf12"
+        },
+        {
+            "brawlhalla_id": "17397563",
+            "brawlhalla_name": "Split39"
+        },
+        {
+            "brawlhalla_id": "42454540",
+            "brawlhalla_name": "Brian_-V11"
+        },
+        {
+            "brawlhalla_id": "14096598",
+            "brawlhalla_name": "Akamex14"
+        },
+        {
+            "brawlhalla_id": "12618511",
+            "brawlhalla_name": "JOSI-IUA_"
+        },
+        {
+            "brawlhalla_id": "16321402",
+            "brawlhalla_name": "t24rude"
+        },
+        {
+            "brawlhalla_id": "13189301",
+            "brawlhalla_name": "MoV-Sah1n"
+        },
+        {
+            "brawlhalla_id": "12206794",
+            "brawlhalla_name": "0SGM"
+        },
+        {
+            "brawlhalla_id": "11971299",
+            "brawlhalla_name": "Lake"
+        },
+        {
+            "brawlhalla_id": 32394242,
+            "brawlhalla_name": "EltitoYavi"
+        }
     ]
- }
+}

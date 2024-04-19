@@ -34,8 +34,8 @@ def __already_claimed(interaction):
 
 async def __add_link(interaction, user):
     print('Entered: __add_link()')
-    brawlhalla_name = __save_data(interaction, user)
-    await interaction.response.send_message("Claimed brawlhalla account: " + brawlhalla_name)
+    __save_data(interaction, user)
+    await interaction.response.send_message("Claimed brawlhalla account: " + user.brawlhalla_name)
 
 
 async def __update_link(interaction, user):
