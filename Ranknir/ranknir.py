@@ -1,3 +1,4 @@
+import asyncio
 import discord
 from Global.Xos import Xos
 from discord.ext import commands
@@ -33,8 +34,7 @@ async def on_ready():
 
             # print order
             order = [Pandation, Tews, Frost, Brawlhalla_NL, Empire_United, KryptX, M30W, Grant, aura, Brawlhalla_Hungary]
-            new_order = get_current_order(order, turn)
-            await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=new_order))
+            get_current_order(order, turn)
 
             # Clans / Servers
             if turn == 0:
@@ -74,8 +74,9 @@ async def on_ready():
                 await send_all_legends_elo(CROSSYCHAINSAW_ID, 1165233774305493012, bot)
             next_turn()
         except Exception as e:
-            # next_turn()
             print(e)
+            asyncio.sleep(10)
+            print('HELP HELP HELP HELP')
 
 
 @bot.command(name='ping')
@@ -109,6 +110,6 @@ async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
     await test_server_1v1_and_2v2_and_rotating_elo_list(bot, ctx)
 
 def run_ranknir():
-    # bot.run(os.environ[1])
+    bot.run(os.environ[1])
     # bot.run(os.environ[2]) # Testing
-    return
+    # return

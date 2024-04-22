@@ -21,9 +21,12 @@ class Server:
         self.member_count = member_count
 
     def get_data(self):
-        with open(self.DATA_LOCATION) as file:
-            data = json.load(file)
-            return data
+        try:
+            with open(self.DATA_LOCATION) as file:
+                data = json.load(file)
+                return data
+        except:
+            print('error in trying to load data')
 
     def get_server_name(self):
         server_data = self.get_data()
