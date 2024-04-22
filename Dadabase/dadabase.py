@@ -57,11 +57,11 @@ async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(country_of_residence="Which country does the player live in?")
 @app_commands.choices(country_of_residence=read_all_countries())
-@app_commands.describe(nationality="Which country does the player live in?")
-@app_commands.choices(nationality=read_all_countries())
-async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", nationality: app_commands.Choice[str]=""):
+@app_commands.describe(ethnicity="Which country does the player live in?")
+@app_commands.choices(ethnicity=read_all_countries())
+async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", ethnicity: app_commands.Choice[str]=""):
     discord_id = int(discord_id)
-    await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, nationality)
+    await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, ethnicity)
 
 
 @tree.command(name='check', description='Check your linked Brawlhalla account')
@@ -72,9 +72,9 @@ async def check_command(interaction):
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
 @app_commands.describe(country_of_residence="Which country do you live in?")
 @app_commands.choices(country_of_residence=read_all_countries())
-@app_commands.describe(nationality="What is your nationality?")
-@app_commands.choices(nationality=read_all_countries())
-async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], nationality: app_commands.Choice[str]):
+@app_commands.describe(ethnicity="What is your ethnicity?")
+@app_commands.choices(ethnicity=read_all_countries())
+async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], ethnicity: app_commands.Choice[str]):
     print('Someone called claim!')
     
     # niet netjes broeder
@@ -87,7 +87,7 @@ async def claim_command(interaction, brawlhalla_id:int, country_of_residence: ap
     print(interaction.guild.id)
 
     if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None or interaction.guild.id == brawlhalla_hungary_server_id:
-        await claim(interaction, brawlhalla_id, country_of_residence.value, nationality.value)
+        await claim(interaction, brawlhalla_id, country_of_residence.value, ethnicity.value)
     else:
         await interaction.response.send_message(f'{member.name} does not have permission to use this command')
 
@@ -139,6 +139,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    # client.run(os.environ[3])
-    client.run(os.environ[2]) # Testing
-    return
+    client.run(os.environ[3])
+    # client.run(os.environ[2]) # Testing
+    # return

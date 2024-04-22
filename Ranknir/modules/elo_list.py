@@ -246,8 +246,7 @@ async def server_1v1_and_2v2_elo_list(server, bot):
 
 
 async def server_1v1_and_2v2_and_rotating_elo_list(server, bot):
-    print("Server 1v1 and 2v2 and rotating elo list for " +
-          server.get_server_name())
+    print("Server 1v1 and 2v2 and rotating elo list for " + server.get_server_name())
     brawlhalla_nl_players = get_server_players(server)
     # Get Elo
     all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, brawlhalla_nl_players, server.get_server_name())

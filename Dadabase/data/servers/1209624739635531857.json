@@ -175,8 +175,16 @@
             "brawlhalla_name": "yang",
             "discord_id": 54,
             "discord_name": "gri2",
-            "country": "NL",
-            "nationality": "NL"
+            "country": "",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 24737524,
+            "brawlhalla_name": "KC | carry me alhamdulillah",
+            "discord_id": 57,
+            "discord_name": "DeniaL_",
+            "country": "",
+            "ethnicity": ""
         }
     ]
 }

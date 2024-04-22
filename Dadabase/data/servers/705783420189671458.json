@@ -14,7 +14,15 @@
             "discord_id": 413070742591373314,
             "discord_name": "crossychainsaw",
             "country": "BE",
-            "nationality": "LU"
+            "ethnicity": "LU"
+        },
+        {
+            "brawlhalla_id": 2,
+            "brawlhalla_name": "bmgtherealfirstdan",
+            "discord_id": 222,
+            "discord_name": "bmgdan2",
+            "country": "",
+            "ethnicity": ""
         }
     ]
 }
