@@ -57,7 +57,7 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player):
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
     if "country" in player:
-        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['nationality'])
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['ethnicity'])
     else:
         player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
     player_object.name = __fill_in_empty_name(player_object.name, player)
@@ -79,7 +79,7 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
     """Takes player data and turns it into a `Player` object (Rotating Ranked)"""
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
     if "country" in player:
-        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['nationality'])
+        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['ethnicity'])
     else:
         player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
     rotating_stats = player_ranked_stats['rotating_ranked']
