@@ -6,14 +6,15 @@ from discord.ext.commands import has_permissions, MissingPermissions
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_elo_list
-from Ranknir.data.clan_data import test_clan, Pandation, Excalibur, Tews, Frost, KryptX, Empire_United, Grant, aura
+from Ranknir.data.clan_data import test_clan, Pandation, Tews, Frost, KryptX, Empire_United, Grant, aura
 from Ranknir.data.server_data import Brawlhalla_NL, Test_Server, M30W, Brawlhalla_Hungary
-from Ranknir.data.player_data import CROSSYCHAINSAW_ID, SHAW_ID, DISCARDS_ID
+from Ranknir.data.player_data import CROSSYCHAINSAW_ID
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.commands.leave_server import leave_server
 from Ranknir.modules.get_current_order import get_current_order
-from Ranknir.modules.tests import test_clan_console_mix_1v1_elo_list, test_server_1v1_elo_list, test_server_1v1_and_2v2_and_rotating_elo_list
+from Ranknir.commands.test_clan_console_mix_1v1_elo_list import test_clan_console_mix_1v1_elo_list
+from Ranknir.commands.test_server_1v1_elo_list import test_server_1v1_elo_list
 os = Xos()
 
 intents = discord.Intents().all()
@@ -97,17 +98,12 @@ async def leave_server_command(ctx, server_id):
 @bot.command(name='testclan1')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_clan_console_mix_1v1_elo_list_command(ctx):
-    await test_clan_console_mix_1v1_elo_list(bot, ctx)
+    await test_clan_console_mix_1v1_elo_list(bot)
 
 @bot.command(name='testserver1')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_server_1v1_elo_list_command(ctx):
-    await test_server_1v1_elo_list(bot, ctx)
-
-@bot.command(name='testserver3')
-@has_permissions(manage_roles=True, ban_members=True)
-async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
-    await test_server_1v1_and_2v2_and_rotating_elo_list(bot, ctx)
+    await test_server_1v1_elo_list(bot)
 
 def run_ranknir():
     bot.run(os.environ[1])

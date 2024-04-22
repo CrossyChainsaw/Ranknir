@@ -2,7 +2,7 @@ from Ranknir.modules.test_data import CLAN_DATA, CLAN_OBJECT, AL_PLAYERS, PLAYER
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 
-async def test_clan_console_mix_1v1_elo_list(bot, ctx):
+async def test_clan_console_mix_1v1_elo_list(bot):
     clan = CLAN_OBJECT
 
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
