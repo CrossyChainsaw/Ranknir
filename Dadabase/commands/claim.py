@@ -5,11 +5,11 @@ from Dadabase.modules.data_management import read_link_data, write_data, read_da
 from Dadabase.classes.Server import Server
 
 
-async def claim(interaction, brawlhalla_id, country_of_residence, nationality):
+async def claim(interaction, brawlhalla_id, country_of_residence, ethnicity):
     print("Entered Claim")
     ranked_stats = fetch_player_ranked_stats(brawlhalla_id)
     if (ranked_stats):
-        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], interaction.user.id, interaction.user.name, country_of_residence, nationality)
+        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], interaction.user.id, interaction.user.name, country_of_residence, ethnicity)
         condition = __already_claimed(interaction)
         if condition == True:
             print('updating link')
@@ -51,10 +51,10 @@ async def __update_link(interaction, user):
     link_data[x]['brawlhalla_id'] = user.brawlhalla_id
     link_data[x]['brawlhalla_name'] = user.brawlhalla_name
     link_data[x]['country'] = user.country
-    link_data[x]['nationality'] = user.nationality
+    link_data[x]['ethnicity'] = user.ethnicity
     server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
     write_data(SERVERS_DATA_LOCATION, server.__dict__, interaction.guild.id)
-    await interaction.response.send_message(f"Updated claimed brawlhalla account to ```brawlhalla_name: {user.brawlhalla_name}\nbrawlhalla_id: {user.brawlhalla_id}\ncountry: {user.country}\nnationality: {user.nationality}```"
+    await interaction.response.send_message(f"Updated claimed brawlhalla account to ```brawlhalla_name: {user.brawlhalla_name}\nbrawlhalla_id: {user.brawlhalla_id}\ncountry: {user.country}\nethnicity: {user.ethnicity}```"
 )
 
 

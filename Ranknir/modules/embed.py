@@ -59,7 +59,7 @@ def prepare_embeds_server(server, players_sorted):
         if count <= 20:
             #embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (str(rank), player.name, str(player.current), str(player.peak))
             if server.id == 1047987261905584128:
-                flag_source = player.nationality
+                flag_source = player.ethnicity
                 if flag_source == "NL":
                     flag = "<:NL:1225603278927040613>"
                 elif flag_source == "BE":
@@ -94,14 +94,14 @@ def prepare_embeds_server(server, players_sorted):
                     flag = ""
                 embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
             elif server.id == 1047987261905584128:
-                flag_source = player.nationality
+                flag_source = player.ethnicity
                 if flag_source == "":
                     flag = ""
                 else:
                     flag = f":flag_{flag_source.lower()}:"
                 embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"              
             else:
-                flag_source = player.nationality
+                flag_source = player.ethnicity
                 if flag_source == "":
                     flag = ""
                 else:
