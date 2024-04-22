@@ -75,7 +75,7 @@ async def on_ready():
             next_turn()
         except Exception as e:
             print(e)
-            asyncio.sleep(10)
+            await asyncio.sleep(10)
             print('HELP HELP HELP HELP')
 
 
