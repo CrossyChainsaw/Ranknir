@@ -6,7 +6,11 @@ async def check(interaction):
     link_data = read_link_data(SERVERS_DATA_LOCATION, interaction.guild.id)
     user = __find_user(interaction, link_data)
     if user is not None:
-        await interaction.response.send_message('Currently claimed brawlhalla account \n```brawlhalla_name: ' + user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
+        if user.country == "":
+            user.country = "Not Claimed"
+        if user.nationality == "":
+            user.nationality = "Not Claimed"
+        await interaction.response.send_message(f"Currently claimed Brawlhalla account:\n```brawlhalla_name: {user.brawlhalla_name}\nbrawlhalla_id: {user.brawlhalla_id}\ncountry_of_residence: {user.country}\nnationality: {user.nationality}```")
     else:
         await interaction.response.send_message("You haven't claimed an account yet, use `/claim` to claim your Brawlhalla account.")
 

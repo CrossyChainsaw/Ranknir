@@ -139,6 +139,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    # client.run(os.environ[3])
-    client.run(os.environ[2]) # Testing
-    return
+    client.run(os.environ[3])
+    # client.run(os.environ[2]) # Testing
+    # return
