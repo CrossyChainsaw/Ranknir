@@ -1,4 +1,4 @@
-from Ranknir.modules.api import fetch_console_players, fetch_clan
+from Ranknir.modules.api import fetch_clan
 import json
 
 # get console players

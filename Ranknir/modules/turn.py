@@ -1,12 +1,14 @@
 import json
 
-TURN_SWITCH_JSON_LOCATION = 'Ranknir/data/turn_switch.json'
+TURN_SWITCH_JSON_LOCATION = 'Global/turn_switch.json'
 
 
 def get_turn():
-    with open(TURN_SWITCH_JSON_LOCATION, 'r') as file:
-        return json.load(file)['turn']
-
+    try:
+        with open(TURN_SWITCH_JSON_LOCATION, 'r') as file:
+            return json.load(file)['turn']
+    except Exception as e:
+        print(e)
 
 def next_turn():
     with open(TURN_SWITCH_JSON_LOCATION, 'r') as file:

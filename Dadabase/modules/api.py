@@ -1,8 +1,8 @@
 import json
 import time
 import requests
-from Global.Xos import Xos
-os = Xos()
+from Dadabase.modules.env import env_variable
+BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
 
 # import os
 
@@ -10,12 +10,10 @@ os = Xos()
 
 
 def fetch_player_ranked_stats(brawlhalla_id):
-    json_object = requests.get("https://api.brawlhalla.com/player/" +
-                               str(brawlhalla_id) + "/ranked?api_key=" + os.environ[0])
+    json_object = requests.get("https://api.brawlhalla.com/player/{brawlhalla_id}/ranked?api_key={BRAWLHALLA_API_KEY}")
     return json.loads(json_object.content)
 
 
 def fetch_player_stats(brawlhalla_id):
-    json_object = requests.get("https://api.brawlhalla.com/player/" +
-                               str(brawlhalla_id) + "/stats?api_key=" + os.environ[0])
+    json_object = requests.get("https://api.brawlhalla.com/player/{brawlhalla_id}/stats?api_key={BRAWLHALLA_API_KEY}")
     return json.loads(json_object.content)
