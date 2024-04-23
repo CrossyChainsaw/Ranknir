@@ -1,6 +1,5 @@
 # Last Updated 27/01/2024 - 11:16
 import requests
-import time
 import json
 import asyncio
 from Ranknir.modules.env import env_variable
@@ -8,8 +7,6 @@ BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
 
 # VARIABLES
 API_WAIT_TIME = 10 # 8 possible if only ranknir
-
-# METHODS
 
 
 async def fetch_clan(clan_id):
