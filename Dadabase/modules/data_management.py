@@ -12,6 +12,30 @@ BENELUX_COUNTRIES = [
     app_commands.Choice(name="Belgium", value="BE"),
     app_commands.Choice(name="Luxembourg", value="LU")]
 
+ALL_COUNTRIES = [
+    app_commands.Choice(name="Netherlands", value="NL"),
+    app_commands.Choice(name="Belgium", value="BE"),
+    app_commands.Choice(name="Luxembourg", value="LU"),
+    app_commands.Choice(name="Turkey", value="TR"),
+    app_commands.Choice(name="Morocco", value="MA"),
+    app_commands.Choice(name="Dominican Republic", value="DO"),
+    app_commands.Choice(name="Spain", value="ES"),
+    app_commands.Choice(name="Vietnam", value="VN"),
+    app_commands.Choice(name="Algeria", value="DZ"),
+    app_commands.Choice(name="Iraq", value="IQ"),
+    app_commands.Choice(name="Suriname", value="SR"),
+    app_commands.Choice(name="Japan", value="JP"),
+    app_commands.Choice(name="Italy", value="IT"),
+    app_commands.Choice(name="Curacao", value="CW"),
+    app_commands.Choice(name="Indonesia", value="ID"),
+    app_commands.Choice(name="Germany", value="DE"),
+    app_commands.Choice(name="Canada", value="CA"),
+    app_commands.Choice(name="United States of America", value="US"),
+    app_commands.Choice(name="Brazil", value="BR"),
+    app_commands.Choice(name="Argentina", value="AR"),
+    app_commands.Choice(name="Chile", value="CL")
+]
+
 def read_data(path, id):
   """Read clan or server data"""
   with open(path + str(id) + '.json') as file:
@@ -23,14 +47,6 @@ def read_link_data(path, id):
   with open(path + str(id) + '.json') as data:
     link_data = json.load(data)["links"]
     return link_data
-  
-
-def read_all_countries():
-  with open(DATA_LOCATION + 'all_countries.json', 'r') as file:
-      data = json.load(file)
-  all_countries = data['all_countries']
-  country_choices = [app_commands.Choice(name=country['name'], value=country['value']) for country in all_countries]
-  return country_choices
 
 
 def write_data(path, data, id):
