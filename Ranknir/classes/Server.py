@@ -1,7 +1,6 @@
 import json
 import requests
-from Global.Xos import Xos
-os = Xos()
+import time
 
 
 class Server:
@@ -27,6 +26,7 @@ class Server:
                 return data
         except:
             print('error in trying to load data')
+            time.sleep(5)
 
     def get_server_name(self):
         server_data = self.get_data()

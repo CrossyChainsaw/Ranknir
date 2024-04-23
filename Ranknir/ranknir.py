@@ -1,6 +1,5 @@
 import asyncio
 import discord
-from Global.Xos import Xos
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 from Ranknir.commands.ping import ping
@@ -15,7 +14,7 @@ from Ranknir.commands.leave_server import leave_server
 from Ranknir.modules.get_current_order import get_current_order
 from Ranknir.commands.test_clan_console_mix_1v1_elo_list import test_clan_console_mix_1v1_elo_list
 from Ranknir.commands.test_server_1v1_elo_list import test_server_1v1_elo_list
-os = Xos()
+from Ranknir.modules.env import env_variable
 
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
@@ -76,8 +75,6 @@ async def on_ready():
             next_turn()
         except Exception as e:
             print(e)
-            await asyncio.sleep(10)
-            print('HELP HELP HELP HELP')
 
 
 @bot.command(name='ping')
@@ -106,6 +103,6 @@ async def test_server_1v1_elo_list_command(ctx):
     await test_server_1v1_elo_list(bot)
 
 def run_ranknir():
-    bot.run(os.environ[1])
+    bot.run(env_variable("RANKNIR_BOT_TOKEN"))
     # bot.run(os.environ[2]) # Testing
     # return

@@ -3,7 +3,6 @@
 
 import discord
 from discord import app_commands
-from Global.Xos import Xos
 from Dadabase.commands.claim import claim
 from Dadabase.commands.check import check
 from Dadabase.commands.ping import ping
@@ -17,13 +16,8 @@ from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
-from Dadabase.modules.data_management import read_all_countries
-os = Xos()
-
-BENELUX_COUNTRIES = [    
-    app_commands.Choice(name="Netherlands", value="NL"),
-    app_commands.Choice(name="Belgium", value="BE"),
-    app_commands.Choice(name="Luxembourg", value="LU")]
+from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES
+from Dadabase.modules.env import env_variable
 
 
 intents = discord.Intents.default()
@@ -56,9 +50,9 @@ async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(country_of_residence="Which country does the player live in?")
-@app_commands.choices(country_of_residence=read_all_countries())
+@app_commands.choices(country_of_residence=ALL_COUNTRIES)
 @app_commands.describe(ethnicity="Which country does the player live in?")
-@app_commands.choices(ethnicity=read_all_countries())
+@app_commands.choices(ethnicity=ALL_COUNTRIES)
 async def add_server_player_command(interaction: discord.Interaction, brawlhalla_id:int, discord_id:str, discord_name:str, country_of_residence: app_commands.Choice[str]="", ethnicity: app_commands.Choice[str]=""):
     discord_id = int(discord_id)
     await add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, ethnicity)
@@ -71,9 +65,9 @@ async def check_command(interaction):
 
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
 @app_commands.describe(country_of_residence="Which country do you live in?")
-@app_commands.choices(country_of_residence=read_all_countries())
+@app_commands.choices(country_of_residence=ALL_COUNTRIES)
 @app_commands.describe(ethnicity="What is your ethnicity?")
-@app_commands.choices(ethnicity=read_all_countries())
+@app_commands.choices(ethnicity=ALL_COUNTRIES)
 async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], ethnicity: app_commands.Choice[str]):
     print('Someone called claim!')
     
@@ -139,6 +133,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(os.environ[3])
+    client.run(env_variable("DADABASE_BOT_TOKEN"))
     # client.run(os.environ[2]) # Testing
     # return
