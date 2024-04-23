@@ -1,25 +1,28 @@
-# Last Updated 27/01/2024 - 11:16
-import requests
-import json
+import aiohttp
 import asyncio
+import json
 from Ranknir.modules.env import env_variable
-BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
 
-# VARIABLES
-API_WAIT_TIME = 10 # 8 possible if only ranknir
+BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
+API_WAIT_TIME = 10  # 8 possible if only ranknir
 
 
 async def fetch_clan(clan_id):
     await asyncio.sleep(API_WAIT_TIME)  # 0.10 might be possible
-    json_object = requests.get(f"https://api.brawlhalla.com/clan/{clan_id}/?api_key={BRAWLHALLA_API_KEY}")
-    return json.loads(json_object.content)
+    url = f"https://api.brawlhalla.com/clan/{clan_id}/?api_key={BRAWLHALLA_API_KEY}"
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
 
 
 async def fetch_player_ranked_stats(brawlhalla_id):
     await asyncio.sleep(API_WAIT_TIME)
-    json_object = requests.get(f"https://api.brawlhalla.com/player/{brawlhalla_id}/ranked?api_key={BRAWLHALLA_API_KEY}")
-    return json.loads(json_object.content)
-
+    url = f"https://api.brawlhalla.com/player/{brawlhalla_id}/ranked?api_key={BRAWLHALLA_API_KEY}"
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+        
+        
 # Deprecated
 
 
