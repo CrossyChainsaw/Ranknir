@@ -18,6 +18,7 @@ from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
 from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES
 from Dadabase.modules.env import env_variable
+from Dadabase.modules.check_permission import has_permission
 
 
 intents = discord.Intents.default()
@@ -69,21 +70,11 @@ async def check_command(interaction):
 @app_commands.describe(ethnicity="What is your ethnicity?")
 @app_commands.choices(ethnicity=ALL_COUNTRIES)
 async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], ethnicity: app_commands.Choice[str]):
-    print('Someone called claim!')
-    
-    # niet netjes broeder
-    brawlhalla_hungary_server_id = 1209624739635531857
-    member = interaction.user
-    role_name1 = "M30W"
-    role_name2 = "Verified ✔"
-    role_name3 = "M3W"
-    print('help')
-    print(interaction.guild.id)
-
-    if discord.utils.get(member.roles, name=role_name1) is not None or discord.utils.get(member.roles, name=role_name2) is not None or discord.utils.get(member.roles, name=role_name3) is not None or interaction.guild.id == brawlhalla_hungary_server_id:
+    print(f'{interaction.user.name} called claim!')
+    if has_permission(interaction.user):
         await claim(interaction, brawlhalla_id, country_of_residence.value, ethnicity.value)
     else:
-        await interaction.response.send_message(f'{member.name} does not have permission to use this command')
+        await interaction.response.send_message(f'{interaction.user.name} does not have permission to use this command')
 
 
 @tree.command(name='configure_clan', description="(You aren't suposed to run this) Generate a file with clan data for the current clan server")
