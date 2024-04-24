@@ -1,6 +1,6 @@
 import json
 
-TURN_SWITCH_JSON_LOCATION = 'Global/turn_switch.json'
+TURN_SWITCH_JSON_LOCATION = '../Global/turn_switch.json'
 
 
 def get_turn():
