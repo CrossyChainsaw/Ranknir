@@ -14,7 +14,7 @@ def __structure_option_if_empty(option):
 async def add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, ethnicity):
     country_of_residence = __structure_option_if_empty(country_of_residence)
     ethnicity = __structure_option_if_empty(ethnicity)
-    ranked_stats = fetch_player_ranked_stats(brawlhalla_id)
+    ranked_stats = await fetch_player_ranked_stats(brawlhalla_id)
     if (ranked_stats):
         user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], int(discord_id), discord_name, country_of_residence, ethnicity)
         condition = __already_claimed(interaction, user.discord_id)
@@ -44,7 +44,8 @@ async def __add_link(interaction, user):
 
 async def __update_link(interaction, user):
     print('Entered: __update_link()')
-    link_data = read_link_data(SERVERS_DATA_LOCATION, interaction.guild.id)
+    server_data = read_data(SERVERS_DATA_LOCATION, interaction.guild.id)
+    link_data = server_data['links']
     x = 0
     print('g')
     for link in link_data:
@@ -54,14 +55,15 @@ async def __update_link(interaction, user):
     print(link_data[x])
     link_data[x]['brawlhalla_id'] = user.brawlhalla_id
     link_data[x]['brawlhalla_name'] = user.brawlhalla_name
-    server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
+    server = Server(interaction.guild.name, server_data['title'], link_data)
     write_data(SERVERS_DATA_LOCATION,server.__dict__, interaction.guild.id)
     await interaction.response.send_message("Updated brawlhalla account to ```brawlhalla_name: "+user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
 
 
 def __save_data(interaction, user):
     print('Entered: __save_data()')
-    link_data = read_link_data(SERVERS_DATA_LOCATION, interaction.guild.id)
+    server_data = read_data(SERVERS_DATA_LOCATION, interaction.guild.id)
+    link_data = server_data['links']
     link_data.append(user.__dict__)
-    server = Server(interaction.guild.name, interaction.guild.name + " Leaderboard", link_data)
+    server = Server(interaction.guild.name, server_data['title'], link_data)
     write_data(SERVERS_DATA_LOCATION, server.__dict__, interaction.guild.id)
