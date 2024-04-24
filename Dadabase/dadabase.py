@@ -71,7 +71,7 @@ async def check_command(interaction):
 @app_commands.choices(ethnicity=ALL_COUNTRIES)
 async def claim_command(interaction, brawlhalla_id:int, country_of_residence: app_commands.Choice[str], ethnicity: app_commands.Choice[str]):
     print(f'{interaction.user.name} called claim!')
-    if has_permission(interaction.user):
+    if has_permission(interaction):
         await claim(interaction, brawlhalla_id, country_of_residence.value, ethnicity.value)
     else:
         await interaction.response.send_message(f'{interaction.user.name} does not have permission to use this command')
@@ -124,6 +124,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(env_variable("DADABASE_BOT_TOKEN"))
-    # client.run(os.environ[2]) # Testing
+    # client.run(env_variable("DADABASE_BOT_TOKEN"))
+    client.run(env_variable("TEST_BOT_TOKEN"))
     # return
