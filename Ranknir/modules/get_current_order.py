@@ -1,4 +1,4 @@
-def get_current_order(order, turn):
+def print_current_order(order, turn):
     order = __reorder_order(order, turn)
     order_msg = ''
     for x in order:
