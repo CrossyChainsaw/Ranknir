@@ -2,6 +2,7 @@ from Ranknir.classes.Player import Player
 
 
 def sort_elo(sorting_method, players):
+    print('sorting elo...')
     players_sorted = []
 
     while len(players) > 0:

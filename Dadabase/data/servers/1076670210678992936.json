@@ -1,6 +1,15 @@
 {
+    "id": 1076670210678992936,
     "name": "M30W",
-    "title": "M30W Leaderboard",
+    "leaderboard_title": "M30W Leaderboard",
+    "sorting_method": "peak",
+    "channel_1v1_id": 1207380613380837416,
+    "channel_2v2_id": 1207374159882223687,
+    "channel_rotating_id": 1207374136188338258,
+    "image": "https://media.discordapp.net/attachments/1110725749859688648/1207376677110415411/new_pink_yellow_m30w_header.png?ex=65df6c27&is=65ccf727&hm=6b5096a4a5706c225e7c67caa3c01e2c3ac5b2fbeb7b7c1cc5a30bcb3d43144a&=&format=webp&quality=lossless&width=1440&height=480",
+    "member_count": "show",
+    "no_elo_players": "show",
+    "color": "0xd6307a",
     "links": [
         {
             "brawlhalla_id": 60269269,
@@ -260,9 +269,11 @@
         },
         {
             "brawlhalla_id": 6152274,
-            "brawlhalla_name": "M3W | Lexi Bear ~Recruiting!~",
+            "brawlhalla_name": "Lexi",
             "discord_id": 236127985500028928,
-            "discord_name": "_elk"
+            "discord_name": "_elk",
+            "country": "US",
+            "ethnicity": "US"
         },
         {
             "brawlhalla_id": 27492017,
@@ -357,6 +368,15 @@
             "discord_name": "caxtun",
             "country": "US",
             "ethnicity": "US"
+        },
+        {
+            "brawlhalla_id": 56373737,
+            "brawlhalla_name": "M3W L\u00c3\u00b8kiStrange",
+            "discord_id": 882394287160057858,
+            "discord_name": "lokistrange",
+            "region": "BRS",
+            "country": "BR",
+            "ethnicity": "BR"
         }
     ]
 }

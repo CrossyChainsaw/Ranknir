@@ -1,6 +1,15 @@
 {
+    "id": 1209624739635531857,
     "name": "Brawlhalla Hungary",
-    "title": "Brawlhalla Hungary Leaderboard",
+    "leaderboard_title": "Brawlhalla Hungary Leaderboard",
+    "sorting_method": "current",
+    "channel_1v1_id": 1209633413821108274,
+    "channel_2v2_id": 1226931575724179628,
+    "channel_rotating_id": "",
+    "image": "",
+    "member_count": "hide",
+    "no_elo_players": "show",
+    "color": "0xc1253b",
     "links": [
         {
             "brawlhalla_id": 10241375,
@@ -183,6 +192,15 @@
             "brawlhalla_name": "KC | carry me alhamdulillah",
             "discord_id": 57,
             "discord_name": "DeniaL_",
+            "country": "",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 2097151,
+            "brawlhalla_name": "1571.",
+            "discord_id": 60,
+            "discord_name": "Isti",
+            "region": "",
             "country": "",
             "ethnicity": ""
         }

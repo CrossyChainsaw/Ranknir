@@ -1,5 +1,6 @@
 import discord
 import asyncio
+from Ranknir.classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
 
@@ -37,9 +38,9 @@ def prepare_embeds_clan_mix_console(clan, players_sorted, clan_data_array, conso
     return embed_title, embed_array
 
 
-def prepare_embeds_server(server, players_sorted):
-    embed_title = discord.Embed(
-        title=server.get_server_title(), description='', color=server.color)
+def prepare_embeds_server(server:Server, players_sorted):
+    color2 = server.color
+    embed_title = discord.Embed(title=server.leaderboard_title, description='', color=color2)
     if server.member_count == 'show':
         embed_title = __add_member_count([{"clan": []}], embed_title, 0, players_sorted)
     # Variables
@@ -47,7 +48,7 @@ def prepare_embeds_server(server, players_sorted):
     global rank
     rank = 1
     count = 0
-    embed = discord.Embed(description="", color=server.color)
+    embed = discord.Embed(description="", color=color2)
 
     # Format Embeds
     for player in players_sorted:
@@ -55,7 +56,7 @@ def prepare_embeds_server(server, players_sorted):
             embed_array.append(embed)
             count = 0
         if count == 0:
-            embed = discord.Embed(description="", color=server.color)
+            embed = discord.Embed(description="", color=color2)
         if count <= 20:
             #embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (str(rank), player.name, str(player.current), str(player.peak))
             if server.id == 1047987261905584128:

@@ -1,8 +1,9 @@
+from Ranknir.classes.Server import Server
 from Ranknir.modules.get_elo import get_players_elo_1v1_and_2v2, get_players_elo_1v1_and_2v2_and_rotating
 from Ranknir.modules.get_players import get_server_players
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import send_embeds, prepare_embeds_clan_mix_console, prepare_embeds_server
-from Ranknir.modules.get_players import get_console_players, load_rm_players
+from Ranknir.modules.get_players import get_console_players, get_account_linker_players
 from Ranknir.modules.clan import get_clan_data
 # from data.server_data import Brawlhalla_NL
 
@@ -28,7 +29,7 @@ async def clan_console_mix_1v1_elo_list(clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         if clan.has_rm_players:
-            rm_players = load_rm_players(clan.server_id)
+            rm_players = get_account_linker_players(clan.server_id)
             clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.name[i])
@@ -61,7 +62,7 @@ async def clan_console_mix_2v2_elo_list(clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         if clan.has_rm_players:
-            rm_players = load_rm_players(clan.server_id)
+            rm_players = get_account_linker_players(clan.server_id)
             clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         _, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.name[i])
@@ -97,7 +98,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         if clan.has_rm_players:
-            rm_players = load_rm_players(clan.server_id)
+            rm_players = get_account_linker_players(clan.server_id)
             clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         clan_player_objects, clan_team_objects = await get_players_elo_1v1_and_2v2(
@@ -151,7 +152,7 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         if clan.has_rm_players:
-            rm_players = load_rm_players(clan.server_id)
+            rm_players = get_account_linker_players(clan.server_id)
             clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         # p2
@@ -203,7 +204,6 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan, bot):
 async def server_1v1_elo_list(server, bot):
     print("Server 1v1 elo list for " + server.get_server_name())
     # __try_update_data(server)
-
     brawlhalla_nl_players = get_server_players(server)
     all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.get_server_name())
     all_player_objects_sorted = sort_elo(
@@ -245,27 +245,24 @@ async def server_1v1_and_2v2_elo_list(server, bot):
                       server.channel_2v2_id)
 
 
-async def server_1v1_and_2v2_and_rotating_elo_list(server, bot):
-    print("Server 1v1 and 2v2 and rotating elo list for " + server.get_server_name())
-    brawlhalla_nl_players = get_server_players(server)
+async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot):
+    print("Server 1v1 and 2v2 and rotating elo list for " + server.name)
+    server_players = get_server_players(server)
     # Get Elo
-    all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, brawlhalla_nl_players, server.get_server_name())
+    all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, server_players, server.name)
+    print('test')
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
     all_rotating_array = sort_elo(server.sorting_method, all_rotating_array)
     # Send 1v1 Elo List
-    embed_title, embed_array = prepare_embeds_server(
-        server, all_players_sorted)
-    await send_embeds(embed_title, embed_array, bot, server,
-                      server.channel_1v1_id)
+    embed_title, embed_array = prepare_embeds_server(server, all_players_sorted)
+    await send_embeds(embed_title, embed_array, bot, server, server.channel_1v1_id)
     # Send 2v2 Elo List
     embed_title, embed_array = prepare_embeds_server(server, all_teams_sorted)
-    await send_embeds(embed_title, embed_array, bot, server,
-                      server.channel_2v2_id)
+    await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
     # Send Rotating Elo List
-    embed_title, embed_array = prepare_embeds_server(
-        server, all_rotating_array)
+    embed_title, embed_array = prepare_embeds_server(server, all_rotating_array)
     await send_embeds(embed_title, embed_array, bot, server, server.channel_rotating_id)
 
 

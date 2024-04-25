@@ -1,7 +1,7 @@
 import json
 from Dadabase.modules.api import fetch_player_ranked_stats
 from Dadabase.classes.User import User
-from Dadabase.modules.data_management import read_link_data, write_data, read_data, SERVERS_DATA_LOCATION
+from Dadabase.modules.data_management import codeblock_with_link_data, find_link_index, read_link_data, write_data, read_data, SERVERS_DATA_LOCATION
 from Dadabase.classes.Server import Server
 
 def __structure_option_if_empty(option):
@@ -40,25 +40,22 @@ def __already_claimed(interaction, discord_id):
 async def __add_link(interaction, user):
     print('Entered: __add_link()')
     __save_data(interaction, user)
-    await interaction.response.send_message(f"Added brawlhalla account: {user.brawlhalla_name} (ID: {user.brawlhalla_id})")
+    await interaction.response.send_message(f"Added brawlhalla account {codeblock_with_link_data(user)}")
 
 
 async def __update_link(interaction, user):
     print('Entered: __update_link()')
     server_data = read_data(SERVERS_DATA_LOCATION, interaction.guild.id)
     link_data = server_data['links']
-    x = 0
-    print('g')
-    for link in link_data:
-        if user.discord_id == link['discord_id']:
-            break
-        x += 1
-    print(link_data[x])
-    link_data[x]['brawlhalla_id'] = user.brawlhalla_id
-    link_data[x]['brawlhalla_name'] = user.brawlhalla_name
-    server = Server(interaction.guild.name, server_data['title'], link_data)
-    write_data(SERVERS_DATA_LOCATION,server.__dict__, interaction.guild.id)
-    await interaction.response.send_message("Updated brawlhalla account to ```brawlhalla_name: "+user.brawlhalla_name+'\nbrawlhalla_id: '+str(user.brawlhalla_id)+'```')
+    link_index = find_link_index(interaction.user.id, link_data)
+    link = link_data[link_index]
+    link['brawlhalla_id'] = user.brawlhalla_id
+    link['brawlhalla_name'] = user.brawlhalla_name
+    link['region'] = user.region
+    link['country'] = user.country
+    link['ethnicity'] = user.ethnicity
+    server_data['links'][link_index] = link
+    await interaction.response.send_message(f"Updated claimed brawlhalla account {codeblock_with_link_data(user)}")
 
 
 def __save_data(interaction, user):
@@ -66,5 +63,5 @@ def __save_data(interaction, user):
     server_data = read_data(SERVERS_DATA_LOCATION, interaction.guild.id)
     link_data = server_data['links']
     link_data.append(user.__dict__)
-    server = Server(interaction.guild.name, server_data['title'], link_data)
-    write_data(SERVERS_DATA_LOCATION, server.__dict__, interaction.guild.id)
+    server_data['links'] = link_data
+    write_data(SERVERS_DATA_LOCATION, server_data, interaction.guild.id)

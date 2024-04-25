@@ -1,5 +1,6 @@
 import json
 from discord import app_commands
+from Dadabase.classes.User import User
 
 DATA_LOCATION = 'Dadabase/data/'
 SERVERS_DATA_LOCATION = DATA_LOCATION + 'servers/'
@@ -49,7 +50,13 @@ SERVERS = [
     app_commands.Choice(name="Southern Africa", value="SAF"),
 ]
 
+SORTING_METHOD_OPTIONS = [
+    app_commands.Choice(name="Current Elo", value="current"),
+    app_commands.Choice(name="Peak Elo", value="peak")]
 
+MEMBER_COUNT_OPTIONS = [
+    app_commands.Choice(name="Hide", value="hide"),
+    app_commands.Choice(name="Show", value="show")]
 
 def read_data(path, id):
   """Read clan or server data"""
@@ -87,3 +94,40 @@ def remove_player_from_clan_data(interaction, brawlhalla_id, data, key):
                 json.dump(data, file)
             break
     return bh_name
+
+def find_link(discord_id, link_data):
+    for link in link_data:
+        if str(discord_id) == str(link['discord_id']):
+            user = User(link['brawlhalla_id'], 
+                        link['brawlhalla_name'],
+                        link['discord_id'], 
+                        link['discord_name'], 
+                        __check_empty(link.get('region')), 
+                        __check_empty(link.get('country')), 
+                        __check_empty(link.get('ethnicity')))
+            return user
+    else:
+        return None
+    
+def find_link_index(discord_id, link_data):
+    for index, link in enumerate(link_data):
+        if discord_id == link['discord_id']:
+            return index
+    
+def __check_empty(value):
+   if value:
+      return value
+   else: 
+      return "Not Specified"
+   
+
+
+def codeblock_with_link_data(user):
+    return f"```ts\nbrawlhalla_name: {__empty_name(user.brawlhalla_name)}\nbrawlhalla_id: {user.brawlhalla_id}\nregion: {__check_empty(user.region)}\ncountry: {__check_empty(user.country)}\nethnicity: {__check_empty(user.ethnicity)}```"
+
+
+def __empty_name(name):
+    if name == "":
+        return "N/A (finish 1s placement matches)"
+    else:
+        return name
