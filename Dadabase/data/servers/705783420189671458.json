@@ -1,26 +1,22 @@
 {
+    "id": 705783420189671458,
     "name": "Skyward",
-    "title": "Skyward Leaderboard",
+    "leaderboard_title": "Swag Leaderboard",
+    "sorting_method": "current",
+    "channel_1v1_id": 1131552899378466887,
+    "channel_2v2_id": 1131552899378466887,
+    "channel_rotating_id": 1131552899378466887,
+    "image": "",
+    "member_count": "hide",
+    "no_elo_players": "show",
+    "color": "0xFFFFFF",
     "links": [
         {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgtherealfirstdan",
-            "discord_id": 5,
-            "discord_name": "bmgdan"
-        },
-        {
             "brawlhalla_id": 7364605,
-            "brawlhalla_name": "CrossyChainsaw LFT 2400+",
+            "brawlhalla_name": ".......... :frowning:",
             "discord_id": 413070742591373314,
             "discord_name": "crossychainsaw",
-            "country": "BE",
-            "ethnicity": "LU"
-        },
-        {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgtherealfirstdan",
-            "discord_id": 222,
-            "discord_name": "bmgdan2",
+            "region": "EU",
             "country": "",
             "ethnicity": ""
         }
