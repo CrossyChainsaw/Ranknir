@@ -11,12 +11,13 @@ def __structure_option_if_empty(option):
     except:
         return ""
 
-async def add_server_player(interaction, brawlhalla_id, discord_id, discord_name, country_of_residence, ethnicity):
+async def add_server_player(interaction, brawlhalla_id, discord_id, discord_name, region, country_of_residence, ethnicity):
+    region = __structure_option_if_empty(region)
     country_of_residence = __structure_option_if_empty(country_of_residence)
     ethnicity = __structure_option_if_empty(ethnicity)
     ranked_stats = await fetch_player_ranked_stats(brawlhalla_id)
     if (ranked_stats):
-        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], int(discord_id), discord_name, country_of_residence, ethnicity)
+        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], int(discord_id), discord_name, region, country_of_residence, ethnicity)
         condition = __already_claimed(interaction, user.discord_id)
         if condition == True:
             await __update_link(interaction, user)

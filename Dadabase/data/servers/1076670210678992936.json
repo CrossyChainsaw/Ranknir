@@ -341,6 +341,22 @@
             "discord_name": "zinyzin",
             "country": "",
             "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 59809856,
+            "brawlhalla_name": "M3W | Toad",
+            "discord_id": 1001778720509530122,
+            "discord_name": "itskhoitoad",
+            "country": "VN",
+            "ethnicity": "VN"
+        },
+        {
+            "brawlhalla_id": 9777754,
+            "brawlhalla_name": "",
+            "discord_id": 844082157768540161,
+            "discord_name": "caxtun",
+            "country": "US",
+            "ethnicity": "US"
         }
     ]
 }
