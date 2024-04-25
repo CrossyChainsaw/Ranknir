@@ -3,12 +3,11 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
 from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BHHU_SERVER_ID, load_server
-from Ranknir.classes.Server import Server
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_elo_list
 from Ranknir.data.clan_data import test_clan, Pandation, Tews, Frost, KryptX, Empire_United, Grant, aura
-from Ranknir.data.player_data import CROSSYCHAINSAW_ID
+from Ranknir.modules.data_management import CROSSYCHAINSAW_ID
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.commands.leave_server import leave_server
