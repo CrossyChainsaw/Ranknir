@@ -778,6 +778,15 @@
             "discord_name": "hefaistos_",
             "country": "BE",
             "ethnicity": "ES"
+        },
+        {
+            "brawlhalla_id": 10273650,
+            "brawlhalla_name": "ball",
+            "discord_id": 1190493255285096448,
+            "discord_name": "joran_40541",
+            "region": "EU",
+            "country": "NL",
+            "ethnicity": "DE"
         }
     ]
 }
