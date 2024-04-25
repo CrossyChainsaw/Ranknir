@@ -761,6 +761,14 @@
             "discord_name": "Mugiwara",
             "country": "BE",
             "ethnicity": "MA"
+        },
+        {
+            "brawlhalla_id": 9123654,
+            "brawlhalla_name": "\u00e2\u0080\u00a2Hefaistos\u00e2\u0080\u00a2",
+            "discord_id": 522014378267246599,
+            "discord_name": "hefaistos_",
+            "country": "BE",
+            "ethnicity": "BE"
         }
     ]
 }
