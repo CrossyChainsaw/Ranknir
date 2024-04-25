@@ -18,6 +18,11 @@ async def claim(interaction, brawlhalla_id, region, country_of_residence, ethnic
     else:
         await interaction.response.send_message(f"Account with `brawlhalla_id: {brawlhalla_id}` does not exist")
 
+def __give_empty_name_a_placeholder(name):
+    if name == "":
+        return "N/A (finish 1s placement matches)"
+    else:
+        return name
 
 def __already_claimed(interaction):
     print('Entered: already_claimed()')
@@ -34,7 +39,7 @@ def __already_claimed(interaction):
 async def __add_link(interaction, user):
     print('Entered: __add_link()')
     __save_data(interaction, user)
-    await interaction.response.send_message("Claimed brawlhalla account: " + user.brawlhalla_name)
+    await interaction.response.send_message(f"Claimed brawlhalla account ```brawlhalla_name: {__give_empty_name_a_placeholder(user.brawlhalla_name)}\nbrawlhalla_id: {user.brawlhalla_id}\nregion: {user.region}\ncountry: {user.country}\nethnicity: {user.ethnicity}```")
 
 
 async def __update_link(interaction, user):
@@ -54,8 +59,7 @@ async def __update_link(interaction, user):
     link_data[x]['ethnicity'] = user.ethnicity
     server = Server(interaction.guild.name, server_data['title'], link_data)
     write_data(SERVERS_DATA_LOCATION, server.__dict__, interaction.guild.id)
-    await interaction.response.send_message(f"Updated claimed brawlhalla account to ```brawlhalla_name: {user.brawlhalla_name}\nbrawlhalla_id: {user.brawlhalla_id}\ncountry: {user.country}\nethnicity: {user.ethnicity}```"
-)
+    await interaction.response.send_message(f"Updated claimed brawlhalla account ```brawlhalla_name: {__give_empty_name_a_placeholder(user.brawlhalla_name)}\nbrawlhalla_id: {user.brawlhalla_id}\nregion: {user.region}\ncountry: {user.country}\nethnicity: {user.ethnicity}```")
 
 
 def __save_data(interaction, user):

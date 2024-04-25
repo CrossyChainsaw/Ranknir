@@ -25,7 +25,7 @@ async def add_server_player(interaction, brawlhalla_id, discord_id, discord_name
             await __add_link(interaction, user)
     else:
         await interaction.response.send_message("Account with `brawlhalla_id: "+brawlhalla_id+"` does not exist or hasn't played ranked yet")
-
+        
 
 def __already_claimed(interaction, discord_id):
     print('Entered: already_claimed()')
