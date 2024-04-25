@@ -1,9 +1,9 @@
-from Ranknir.classes.Server import Server
+from Ranknir.classes.Deprecated_Server import Deprecated_Server
 from Dadabase.modules.data_management import SERVERS_DATA_LOCATION
 
 
 BRAWLHALLA_NL_SERVER_ID = 1047987261905584128
-Brawlhalla_NL = Server(["Brawlhalla Nederland Leaderboard"],
+Brawlhalla_NL = Deprecated_Server(["Brawlhalla Nederland Leaderboard"],
                        channel_1v1_id=1050114658566152262,
                        channel_2v2_id=1075022495142400091,
                        id=BRAWLHALLA_NL_SERVER_ID,
@@ -13,15 +13,16 @@ Brawlhalla_NL = Server(["Brawlhalla Nederland Leaderboard"],
                        channel_rotating_id=1165780126508797953)
 
 BRAWLHALLA_HUNGARY_SERVER_ID = 1209624739635531857
-Brawlhalla_Hungary = Server(["Brawlhalla Hungary Leaderboard"],
+Brawlhalla_Hungary = Deprecated_Server(["Brawlhalla Hungary Leaderboard"],
                        channel_1v1_id=1209633413821108274,
                        channel_2v2_id=1226931575724179628,
                        id=BRAWLHALLA_HUNGARY_SERVER_ID,
                        color=0xc1253b,
                        sorting_method="current",
                        data_location=f"{SERVERS_DATA_LOCATION}{BRAWLHALLA_HUNGARY_SERVER_ID}.json")
+
 TEST_SERVER_ID = 1047987261905584128
-Test_Server = Server(["Test"],
+Test_Server = Deprecated_Server(["Test"],
                      channel_1v1_id=1048162813132152833,
                      channel_2v2_id=1131552899378466887,
                      id=1047987261905584128,
@@ -32,7 +33,7 @@ Test_Server = Server(["Test"],
                      member_count="show")
 
 M30W_SERVER_ID = 1076670210678992936
-M30W = Server(name=["M30W Elo Leaderboard"],
+M30W = Deprecated_Server(name=["M30W Elo Leaderboard"],
               channel_1v1_id=1207380613380837416,
               channel_2v2_id=1207374159882223687,
               id=M30W_SERVER_ID,

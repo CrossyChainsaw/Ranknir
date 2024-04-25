@@ -4,20 +4,24 @@ import time
 
 
 class Server:
-    def __init__(self, name, channel_1v1_id, channel_2v2_id, id, color, sorting_method, data_location, image="", member_count='hide', no_elo_players='hide', channel_rotating_id="NO ACCESS"):
-        self.name = name
-        self.channel_1v1_id = channel_1v1_id
-        self.channel_2v2_id = channel_2v2_id
+    def __init__(self, id, name, leaderboard_title, sorting_method, member_count, no_elo_players, channel_1v1_id="", channel_2v2_id="", channel_rotating_id="", color="", image=""):
+        # Required
         self.id = id
-        self.color = color
+        self.name = name
+        self.leaderboard_title = leaderboard_title
         self.sorting_method = sorting_method
-        self.DATA_LOCATION = data_location
+        self.member_count = member_count
+        self.no_elo_players = no_elo_players
 
         # Optional
+        self.channel_1v1_id = channel_1v1_id
+        self.channel_2v2_id = channel_2v2_id
+        self.channel_rotating_id = channel_rotating_id
         self.image = image
-        self.no_elo_players = no_elo_players  # hide / show
-        self.channel_rotating_id = channel_rotating_id  # id
-        self.member_count = member_count
+        self.color = color
+
+        # Other
+        links = []
 
     def get_data(self):
         try:

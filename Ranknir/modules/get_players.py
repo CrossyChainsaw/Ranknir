@@ -1,9 +1,10 @@
+from Ranknir.classes.Server import Server
 from Ranknir.modules.api import fetch_clan
 import json
 
 # get console players
-DATA_LOCATION = 'Dadabase/data/clans/'
-
+CLAN_DATA_LOCATION = 'Dadabase/data/clans/'
+SERVER_DATA_LOCATION = 'Dadabase/data/servers/'
 
 def get_console_players(clan):
     console_players = {}
@@ -17,7 +18,7 @@ def get_console_players(clan):
     return console_players
 
 def load_rm_players(server_id):
-    with open(DATA_LOCATION + str(server_id) + '.json', 'r') as file:
+    with open(CLAN_DATA_LOCATION + str(server_id) + '.json', 'r') as file:
         data = json.load(file)
         rm_players = data['al_players']
         rm_player_ids = []
@@ -30,23 +31,20 @@ def load_rm_players(server_id):
 
 
 def __load_ps4_players(server_id):
-    with open(DATA_LOCATION + str(server_id) + '.json', 'r') as file:
+    with open(CLAN_DATA_LOCATION + str(server_id) + '.json', 'r') as file:
         data = json.load(file)  # error
         return data['ps4_players']
     
 
-
-# get server players
-
-
-def get_server_players(server):  # server object
-    print(server.name[0])
-    server_data = []
-    try:
-        server_data = server.get_data()
-        print(server_data)
-        print(
-            f"Amount of players in {server_data['name']}: {len(server_data['links'])}")
-    except:
-        print(f"{server_data['name']} doesn't have any players")
+def get_server_players(server: Server):
+    print(server.name)
+    server_data = __read_data(SERVER_DATA_LOCATION, server.id)
+    print(f"Amount of players in {server_data['name']}: {len(server_data['links'])}")
     return server_data['links']
+     
+
+def __read_data(path, id):
+  """Read clan or server data"""
+  with open(path + str(id) + '.json') as file:
+    data = json.load(file)
+    return data
