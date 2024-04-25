@@ -215,34 +215,28 @@ async def server_1v1_elo_list(server, bot):
 
 
 async def server_2v2_elo_list(server, bot):
-    print("Server 2v2 elo list for " + server.get_server_name())
+    print("Server 2v2 elo list for " + server)
     brawlhalla_nl_players = get_server_players(server)
-    _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.get_server_name())
+    _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server)
     all_team_objects_sorted = sort_elo(server.sorting_method, all_teams_array)
-    embed_title, embed_array = prepare_embeds_server(
-        server, all_team_objects_sorted)
-    await send_embeds(embed_title, embed_array, bot, server,
-                      server.channel_2v2_id)
+    embed_title, embed_array = prepare_embeds_server(server, all_team_objects_sorted)
+    await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
 
 
 async def server_1v1_and_2v2_elo_list(server, bot):
-    print("Server 1v1 and 2v2 elo list for " + server.get_server_name())
+    print("Server 1v1 and 2v2 elo list for " + server.name)
     brawlhalla_nl_players = get_server_players(server)
     # Get Elo
-    all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(
-        server, brawlhalla_nl_players, server.get_server_name())
+    all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name)
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
     # Send 1v1 Elo List
-    embed_title, embed_array = prepare_embeds_server(
-        server, all_players_sorted)
-    await send_embeds(embed_title, embed_array, bot, server,
-                      server.channel_1v1_id)
+    embed_title, embed_array = prepare_embeds_server(server, all_players_sorted)
+    await send_embeds(embed_title, embed_array, bot, server, server.channel_1v1_id)
     # Send 2v2 Elo List
     embed_title, embed_array = prepare_embeds_server(server, all_teams_sorted)
-    await send_embeds(embed_title, embed_array, bot, server,
-                      server.channel_2v2_id)
+    await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
 
 
 async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot):
