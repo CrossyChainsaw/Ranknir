@@ -13,28 +13,43 @@ BENELUX_COUNTRIES = [
     app_commands.Choice(name="Luxembourg", value="LU")]
 
 ALL_COUNTRIES = [
-    app_commands.Choice(name="Netherlands", value="NL"),
-    app_commands.Choice(name="Belgium", value="BE"),
-    app_commands.Choice(name="Luxembourg", value="LU"),
-    app_commands.Choice(name="Turkey", value="TR"),
-    app_commands.Choice(name="Morocco", value="MA"),
-    app_commands.Choice(name="Dominican Republic", value="DO"),
-    app_commands.Choice(name="Spain", value="ES"),
-    app_commands.Choice(name="Vietnam", value="VN"),
+    app_commands.Choice(name="Don't Specify", value=""),
     app_commands.Choice(name="Algeria", value="DZ"),
-    app_commands.Choice(name="Iraq", value="IQ"),
-    app_commands.Choice(name="Suriname", value="SR"),
-    app_commands.Choice(name="Japan", value="JP"),
-    app_commands.Choice(name="Italy", value="IT"),
-    app_commands.Choice(name="Curacao", value="CW"),
-    app_commands.Choice(name="Indonesia", value="ID"),
-    app_commands.Choice(name="Germany", value="DE"),
-    app_commands.Choice(name="Canada", value="CA"),
-    app_commands.Choice(name="United States of America", value="US"),
-    app_commands.Choice(name="Brazil", value="BR"),
     app_commands.Choice(name="Argentina", value="AR"),
-    app_commands.Choice(name="Chile", value="CL")
+    app_commands.Choice(name="Belgium", value="BE"),
+    app_commands.Choice(name="Brazil", value="BR"),
+    app_commands.Choice(name="Canada", value="CA"),
+    app_commands.Choice(name="Chile", value="CL"),
+    app_commands.Choice(name="Curacao", value="CW"),
+    app_commands.Choice(name="Dominican Republic", value="DO"),
+    app_commands.Choice(name="Germany", value="DE"),
+    app_commands.Choice(name="Indonesia", value="ID"),
+    app_commands.Choice(name="Iraq", value="IQ"),
+    app_commands.Choice(name="Italy", value="IT"),
+    app_commands.Choice(name="Japan", value="JP"),
+    app_commands.Choice(name="Luxembourg", value="LU"),
+    app_commands.Choice(name="Morocco", value="MA"),
+    app_commands.Choice(name="Netherlands", value="NL"),
+    app_commands.Choice(name="Spain", value="ES"),
+    app_commands.Choice(name="Suriname", value="SR"),
+    app_commands.Choice(name="Turkey", value="TR"),
+    app_commands.Choice(name="United States of America", value="US"),
+    app_commands.Choice(name="Vietnam", value="VN")
 ]
+
+SERVERS = [
+    app_commands.Choice(name="US-E", value="USE"),
+    app_commands.Choice(name="US-W", value="USW"),
+    app_commands.Choice(name="Europe", value="EU"),
+    app_commands.Choice(name="South East Asia", value="SEA"),
+    app_commands.Choice(name="Australia", value="AUS"),
+    app_commands.Choice(name="Brazil", value="BRS"),
+    app_commands.Choice(name="Japan", value="JPN"),
+    app_commands.Choice(name="Middle East", value="MDE"),
+    app_commands.Choice(name="Southern Africa", value="SAF"),
+]
+
+
 
 def read_data(path, id):
   """Read clan or server data"""
