@@ -5,11 +5,10 @@ from Dadabase.modules.data_management import read_link_data, write_data, read_da
 from Dadabase.classes.Server import Server
 
 
-async def claim(interaction, brawlhalla_id, country_of_residence, ethnicity):
-    print("Entered Claim")
+async def claim(interaction, brawlhalla_id, region, country_of_residence, ethnicity):
     ranked_stats = await fetch_player_ranked_stats(brawlhalla_id)
     if (ranked_stats):
-        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], interaction.user.id, interaction.user.name, country_of_residence, ethnicity)
+        user = User(ranked_stats['brawlhalla_id'], ranked_stats['name'], interaction.user.id, interaction.user.name, region, country_of_residence, ethnicity)
         condition = __already_claimed(interaction)
         if condition == True:
             print('updating link')
@@ -17,7 +16,7 @@ async def claim(interaction, brawlhalla_id, country_of_residence, ethnicity):
         else:
             await __add_link(interaction, user)
     else:
-        await interaction.response.send_message("Account with `brawlhalla_id: "+brawlhalla_id+"` does not exist or hasn't played ranked yet")
+        await interaction.response.send_message(f"Account with `brawlhalla_id: {brawlhalla_id}` does not exist")
 
 
 def __already_claimed(interaction):
