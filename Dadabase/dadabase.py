@@ -16,7 +16,7 @@ from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
-from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, SERVERS
+from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, SERVERS, SORTING_METHOD_OPTIONS, MEMBER_COUNT_OPTIONS
 from Dadabase.modules.env import env_variable
 from Dadabase.modules.check_permission import has_permission
 
@@ -92,8 +92,23 @@ async def configure_clan_command(interaction):
 
 @tree.command(name='configure_server', description="(You aren't suposed to run this) Generate a file with clan data for the current server")
 @app_commands.checks.has_permissions(administrator=True)
-async def configure_server_command(interaction):
-    await configure_server(interaction)
+@app_commands.describe(sorting_method="What elo should be prioritised?")
+@app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
+@app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
+@app_commands.choices(member_count=MEMBER_COUNT_OPTIONS)
+@app_commands.describe(no_elo_players="Show or Hide the amount of players in the leaderboard?")
+@app_commands.choices(no_elo_players=MEMBER_COUNT_OPTIONS)
+async def configure_server_command(interaction, 
+                                   leaderboard_title:str,
+                                   sorting_method: app_commands.Choice[str], 
+                                   member_count: app_commands.Choice[str],
+                                   no_elo_players: app_commands.Choice[str],
+                                   channel_1v1_id:str,
+                                   channel_2v2_id:str,
+                                   channel_rotating_id:str,
+                                   color:str="FFFFFF",
+                                   image:str=""):
+    await configure_server(interaction, leaderboard_title, sorting_method.value, member_count.value, no_elo_players.value, int(channel_1v1_id), int(channel_2v2_id), int(channel_rotating_id), color, image)
 
 
 @tree.command(name='console_player_list', description='List all console players')
@@ -131,6 +146,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    #client.run(env_variable("DADABASE_BOT_TOKEN"))
-    client.run(env_variable("TEST_BOT_TOKEN"))
-    # return
+    # client.run(env_variable("DADABASE_BOT_TOKEN"))
+    # client.run(env_variable("TEST_BOT_TOKEN"))
+    return
