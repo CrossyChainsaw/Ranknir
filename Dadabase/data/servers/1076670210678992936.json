@@ -260,9 +260,11 @@
         },
         {
             "brawlhalla_id": 6152274,
-            "brawlhalla_name": "M3W | Lexi Bear ~Recruiting!~",
+            "brawlhalla_name": "Lexi",
             "discord_id": 236127985500028928,
-            "discord_name": "_elk"
+            "discord_name": "_elk",
+            "country": "US",
+            "ethnicity": "US"
         },
         {
             "brawlhalla_id": 27492017,
@@ -357,6 +359,15 @@
             "discord_name": "caxtun",
             "country": "US",
             "ethnicity": "US"
+        },
+        {
+            "brawlhalla_id": 56373737,
+            "brawlhalla_name": "M3W L\u00c3\u00b8kiStrange",
+            "discord_id": 882394287160057858,
+            "discord_name": "lokistrange",
+            "region": "BRS",
+            "country": "BR",
+            "ethnicity": "BR"
         }
     ]
 }
