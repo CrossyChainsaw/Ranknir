@@ -3,12 +3,12 @@
     "name": "Brawlhalla Hungary",
     "leaderboard_title": "Brawlhalla Hungary Leaderboard",
     "sorting_method": "current",
+    "member_count": "hide",
+    "no_elo_players": "show",
     "channel_1v1_id": 1209633413821108274,
     "channel_2v2_id": 1226931575724179628,
     "channel_rotating_id": "",
     "image": "",
-    "member_count": "hide",
-    "no_elo_players": "show",
     "color": "0xc1253b",
     "links": [
         {

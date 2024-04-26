@@ -3,12 +3,12 @@
     "name": "Brawlhalla Nederland",
     "leaderboard_title": "Brawlhalla Benelux Leaderboard",
     "sorting_method": "current",
+    "member_count": "hide",
+    "no_elo_players": "show",
     "channel_1v1_id": 1050114658566152262,
     "channel_2v2_id": 1075022495142400091,
     "channel_rotating_id": 1165780126508797953,
     "image": "",
-    "member_count": "hide",
-    "no_elo_players": "show",
     "color": "0xff6404",
     "links": [
         {
