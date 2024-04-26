@@ -1,20 +1,17 @@
 {
     "name": "Skyward",
-    "id": "705783420189671458",
-    "ps4_players": [
-        {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgdan"
-        },
-        {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgdan2"
-        }
-    ],
-    "al_players": [
-        {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgdan2"
-        }
-    ]
+    "discord_server_id": "705783420189671458",
+    "id": "12",
+    "color": "0xFFFFFF",
+    "image": "",
+    "channel_1v1_id": 1,
+    "channel_2v2_id": 1,
+    "channel_rotating_id": null,
+    "sorting_method": "current",
+    "member_count": "hide",
+    "xp": "hide",
+    "no_elo_players": "hide",
+    "has_account_linkers": true,
+    "account_linkers": [],
+    "console_players": []
 }
