@@ -1,18 +1,23 @@
 import json
 from discord import app_commands
-from Dadabase.classes.User import User
+from Dadabase.classes.Link import Link
 
-DATA_LOCATION = 'Dadabase/data/'
-SERVERS_DATA_LOCATION = DATA_LOCATION + 'servers/'
-CLANS_DATA_LOCATION = DATA_LOCATION + 'clans/'
+# Paths
+DADABASE_DATA_PATH = 'Dadabase/data/'
+SERVERS_DATA_PATH = DADABASE_DATA_PATH + 'servers/'
+CLANS_DATA_PATH = DADABASE_DATA_PATH + 'clans/'
+# Data Keys
 DATA_KEY_FOR_ACCOUNT_LINKERS = 'al_players' # account linkers / remove players / crossplayers
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'ps4_players' # console players
+# Command Names
+EDIT_SERVER_COMMAND = "/edit_server (This one doesn't exist yet)"
+EDIT_CLAN_COMMAND = "/edit_clan (This one doesn't exist yet)"
 
+# App Commands Choices
 BENELUX_COUNTRIES = [    
     app_commands.Choice(name="Netherlands", value="NL"),
     app_commands.Choice(name="Belgium", value="BE"),
     app_commands.Choice(name="Luxembourg", value="LU")]
-
 ALL_COUNTRIES = [
     app_commands.Choice(name="Don't Specify", value=""),
     app_commands.Choice(name="Algeria", value="DZ"),
@@ -37,8 +42,7 @@ ALL_COUNTRIES = [
     app_commands.Choice(name="United States of America", value="US"),
     app_commands.Choice(name="Vietnam", value="VN")
 ]
-
-SERVERS = [
+BRAWL_SERVERS = [
     app_commands.Choice(name="US-E", value="USE"),
     app_commands.Choice(name="US-W", value="USW"),
     app_commands.Choice(name="Europe", value="EU"),
@@ -49,14 +53,13 @@ SERVERS = [
     app_commands.Choice(name="Middle East", value="MDE"),
     app_commands.Choice(name="Southern Africa", value="SAF"),
 ]
-
 SORTING_METHOD_OPTIONS = [
     app_commands.Choice(name="Current Elo", value="current"),
     app_commands.Choice(name="Peak Elo", value="peak")]
-
-MEMBER_COUNT_OPTIONS = [
+SHOW_OR_HIDE = [
     app_commands.Choice(name="Hide", value="hide"),
     app_commands.Choice(name="Show", value="show")]
+
 
 def read_data(path, id):
   """Read clan or server data"""
@@ -90,7 +93,7 @@ def remove_player_from_clan_data(interaction, brawlhalla_id, data, key):
     for index, player in enumerate(data[key]):
         if player['brawlhalla_id'] == str(brawlhalla_id):
             bh_name = data[key].pop(index)['brawlhalla_name']
-            with open(CLANS_DATA_LOCATION + str(interaction.guild.id) + '.json', 'w') as file:
+            with open(CLANS_DATA_PATH + str(interaction.guild.id) + '.json', 'w') as file:
                 json.dump(data, file)
             break
     return bh_name
@@ -98,7 +101,7 @@ def remove_player_from_clan_data(interaction, brawlhalla_id, data, key):
 def find_link(discord_id, link_data):
     for link in link_data:
         if str(discord_id) == str(link['discord_id']):
-            user = User(link['brawlhalla_id'], 
+            user = Link(link['brawlhalla_id'], 
                         link['brawlhalla_name'],
                         link['discord_id'], 
                         link['discord_name'], 
