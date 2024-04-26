@@ -4,7 +4,7 @@ import time
 
 
 class Server:
-    def __init__(self, id, name, leaderboard_title, sorting_method, member_count, no_elo_players, channel_1v1_id="", channel_2v2_id="", channel_rotating_id="", color="", image=""):
+    def __init__(self, id, name, leaderboard_title, sorting_method, member_count, no_elo_players, channel_1v1_id="", channel_2v2_id="", channel_rotating_id="", color="", image="", links=[]):
         # Required
         self.id = id
         self.name = name
@@ -19,6 +19,4 @@ class Server:
         self.channel_rotating_id = channel_rotating_id
         self.image = image
         self.color = color
-
-        # Other
-        self.links = []
+        self.links = links
