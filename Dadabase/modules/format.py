@@ -13,7 +13,12 @@ def format_color(color:str):
     def __check_hex_string(s):
         return re.match(r'^0x[a-fA-F0-9]{6}$', s) is not None
     def __check_hex_string_without_hashtag(s):
-        return re.match(r'^0x[a-fA-F0-9]{6}$', s) is not None
+        if len(s) == 6:
+            for char in s:
+                if char.lower() not in "0123456789abcdef":
+                    return False
+            return True
+        return False
     def __check_hex_color(s):
         return len(s) == 7 and s.startswith("#")
 
