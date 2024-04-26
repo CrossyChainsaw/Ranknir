@@ -1,9 +1,9 @@
-from Dadabase.modules.data_management import read_data, CLANS_DATA_LOCATION, DATA_KEY_FOR_ACCOUNT_LINKERS
+from Dadabase.modules.data_management import read_data, CLANS_DATA_PATH, DATA_KEY_FOR_ACCOUNT_LINKERS
 from Dadabase.modules.format import format_embed_list
 import discord
 
 async def account_linker_list(interaction):
-    data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
+    data = read_data(CLANS_DATA_PATH, interaction.guild.id)
     msg = format_embed_list(data, DATA_KEY_FOR_ACCOUNT_LINKERS)
     embed = __create_embed(msg)
     await interaction.response.send_message(embed=embed)
