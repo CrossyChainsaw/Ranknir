@@ -201,11 +201,11 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan, bot):
 # ------------------------------------------------------------------#
 
 
-async def server_1v1_elo_list(server, bot):
-    print("Server 1v1 elo list for " + server.get_server_name())
+async def server_1v1_elo_list(server: Server, bot):
+    print("Server 1v1 elo list for " + server.name)
     # __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
-    all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.get_server_name())
+    all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name)
     all_player_objects_sorted = sort_elo(
         server.sorting_method, all_player_objects_array)
     embed_title, embed_array = prepare_embeds_server(
