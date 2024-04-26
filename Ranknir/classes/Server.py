@@ -21,33 +21,4 @@ class Server:
         self.color = color
 
         # Other
-        links = []
-
-    def get_data(self):
-        try:
-            with open(self.DATA_LOCATION) as file:
-                data = json.load(file)
-                return data
-        except:
-            print('error in trying to load data')
-            time.sleep(5)
-
-    def get_server_name(self):
-        server_data = self.get_data()
-        return server_data['name']
-
-    def get_server_title(self):
-        server_data = self.get_data()
-        return server_data['title']
-
-    # Deprecated
-    def update_data(self):
-        print('update_data() is deprecated')
-        # print("Entered: update_data()")
-        # print("id: " + str(self.id))
-        # json_object = requests.get(
-        #     f"http://game-node01.jetstax.com:27046/get_links?api_key={str(os.environ[4])}&id={str(self.id)}")
-        # data = json.loads(json_object.content)
-        # with open(self.DATA_LOCATION, 'w') as file:
-        #     json.dump(data, file)
-        #     print(self.name + ' data updated')
+        self.links = []

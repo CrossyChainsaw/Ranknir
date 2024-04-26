@@ -2,7 +2,6 @@ import json
 from Dadabase.modules.api import fetch_player_ranked_stats
 from Dadabase.classes.User import User
 from Dadabase.modules.data_management import codeblock_with_link_data, find_link_index, read_link_data, write_data, read_data, SERVERS_DATA_LOCATION
-from Dadabase.classes.Server import Server
 
 
 async def claim(interaction, brawlhalla_id, region, country_of_residence, ethnicity):
