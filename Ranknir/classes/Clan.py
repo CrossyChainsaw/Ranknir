@@ -1,8 +1,9 @@
 class Clan:
-    def __init__(self, name:str, channel_1v1_id:int, channel_2v2_id:int, id:str, color:str, image:str, server_id:str, sorting_method='current', member_count='show', xp='hide', no_elo_players='hide', channel_rotating_id = "NO ACCESS", has_account_linkers=False, account_linkers=[], console_players=[]):
-        self.name = name
+    def __init__(self, server_name:str, clan_names: str, channel_1v1_id:int, channel_2v2_id:int, id_array:str, color:str, image:str, server_id:str, sorting_method='current', member_count='show', xp='hide', no_elo_players='hide', channel_rotating_id = "NO ACCESS", has_account_linkers=False, account_linkers=[], console_players=[]):
+        self.server_name = server_name
+        self.clan_names = clan_names
         self.discord_server_id = server_id
-        self.id = id
+        self.id_array = id_array
         self.color = color
         self.image = image
         self.channel_1v1_id = channel_1v1_id
