@@ -9,10 +9,14 @@ CLANS_DATA_PATH = DADABASE_DATA_PATH + 'clans/'
 # Data Keys
 DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove players / crossplayers
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
+DATA_KEY_FOR_SERVER_LINKS = 'links'
 # Command Names
 EDIT_SERVER_COMMAND = "/edit_server (This one doesn't exist yet)"
 EDIT_CLAN_COMMAND = "/edit_clan (This one doesn't exist yet)"
-
+ADD_CONSOLE_PLAYER_COMMAND = "/add_console_player"
+REMOVE_CONSOLE_PLAYER_COMMAND = "/remove_console_player"
+ADD_SERVER_PLAYER_COMMAND = "/add_server_player"
+REMOVE_SERVER_PLAYER_COMMAND = "/remove_server_player"
 # App Commands Choices
 BENELUX_COUNTRIES = [    
     app_commands.Choice(name="Netherlands", value="NL"),

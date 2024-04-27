@@ -19,6 +19,7 @@ from Dadabase.commands.remove_account_linker import remove_account_linker
 from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, BRAWL_SERVERS, SORTING_METHOD_OPTIONS, SHOW_OR_HIDE
 from Dadabase.modules.env import env_variable
 from Dadabase.modules.check_permission import has_permission
+from Dadabase.commands.server_player_list import server_player_list
 
 
 intents = discord.Intents.default()
@@ -149,6 +150,11 @@ async def remove_console_player_command(interaction, brawlhalla_id:int):
 @app_commands.checks.has_permissions(administrator=True)
 async def remove_server_player_command(interaction, brawlhalla_id:int):
     await remove_server_player(interaction, brawlhalla_id)
+
+@tree.command(name='server_player_list', description="(List all server players")
+@app_commands.checks.has_permissions(administrator=True)
+async def server_player_list_command(interaction):
+    await server_player_list(interaction)
     
 
 # sync everything up
@@ -158,6 +164,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(env_variable("DADABASE_BOT_TOKEN"))
-    # client.run(env_variable("TEST_BOT_TOKEN"))
+    # client.run(env_variable("DADABASE_BOT_TOKEN"))
+    client.run(env_variable("TEST_BOT_TOKEN"))
     return
