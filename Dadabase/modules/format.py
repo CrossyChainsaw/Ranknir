@@ -8,6 +8,19 @@ def format_embed_list(data, key):
     return msg
 
 
+def split_string(input_string, delimiter=':'):
+    """
+    Split the input string by the specified delimiter and return the list of substrings.
+    
+    Args:
+    input_string (str): The input string to be split.
+    delimiter (str): The delimiter to split the string. Default is ':'.
+    
+    Returns:
+    list: A list of substrings after splitting the input string.
+    """
+    return input_string.split(delimiter)
+
 
 def format_color(color:str):
     def __check_hex_string(s):
