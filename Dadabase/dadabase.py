@@ -96,9 +96,9 @@ async def claim_command(interaction, brawlhalla_id:int,
 @app_commands.choices(no_elo_players=SHOW_OR_HIDE)
 @app_commands.describe(xp="Show or Hide the amount of clan xp?")
 @app_commands.choices(xp=SHOW_OR_HIDE)
-async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:int, channel_2v2_id:int, clan_id:str, color:str,
+async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
                                  sorting_method: app_commands.Choice[str], member_count: app_commands.Choice[str], 
-                                 no_elo_players: app_commands.Choice[str], xp: app_commands.Choice[str], has_account_linkers:bool, channel_rotating_id:int=None, image:str=""):
+                                 no_elo_players: app_commands.Choice[str], xp: app_commands.Choice[str], has_account_linkers:bool, channel_rotating_id:str=None, image:str=""):
     
     await configure_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
                          sorting_method.value, member_count.value, xp.value, no_elo_players.value, channel_rotating_id, has_account_linkers)
@@ -122,7 +122,7 @@ async def configure_server_command(interaction,
                                    channel_rotating_id:str,
                                    color:str="0xFFFFFF",
                                    image:str=""):
-    await configure_server(interaction, leaderboard_title, sorting_method.value, member_count.value, no_elo_players.value, int(channel_1v1_id), int(channel_2v2_id), int(channel_rotating_id), color, image)
+    await configure_server(interaction, leaderboard_title, sorting_method.value, member_count.value, no_elo_players.value, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image)
 
 
 @tree.command(name='console_player_list', description='List all console players')
