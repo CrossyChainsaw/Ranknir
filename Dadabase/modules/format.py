@@ -21,6 +21,11 @@ def split_string(input_string, delimiter=':'):
     """
     return input_string.split(delimiter)
 
+def bool_to_show_hide(b:bool):
+    if b:
+        return "show"
+    else:
+        return "hide"
 
 def format_color(color:str):
     def __check_hex_string(s):
