@@ -2,7 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from Ranknir.modules.data_management import AURA_SERVER_ID, EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, TEWS_SERVER_ID, load_clan
+from Ranknir.modules.data_management import AURA_SERVER_ID, EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, DIVISION_SERVER_ID, TEWS_SERVER_ID, load_clan
 from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BRAWL_HUNGARY_SERVER_ID, load_server
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
@@ -51,10 +51,10 @@ async def on_ready():
                 await server_1v1_and_2v2_and_rotating_elo_list(load_server(M30W_SERVER_ID), bot)
             elif turn == 7:
                 await clan_console_mix_1v1_and_2v2_elo_list(load_clan(GRANT_SERVER_ID), bot)
-            elif turn == 8:
-                await clan_console_mix_1v1_and_2v2_elo_list(load_clan(AURA_SERVER_ID), bot)            
-            elif turn == 9:
+            elif turn == 8:        
                 await server_1v1_and_2v2_elo_list(load_server(BRAWL_HUNGARY_SERVER_ID), bot)
+            elif turn == 9:
+                await clan_console_mix_1v1_and_2v2_elo_list(load_clan(DIVISION_SERVER_ID), bot)    
             # Test Clan
             elif turn == 69:
                 await clan_console_mix_1v1_elo_list(load_clan(TEST_SERVER_ID), bot)

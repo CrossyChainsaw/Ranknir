@@ -1,0 +1,18 @@
+{
+    "server_name": "Division 9",
+    "clan_names": ["Division 9"],
+    "discord_server_id": "1207304690862129233",
+    "id_array": ["2316675"],
+    "color": "0x0000ff",
+    "image": "",
+    "channel_1v1_id": 1233756871551094784,
+    "channel_2v2_id": 1233760602007011359,
+    "channel_rotating_id": null,
+    "sorting_method": "peak",
+    "member_count": "show",
+    "xp": "hide",
+    "no_elo_players": "hide",
+    "has_account_linkers": false,
+    "account_linkers": [],
+    "console_players": []
+}
