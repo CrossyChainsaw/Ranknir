@@ -2,11 +2,12 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BHHU_SERVER_ID, load_server
+from Ranknir.modules.data_management import AURA_SERVER_ID, EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, TEWS_SERVER_ID, load_clan
+from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BRAWL_HUNGARY_SERVER_ID, load_server
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_elo_list
-from Ranknir.data.clan_data import test_clan, Pandation, Tews, Frost, KryptX, Empire_United, Grant, aura
+# from Ranknir.data.clan_data import test_clan, Pandation, Tews, Frost, KryptX, Empire_United, Grant, aura
 from Ranknir.modules.data_management import CROSSYCHAINSAW_ID
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
@@ -25,8 +26,6 @@ bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-    channel = bot.get_channel(test_clan.channel_1v1_id)
-    await channel.send("I'm back online!")
 
     while True:
         try:
@@ -37,28 +36,28 @@ async def on_ready():
 
             # Clans / Servers
             if turn == 0:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Pandation, bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(load_clan(PANDATION_SERVER_ID), bot)
             elif turn == 1:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(Tews, bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(load_clan(TEWS_SERVER_ID), bot)
             elif turn == 2:
-                await clan_console_mix_1v1_and_2v2_elo_list(Frost, bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(load_clan(FROST_SERVER_ID), bot)
             elif turn == 3:
                 await server_1v1_and_2v2_and_rotating_elo_list(load_server(BHNL_SERVER_ID), bot)
             elif turn == 4:
-                await clan_console_mix_1v1_elo_list(Empire_United, bot)
+                await clan_console_mix_1v1_elo_list(load_clan(EMPIRE_UNITED_SERVER_ID), bot)
             elif turn == 5:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(KryptX, bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(load_clan(KRYPTX_SERVER_ID), bot)
             elif turn == 6:
                 await server_1v1_and_2v2_and_rotating_elo_list(load_server(M30W_SERVER_ID), bot)
             elif turn == 7:
-                await clan_console_mix_1v1_and_2v2_elo_list(Grant, bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(load_clan(GRANT_SERVER_ID), bot)
             elif turn == 8:
-                await clan_console_mix_1v1_and_2v2_elo_list(aura, bot)            
+                await clan_console_mix_1v1_and_2v2_elo_list(load_clan(AURA_SERVER_ID), bot)            
             elif turn == 9:
-                await server_1v1_and_2v2_elo_list(load_server(BHHU_SERVER_ID), bot)
+                await server_1v1_and_2v2_elo_list(load_server(BRAWL_HUNGARY_SERVER_ID), bot)
             # Test Clan
             elif turn == 69:
-                await clan_console_mix_1v1_elo_list(test_clan, bot)
+                await clan_console_mix_1v1_elo_list(load_clan(TEST_SERVER_ID), bot)
                 prev_turn
             elif turn == 420:
                 await server_1v1_and_2v2_and_rotating_elo_list(load_server(TEST_SERVER_ID), bot)
@@ -104,4 +103,4 @@ async def test_server_1v1_elo_list_command(ctx):
 def run_ranknir():
     bot.run(env_variable("RANKNIR_BOT_TOKEN"))
     # bot.run(env_variable("TEST_BOT_TOKEN"))
-    return
+    # return
