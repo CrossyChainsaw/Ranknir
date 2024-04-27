@@ -20,6 +20,7 @@ from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, B
 from Dadabase.modules.env import env_variable
 from Dadabase.modules.check_permission import has_permission
 from Dadabase.commands.server_player_list import server_player_list
+from Dadabase.commands.edit_clan import edit_clan
 
 
 intents = discord.Intents.default()
@@ -129,6 +130,14 @@ async def console_player_list_command(interaction):
     await console_player_list(interaction)
 
 
+@tree.command(name='edit_clan', description='Edit clan data')
+@app_commands.checks.has_permissions(administrator=True)
+@app_commands.describe(sorting_method="What elo should be prioritised?")
+@app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
+async def edit_clan_command(interaction, channel_1v1_id:str=None, channel_2v2_id:str=None, color:str=None, image:str=None, sorting_method:str=None, show_member_count:bool=None, show_xp:bool=None, show_no_elo_players:bool=None, channel_rotating_id:str = None, has_account_linkers:bool=None):
+    await edit_clan(interaction, channel_1v1_id, channel_2v2_id, color, image, sorting_method, show_member_count, show_xp, show_no_elo_players, channel_rotating_id, has_account_linkers)
+
+
 @tree.command(name='ping')
 async def ping_command(interaction):
     await ping(interaction)
@@ -164,6 +173,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(env_variable("DADABASE_BOT_TOKEN"))
-    # client.run(env_variable("TEST_BOT_TOKEN"))
+    # client.run(env_variable("DADABASE_BOT_TOKEN"))
+    client.run(env_variable("TEST_BOT_TOKEN"))
     return
