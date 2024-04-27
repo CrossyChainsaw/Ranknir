@@ -1,0 +1,18 @@
+{
+    "server_name": "Empire United",
+    "clan_names": ["Empire United"],
+    "discord_server_id": "1057780084582387793",
+    "id_array": ["2063244"],
+    "color": "0x43c9b8",
+    "image": "https://cdn.discordapp.com/attachments/948699404003573780/1195101104267071589/EMP_Mascot_Avatar_TURQ.png",
+    "channel_1v1_id": 1195088887664627772,
+    "channel_2v2_id": "NO ACCESS",
+    "channel_rotating_id": null,
+    "sorting_method": "current",
+    "member_count": "show",
+    "xp": "show",
+    "no_elo_players": "hide",
+    "has_account_linkers": false,
+    "account_linkers": [],
+    "console_players": []
+}

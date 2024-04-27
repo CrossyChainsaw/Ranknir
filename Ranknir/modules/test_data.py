@@ -1,6 +1,7 @@
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Player import Player
-from Ranknir.classes.Deprecated_Server import Deprecated_Server
+from Ranknir.classes.Server import Server
+from Ranknir.modules.data_management import TEST_SERVER_ID, load_clan, load_server
 
 CLAN_DATA = {
     "clan_id": 84648,
@@ -25,8 +26,8 @@ CLAN_DATA = {
     ]
 }
 
-CLAN_OBJECT = Clan('test', 1131552899378466887, 1131552899378466887, [0], 0x000000, '', 705783420189671458)
-SERVER_OBJECT = Deprecated_Server('test', 1131552899378466887, 1131552899378466887, 705783420189671458, 0xFFFFFF, 'current', 'Dadabase/data/servers/705783420189671458.json', channel_rotating_id=1131552899378466887)
+CLAN_OBJECT = load_clan(TEST_SERVER_ID)
+SERVER_OBJECT = load_server(TEST_SERVER_ID)
 CLAN_PLAYER_DATA = [{"brawlhalla_id": "12974529", "brawlhalla_name": "CrossyChris (PS4)"}, {"brawlhalla_id": "12974529", "brawlhalla_name": "CrossyChris (PS4)"}]
 PLAYER_OBJECT_DATA = [
     Player('Lionheart', 2200, 2400),

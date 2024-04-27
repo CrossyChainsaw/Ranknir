@@ -16,7 +16,7 @@ from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
-from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, SERVERS, SORTING_METHOD_OPTIONS, MEMBER_COUNT_OPTIONS
+from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, BRAWL_SERVERS, SORTING_METHOD_OPTIONS, SHOW_OR_HIDE
 from Dadabase.modules.env import env_variable
 from Dadabase.modules.check_permission import has_permission
 
@@ -51,7 +51,7 @@ async def add_console_player_command(interaction, brawlhalla_id:int, brawlhalla_
 @tree.command(name='add_server_player', description="(You aren't suposed to run this) Manually add a player to the server leaderboard")
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(region="What server do you play on?")
-@app_commands.choices(region=SERVERS)
+@app_commands.choices(region=BRAWL_SERVERS)
 @app_commands.describe(country_of_residence="Which country does the player live in?")
 @app_commands.choices(country_of_residence=ALL_COUNTRIES)
 @app_commands.describe(ethnicity="Which country does the player live in?")
@@ -68,7 +68,7 @@ async def check_command(interaction):
 
 @tree.command(name='claim', description='Link your Brawlhalla account to Discord')
 @app_commands.describe(region="What server do you play on?")
-@app_commands.choices(region=SERVERS)
+@app_commands.choices(region=BRAWL_SERVERS)
 @app_commands.describe(country_of_residence="Which country do you live in?")
 @app_commands.choices(country_of_residence=ALL_COUNTRIES)
 @app_commands.describe(ethnicity="What is your ethnicity?")
@@ -86,8 +86,20 @@ async def claim_command(interaction, brawlhalla_id:int,
 
 @tree.command(name='configure_clan', description="(You aren't suposed to run this) Generate a file with clan data for the current clan server")
 @app_commands.checks.has_permissions(administrator=True)
-async def configure_clan_command(interaction):
-    await configure_clan(interaction)
+@app_commands.describe(sorting_method="What elo should be prioritised?")
+@app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
+@app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
+@app_commands.choices(member_count=SHOW_OR_HIDE)
+@app_commands.describe(no_elo_players="Show or Hide the amount of players in the leaderboard?")
+@app_commands.choices(no_elo_players=SHOW_OR_HIDE)
+@app_commands.describe(xp="Show or Hide the amount of clan xp?")
+@app_commands.choices(xp=SHOW_OR_HIDE)
+async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:int, channel_2v2_id:int, clan_id:str, color:str,
+                                 sorting_method: app_commands.Choice[str], member_count: app_commands.Choice[str], 
+                                 no_elo_players: app_commands.Choice[str], xp: app_commands.Choice[str], has_account_linkers:bool, channel_rotating_id:int=None, image:str=""):
+    
+    await configure_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
+                         sorting_method.value, member_count.value, xp.value, no_elo_players.value, channel_rotating_id, has_account_linkers)
 
 
 @tree.command(name='configure_server', description="(You aren't suposed to run this) Generate a file with clan data for the current server")
@@ -95,9 +107,9 @@ async def configure_clan_command(interaction):
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
 @app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
-@app_commands.choices(member_count=MEMBER_COUNT_OPTIONS)
+@app_commands.choices(member_count=SHOW_OR_HIDE)
 @app_commands.describe(no_elo_players="Show or Hide the amount of players in the leaderboard?")
-@app_commands.choices(no_elo_players=MEMBER_COUNT_OPTIONS)
+@app_commands.choices(no_elo_players=SHOW_OR_HIDE)
 async def configure_server_command(interaction, 
                                    leaderboard_title:str,
                                    sorting_method: app_commands.Choice[str], 
@@ -106,7 +118,7 @@ async def configure_server_command(interaction,
                                    channel_1v1_id:str,
                                    channel_2v2_id:str,
                                    channel_rotating_id:str,
-                                   color:str="FFFFFF",
+                                   color:str="0xFFFFFF",
                                    image:str=""):
     await configure_server(interaction, leaderboard_title, sorting_method.value, member_count.value, no_elo_players.value, int(channel_1v1_id), int(channel_2v2_id), int(channel_rotating_id), color, image)
 

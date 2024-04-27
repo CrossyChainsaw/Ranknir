@@ -1,10 +1,10 @@
-from Dadabase.modules.data_management import read_data, DATA_KEY_FOR_CONSOLE_PLAYERS, CLANS_DATA_LOCATION
-from Dadabase.modules.format_embeds import format_embed_list
+from Dadabase.modules.data_management import read_data, DATA_KEY_FOR_CONSOLE_PLAYERS, CLANS_DATA_PATH
+from Dadabase.modules.format import format_embed_list
 import discord
 
 
 async def console_player_list(interaction):
-    clan_data = read_data(CLANS_DATA_LOCATION, interaction.guild.id)
+    clan_data = read_data(CLANS_DATA_PATH, interaction.guild.id)
     msg = format_embed_list(clan_data, DATA_KEY_FOR_CONSOLE_PLAYERS)
     embed = __create_embed(msg)
     await interaction.response.send_message(embed=embed)

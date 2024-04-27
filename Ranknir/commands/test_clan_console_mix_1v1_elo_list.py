@@ -1,9 +1,10 @@
+from Ranknir.classes.Clan import Clan
 from Ranknir.modules.test_data import CLAN_DATA, CLAN_OBJECT, AL_PLAYERS, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 
 async def test_clan_console_mix_1v1_elo_list(bot):
-    clan = CLAN_OBJECT
+    clan:Clan = CLAN_OBJECT
 
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
     all_player_objects_array = []
@@ -22,7 +23,7 @@ async def test_clan_console_mix_1v1_elo_list(bot):
         # Get Clan Players
         clan_players = clan_data['clan']
         # Remove rm Players
-        if clan.has_rm_players:
+        if clan.has_account_linkers:
             rm_players = AL_PLAYERS
             clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo

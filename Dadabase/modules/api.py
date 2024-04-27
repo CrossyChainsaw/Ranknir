@@ -1,7 +1,5 @@
 import aiohttp
-import asyncio
 from Dadabase.modules.env import env_variable
-import json
 
 BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
 

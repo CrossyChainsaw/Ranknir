@@ -1,4 +1,4 @@
-class User:
+class Link:
     def __init__(self, brawlhalla_id, brawlhalla_name, discord_id, discord_name, region='', country='', ethnicity=''):
         self.brawlhalla_id = brawlhalla_id
         self.brawlhalla_name = brawlhalla_name

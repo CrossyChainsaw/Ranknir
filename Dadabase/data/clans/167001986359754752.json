@@ -1,16 +1,28 @@
 {
-    "name": "Team Frost",
-    "id": "167001986359754752",
-    "ps4_players": [
-        {
-            "brawlhalla_id": "12974529",
-            "brawlhalla_name": "CrossyChris (PS4)"
-        }
-    ],
-    "al_players": [
+    "server_name": "Frost",
+    "clan_names": ["Frost"],
+    "discord_server_id": "167001986359754752",
+    "id_array": ["12"],
+    "color": "0x30cff1",
+    "image": "",
+    "channel_1v1_id": 1093898006299934781,
+    "channel_2v2_id": 1093898340657275040,
+    "channel_rotating_id": null,
+    "sorting_method": "peak",
+    "member_count": "show",
+    "xp": "show",
+    "no_elo_players": "show",
+    "has_account_linkers": true,
+    "account_linkers": [
         {
             "brawlhalla_id": "7013979",
             "brawlhalla_name": "CrossyChris"
+        }
+    ],
+    "console_players": [
+        {
+            "brawlhalla_id": "12974529",
+            "brawlhalla_name": "CrossyChris (PS4)"
         }
     ]
 }
