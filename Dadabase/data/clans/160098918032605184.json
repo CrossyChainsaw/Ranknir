@@ -1,0 +1,18 @@
+{
+    "server_name": "Tews",
+    "clan_names": ["Tews", "Tews ll", "Tews Academy"],
+    "discord_server_id": "160098918032605184",
+    "id_array": ["527406", "1374400", "537048"],
+    "color": "0xff8a0f",
+    "image": "https://cdn.discordapp.com/attachments/837763218311086080/1056185356329955468/Tews_logo.png",
+    "channel_1v1_id": 955483557931925514,
+    "channel_2v2_id": 1056187762983845960,
+    "channel_rotating_id": 1164533654047965317,
+    "sorting_method": "current",
+    "member_count": "show",
+    "xp": "hide",
+    "no_elo_players": "hide",
+    "has_account_linkers": false,
+    "account_linkers": [],
+    "console_players": []
+}

@@ -1,7 +1,20 @@
 {
-    "name": "Pandation",
-    "id": "889594104873377812",
-    "ps4_players": [
+    "server_name": "Pandation",
+    "clan_names": ["Pandation", "Pandace", "Panhalla", "PanhaIIa"],
+    "discord_server_id": "889594104873377812",
+    "id_array": ["1702413", "1868949", "1709279", "1722822"],
+    "color": "0x212226",
+    "image": "https://media.discordapp.net/attachments/958131738503155714/958141534455337031/standard.gif",
+    "channel_1v1_id": 1225052181443645500,
+    "channel_2v2_id": 1225052340025954354,
+    "channel_rotating_id": 1225059050396450957,
+    "sorting_method": "peak",
+    "member_count": "show",
+    "xp": "hide",
+    "no_elo_players": "hide",
+    "has_account_linkers": false,
+    "account_linkers": [],
+    "console_players": [
         {
             "brawlhalla_id": "12779207",
             "brawlhalla_name": "higi-chan"

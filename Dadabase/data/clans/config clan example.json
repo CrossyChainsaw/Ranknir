@@ -1,0 +1,18 @@
+{
+    "server_name": "server_name",
+    "clan_names": ["clan_name"],
+    "discord_server_id": "00000000server_id0000000000",
+    "id_array": ["2021161"],
+    "color": "here_color",
+    "image": "here_image",
+    "channel_1v1_id": 10000000000000000000,
+    "channel_2v2_id": 100000000000000000000,
+    "channel_rotating_id": 1000000000000000000,
+    "sorting_method": "current",
+    "member_count": "show",
+    "xp": "hide",
+    "no_elo_players": "show",
+    "has_account_linkers": true,
+    "account_linkers": [],
+    "console_players": []
+}
