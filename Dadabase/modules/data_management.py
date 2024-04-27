@@ -7,8 +7,8 @@ DADABASE_DATA_PATH = 'Dadabase/data/'
 SERVERS_DATA_PATH = DADABASE_DATA_PATH + 'servers/'
 CLANS_DATA_PATH = DADABASE_DATA_PATH + 'clans/'
 # Data Keys
-DATA_KEY_FOR_ACCOUNT_LINKERS = 'al_players' # account linkers / remove players / crossplayers
-DATA_KEY_FOR_CONSOLE_PLAYERS = 'ps4_players' # console players
+DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove players / crossplayers
+DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
 # Command Names
 EDIT_SERVER_COMMAND = "/edit_server (This one doesn't exist yet)"
 EDIT_CLAN_COMMAND = "/edit_clan (This one doesn't exist yet)"
