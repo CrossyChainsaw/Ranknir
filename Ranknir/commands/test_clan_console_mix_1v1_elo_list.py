@@ -8,7 +8,7 @@ from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 # Set Test Variables
 clan = CLAN_OBJECT
 console_player_objects = PLAYER_OBJECT_DATA[-5:]
-clan_player_objects = PLAYER_OBJECT_DATA[10:]
+clan_player_objects = PLAYER_OBJECT_DATA[:5]
 
 async def test_clan_console_mix_1v1_elo_list(bot):
 

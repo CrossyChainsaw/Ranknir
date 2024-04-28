@@ -10,6 +10,9 @@ CLANS_DATA_PATH = DADABASE_DATA_PATH + 'clans/'
 DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove players / crossplayers
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
 DATA_KEY_FOR_SERVER_LINKS = 'links'
+DATA_KEY_FOR_SHOW_XP = 'show_xp'
+DATA_KEY_FOR_SHOW_MEMBER_COUNT = 'show_member_count'
+DATA_KEY_FOR_SHOW_NO_ELO_PLAYERS = 'show_no_elo_players'
 # Command Names
 EDIT_SERVER_COMMAND = "/edit_server (This one doesn't exist yet)"
 EDIT_CLAN_COMMAND = "/edit_clan (This one doesn't exist yet)"
