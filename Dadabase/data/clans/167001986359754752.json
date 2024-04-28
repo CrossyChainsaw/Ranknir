@@ -9,10 +9,9 @@
     "channel_2v2_id": 1093898340657275040,
     "channel_rotating_id": null,
     "sorting_method": "peak",
-    "member_count": "show",
-    "xp": "show",
-    "no_elo_players": "show",
-    "has_account_linkers": true,
+    "show_member_count": true,
+    "show_xp": true,
+    "show_no_elo_players": true,
     "account_linkers": [
         {
             "brawlhalla_id": "7013979",

@@ -29,9 +29,8 @@ async def clan_console_mix_1v1_elo_list(clan:Clan, bot):
         # Get Clan Players
         clan_players = clan_data['clan']
         # Remove rm Players
-        if clan.has_account_linkers:
-            rm_players = get_account_linker_players(clan.discord_server_id)
-            clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
+        rm_players = get_account_linker_players(clan.discord_server_id)
+        clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
         all_player_objects_array.append(clan_player_objects)
@@ -207,12 +206,9 @@ async def server_1v1_elo_list(server: Server, bot):
     # __try_update_data(server)
     brawlhalla_nl_players = get_server_players(server)
     all_player_objects_array, _ = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name)
-    all_player_objects_sorted = sort_elo(
-        server.sorting_method, all_player_objects_array)
-    embed_title, embed_array = prepare_embeds_server(
-        server, all_player_objects_sorted)
-    await send_embeds(embed_title, embed_array, bot, server,
-                      server.channel_1v1_id)
+    all_player_objects_sorted = sort_elo(server.sorting_method, all_player_objects_array)
+    embed_title, embed_array = prepare_embeds_server(server, all_player_objects_sorted)
+    await send_embeds(embed_title, embed_array, bot, server,server.channel_1v1_id)
 
 
 async def server_2v2_elo_list(server, bot):

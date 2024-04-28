@@ -1,18 +1,19 @@
 import discord
 import asyncio
+from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
 
 
-def prepare_embeds_clan_mix_console(clan, players_sorted, clan_data_array, console_player_amount):
+def prepare_embeds_clan_mix_console(clan:Clan, players_sorted, clan_data_array, console_player_amount):
 
     # OPTIONAL ADD ONS
     embed_title = discord.Embed(title='', description='', color=clan.color)
     embed_title = __add_title(clan_data_array, embed_title)
-    if clan.member_count == 'show':
+    if clan.show_member_count:
         embed_title = __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted)
-    if clan.xp == 'show':
+    if clan.show_xp:
         embed_title = __add_xp(clan_data_array, embed_title)
     # Variables
     embed_array = []
@@ -41,7 +42,7 @@ def prepare_embeds_clan_mix_console(clan, players_sorted, clan_data_array, conso
 def prepare_embeds_server(server:Server, players_sorted):
     color2 = server.color
     embed_title = discord.Embed(title=server.leaderboard_title, description='', color=color2)
-    if server.member_count == 'show':
+    if server.member_count:
         embed_title = __add_member_count([{"clan": []}], embed_title, 0, players_sorted)
     # Variables
     embed_array = []

@@ -1,3 +1,4 @@
+from Dadabase.classes.Clan import Clan
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
@@ -111,7 +112,7 @@ def __try_decode(name):
         return name
 
 
-def __change_order_team_name(team_object):
+def __change_order_team_name(team_object:Team):
     best_team_name = team_object.name
     if '+' in best_team_name:
         name_plus_index = best_team_name.find('+')
@@ -125,7 +126,7 @@ def __change_order_team_name(team_object):
         return team_object
 
 
-def __format_teamname(player, team_object):
+def __format_teamname(player:Player, team_object:Team):
     """Puts 2 asterisks after name 1, and 2 asterisks before name 2. Necessary for making the names bold when sending the embed (consider putting this in embed.py)"""
     best_team_name = team_object.name
     if '+' in best_team_name:
@@ -146,7 +147,7 @@ def __check_order_team_name(player, brawl_id_one, brawl_id_two, team_obj):
         return __change_order_team_name(team_obj)
 
 
-def __find_best_team(clan, player):
+def __find_best_team(clan:Clan, player):
     """Finds the best team of the player using `sorting_method` and returns a `Team` object"""
     all_my_2v2_teams = player['2v2']
     best_team = None
@@ -203,16 +204,16 @@ def __try_get_discord_name(player, player_name):
 
 
 
-def __check_if_elo_is_zero(clan, player_object):
-    if clan.no_elo_players == 'hide':
+def __check_if_elo_is_zero(clan:Clan, player_object:Player):
+    if clan.show_no_elo_players == True:
         if player_object.current == 0 and player_object.peak == 0:
             return True
     else:
         return False
 
 
-def __check_if_name_is_blank(clan, player_object):
-    if clan.no_elo_players == 'hide':
+def __check_if_name_is_blank(clan:Clan, player_object:Player):
+    if clan.show_no_elo_players == 'hide':
         if player_object.name == 'N/A' or player_object.name == "":
             return True
     else:
