@@ -9,10 +9,9 @@
     "channel_2v2_id": 1165796021952069702,
     "channel_rotating_id": 1225481293010174144,
     "sorting_method": "current",
-    "member_count": "show",
-    "xp": "show",
-    "no_elo_players": "hide",
-    "has_account_linkers": false,
+    "show_member_count": true,
+    "show_xp": true,
+    "show_no_elo_players": false,
     "account_linkers": [],
     "console_players": []
 }
