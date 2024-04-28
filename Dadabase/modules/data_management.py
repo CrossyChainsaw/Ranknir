@@ -54,9 +54,9 @@ BRAWL_SERVERS = [
     app_commands.Choice(name="US-W", value="USW"),
     app_commands.Choice(name="Europe", value="EU"),
     app_commands.Choice(name="South East Asia", value="SEA"),
-    app_commands.Choice(name="Australia", value="AUS"),
-    app_commands.Choice(name="Brazil", value="BRS"),
-    app_commands.Choice(name="Japan", value="JPN"),
+    app_commands.Choice(name="Australia", value="AU"),
+    app_commands.Choice(name="Brazil", value="BR"),
+    app_commands.Choice(name="Japan", value="JP"),
     app_commands.Choice(name="Middle East", value="MDE"),
     app_commands.Choice(name="Southern Africa", value="SAF"),
 ]
