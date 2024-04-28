@@ -60,9 +60,9 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Pl
     player_object = Player(name=player_ranked_stats['name'], 
                            current=player_ranked_stats['rating'],
                            peak=player_ranked_stats['peak_rating'],
-                           region=player['region'],
-                           country=player['country'],
-                           ethnicity=player['ethnicity'])
+                           region=player.get('region'),
+                           country=player.get('country'),
+                           ethnicity=player.get('ethnicity'))
     player_object.name = __fill_in_empty_name(player_object.name, player)
     player_object.name = __try_decode(player_object.name)
     return player_object
@@ -90,7 +90,10 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
         name = rotating_stats['name']
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
-    rotating_object = Player(name, rating, peak, region=player['region'], country=player['country'], ethnicity=player['ethnicity'])
+    rotating_object = Player(name, rating, peak, 
+                             region=player.get('region'),
+                             country=player.get('country'),
+                             ethnicity=player.get('ethnicity'))
     rotating_object.name = __fill_in_empty_name(rotating_object.name, player_ranked_stats)
     rotating_object.name = __try_decode(rotating_object.name)
     return rotating_object
@@ -178,7 +181,10 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
         brawl_id_one = best_team["brawlhalla_id_one"]
         brawl_id_two = best_team["brawlhalla_id_two"]
 
-    team_obj = Team(best_team_name, best_current, best_peak, region=player['region'], country=player['country'], ethnicity=player['ethnicity'])
+    team_obj = Team(best_team_name, best_current, best_peak, 
+                        region=player.get('region'),
+                        country=player.get('country'),
+                        ethnicity=player.get('ethnicity'))
     team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two,
                                        team_obj)
 
