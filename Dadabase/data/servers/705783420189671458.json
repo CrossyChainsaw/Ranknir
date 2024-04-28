@@ -10,115 +10,16 @@
     "channel_rotating_id": 1131552913160937513,
     "image": "",
     "color": "0x00FFFA",
-    "flag_type": "region",
+    "flag_type": "country",
     "links": [
         {
             "brawlhalla_id": 7364605,
             "brawlhalla_name": ".......... :frowning:",
             "discord_id": 413070742591373314,
             "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "USE",
-            "country": "",
-            "ethnicity": ""
-        },
-        {
-            "brawlhalla_id": 2,
-            "brawlhalla_name": "bmgtherealfirstdan",
-            "discord_id": 2,
-            "discord_name": "2",
-            "region": "",
-            "country": "",
-            "ethnicity": ""
+            "region": "EU",
+            "country": "NL",
+            "ethnicity": "TR"
         }
     ]
 }

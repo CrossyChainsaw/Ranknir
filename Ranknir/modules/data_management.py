@@ -39,7 +39,6 @@ DISCARDS_ID = 15554673
 def load_server(server_id):
     server_path = f"{DADABASE_SERVER_DATA_PATH}{server_id}.json"
     server_data = load_json_file(server_path)
-    print(json.dumps(server_data, indent=4))
     server = Server(
         id=server_data['id'],
         name=server_data['name'],

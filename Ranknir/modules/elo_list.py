@@ -208,10 +208,10 @@ async def server_1v1_elo_list(server: Server, bot):
     await send_embeds(embed_title, embed_array, bot, server,server.channel_1v1_id)
 
 
-async def server_2v2_elo_list(server, bot):
-    print("Server 2v2 elo list for " + server)
+async def server_2v2_elo_list(server:Server, bot):
+    print("Server 2v2 elo list for " + server.name)
     brawlhalla_nl_players = get_server_players(server)
-    _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server)
+    _, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name)
     all_team_objects_sorted = sort_elo(server.sorting_method, all_teams_array)
     embed_title, embed_array = prepare_embeds_server(server, all_team_objects_sorted)
     await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)

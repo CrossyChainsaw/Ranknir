@@ -378,6 +378,15 @@
             "region": "BRS",
             "country": "BR",
             "ethnicity": "BR"
+        },
+        {
+            "brawlhalla_id": 51653936,
+            "brawlhalla_name": "M30w | Kyu",
+            "discord_id": 561832330340073472,
+            "discord_name": "700uyk",
+            "region": "SEA",
+            "country": "",
+            "ethnicity": ""
         }
     ]
 }

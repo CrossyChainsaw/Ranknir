@@ -14,7 +14,7 @@ from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.commands.leave_server import leave_server
 from Ranknir.modules.get_current_order import print_current_order
 from Ranknir.commands.test_clan_console_mix_1v1_elo_list import test_clan_console_mix_1v1_elo_list
-from Ranknir.commands.test_server_1v1_elo_list import test_server
+from Ranknir.commands.test_server import test_server
 from Ranknir.modules.env import env_variable
 import json
 
@@ -99,6 +99,11 @@ async def test_clan_console_mix_1v1_elo_list_command(ctx):
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_server_command(ctx):
     await test_server(bot)
+
+@bot.command(name='ts2')
+@has_permissions(manage_roles=True, ban_members=True)
+async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
+    await server_1v1_and_2v2_and_rotating_elo_list(load_server(TEST_SERVER_ID), bot)
 
 def run_ranknir():
     # bot.run(env_variable("RANKNIR_BOT_TOKEN"))
