@@ -5,11 +5,12 @@
     "sorting_method": "current",
     "show_member_count": true,
     "show_no_elo_players": false,
-    "channel_1v1_id": 1131552899378466887,
-    "channel_2v2_id": 1131552899378466887,
-    "channel_rotating_id": 1131552899378466887,
+    "channel_1v1_id": 1131552913160937513,
+    "channel_2v2_id": 1131552913160937513,
+    "channel_rotating_id": 1131552913160937513,
     "image": "",
     "color": "0x00FFFA",
+    "show_flags": false,
     "links": [
         {
             "brawlhalla_id": 7364605,

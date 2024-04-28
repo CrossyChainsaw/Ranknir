@@ -1,5 +1,6 @@
 import discord
 import asyncio
+from Ranknir.classes.Player import Player
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
@@ -39,10 +40,10 @@ def prepare_embeds_clan_mix_console(clan:Clan, players_sorted, clan_data_array, 
     return embed_title, embed_array
 
 
-def prepare_embeds_server(server:Server, players_sorted):
+def prepare_embeds_server(server:Server, players_sorted: list[Player]):
     color2 = server.color
     embed_title = discord.Embed(title=server.leaderboard_title, description='', color=color2)
-    if server.member_count:
+    if server.show_member_count:
         embed_title = __add_member_count([{"clan": []}], embed_title, 0, players_sorted)
     # Variables
     embed_array = []
@@ -59,64 +60,65 @@ def prepare_embeds_server(server:Server, players_sorted):
         if count == 0:
             embed = discord.Embed(description="", color=color2)
         if count <= 20:
-            #embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (str(rank), player.name, str(player.current), str(player.peak))
-            if server.id == 1047987261905584128:
-                flag_source = player.ethnicity
-                if flag_source == "NL":
-                    flag = "<:NL:1225603278927040613>"
-                elif flag_source == "BE":
-                    flag = "<:BE:1225603306752315392>"
-                elif flag_source == "TR":
-                    flag = "<:TR:1225869099477762058>"
-                elif flag_source == "MA":
-                    flag = "<:MA:1225869638869454971>"
-                elif flag_source == "ES":
-                    flag = "<:ES:1225876346090164325>"
-                elif flag_source == "IQ":
-                    flag = "<:IQ:1225876351781961728>"
-                elif flag_source == "VN":
-                    flag = "<:VN:1225876347629342771>"
-                elif flag_source == "DO":
-                    flag = "<:DO:1225876344269705347>"
-                elif flag_source == "DZ":
-                    flag = "<:DZ:1225876350418812948>"
-                elif flag_source == "SR":
-                    flag = "<:SR:1225957555545571432>"
-                elif flag_source == "JP":
-                    flag = "<:JP:1225969115915751464>"
-                elif flag_source == "IT":
-                    flag = "<:IT:1225970111698046976>"
-                elif flag_source == "CW":
-                    flag = "<:CW:1226200567450435704>"
-                elif flag_source == "ID":
-                    flag = "<:ID:1226368641985941504>"
-                elif flag_source == "DE":
-                    flag = "<:DE:1228355548810842212>"
+            if server.show_flags: # ideally if show_flags = true, append to msg, and later again append to msg
+                if server.id == 1047987261905584128:
+                    flag_source = player.ethnicity
+                    if flag_source == "NL":
+                        flag = "<:NL:1225603278927040613>"
+                    elif flag_source == "BE":
+                        flag = "<:BE:1225603306752315392>"
+                    elif flag_source == "TR":
+                        flag = "<:TR:1225869099477762058>"
+                    elif flag_source == "MA":
+                        flag = "<:MA:1225869638869454971>"
+                    elif flag_source == "ES":
+                        flag = "<:ES:1225876346090164325>"
+                    elif flag_source == "IQ":
+                        flag = "<:IQ:1225876351781961728>"
+                    elif flag_source == "VN":
+                        flag = "<:VN:1225876347629342771>"
+                    elif flag_source == "DO":
+                        flag = "<:DO:1225876344269705347>"
+                    elif flag_source == "DZ":
+                        flag = "<:DZ:1225876350418812948>"
+                    elif flag_source == "SR":
+                        flag = "<:SR:1225957555545571432>"
+                    elif flag_source == "JP":
+                        flag = "<:JP:1225969115915751464>"
+                    elif flag_source == "IT":
+                        flag = "<:IT:1225970111698046976>"
+                    elif flag_source == "CW":
+                        flag = "<:CW:1226200567450435704>"
+                    elif flag_source == "ID":
+                        flag = "<:ID:1226368641985941504>"
+                    elif flag_source == "DE":
+                        flag = "<:DE:1228355548810842212>"
+                    else:
+                        flag = ""
+                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
+                elif server.id == 1047987261905584128:
+                    flag_source = player.ethnicity
+                    if flag_source == "":
+                        flag = ""
+                    else:
+                        flag = f":flag_{flag_source.lower()}:"
+                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"              
                 else:
-                    flag = ""
-                embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-            elif server.id == 1047987261905584128:
-                flag_source = player.ethnicity
-                if flag_source == "":
-                    flag = ""
-                else:
-                    flag = f":flag_{flag_source.lower()}:"
-                embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"              
+                    flag_source = player.ethnicity
+                    if flag_source == "":
+                        flag = ""
+                    else:
+                        flag = f":flag_{flag_source.lower()}:"
+                    embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
             else:
-                flag_source = player.ethnicity
-                if flag_source == "":
-                    flag = ""
-                else:
-                    flag = f":flag_{flag_source.lower()}:"
-                embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
- 
+                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
         rank += 1
         count += 1
     embed_array.append(embed)
     return embed_title, embed_array
 
 
-async def send_embeds(embed_title, embed_array, bot, clan, channel_id):
+async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
     channel = bot.get_channel(channel_id)
     print('Target Channel: ' + channel.name)
 
@@ -168,7 +170,7 @@ def __add_title(clan_data_array, embed2):
         return embed2
 
 
-def __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted):
+def __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted: list[Player]):
     embed_title.description += "\n\n"
     if len(clan_data_array) == 1:
         embed_title.description = '**Member Count\n**'

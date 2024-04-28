@@ -31,26 +31,27 @@ DISCARDS_ID = 15554673
 def load_server(server_id):
     server_path = f"{DADABASE_SERVER_DATA_PATH}{server_id}.json"
     server_data = load_json_file(server_path)
+    print(json.dumps(server_data, indent=4))
     server = Server(
-        server_data['id'],
-        server_data['name'],
-        server_data['leaderboard_title'],
-        server_data['sorting_method'],
-        server_data['show_member_count'],
-        server_data['show_no_elo_players'],
-        server_data['channel_1v1_id'],
-        server_data['channel_2v2_id'],
-        server_data['channel_rotating_id'],
-        int(server_data['color'], 16),
-        server_data['image'],
-        server_data['links']
+        id=server_data['id'],
+        name=server_data['name'],
+        leaderboard_title=server_data['leaderboard_title'],
+        sorting_method=server_data['sorting_method'],
+        show_member_count=server_data['show_member_count'],
+        show_no_elo_players=server_data['show_no_elo_players'],
+        channel_1v1_id=server_data['channel_1v1_id'],
+        channel_2v2_id=server_data['channel_2v2_id'],
+        channel_rotating_id=server_data['channel_rotating_id'],
+        color=int(server_data['color'], 16),
+        image=server_data['image'],
+        show_flags=server_data['show_flags'],
+        links=server_data['links']
     )
     return server
 
 def load_clan(server_id):
     clan_path = f"{DADABASE_CLAN_DATA_PATH}{server_id}.json"
     clan_data = load_json_file(clan_path)
-    print(clan_data)
     clan = Clan(
         server_name=clan_data['server_name'],
         clan_names=clan_data['clan_names'],
@@ -65,8 +66,8 @@ def load_clan(server_id):
         show_xp=clan_data['show_xp'],
         show_no_elo_players=clan_data['show_no_elo_players'],
         channel_rotating_id=clan_data['channel_rotating_id'],
-        account_linkers=clan_data['account_linkers'],
-        console_players=clan_data['console_players']
+        account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
+        console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS]
     )
     return clan
 
