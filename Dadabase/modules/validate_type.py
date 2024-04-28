@@ -5,7 +5,7 @@ def id_is_int(id):
         return False
     
 def cast_to_int(value):
-    try:
+    if value:
         return int(value)
-    except ValueError:
+    else:
         return value

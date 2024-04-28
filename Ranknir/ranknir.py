@@ -103,4 +103,4 @@ async def test_server_1v1_elo_list_command(ctx):
 def run_ranknir():
     bot.run(env_variable("RANKNIR_BOT_TOKEN"))
     # bot.run(env_variable("TEST_BOT_TOKEN"))
-    # return
+    return

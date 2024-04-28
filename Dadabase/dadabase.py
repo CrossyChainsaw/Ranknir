@@ -90,39 +90,32 @@ async def claim_command(interaction, brawlhalla_id:int,
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
-@app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
-@app_commands.choices(member_count=SHOW_OR_HIDE)
-@app_commands.describe(no_elo_players="Show or Hide the amount of players in the leaderboard?")
-@app_commands.choices(no_elo_players=SHOW_OR_HIDE)
-@app_commands.describe(xp="Show or Hide the amount of clan xp?")
-@app_commands.choices(xp=SHOW_OR_HIDE)
+# @app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
+# @app_commands.describe(show_no_elo_players="Show or Hide the amount of players in the leaderboard?")
+# @app_commands.describe(show_xp="Show or Hide the amount of clan xp?")
 async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
-                                 sorting_method: app_commands.Choice[str], member_count: app_commands.Choice[str], 
-                                 no_elo_players: app_commands.Choice[str], xp: app_commands.Choice[str], has_account_linkers:bool, channel_rotating_id:str=None, image:str=""):
+                                 sorting_method: app_commands.Choice[str], show_member_count: bool, 
+                                 show_no_elo_players: bool, show_xp: bool, channel_rotating_id:str=None, image:str=""):
     
     await configure_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
-                         sorting_method.value, member_count.value, xp.value, no_elo_players.value, channel_rotating_id, has_account_linkers)
+                         sorting_method.value, show_member_count, show_xp, show_no_elo_players, channel_rotating_id)
 
 
 @tree.command(name='configure_server', description="(You aren't suposed to run this) Generate a file with clan data for the current server")
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
-@app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
-@app_commands.choices(member_count=SHOW_OR_HIDE)
-@app_commands.describe(no_elo_players="Show or Hide the amount of players in the leaderboard?")
-@app_commands.choices(no_elo_players=SHOW_OR_HIDE)
 async def configure_server_command(interaction, 
                                    leaderboard_title:str,
                                    sorting_method: app_commands.Choice[str], 
-                                   member_count: app_commands.Choice[str],
-                                   no_elo_players: app_commands.Choice[str],
+                                   show_member_count: bool,
+                                   show_no_elo_players: bool,
                                    channel_1v1_id:str,
                                    channel_2v2_id:str,
                                    channel_rotating_id:str,
                                    color:str="0xFFFFFF",
                                    image:str=""):
-    await configure_server(interaction, leaderboard_title, sorting_method.value, member_count.value, no_elo_players.value, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image)
+    await configure_server(interaction, leaderboard_title, sorting_method.value, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image)
 
 
 @tree.command(name='console_player_list', description='List all console players')
