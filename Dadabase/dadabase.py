@@ -90,9 +90,9 @@ async def claim_command(interaction, brawlhalla_id:int,
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
-@app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
-@app_commands.describe(no_elo_players="Show or Hide the amount of players in the leaderboard?")
-@app_commands.describe(xp="Show or Hide the amount of clan xp?")
+# @app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
+# @app_commands.describe(show_no_elo_players="Show or Hide the amount of players in the leaderboard?")
+# @app_commands.describe(show_xp="Show or Hide the amount of clan xp?")
 async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
                                  sorting_method: app_commands.Choice[str], show_member_count: bool, 
                                  show_no_elo_players: bool, show_xp: bool, channel_rotating_id:str=None, image:str=""):
@@ -166,6 +166,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(env_variable("DADABASE_BOT_TOKEN"))
-    # client.run(env_variable("TEST_BOT_TOKEN"))
+    #client.run(env_variable("DADABASE_BOT_TOKEN"))
+    client.run(env_variable("TEST_BOT_TOKEN"))
     return
