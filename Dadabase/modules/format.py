@@ -10,6 +10,24 @@ def format_embed_list(data, key):
             msg += f"{index}. **id:** {brawlhalla_account['brawlhalla_id']}, **name:** {brawlhalla_account['discord_name']}\n"
     return msg
 
+def format_embed_list_big(data, key):
+    def __get_nickname(brawlhalla_account):
+        if len(brawlhalla_account['brawlhalla_name']) > 0:
+            return brawlhalla_account['brawlhalla_name']
+        else:
+            return brawlhalla_account.get('discord_name')
+    msg = ''
+    msg2 = ''
+    for index, brawlhalla_account in enumerate(data[key], 1):
+        nickname = __get_nickname(brawlhalla_account)
+        brawlhalla_id = brawlhalla_account['brawlhalla_id']
+        if index < 51:
+            msg += f"{index}. **id:** {brawlhalla_id}, **name:** {nickname}\n"
+        else:
+            msg2 += f"{index}. **id:** {brawlhalla_id}, **name:** {nickname}\n"
+
+    return msg, msg2
+
 
 def split_string(input_string, delimiter=':'):
     """

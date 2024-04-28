@@ -1,13 +1,17 @@
 from Dadabase.modules.data_management import read_data, SERVERS_DATA_PATH, DATA_KEY_FOR_SERVER_LINKS, ADD_SERVER_PLAYER_COMMAND, REMOVE_SERVER_PLAYER_COMMAND
-from Dadabase.modules.format import format_embed_list
+from Dadabase.modules.format import format_embed_list_big
 import discord
 
 
 async def server_player_list(interaction):
     server_data = read_data(SERVERS_DATA_PATH, interaction.guild.id)
-    msg = format_embed_list(server_data, DATA_KEY_FOR_SERVER_LINKS)
+    msg, msg2 = format_embed_list_big(server_data, DATA_KEY_FOR_SERVER_LINKS)
     embed = __create_embed(msg)
-    await interaction.response.send_message(embed=embed)
+    if len(msg2) > 0:
+        embed2 = __create_embed(msg2)
+        await interaction.response.send_message(embeds=[embed, embed2])
+    else:
+        await interaction.response.send_message(embed=embed)
 
 
 def __create_embed(msg):
