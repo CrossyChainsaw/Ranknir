@@ -7,7 +7,7 @@ from Dadabase.modules.format import split_string, format_color
 from Dadabase.classes.Clan import Clan
 from Dadabase.modules.validate_type import cast_to_int
 
-async def configure_clan(interaction, clan_names: str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str, image:str, sorting_method:str, member_count:str, xp:str, no_elo_players:str, channel_rotating_id:str, has_account_linkers:bool):
+async def configure_clan(interaction, clan_names: str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str, image:str, sorting_method:str, show_member_count:bool, show_xp:bool, show_no_elo_players:bool, channel_rotating_id:str):
     # Convert Fields
     channel_1v1_id = int(channel_1v1_id)
     channel_2v2_id = int(channel_2v2_id)
@@ -15,8 +15,9 @@ async def configure_clan(interaction, clan_names: str, channel_1v1_id:str, chann
     color = format_color(color)
     clan_names = split_string(clan_names)
     clan_id = split_string(clan_id)
+
     # Logic
-    clan = Clan(interaction.guild.name, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, str(interaction.guild.id), sorting_method, member_count, xp, no_elo_players, channel_rotating_id, has_account_linkers)
+    clan = Clan(interaction.guild.name, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, str(interaction.guild.id), sorting_method, show_member_count, show_xp, show_no_elo_players, channel_rotating_id)
     if os.path.exists(f"{CLANS_DATA_PATH}{interaction.guild.id}.json"):
         await interaction.response.send_message(f"Oops! This server already exists. Consider running `{EDIT_CLAN_COMMAND}` to update data.")
     else:
