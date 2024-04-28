@@ -1,5 +1,6 @@
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
+from enum import Enum
 import json
 
 # Paths
@@ -9,6 +10,13 @@ DADABASE_CLAN_DATA_PATH = f"{DADABASE_PATH}data/clans/"
 # Data Keys
 DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove players / crossplayers
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
+DATA_KEY_FOR_FLAG_TYPE = 'flag_type'
+# Flag Type Values
+class FlagType(Enum):
+    NONE = None
+    REGION = 'region'
+    COUNTRY = 'country'
+    ETHNICITY = 'ethnicity'
 # Server_IDs
 TEST_SERVER_ID = 705783420189671458
 M30W_SERVER_ID = 1076670210678992936
@@ -44,7 +52,7 @@ def load_server(server_id):
         channel_rotating_id=server_data['channel_rotating_id'],
         color=int(server_data['color'], 16),
         image=server_data['image'],
-        show_flags=server_data['show_flags'],
+        flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
         links=server_data['links']
     )
     return server

@@ -1,5 +1,6 @@
 import discord
 import asyncio
+from Ranknir.modules.data_management import FlagType
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
@@ -60,9 +61,11 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
         if count == 0:
             embed = discord.Embed(description="", color=color2)
         if count <= 20:
-            if server.show_flags: # ideally if show_flags = true, append to msg, and later again append to msg
+            if server.flag_type is not FlagType.NONE.value: # ideally if show_flags = true, append to msg, and later again append to msg
+                
+                flag_source = __get_flag_source(server, player)
+
                 if server.id == 1047987261905584128:
-                    flag_source = player.ethnicity
                     if flag_source == "NL":
                         flag = "<:NL:1225603278927040613>"
                     elif flag_source == "BE":
@@ -96,15 +99,7 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
                     else:
                         flag = ""
                     embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-                elif server.id == 1047987261905584128:
-                    flag_source = player.ethnicity
-                    if flag_source == "":
-                        flag = ""
-                    else:
-                        flag = f":flag_{flag_source.lower()}:"
-                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"              
                 else:
-                    flag_source = player.ethnicity
                     if flag_source == "":
                         flag = ""
                     else:
@@ -222,3 +217,11 @@ def __add_xp(clan_data_array, embed2):
         total_xp_reformatted = '{:,.0f}'.format(total_xp)
         embed2.description += "\nTotal: " + str(total_xp_reformatted)
         return embed2
+
+def __get_flag_source(server:Server, player:Player):
+    if server.flag_type == FlagType.ETHNICITY.value:
+        return player.ethnicity
+    elif server.flag_type == FlagType.COUNTRY.value:
+        return player.country
+    elif server.flag_type == FlagType.REGION.value:
+        return player.region
