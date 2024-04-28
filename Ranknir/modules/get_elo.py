@@ -79,10 +79,6 @@ def __extract_player_stats_into_team_object_2v2(clan, player):
 def __extract_player_stats_into_player_object_rotating(player_ranked_stats, player):
     """Takes player data and turns it into a `Player` object (Rotating Ranked)"""
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
-    if "country" in player:
-        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'], player['country'], player['ethnicity'])
-    else:
-        player_object = Player(player_ranked_stats['name'], player_ranked_stats['rating'],player_ranked_stats['peak_rating'])
     rotating_stats = player_ranked_stats['rotating_ranked']
     if rotating_stats == []:
         name = ""
