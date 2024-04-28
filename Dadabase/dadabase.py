@@ -16,7 +16,7 @@ from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
-from Dadabase.modules.data_management import BENELUX_COUNTRIES, ALL_COUNTRIES, BRAWL_SERVERS, SORTING_METHOD_OPTIONS, SHOW_OR_HIDE
+from Dadabase.modules.data_management import ALL_COUNTRIES, BRAWL_SERVERS, SORTING_METHOD_OPTIONS
 from Dadabase.modules.env import env_variable
 from Dadabase.modules.check_permission import has_permission
 from Dadabase.commands.server_player_list import server_player_list
@@ -166,6 +166,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    # client.run(env_variable("DADABASE_BOT_TOKEN"))
+    client.run(env_variable("DADABASE_BOT_TOKEN"))
     # client.run(env_variable("TEST_BOT_TOKEN"))
     return
