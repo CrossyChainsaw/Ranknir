@@ -6,7 +6,7 @@ from Dadabase.classes.Server import Server
 
 async def initialise_server(interaction, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, flag_type):
     # Logic
-    server = Server(interaction.guild.id, interaction.guild.name, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, show_flags=show_flags)
+    server = Server(interaction.guild.id, interaction.guild.name, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, flag_type)
     if os.path.exists(f"{SERVERS_DATA_PATH}{interaction.guild.id}.json"):
         await interaction.response.send_message(f"Oops! This server already exists. Consider running `{EDIT_SERVER_COMMAND}` to update data.")
     else:

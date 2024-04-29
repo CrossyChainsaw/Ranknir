@@ -6,11 +6,11 @@ from discord import app_commands
 from Dadabase.commands.claim import claim
 from Dadabase.commands.check import check
 from Dadabase.commands.ping import ping
-from Ranknir.Dadabase.commands.initialise_clan import initialise_clan
+from Dadabase.commands.initialise_clan import initialise_clan
 from Dadabase.commands.add_console_player import add_console_player
 from Dadabase.commands.console_player_list import console_player_list
 from Dadabase.commands.remove_console_player import remove_console_player
-from Ranknir.Dadabase.commands.initialise_server import initialise_server
+from Dadabase.commands.initialise_server import initialise_server
 from Dadabase.commands.add_server_player import add_server_player
 from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
@@ -22,6 +22,7 @@ from Dadabase.modules.check_permission import has_permission
 from Dadabase.commands.server_player_list import server_player_list
 from Dadabase.commands.edit_clan import edit_clan
 from Dadabase.commands.edit_server import edit_server
+from Dadabase.modules.data_management import FlagType
 
 
 intents = discord.Intents.default()
@@ -108,8 +109,17 @@ async def edit_clan_command(interaction, channel_1v1_id:str=None, channel_2v2_id
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
 @app_commands.describe(flag_type="What flag should be shown next to each player?")
 @app_commands.choices(flag_type=FLAG_TYPE_OPTIONS)
-async def edit_server_command(interaction, leaderboard_title:str=None, sorting_method:app_commands.Choice[str]=None, show_member_count:bool=None, show_no_elo_players:bool=None, channel_1v1_id:str=None, channel_2v2_id:str=None, channel_rotating_id:str = None, image:str=None, color:str=None, flag_type:app_commands.Choice[str]=None):
-    print(flag_type)
+async def edit_server_command(interaction, 
+                              leaderboard_title:str=None, 
+                              sorting_method:app_commands.Choice[str]=None, 
+                              show_member_count:bool=None, 
+                              show_no_elo_players:bool=None, 
+                              channel_1v1_id:str=None, 
+                              channel_2v2_id:str=None, 
+                              channel_rotating_id:str = None, 
+                              image:str=None, 
+                              color:str=None, 
+                              flag_type:app_commands.Choice[str]=None):
     await edit_server(interaction, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, image, color, flag_type)
 
 
@@ -120,10 +130,20 @@ async def edit_server_command(interaction, leaderboard_title:str=None, sorting_m
 # @app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
 # @app_commands.describe(show_no_elo_players="Show or Hide the amount of players in the leaderboard?")
 # @app_commands.describe(show_xp="Show or Hide the amount of clan xp?")
-async def initialise_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
-                                 sorting_method: app_commands.Choice[str], show_member_count: bool, 
-                                 show_no_elo_players: bool, show_xp: bool, channel_rotating_id:str=None, image:str="", server_id:str=None, server_name:str=None):
-    
+async def initialise_clan_command(interaction, 
+                                  clan_names:str, 
+                                  channel_1v1_id:str, 
+                                  channel_2v2_id:str, 
+                                  clan_id:str, 
+                                  color:str,
+                                  sorting_method: app_commands.Choice[str], 
+                                  show_member_count: bool, 
+                                  show_no_elo_players: bool, 
+                                  show_xp: bool, 
+                                  channel_rotating_id:str=None, 
+                                  image:str="", 
+                                  server_id:str=None, 
+                                  server_name:str=None):
     await initialise_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
                          sorting_method.value, show_member_count, show_xp, show_no_elo_players, channel_rotating_id, server_id, server_name)
 
@@ -132,6 +152,8 @@ async def initialise_clan_command(interaction, clan_names:str, channel_1v1_id:st
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
+@app_commands.describe(flag_type="What flag should be shown next to each player?")
+@app_commands.choices(flag_type=FLAG_TYPE_OPTIONS)
 async def initialise_server_command(interaction, 
                                    leaderboard_title:str,
                                    sorting_method: app_commands.Choice[str], 
@@ -140,9 +162,10 @@ async def initialise_server_command(interaction,
                                    channel_1v1_id:str,
                                    channel_2v2_id:str,
                                    channel_rotating_id:str,
+                                   flag_type:app_commands.Choice[str],
                                    color:str="0xFFFFFF",
                                    image:str=""):
-    await initialise_server(interaction, leaderboard_title, sorting_method.value, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image)
+    await initialise_server(interaction, leaderboard_title, sorting_method.value, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, flag_type.value)
 
 
 @tree.command(name=PING_COMMAND[1:])

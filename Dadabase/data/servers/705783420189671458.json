@@ -1,25 +1,15 @@
 {
     "id": 705783420189671458,
     "name": "Skyward",
-    "leaderboard_title": "SWAGG",
+    "leaderboard_title": "Skyward Epico",
     "sorting_method": "current",
     "show_member_count": true,
-    "show_no_elo_players": false,
-    "channel_1v1_id": 1131552913160937513,
+    "show_no_elo_players": true,
+    "channel_1v1_id": 1131552899378466887,
     "channel_2v2_id": 1131552913160937513,
-    "channel_rotating_id": 1131552913160937513,
+    "channel_rotating_id": 973594560368373820,
     "image": "",
-    "color": "0x00FFFA",
-    "flag_type": "country",
-    "links": [
-        {
-            "brawlhalla_id": 7364605,
-            "brawlhalla_name": ".......... :frowning:",
-            "discord_id": 413070742591373314,
-            "discord_name": "crossychainsaw",
-            "region": "",
-            "country": "",
-            "ethnicity": ""
-        }
-    ]
+    "color": "0xFFFFFF",
+    "flag_type": "region",
+    "links": []
 }

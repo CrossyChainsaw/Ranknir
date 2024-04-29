@@ -1,6 +1,6 @@
 from Ranknir.modules.data_management import TEST_SERVER_ID, load_server
 from Ranknir.modules.get_players import get_server_players
-from Ranknir.modules.test_data import SERVER_OBJECT, SERVER_PLAYER_OBJECT_DATA
+from Ranknir.modules.test_data import SERVER_PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import send_embeds, prepare_embeds_server
 from Ranknir.classes.Server import Server
