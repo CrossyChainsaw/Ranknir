@@ -2,7 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from Ranknir.modules.data_management import AURA_SERVER_ID, EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, DIVISION_SERVER_ID, TEWS_SERVER_ID, load_clan
+from Ranknir.modules.data_management import EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, DIVISION_SERVER_ID, TEWS_SERVER_ID, load_clan
 from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BRAWL_HUNGARY_SERVER_ID, load_server
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
@@ -106,6 +106,6 @@ async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
     await server_1v1_and_2v2_and_rotating_elo_list(load_server(TEST_SERVER_ID), bot)
 
 def run_ranknir():
-    bot.run(env_variable("RANKNIR_BOT_TOKEN"))
+    # bot.run(env_variable("RANKNIR_BOT_TOKEN"))
     # bot.run(env_variable("TEST_BOT_TOKEN"))
     return

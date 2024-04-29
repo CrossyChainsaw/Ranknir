@@ -95,10 +95,10 @@ async def claim_command(interaction, brawlhalla_id:int,
 # @app_commands.describe(show_xp="Show or Hide the amount of clan xp?")
 async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
                                  sorting_method: app_commands.Choice[str], show_member_count: bool, 
-                                 show_no_elo_players: bool, show_xp: bool, channel_rotating_id:str=None, image:str=""):
+                                 show_no_elo_players: bool, show_xp: bool, channel_rotating_id:str=None, image:str="", server_id:str=None, server_name:str=None):
     
     await configure_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
-                         sorting_method.value, show_member_count, show_xp, show_no_elo_players, channel_rotating_id)
+                         sorting_method.value, show_member_count, show_xp, show_no_elo_players, channel_rotating_id, server_id, server_name)
 
 
 @tree.command(name='configure_server', description="(You aren't suposed to run this) Generate a file with clan data for the current server")
@@ -166,6 +166,6 @@ async def on_ready():
     print(f'We have logged in as {client.user}')
 
 def run_dadabase():
-    client.run(env_variable("DADABASE_BOT_TOKEN"))
-    # client.run(env_variable("TEST_BOT_TOKEN"))
+    #client.run(env_variable("DADABASE_BOT_TOKEN"))
+    client.run(env_variable("TEST_BOT_TOKEN"))
     # return
