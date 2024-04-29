@@ -1,5 +1,7 @@
 from discord import app_commands
 
+from Dadabase.modules.data_management import FlagType
+
 # Command Names
 ACCOUNT_LINKER_LIST_COMMAND = '/account_linker_list'
 ADD_ACCOUNT_LINKER_COMMAND = "/add_account_linker"
