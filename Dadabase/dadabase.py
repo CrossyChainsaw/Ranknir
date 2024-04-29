@@ -16,11 +16,12 @@ from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
 from Dadabase.commands.account_linker_list import account_linker_list
 from Dadabase.commands.remove_account_linker import remove_account_linker
-from Dadabase.modules.data_management import ALL_COUNTRIES, BRAWL_SERVERS, SORTING_METHOD_OPTIONS
+from Dadabase.modules.data_management import ALL_COUNTRIES, BRAWL_SERVERS, FLAG_TYPE_OPTIONS, SORTING_METHOD_OPTIONS, FlagType
 from Dadabase.modules.env import env_variable
 from Dadabase.modules.check_permission import has_permission
 from Dadabase.commands.server_player_list import server_player_list
 from Dadabase.commands.edit_clan import edit_clan
+from Dadabase.commands.edit_server import edit_server
 
 
 intents = discord.Intents.default()
@@ -129,6 +130,16 @@ async def console_player_list_command(interaction):
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
 async def edit_clan_command(interaction, channel_1v1_id:str=None, channel_2v2_id:str=None, color:str=None, image:str=None, sorting_method:str=None, show_member_count:bool=None, show_xp:bool=None, show_no_elo_players:bool=None, channel_rotating_id:str = None):
     await edit_clan(interaction, channel_1v1_id, channel_2v2_id, color, image, sorting_method, show_member_count, show_xp, show_no_elo_players, channel_rotating_id)
+
+@tree.command(name='edit_server', description='Edit server data')
+@app_commands.checks.has_permissions(administrator=True)
+@app_commands.describe(sorting_method="What elo should be prioritised?")
+@app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
+@app_commands.describe(flag_type="What flag should be shown next to each player?")
+@app_commands.choices(flag_type=FLAG_TYPE_OPTIONS)
+async def edit_server_command(interaction, leaderboard_title:str=None, sorting_method:app_commands.Choice[str]=None, show_member_count:bool=None, show_no_elo_players:bool=None, channel_1v1_id:str=None, channel_2v2_id:str=None, channel_rotating_id:str = None, image:str=None, color:str=None, flag_type:app_commands.Choice[str]=None):
+    print(flag_type)
+    await edit_server(interaction, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, image, color, flag_type)
 
 
 @tree.command(name='ping')

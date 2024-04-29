@@ -225,3 +225,5 @@ def __get_flag_source(server:Server, player:Player):
         return player.country
     elif server.flag_type == FlagType.REGION.value:
         return player.region
+    else:
+        return ""
