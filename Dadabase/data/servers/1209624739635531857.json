@@ -10,7 +10,7 @@
     "channel_rotating_id": "",
     "image": "",
     "color": "0xc1253b",
-    "flag_type": null,
+    "flag_type": "no_flags",
     "links": [
         {
             "brawlhalla_id": 10241375,

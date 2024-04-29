@@ -884,6 +884,24 @@
             "region": "EU",
             "country": "NL",
             "ethnicity": "DE"
+        },
+        {
+            "brawlhalla_id": 98723157,
+            "brawlhalla_name": "FerhatDenHaagJwzAsah",
+            "discord_id": 70,
+            "discord_name": "FerhatDenhaagJWZ",
+            "region": "EU",
+            "country": "NL",
+            "ethnicity": "TR"
+        },
+        {
+            "brawlhalla_id": 9764452,
+            "brawlhalla_name": "",
+            "discord_id": 222,
+            "discord_name": "ClassicPhantom",
+            "region": "EU",
+            "country": "NL",
+            "ethnicity": "NL"
         }
     ]
 }
