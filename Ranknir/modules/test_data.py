@@ -26,8 +26,7 @@ CLAN_DATA = {
     ]
 }
 
-CLAN_OBJECT = load_clan(TEST_SERVER_ID)
-SERVER_OBJECT = load_server(TEST_SERVER_ID)
+
 CLAN_PLAYER_DATA = [{"brawlhalla_id": "12974529", "brawlhalla_name": "CrossyChris (PS4)"}, {"brawlhalla_id": "12974529", "brawlhalla_name": "CrossyChris (PS4)"}]
 PLAYER_OBJECT_DATA = [
     Player('Lionheart', 2200, 2400),

@@ -1,16 +1,16 @@
-from Ranknir.modules.get_elo import get_players_elo_1v1_and_2v2
+from Ranknir.modules.data_management import TEST_SERVER_ID, load_clan
 from Ranknir.modules.get_players import get_account_linker_players
-from Ranknir.classes.Clan import Clan
-from Ranknir.modules.test_data import CLAN_DATA, CLAN_OBJECT, AL_PLAYERS, PLAYER_OBJECT_DATA
+from Ranknir.modules.test_data import CLAN_DATA, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 
-# Set Test Variables
-clan = CLAN_OBJECT
-console_player_objects = PLAYER_OBJECT_DATA[-5:]
-clan_player_objects = PLAYER_OBJECT_DATA[:5]
 
 async def test_clan_console_mix_1v1_elo_list(bot):
+    # Set Test Variables
+    clan = load_clan(TEST_SERVER_ID)
+    console_player_objects = PLAYER_OBJECT_DATA[-5:]
+    clan_player_objects = PLAYER_OBJECT_DATA[:5]
+
 
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
     all_player_objects_array = []
