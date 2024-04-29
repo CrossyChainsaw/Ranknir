@@ -1,6 +1,8 @@
-from Dadabase.modules.data_management import read_data, SERVERS_DATA_PATH, DATA_KEY_FOR_SERVER_LINKS, ADD_SERVER_PLAYER_COMMAND, REMOVE_SERVER_PLAYER_COMMAND
+from Dadabase.modules.data_management import read_data, SERVERS_DATA_PATH, DATA_KEY_FOR_SERVER_LINKS
+from Dadabase.modules.command import ADD_SERVER_PLAYER_COMMAND, REMOVE_SERVER_PLAYER_COMMAND
 from Dadabase.modules.format import format_embed_list_big
 import discord
+
 
 
 async def server_player_list(interaction):

@@ -1,17 +1,10 @@
 import json
 import os
-from Dadabase.modules.data_management import SERVERS_DATA_PATH, EDIT_SERVER_COMMAND
+from Dadabase.modules.data_management import SERVERS_DATA_PATH
+from Dadabase.modules.command import EDIT_SERVER_COMMAND
 from Dadabase.classes.Server import Server
-from Dadabase.modules.format import format_color
-from Dadabase.modules.validate_type import cast_to_int
 
-async def configure_server(interaction, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, flag_type):
-    # Convert Fields
-    channel_1v1_id = int(channel_1v1_id)
-    channel_2v2_id = int(channel_2v2_id)
-    channel_rotating_id = cast_to_int(channel_rotating_id)
-    color = format_color(color)
-    
+async def initialise_server(interaction, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, flag_type):
     # Logic
     server = Server(interaction.guild.id, interaction.guild.name, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image, show_flags=show_flags)
     if os.path.exists(f"{SERVERS_DATA_PATH}{interaction.guild.id}.json"):
