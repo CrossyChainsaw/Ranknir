@@ -3,7 +3,7 @@ from Dadabase.modules.validate_type import cast_to_int
 
 
 class Clan:
-    def __init__(self, server_name:str, clan_names: str, channel_1v1_id:int, channel_2v2_id:int, id_array:str, color:str, image:str, server_id:str, sorting_method:str='current', show_member_count:bool=True, show_xp:bool=False, show_no_elo_players:bool=False, channel_rotating_id:str = None, account_linkers=[], console_players=[]):
+    def __init__(self, server_name:str, clan_names: str, channel_1v1_id:int, channel_2v2_id:int, clan_ids:str, color:str, image:str, server_id:str, sorting_method:str='current', show_member_count:bool=True, show_xp:bool=False, show_no_elo_players:bool=False, channel_rotating_id:str = None, account_linkers=[], console_players=[]):
         
         # Convert Fields
         channel_1v1_id = int(channel_1v1_id)
@@ -11,13 +11,13 @@ class Clan:
         channel_rotating_id = cast_to_int(channel_rotating_id)
         color = format_color(color)
         clan_names = split_string(clan_names)
-        clan_id = split_string(clan_id)
+        clan_id_list = split_string(clan_ids)
         
         # Required
         self.server_name = server_name
         self.clan_names = clan_names
         self.discord_server_id = server_id
-        self.id_array = id_array
+        self.id_array = clan_id_list
         self.color = color
         self.image = image
         self.channel_1v1_id = channel_1v1_id
