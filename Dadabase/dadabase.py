@@ -6,11 +6,11 @@ from discord import app_commands
 from Dadabase.commands.claim import claim
 from Dadabase.commands.check import check
 from Dadabase.commands.ping import ping
-from Dadabase.commands.configure_clan import configure_clan
+from Ranknir.Dadabase.commands.initialise_clan import initialise_clan
 from Dadabase.commands.add_console_player import add_console_player
 from Dadabase.commands.console_player_list import console_player_list
 from Dadabase.commands.remove_console_player import remove_console_player
-from Dadabase.commands.configure_server import configure_server
+from Ranknir.Dadabase.commands.initialise_server import initialise_server
 from Dadabase.commands.add_server_player import add_server_player
 from Dadabase.commands.remove_server_player import remove_server_player
 from Dadabase.commands.add_account_linker import add_account_linker
@@ -120,11 +120,11 @@ async def edit_server_command(interaction, leaderboard_title:str=None, sorting_m
 # @app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
 # @app_commands.describe(show_no_elo_players="Show or Hide the amount of players in the leaderboard?")
 # @app_commands.describe(show_xp="Show or Hide the amount of clan xp?")
-async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
+async def initialise_clan_command(interaction, clan_names:str, channel_1v1_id:str, channel_2v2_id:str, clan_id:str, color:str,
                                  sorting_method: app_commands.Choice[str], show_member_count: bool, 
                                  show_no_elo_players: bool, show_xp: bool, channel_rotating_id:str=None, image:str="", server_id:str=None, server_name:str=None):
     
-    await configure_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
+    await initialise_clan(interaction, clan_names, channel_1v1_id, channel_2v2_id, clan_id, color, image, 
                          sorting_method.value, show_member_count, show_xp, show_no_elo_players, channel_rotating_id, server_id, server_name)
 
 
@@ -132,7 +132,7 @@ async def configure_clan_command(interaction, clan_names:str, channel_1v1_id:str
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
-async def configure_server_command(interaction, 
+async def initialise_server_command(interaction, 
                                    leaderboard_title:str,
                                    sorting_method: app_commands.Choice[str], 
                                    show_member_count: bool,
@@ -142,7 +142,7 @@ async def configure_server_command(interaction,
                                    channel_rotating_id:str,
                                    color:str="0xFFFFFF",
                                    image:str=""):
-    await configure_server(interaction, leaderboard_title, sorting_method.value, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image)
+    await initialise_server(interaction, leaderboard_title, sorting_method.value, show_member_count, show_no_elo_players, channel_1v1_id, channel_2v2_id, channel_rotating_id, color, image)
 
 
 @tree.command(name=PING_COMMAND[1:])
