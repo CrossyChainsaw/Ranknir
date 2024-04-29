@@ -36,8 +36,8 @@ DATA_KEY_FOR_IMAGE = 'image'
 DATA_KEY_FOR_COLOR = 'color'
 
 # Command Names
-EDIT_SERVER_COMMAND = "/edit_server (This one doesn't exist yet)"
-EDIT_CLAN_COMMAND = "/edit_clan (This one doesn't exist yet)"
+EDIT_SERVER_COMMAND = "/edit_server"
+EDIT_CLAN_COMMAND = "/edit_clan"
 ADD_CONSOLE_PLAYER_COMMAND = "/add_console_player"
 REMOVE_CONSOLE_PLAYER_COMMAND = "/remove_console_player"
 ADD_SERVER_PLAYER_COMMAND = "/add_server_player"
