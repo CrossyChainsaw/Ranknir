@@ -46,6 +46,7 @@ ALL_COUNTRIES = [
     app_commands.Choice(name="Netherlands", value="NL"),
     app_commands.Choice(name="Spain", value="ES"),
     app_commands.Choice(name="Suriname", value="SR"),
+    app_commands.Choice(name="Syria", value="SY"),
     app_commands.Choice(name="Turkey", value="TR"),
     app_commands.Choice(name="United States of America", value="US"),
     app_commands.Choice(name="Vietnam", value="VN")
