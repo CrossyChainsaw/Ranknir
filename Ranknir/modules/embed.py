@@ -6,6 +6,8 @@ from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
+SEND_ELO_EMBEDS_WAIT_TIME = 4.9
+BOT_WAIT_TIME = 2.9
 
 
 def prepare_embeds_clan_mix_console(clan:Clan, players_sorted, clan_data_array, console_player_amount):
@@ -96,8 +98,10 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
                         flag = "<:ID:1226368641985941504>"
                     elif flag_source == "DE":
                         flag = "<:DE:1228355548810842212>"
+                    elif flag_source == "SY":
+                        flag = "<:SY:1235349190993907722>"
                     else:
-                        flag = ""
+                        flag = "<:NL:1225603278927040613>"
                     embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
                 else:
                     if flag_source == "":
@@ -121,7 +125,7 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
     print('purging...')
     await channel.purge(limit=PURGE_LIMIT)  # CHANGE TO 12
 
-    await asyncio.sleep(3)
+    await asyncio.sleep(BOT_WAIT_TIME)
 
     # Send Image
     try:
@@ -130,13 +134,13 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
     except:
         print('NO IMAGE PROVIDED')
 
-    await asyncio.sleep(3)
+    await asyncio.sleep(BOT_WAIT_TIME)
 
     # Send Embed
     await channel.send(embed=embed_title)
     print("sent title embed")
 
-    await asyncio.sleep(3)
+    await asyncio.sleep(BOT_WAIT_TIME)
 
     num = 1
     print('embed_array length: ' + str(len(embed_array)))
@@ -145,7 +149,7 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
         if len(embed.description) > 0:
             await channel.send(embed=embed)
             print('sent player embed: ' + str(num))
-            await asyncio.sleep(5)
+            await asyncio.sleep(SEND_ELO_EMBEDS_WAIT_TIME)
         num += 1
 
 

@@ -106,6 +106,6 @@ async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
     await server_1v1_and_2v2_and_rotating_elo_list(load_server(TEST_SERVER_ID), bot)
 
 def run_ranknir():
-    # bot.run(env_variable("RANKNIR_BOT_TOKEN"))
+    bot.run(env_variable("RANKNIR_BOT_TOKEN"))
     # bot.run(env_variable("TEST_BOT_TOKEN"))
     return

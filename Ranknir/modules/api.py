@@ -4,7 +4,7 @@ import json
 from Ranknir.modules.env import env_variable
 
 BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
-API_WAIT_TIME = 9  # 8 possible if only ranknir
+API_WAIT_TIME = 9.4  # 8 possible if only ranknir
 
 
 async def fetch_clan(clan_id):
