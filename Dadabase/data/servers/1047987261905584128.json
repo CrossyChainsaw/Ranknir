@@ -676,7 +676,7 @@
             "discord_name": "TheMutantCat",
             "region": "",
             "country": "NL",
-            "ethnicity": "NL"
+            "ethnicity": "SR"
         },
         {
             "brawlhalla_id": 7280983,
@@ -902,6 +902,15 @@
             "region": "EU",
             "country": "NL",
             "ethnicity": "NL"
+        },
+        {
+            "brawlhalla_id": 53015064,
+            "brawlhalla_name": "K<3",
+            "discord_id": 509010764074319872,
+            "discord_name": "kalfer",
+            "region": "EU",
+            "country": "NL",
+            "ethnicity": "SY"
         }
     ]
 }
