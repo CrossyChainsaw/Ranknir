@@ -7,7 +7,7 @@
 
 
 <h1 align="center";size="500px"><b>CURRENTLY ACTIVE IN</b></h1>
-<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla Netherlands, Frost, KryptX (2), Empire United, M30W Organisation, Grant, aura, Brawlhalla Hungary</i></b></p>
+<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla Netherlands, Frost, KryptX (2), Empire United, M30W Organisation, Grant, Brawlhalla Hungary, Division 9</i></b></p>
 
 
 <h1 align="center";size="500px"><b>1V1 LEADERBOARD EXAMPLE</b></h1>
@@ -52,7 +52,7 @@
 
 
 <h2 align="center";size="500px"><b>SERVER HISTORY</b></h2>
-<p align="center"><b><i>Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly, Excalibur</i></b></p>
+<p align="center"><b><i>Insomnia (3), Fanfare, Fawaka, Dair, Cybers (4), Cherimoya, Skyward, sword, Obsessive, GuiIIotine (2), ChinaT0WN (2), Molly, Excalibur, aura</i></b></p>
 
 <h2 align="center";size="500px"><b>CLAN HISTORY</b></h2>
-<p align="center"><b><i>lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly, Excalibur</i></b></p>
+<p align="center"><b><i>lnsomnia, Parasomnia, Hypnosia, Fanfare, Fawaka, Dair, Cybers, Cybers II, Xybers, Cybers Academy, Cherimoya, Skyward, sword, Obsessive, GuiIIotine, GuiIIotine II, ChinaT0WN, ChinaT0WN II, Molly, Excalibur, aura</i></b></p>
