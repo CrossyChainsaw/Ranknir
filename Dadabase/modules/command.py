@@ -44,6 +44,8 @@ ALL_COUNTRIES = [
     app_commands.Choice(name="Luxembourg", value="LU"),
     app_commands.Choice(name="Morocco", value="MA"),
     app_commands.Choice(name="Netherlands", value="NL"),
+    app_commands.Choice(name="Nigeria", value="NG"),
+    app_commands.Choice(name="Romania", value="RO"),
     app_commands.Choice(name="Spain", value="ES"),
     app_commands.Choice(name="Suriname", value="SR"),
     app_commands.Choice(name="Syria", value="SY"),

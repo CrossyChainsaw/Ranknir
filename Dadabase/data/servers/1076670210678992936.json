@@ -524,6 +524,78 @@
             "region": "SEA",
             "country": "",
             "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 34309437,
+            "brawlhalla_name": "M3W | zenit",
+            "discord_id": 654730224583311382,
+            "discord_name": "zenitxd",
+            "region": "BR",
+            "country": "BR",
+            "ethnicity": "BR"
+        },
+        {
+            "brawlhalla_id": 27706070,
+            "brawlhalla_name": "M3W | youtube.com/Nublado",
+            "discord_id": 226030603399593984,
+            "discord_name": "nubladotenderpaw",
+            "region": "BR",
+            "country": "BR",
+            "ethnicity": "BR"
+        },
+        {
+            "brawlhalla_id": 1269285,
+            "brawlhalla_name": "Axscent",
+            "discord_id": 269868609814265856,
+            "discord_name": "axscent",
+            "region": "SEA",
+            "country": "",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 7876434,
+            "brawlhalla_name": "ZiGZag",
+            "discord_id": 567322399477989396,
+            "discord_name": "shtepp",
+            "region": "EU",
+            "country": "",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 65781772,
+            "brawlhalla_name": "DSN | Gojo Satoru",
+            "discord_id": 553676449588969473,
+            "discord_name": "chr1ssy.",
+            "region": "USE",
+            "country": "US",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 31376067,
+            "brawlhalla_name": "vshq",
+            "discord_id": 361886500520198146,
+            "discord_name": "queen.lexa",
+            "region": "EU",
+            "country": "",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 6246636,
+            "brawlhalla_name": "^-^",
+            "discord_id": 614658671514877953,
+            "discord_name": "serenxyz",
+            "region": "SEA",
+            "country": "",
+            "ethnicity": ""
+        },
+        {
+            "brawlhalla_id": 11741969,
+            "brawlhalla_name": "LouMadeLando",
+            "discord_id": 542178566503137302,
+            "discord_name": "landiss",
+            "region": "USE",
+            "country": "US",
+            "ethnicity": "US"
         }
     ]
 }

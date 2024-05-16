@@ -911,6 +911,15 @@
             "region": "EU",
             "country": "NL",
             "ethnicity": "SY"
+        },
+        {
+            "brawlhalla_id": 50512031,
+            "brawlhalla_name": "HUNT2KING",
+            "discord_id": 767803464595013662,
+            "discord_name": "hunt2king",
+            "region": "EU",
+            "country": "NL",
+            "ethnicity": "NL"
         }
     ]
 }
