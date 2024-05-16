@@ -127,6 +127,7 @@ async def edit_server_command(interaction,
 @app_commands.checks.has_permissions(administrator=True)
 @app_commands.describe(sorting_method="What elo should be prioritised?")
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
+@app_commands.describe(color = "Provide a Hex color code")
 # @app_commands.describe(member_count="Show or Hide the amount of players in the leaderboard?")
 # @app_commands.describe(show_no_elo_players="Show or Hide the amount of players in the leaderboard?")
 # @app_commands.describe(show_xp="Show or Hide the amount of clan xp?")
@@ -154,6 +155,7 @@ async def initialise_clan_command(interaction,
 @app_commands.choices(sorting_method=SORTING_METHOD_OPTIONS)
 @app_commands.describe(flag_type="What flag should be shown next to each player?")
 @app_commands.choices(flag_type=FLAG_TYPE_OPTIONS)
+@app_commands.describe(color = "Provide a Hex color code")
 async def initialise_server_command(interaction, 
                                    leaderboard_title:str,
                                    sorting_method: app_commands.Choice[str], 
