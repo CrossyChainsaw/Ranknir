@@ -4,7 +4,7 @@ from Ranknir.modules.test_data import CLAN_DATA, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 
-
+# Try to document what functions this exactly tests
 async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
     clan = load_clan(TEST_SERVER_ID)
