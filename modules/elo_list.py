@@ -18,7 +18,7 @@ async def clan_console_mix_1v1_elo_list(clan:Clan, bot):
     all_player_objects_array = []
     # Get Console Players
     console_players = get_console_players(clan)
-    console_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)")
+    console_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True)
     all_player_objects_array.append(console_player_objects)
     # Get Clan
     clan_data_array = []
@@ -50,7 +50,7 @@ async def clan_console_mix_2v2_elo_list(clan:Clan, bot):
     all_team_objects_array = []
     # Get Console Players
     console_players = get_console_players(clan)
-    _, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)")
+    _, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True)
     all_team_objects_array.append(console_team_objects)
     # Get Clan
     clan_data_array = []
@@ -84,7 +84,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot):
     all_team_objects_array = []
     # Get Console Players
     console_players = get_console_players(clan)
-    console_player_objects, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)")
+    console_player_objects, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True)
     all_player_objects_array.append(console_player_objects)
     all_team_objects_array.append(console_team_objects)
     # Foreach Clan...
@@ -136,7 +136,7 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot):
     # Get Console Players
     console_players = get_console_players(clan)
     # p1
-    console_player_objects, console_team_objects, console_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, console_players, f"{clan.server_name} (Console)")
+    console_player_objects, console_team_objects, console_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True)
     all_player_objects_array.append(console_player_objects)
     all_team_objects_array.append(console_team_objects)
     all_rotating_objects_array.append(console_rotating_objects)

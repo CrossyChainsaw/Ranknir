@@ -9,7 +9,7 @@ from Ranknir.modules.api import fetch_player_ranked_stats
 #################### GET ALL PLAYERS ELO ######################
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
-async def get_players_elo_1v1_and_2v2(clan, players, subclan_name):
+async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_players=False):
     """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
     player_object_array = []
     team_object_array = []
@@ -17,9 +17,12 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
-        if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object):
-            _ = None
-            # continue # for hide no elo player thing
+        if __check_if_name_is_blank(clan, player_object) or __check_if_name_is_blank(clan, team_object):
+            if is_console_players: # fix console players' blank names
+                if __check_if_name_is_blank(clan, player_object):
+                    player_object.name = player['brawlhalla_name']
+                if __check_if_name_is_blank(clan, team_object):
+                    team_object.name = player['brawlhalla_name']
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         print('%s %s/%s' % (subclan_name, str(i + 1), str(len(players))))
@@ -217,8 +220,8 @@ def __check_if_elo_is_zero(clan:Clan, player_object:Player):
 
 
 def __check_if_name_is_blank(clan:Clan, player_object:Player):
-    if clan.show_no_elo_players == 'hide':
-        if player_object.name == 'N/A' or player_object.name == "":
-            return True
+    # if you wanna add the thing for, if clan configs "dont show no elo players" etc etc put another if checking that
+    if player_object.name == 'N/A' or player_object.name == "":
+        return True
     else:
         return False
