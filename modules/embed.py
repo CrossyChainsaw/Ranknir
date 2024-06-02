@@ -1,9 +1,9 @@
 import discord
 import asyncio
-from Ranknir.modules.data_management import FlagType
-from Ranknir.classes.Player import Player
-from Ranknir.classes.Clan import Clan
-from Ranknir.classes.Server import Server
+from modules.data_management import FlagType
+from classes.Player import Player
+from classes.Clan import Clan
+from classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
 SEND_ELO_EMBEDS_WAIT_TIME = 4.9

@@ -1,14 +1,14 @@
-from Ranknir.modules.api import fetch_player_ranked_stats
-from Ranknir.modules.sort_elo import sort_elo
-from Ranknir.modules.embed import send_embeds
-from Ranknir.classes.Clan import Clan
-from Ranknir.classes.Player import Player
+from modules.api import fetch_player_ranked_stats_from_open_api
+from modules.sort_elo import sort_elo
+from modules.embed import send_embeds
+from classes.Clan import Clan
+from classes.Player import Player
 import discord
 import asyncio
 
 
 async def send_all_legends_elo(brawlhalla_id, channel_id, bot):
-    ranked_stats = await fetch_player_ranked_stats(brawlhalla_id)
+    ranked_stats = await fetch_player_ranked_stats_from_open_api(brawlhalla_id)
     legends = ranked_stats['legends']
     legends_ranked_stats = []
     for legend in legends:

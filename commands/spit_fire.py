@@ -1,5 +1,5 @@
-from Ranknir.classes.Clan import Clan
-from Ranknir.modules.data_management import load_clan
+from classes.Clan import Clan
+from modules.data_management import load_clan
 
 
 async def spit_fire(bot, server_id):

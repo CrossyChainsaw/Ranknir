@@ -1,7 +1,7 @@
-from Ranknir.classes.Server import Server
-from Ranknir.classes.Clan import Clan
-from Ranknir.modules.api import fetch_clan
-from Ranknir.modules.data_management import DADABASE_CLAN_DATA_PATH, DADABASE_SERVER_DATA_PATH, DATA_KEY_FOR_ACCOUNT_LINKERS, DATA_KEY_FOR_CONSOLE_PLAYERS, load_json_file
+from classes.Server import Server
+from classes.Clan import Clan
+from modules.api import fetch_clan_from_open_api
+from modules.data_management import DADABASE_CLAN_DATA_PATH, DADABASE_SERVER_DATA_PATH, DATA_KEY_FOR_ACCOUNT_LINKERS, DATA_KEY_FOR_CONSOLE_PLAYERS, load_json_file
 import json
 
 # manually merge this into data_management

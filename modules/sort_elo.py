@@ -1,4 +1,4 @@
-from Ranknir.classes.Player import Player
+from classes.Player import Player
 
 
 def sort_elo(sorting_method, players):
