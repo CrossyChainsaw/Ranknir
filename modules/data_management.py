@@ -1,5 +1,5 @@
-from Ranknir.classes.Clan import Clan
-from Ranknir.classes.Server import Server
+from classes.Clan import Clan
+from classes.Server import Server
 from enum import Enum
 import json
 
