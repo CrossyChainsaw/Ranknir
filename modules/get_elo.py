@@ -1,7 +1,7 @@
-from Dadabase.classes.Clan import Clan
-from Ranknir.classes.Player import Player
-from Ranknir.classes.Team import Team
-from Ranknir.modules.api import fetch_player_ranked_stats
+from classes.Clan import Clan
+from classes.Player import Player
+from classes.Team import Team
+from modules.api import fetch_player_ranked_stats_from_open_api
 
 
 # There are different functions for 1v1, 2v2 and 1v1&2v2. I made an extra one for 1v1&2v2 because it halves the api requests.
@@ -14,7 +14,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     player_object_array = []
     team_object_array = []
     for i, player in enumerate(players):
-        player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
+        player_ranked_stats = await fetch_player_ranked_stats_from_open_api(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
         if __check_if_name_is_blank(clan, player_object) or __check_if_name_is_blank(clan, team_object):
@@ -37,7 +37,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
     team_object_array = []
     rotating_object_array = []
     for i, player in enumerate(players):
-        player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
+        player_ranked_stats = await fetch_player_ranked_stats_from_open_api(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
         rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player)
