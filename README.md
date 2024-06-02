@@ -1,4 +1,4 @@
-# Setup
+# Setup Ranknir (ranknir-manual)
 There are a few steps you need to take to setup Ranknir in your server
 1. Go to [this page](https://discord.com/developers/applications) and create a discord bot
 2. Add the bot to your server and make sure to give it the following commands
@@ -15,3 +15,5 @@ There are a few steps you need to take to setup Ranknir in your server
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/2339ffb5-93c3-4ab6-929d-42f01641e4c1)
 7. Run main.py
 8. run the `r!1v1` command anywhere
+
+currently only supports 1v1
