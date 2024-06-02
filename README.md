@@ -16,4 +16,4 @@ There are a few steps you need to take to setup Ranknir in your server
 7. Run main.py
 8. run the `r!1v1` command anywhere
 
-currently only supports 1v1
+*currently only supports 1v1
