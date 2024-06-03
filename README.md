@@ -1,5 +1,5 @@
 # Setup Ranknir (ranknir-manual)
-There are a few steps you need to take to setup Ranknir in your server
+Would be nice if you credit this repository or me in any way :D
 1. Go to [this page](https://discord.com/developers/applications) and create a discord bot
 2. Add the bot to your server and make sure to give it the following commands
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/aa3afa90-f8d1-4f00-82ed-dabba8c7d0c8)
