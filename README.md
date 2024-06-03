@@ -12,12 +12,6 @@ There are a few steps you need to take to setup Ranknir in your server
 4. Download latest version of ranknir-manual [here](https://github.com/CrossyChainsaw/Ranknir/archive/refs/heads/ranknir-manual.zip)
 5. Unzip the zip and open `main.py`
 6. In `main.py`, replace all the variables mentioned below `# Fill in with your own clan data!`
-![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/2339ffb5-93c3-4ab6-929d-42f01641e4c1)
-
-7. Run main.py
-8. run the `r!1`, `r!2` or `r12` command anywhere
-
-Template data
 ```py
 # Fill in with your own clan data!
 discord_server_name = "YOUR_DISCORD_SERVER_NAME"
@@ -29,3 +23,6 @@ clan_id = ["YOUR_CLAN_ID, YOUR_CLAN_ID_2, YOUR_CLAN_ID_3"]
 clan_image = 'YOUR_CLAN_IMAGE_SOURCE_LINK'
 discord_bot_token = "YOUR_BOT_TOKEN" # DON'T SHARE THIS TOKEN WITH ANYONE!!!!!!!!!!!!!!!!!!!!!!
 ```
+
+7. Run main.py
+8. run the `r!1`, `r!2` or `r12` command anywhere
