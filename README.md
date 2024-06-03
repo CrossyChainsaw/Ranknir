@@ -13,7 +13,19 @@ There are a few steps you need to take to setup Ranknir in your server
 5. Unzip the zip and open `main.py`
 6. In `main.py`, replace all the variables mentioned below `# Fill in with your own clan data!`
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/2339ffb5-93c3-4ab6-929d-42f01641e4c1)
-7. Run main.py
-8. run the `r!1v1` command anywhere
 
-*currently only supports 1v1
+7. Run main.py
+8. run the `r!1`, `r!2` or `r12` command anywhere
+
+Template data
+```py
+# Fill in with your own clan data!
+discord_server_name = "YOUR_DISCORD_SERVER_NAME"
+discord_server_id = 'YOUR_DISCORD_SERVER_ID' # Yes this has to be a string
+clan_name = "YOUR_CLAN_NAME"
+channel_1v1_id=0 # Replace with your 1v1 elo channel id
+channel_2v2_id=0 # Replace with your 2v2 elo channel id
+clan_id = "YOUR_CLAN_ID"
+clan_image = 'YOUR_CLAN_IMAGE_SOURCE_LINK'
+discord_bot_token = "YOUR_BOT_TOKEN" # DON'T SHARE THIS TOKEN WITH ANYONE!!!!!!!!!!!!!!!!!!!!!!
+```
