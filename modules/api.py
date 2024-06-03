@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import json
 
-API_WAIT_TIME = 9.4  # 8 possible if only ranknir
+API_WAIT_TIME = 10  # don't change this variable, you might get temporary blocked
 
 
 async def fetch_clan_from_open_api(clan_id):
