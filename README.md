@@ -16,10 +16,10 @@ There are a few steps you need to take to setup Ranknir in your server
 # Fill in with your own clan data!
 discord_server_name = "YOUR_DISCORD_SERVER_NAME"
 discord_server_id = 'YOUR_DISCORD_SERVER_ID' # Yes this has to be a string
-clan_name = ["YOUR_CLAN_NAME, YOUR_CLAN_NAME_2, YOUR_CLAN_NAME_3"]
+clan_name = ["YOUR_CLAN_NAME"] # for multiple clans -> clan_name = ["YOUR_CLAN_NAME, YOUR_CLAN_NAME_2"]
 channel_1v1_id=0 # Replace with your 1v1 elo channel id
 channel_2v2_id=0 # Replace with your 2v2 elo channel id
-clan_id = ["YOUR_CLAN_ID, YOUR_CLAN_ID_2, YOUR_CLAN_ID_3"]
+clan_id = ["YOUR_CLAN_ID"] # for multiple clans -> clan_id = ["YOUR_CLAN_ID, YOUR_CLAN_ID_2"]
 clan_image = 'YOUR_CLAN_IMAGE_SOURCE_LINK'
 discord_bot_token = "YOUR_BOT_TOKEN" # DON'T SHARE THIS TOKEN WITH ANYONE!!!!!!!!!!!!!!!!!!!!!!
 ```
