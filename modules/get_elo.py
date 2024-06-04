@@ -31,7 +31,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     return player_object_array, team_object_array
 
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
     player_object_array = []
     team_object_array = []
