@@ -2,7 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
-from Ranknir.modules.data_management import EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, DIVISION_SERVER_ID, TEWS_SERVER_ID, load_clan
+from Ranknir.modules.data_management import EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, DIVISION_SERVER_ID, TEWS_SERVER_ID, CLIENT_SERVER_ID, load_clan
 from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BRAWL_HUNGARY_SERVER_ID, load_server
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
@@ -46,7 +46,7 @@ async def on_ready():
             elif turn == 4:
                 await clan_console_mix_1v1_elo_list(load_clan(EMPIRE_UNITED_SERVER_ID), bot)
             elif turn == 5:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(load_clan(KRYPTX_SERVER_ID), bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(load_clan(CLIENT_SERVER_ID), bot)
             elif turn == 6:
                 await server_1v1_and_2v2_and_rotating_elo_list(load_server(M30W_SERVER_ID), bot)
             elif turn == 7:
@@ -82,8 +82,8 @@ async def ping_command(ctx):
 
 @bot.command(name='spit')
 @has_permissions(manage_roles=True, ban_members=True)
-async def spit_fire_command(ctx):
-    await spit_fire(bot)
+async def spit_fire_command(ctx, server_id):
+    await spit_fire(bot, server_id)
 
 @bot.command(name='leave')
 @has_permissions(manage_roles=True, ban_members=True)
