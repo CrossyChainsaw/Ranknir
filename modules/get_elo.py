@@ -1,4 +1,4 @@
-from Dadabase.classes.Clan import Clan
+from Ranknir.classes.Dadabase_Clan import Clan # fic this shit
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
@@ -9,11 +9,18 @@ from Ranknir.modules.api import fetch_player_ranked_stats
 #################### GET ALL PLAYERS ELO ######################
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
-async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_players=False):
+async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_players=False, x=0):
     """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
+    print("Entered: get_players_elo_1v1_and_2v2()")
+
+    if x == 0:
+        x = len(players)  # Set x to the length of players if x is 0
+
+    print(f"x: {x}")
+
     player_object_array = []
     team_object_array = []
-    for i, player in enumerate(players):
+    for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
