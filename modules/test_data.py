@@ -1,7 +1,6 @@
-from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Player import Player
-from Ranknir.classes.Server import Server
-from Ranknir.modules.data_management import TEST_SERVER_ID, load_clan, load_server
+
+
 
 CLAN_DATA = {
     "clan_id": 84648,
