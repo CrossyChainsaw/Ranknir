@@ -1,10 +1,10 @@
 from Ranknir.classes.Clan import Clan
-from Ranknir.modules.data_management import load_clan
+from Ranknir.modules.data_management import load_clan_v2
 
 
 async def spit_fire(bot, server_id):
     msg = ('🔥')
-    clan:Clan = load_clan(server_id)
+    clan:Clan = await load_clan_v2(server_id)
     
     # 1v1 Channel
     try:

@@ -1,5 +1,4 @@
-from Ranknir.modules.data_management import TEST_SERVER_ID, load_clan
-from Ranknir.modules.get_players import get_account_linker_players
+from Ranknir.modules.data_management import TEST_SERVER_ID, load_clan_v2
 from Ranknir.modules.test_data import CLAN_DATA, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
@@ -7,7 +6,7 @@ from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 # Try to document what functions this exactly tests
 async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
-    clan = load_clan(TEST_SERVER_ID)
+    clan = await load_clan_v2(TEST_SERVER_ID)
     console_player_objects = PLAYER_OBJECT_DATA[-5:]
     clan_player_objects = PLAYER_OBJECT_DATA[:5]
 
@@ -28,7 +27,7 @@ async def test_clan_console_mix_1v1_elo_list(bot):
         # Get Clan Players
         clan_players = clan_data['clan']
         # Remove rm Players
-        rm_players = get_account_linker_players(clan.discord_server_id)
+        rm_players = clan.account_linkers
         clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         #clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])

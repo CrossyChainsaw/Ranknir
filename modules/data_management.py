@@ -2,6 +2,7 @@ from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 from enum import Enum
 import json
+from Ranknir.modules.api import request_clan_data_from_dadabase, request_server_data_from_dadabase
 
 # Paths
 DADABASE_PATH = "Dadabase/"
@@ -36,30 +37,8 @@ CROSSYCHAINSAW_ID = 7364605
 SHAW_ID = 395872
 DISCARDS_ID = 15554673
 
-
-def load_server(server_id):
-    server_path = f"{DADABASE_SERVER_DATA_PATH}{server_id}.json"
-    server_data = load_json_file(server_path)
-    server = Server(
-        id=server_data['id'],
-        name=server_data['name'],
-        leaderboard_title=server_data['leaderboard_title'],
-        sorting_method=server_data['sorting_method'],
-        show_member_count=server_data['show_member_count'],
-        show_no_elo_players=server_data['show_no_elo_players'],
-        channel_1v1_id=server_data['channel_1v1_id'],
-        channel_2v2_id=server_data['channel_2v2_id'],
-        channel_rotating_id=server_data['channel_rotating_id'],
-        color=int(server_data['color'], 16),
-        image=server_data['image'],
-        flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
-        links=server_data['links']
-    )
-    return server
-
-def load_clan(server_id):
-    clan_path = f"{DADABASE_CLAN_DATA_PATH}{server_id}.json"
-    clan_data = load_json_file(clan_path)
+async def load_clan_v2(server_id):
+    clan_data = await request_clan_data_from_dadabase(server_id)
     clan = Clan(
         server_name=clan_data['server_name'],
         clan_names=clan_data['clan_names'],
@@ -79,7 +58,70 @@ def load_clan(server_id):
     )
     return clan
 
+async def load_server_v2(server_id):
+    server_data = await request_server_data_from_dadabase(server_id)
+    server = Server(
+        id=server_data['id'],
+        name=server_data['name'],
+        leaderboard_title=server_data['leaderboard_title'],
+        sorting_method=server_data['sorting_method'],
+        show_member_count=server_data['show_member_count'],
+        show_no_elo_players=server_data['show_no_elo_players'],
+        channel_1v1_id=server_data['channel_1v1_id'],
+        channel_2v2_id=server_data['channel_2v2_id'],
+        channel_rotating_id=server_data['channel_rotating_id'],
+        color=int(server_data['color'], 16),
+        image=server_data['image'],
+        flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
+        links=server_data['links']
+    )
+    return server
+
 def load_json_file(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
     return data
+
+# DEPRECATED
+
+# def load_server(server_id):
+#     server_path = f"{DADABASE_SERVER_DATA_PATH}{server_id}.json"
+#     server_data = load_json_file(server_path)
+#     server = Server(
+#         id=server_data['id'],
+#         name=server_data['name'],
+#         leaderboard_title=server_data['leaderboard_title'],
+#         sorting_method=server_data['sorting_method'],
+#         show_member_count=server_data['show_member_count'],
+#         show_no_elo_players=server_data['show_no_elo_players'],
+#         channel_1v1_id=server_data['channel_1v1_id'],
+#         channel_2v2_id=server_data['channel_2v2_id'],
+#         channel_rotating_id=server_data['channel_rotating_id'],
+#         color=int(server_data['color'], 16),
+#         image=server_data['image'],
+#         flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
+#         links=server_data['links']
+#     )
+#     return server
+
+# def load_clan(server_id):
+#     clan_path = f"{DADABASE_CLAN_DATA_PATH}{server_id}.json"
+#     clan_data = load_json_file(clan_path)
+#     clan = Clan(
+#         server_name=clan_data['server_name'],
+#         clan_names=clan_data['clan_names'],
+#         channel_1v1_id=clan_data['channel_1v1_id'],
+#         channel_2v2_id=clan_data['channel_2v2_id'],
+#         id_array=clan_data['id_array'],
+#         color=int(clan_data['color'], 16),
+#         image=clan_data['image'],
+#         server_id=clan_data['discord_server_id'],
+#         sorting_method=clan_data['sorting_method'],
+#         show_member_count=clan_data['show_member_count'],
+#         show_xp=clan_data['show_xp'],
+#         show_no_elo_players=clan_data['show_no_elo_players'],
+#         channel_rotating_id=clan_data['channel_rotating_id'],
+#         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
+#         console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS]
+#     )
+#     return clan
