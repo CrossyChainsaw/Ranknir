@@ -26,12 +26,12 @@ async def fetch_player_ranked_stats(brawlhalla_id):
         async with session.get(url) as response:
             return await response.json()
         
-async def request_clan_data_from_dadabase(id):
+async def request_clan_data_from_dadabase(id: int):
     json_object = requests.get(f"http://{HOST_IP}:{HOST_PORT}/get_clan_data?api_key={DADABASE_API_KEY}&id={id}")      
     data = json.loads(json_object.content)
     return data
 
-async def request_server_data_from_dadabase(id):
+async def request_server_data_from_dadabase(id: int):
     json_object = requests.get(f"http://{HOST_IP}:{HOST_PORT}/get_server_data?api_key={DADABASE_API_KEY}&id={id}")      
     data = json.loads(json_object.content)
     return data

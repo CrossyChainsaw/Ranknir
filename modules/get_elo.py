@@ -16,7 +16,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     if x == 0:
         x = len(players)  # Set x to the length of players if x is 0
 
-    print(f"x: {x}")
+    print(f"Player Amount: {x}")
 
     player_object_array = []
     team_object_array = []
