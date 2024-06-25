@@ -27,7 +27,8 @@ async def clan_console_mix_1v1_elo_list(clan:Clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         rm_players = clan.account_linkers
-        clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
+        rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
+        clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
         clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
         all_player_objects_array.append(clan_player_objects)
@@ -59,7 +60,8 @@ async def clan_console_mix_2v2_elo_list(clan:Clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         rm_players = clan.account_linkers
-        clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
+        rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
+        clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
         _, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
         all_team_objects_array.append(clan_team_objects)
@@ -94,7 +96,8 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         rm_players = clan.account_linkers
-        clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
+        rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
+        clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
         clan_player_objects, clan_team_objects = await get_players_elo_1v1_and_2v2(
             clan, clan_players, clan.clan_names[i])
@@ -147,7 +150,8 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot):
         clan_players = clan_data['clan']
         # Remove rm Players
         rm_players = clan.account_linkers
-        clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
+        rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
+        clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
         # p2
         clan_player_objects, clan_team_objects, clan_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, clan_players, clan.clan_names[i])
