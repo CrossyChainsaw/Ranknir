@@ -13,7 +13,7 @@ from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.commands.leave_server import leave_server
 from Ranknir.modules.get_current_order import print_current_order
-from Ranknir.commands.test_clan_console_mix_1v1_elo_list import test_clan_console_mix_1v1_elo_list
+from Ranknir.commands.test_clan import test_clan_console_mix_1v1_elo_list
 from Ranknir.commands.test_server import test_server
 from Ranknir.modules.env import env_variable
 import json
@@ -93,13 +93,18 @@ async def leave_server_command(ctx, server_id):
 
 @bot.command(name='tc')
 @has_permissions(manage_roles=True, ban_members=True)
-async def test_clan_console_mix_1v1_elo_list_command(ctx):
+async def test_clan_command(ctx):
     await test_clan_console_mix_1v1_elo_list(bot)
 
 @bot.command(name='ts')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_server_command(ctx):
     await test_server(bot)
+
+@bot.command(name='tc2')
+@has_permissions(manage_roles=True, ban_members=True)
+async def test_clan_console_mix_1v1_elo_list_command(ctx):
+    await clan_console_mix_1v1_elo_list(await load_clan_v2(TEST_SERVER_ID), bot)
 
 @bot.command(name='ts2')
 @has_permissions(manage_roles=True, ban_members=True)
@@ -108,5 +113,5 @@ async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
 
 def run_ranknir():
     bot.run(env_variable("RANKNIR_BOT_TOKEN"))
-    # bot.run(env_variable("RANKNIR_TESTING_BOT_TOKEN"))
+    #bot.run(env_variable("RANKNIR_TESTING_BOT_TOKEN"))
     return
