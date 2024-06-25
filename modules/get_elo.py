@@ -38,12 +38,19 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     return player_object_array, team_object_array
 
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False, x=0):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
+    print("Entered: get_players_elo_1v1_and_2v2_and_rotating()")
+
+    if x == 0:
+        x = len(players)  # Set x to the length of players if x is 0
+
+    print(f"Player Amount: {x}")
+    
     player_object_array = []
     team_object_array = []
     rotating_object_array = []
-    for i, player in enumerate(players):
+    for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
