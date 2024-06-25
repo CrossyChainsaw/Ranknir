@@ -78,7 +78,7 @@ async def clan_console_mix_2v2_elo_list(clan:Clan, bot):
     await send_embeds(embed_title, embed_array, bot, clan, clan.channel_2v2_id)
 
 
-async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot):
+async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot, x=0):
     all_player_objects_array = []
     all_team_objects_array = []
     # Get Console Players
@@ -97,10 +97,9 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot):
         # Remove rm Players
         rm_players = clan.account_linkers
         rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
-        clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
+        clan_players = [player for player in clan_players if str(player['brawlhalla_id']) not in rm_player_ids]
         # Get Elo
-        clan_player_objects, clan_team_objects = await get_players_elo_1v1_and_2v2(
-            clan, clan_players, clan.clan_names[i])
+        clan_player_objects, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i], x=x)
         all_player_objects_array.append(clan_player_objects)
         all_team_objects_array.append(clan_team_objects)
     # Restructure Players and Teams
