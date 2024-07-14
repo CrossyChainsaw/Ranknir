@@ -1,0 +1,1 @@
+Make sure `ranknir.exe` is in the same folder as `clan.json`
