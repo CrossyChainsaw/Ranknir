@@ -1,0 +1,18 @@
+{
+    "server_name": "Skyward",
+    "clan_names": ["Skyward"],
+    "discord_server_id": "123456789011223344",
+    "id_array": ["84648"],
+    "color": "0x000000",
+    "image": "https://i.sstatic.net/xJida.png",
+    "channel_1v1_id": 1234567890123456789,
+    "channel_2v2_id": 1234567890123456789,
+    "channel_rotating_id": 1234567890123456789,
+    "sorting_method": "peak",
+    "show_member_count": true,
+    "show_xp": false,
+    "show_no_elo_players": false,
+    "account_linkers": [],
+    "console_players": [],
+    "bot_token": ""
+}
