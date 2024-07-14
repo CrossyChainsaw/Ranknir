@@ -31,7 +31,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     return player_object_array, team_object_array
 
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
     player_object_array = []
     team_object_array = []
@@ -42,8 +42,13 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name):
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
         rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player)
         if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object) and __check_if_name_is_blank(clan, rotating_object):
-            _ = None  # some bs code for no crash
-            # continue # uncomment for hide elo players
+            if is_console_players: # fix console players' blank names
+                if __check_if_name_is_blank(clan, player_object):
+                    player_object.name = player['brawlhalla_name']
+                if __check_if_name_is_blank(clan, team_object):
+                    team_object.name = player['brawlhalla_name']
+                if __check_if_name_is_blank(clan, rotating_object):
+                    rotating_object.name = player['brawlhalla_name']
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         rotating_object_array.append(rotating_object)
@@ -84,6 +89,7 @@ def __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, playe
 def __extract_player_stats_into_player_object_rotating(player_ranked_stats, player):
     """Takes player data and turns it into a `Player` object (Rotating Ranked)"""
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
+    print(player_ranked_stats)
     rotating_stats = player_ranked_stats['rotating_ranked']
     if rotating_stats == []:
         name = ""

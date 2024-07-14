@@ -156,7 +156,7 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot):
         # Get Clan Players, Teams and Rotating
         clan_players = clan_data['clan']
         # Remove rm Players
-        rm_players = get_account_linker_players(clan.discord_server_id)
+        rm_players = clan.account_linkers
         clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
         # p2
