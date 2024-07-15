@@ -15,6 +15,8 @@ Would be nice if you credit this repository or me in any way :D
 4. Download latest version of ranknir-manual [here](https://github.com/CrossyChainsaw/Ranknir/releases/download/manual-v1.1.0/ranknir.zip)
 5. Unzip the zip and open `clan.json`
 6. In `clan.json` changes the variables to make them fit your discord server and brawlhalla clan
+
+*clan.json*
 ```json
 {
     "server_name": "YOUR_DISCORD_SERVER_NAME",
