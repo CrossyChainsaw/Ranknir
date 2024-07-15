@@ -3,7 +3,7 @@
 # Setup Ranknir (ranknir-manual v1.0.0)
 Would be nice if you credit this repository or me in any way :D
 1. Go to [this page](https://discord.com/developers/applications) and create a discord bot
-2. Add the bot to your server and make sure to give it the following commands
+2. Add the bot to your server and make sure to give it the following permissions
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/aa3afa90-f8d1-4f00-82ed-dabba8c7d0c8)
 
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/f7789492-e48c-439c-93d1-93ba8538fabf)
