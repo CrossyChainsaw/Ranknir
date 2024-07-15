@@ -8,7 +8,7 @@
 
 
 <h1 align="center";size="500px"><b>CURRENTLY ACTIVE IN</b></h1>
-<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla Netherlands, Frost, KryptX (2), Empire United, M30W Organisation, Grant, Brawlhalla Hungary, Division 9</i></b></p>
+<p align="center"><b><i>Pandation (4), Tews (3), Brawlhalla Netherlands, Frost, KryptX (2), Empire United, M30W Organisation, Grant, Brawlhalla Hungary, Division 9, Client Org, Lush</i></b></p>
 
 
 <h1 align="center";size="500px"><b>1V1 LEADERBOARD EXAMPLE</b></h1>
