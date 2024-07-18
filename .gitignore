@@ -1,1 +1,8 @@
 *.pyc
+*.toc
+*.zip
+*.pyz
+*.pkg
+*.spec
+warn-main.txt
+xref-main.html
