@@ -11,6 +11,7 @@ async def fetch_clan_from_open_api(clan_id):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             response = await response.json()
+            print(response)
             return response['data']
 
 
@@ -20,6 +21,7 @@ async def fetch_player_ranked_stats_from_open_api(brawlhalla_id):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             response = await response.json()
+            print(response)
             return response['data']
         
         
