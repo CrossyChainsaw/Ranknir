@@ -5,7 +5,7 @@ from discord.ext.commands import has_permissions, MissingPermissions
 from commands.ping import ping
 from modules.choose_file import choose_json_file
 from modules.data_management import DATA_KEY_FOR_ACCOUNT_LINKERS, DATA_KEY_FOR_CONSOLE_PLAYERS, load_clan, load_json_file
-from modules.elo_list import clan_console_mix_1v1_and_2v2_and_rotating_elo_list, clan_console_mix_1v1_elo_list, clan_console_mix_2v2_elo_list, clan_console_mix_1v1_and_2v2_elo_list
+from modules.elo_list import clan_console_mix_1v1_and_2v2_elo_list
 from classes.Clan import Clan
 
 # Discord Stuff
