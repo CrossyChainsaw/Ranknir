@@ -1,7 +1,5 @@
-(setup for ranknir-manual v1.1.0 is not exactly the same, explanation will be uploaded soon)
 
-
-# Setup Ranknir (ranknir-manual v1.1.0)
+# Setup Ranknir (ranknir-manual v1.1.1)
 Would be nice if you credit this repository or me in any way :D
 1. Go to [this page](https://discord.com/developers/applications) and create a discord bot
 2. Add the bot to your server and make sure to give it the following permissions
