@@ -1,6 +1,6 @@
 import discord
 import asyncio
-from Ranknir.modules.data_management import FlagType
+from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
@@ -64,10 +64,9 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
             embed = discord.Embed(description="", color=color2)
         if count <= 20:
             if server.flag_type is not FlagType.NONE.value: # ideally if show_flags = true, append to msg, and later again append to msg
-                
                 flag_source = __get_flag_source(server, player)
 
-                if server.id == 1047987261905584128:
+                if server.id == ServerIDs.BHNL_SERVER_ID:
                     if flag_source == "NL":
                         flag = "<:NL:1225603278927040613>"
                     elif flag_source == "BE":
@@ -102,6 +101,26 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
                         flag = "<:SY:1235349190993907722>"
                     else:
                         flag = "<:NL:1225603278927040613>"
+                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
+                elif server.id == ServerIDs.M30W_SERVER_ID:
+                    if flag_source == "EU":
+                        flag = RegionFlagEmojis.EU_FLAG.value
+                    elif flag_source == "USE":
+                        flag = RegionFlagEmojis.USE_FLAG.value
+                    elif flag_source == "USW":
+                        flag = RegionFlagEmojis.USW_FLAG.value
+                    elif flag_source == "BRS":
+                        flag = RegionFlagEmojis.BRS_FLAG.value
+                    elif flag_source == "JPN":
+                        flag = RegionFlagEmojis.JPN_FLAG.value
+                    elif flag_source == "SEA":
+                        flag = RegionFlagEmojis.SEA_FLAG.value
+                    elif flag_source == "AUS":
+                        flag = RegionFlagEmojis.AUS_FLAG.value
+                    elif flag_source == "MDE":
+                        flag = RegionFlagEmojis.MDE_FLAG.value
+                    elif flag_source == "SAF":
+                        flag = RegionFlagEmojis.SAF_FLAG.value
                     embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
                 else:
                     if flag_source == "":

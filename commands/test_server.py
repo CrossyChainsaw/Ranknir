@@ -1,4 +1,4 @@
-from Ranknir.modules.data_management import TEST_SERVER_ID, load_server_v2
+from Ranknir.modules.data_management import ServerIDs, load_server_v2
 from Ranknir.modules.test_data import SERVER_PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import send_embeds, prepare_embeds_server
@@ -7,7 +7,7 @@ from Ranknir.classes.Server import Server
 
 async def test_server(bot):
     # Set Test Variables
-    server = await load_server_v2(TEST_SERVER_ID)
+    server = await load_server_v2(ServerIDs.TEST_SERVER_ID)
     all_player_objects_array = SERVER_PLAYER_OBJECT_DATA[:20]
     all_teams_array = SERVER_PLAYER_OBJECT_DATA[:20]
     # Logic - in best case this is the actual function, not a copy which is slightly modified

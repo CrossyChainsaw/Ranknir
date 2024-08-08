@@ -1,9 +1,8 @@
 import asyncio
 import discord
 from discord.ext import commands
-from discord.ext.commands import has_permissions, MissingPermissions
-from Ranknir.modules.data_management import EMPIRE_UNITED_SERVER_ID, FROST_SERVER_ID, GRANT_SERVER_ID, KRYPTX_SERVER_ID, PANDATION_SERVER_ID, DIVISION_SERVER_ID, TEWS_SERVER_ID, CLIENT_SERVER_ID, load_clan_v2
-from Ranknir.modules.data_management import TEST_SERVER_ID, M30W_SERVER_ID, BHNL_SERVER_ID, BRAWL_HUNGARY_SERVER_ID, load_server_v2
+from discord.ext.commands import has_permissions, MissingPermissions, Context
+from Ranknir.modules.data_management import ServerIDs, load_clan_v2, load_server_v2
 from Ranknir.commands.ping import ping
 from Ranknir.commands.spit_fire import spit_fire
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list, clan_console_mix_1v1_and_2v2_elo_list, clan_console_mix_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_and_rotating_elo_list, server_1v1_and_2v2_elo_list
@@ -36,31 +35,31 @@ async def on_ready():
 
             # Clans / Servers
             if turn == 0:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(PANDATION_SERVER_ID), bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.PANDATION_SERVER_ID), bot)
             elif turn == 1:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(TEWS_SERVER_ID), bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEWS_SERVER_ID), bot)
             elif turn == 2:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(FROST_SERVER_ID), bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.FROST_SERVER_ID), bot)
             elif turn == 3:
-                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(BHNL_SERVER_ID), bot)
+                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.BHNL_SERVER_ID), bot)
             elif turn == 4:
-                await clan_console_mix_1v1_elo_list(await load_clan_v2(EMPIRE_UNITED_SERVER_ID), bot)
+                await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.EMPIRE_UNITED_SERVER_ID), bot)
             elif turn == 5:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(CLIENT_SERVER_ID), bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.CLIENT_SERVER_ID), bot)
             elif turn == 6:
-                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(M30W_SERVER_ID), bot)
+                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.M30W_SERVER_ID), bot)
             elif turn == 7:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(GRANT_SERVER_ID), bot)
+                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.GRANT_SERVER_ID), bot)
             elif turn == 8:        
-                await server_1v1_and_2v2_elo_list(await load_server_v2(BRAWL_HUNGARY_SERVER_ID), bot)
+                await server_1v1_and_2v2_elo_list(await load_server_v2(ServerIDs.BRAWL_HUNGARY_SERVER_ID), bot)
             elif turn == 9:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(DIVISION_SERVER_ID), bot)    
+                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.DIVISION_SERVER_ID), bot)    
             # Test Clan
             elif turn == 69:
-                await clan_console_mix_1v1_elo_list(await load_clan_v2(TEST_SERVER_ID), bot)
+                await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER_ID), bot)
                 prev_turn
             elif turn == 420:
-                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(TEST_SERVER_ID), bot)
+                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.TEST_SERVER_ID), bot)
                 prev_turn
             # Debugging
             elif turn == 101:
@@ -104,12 +103,12 @@ async def test_server_command(ctx):
 @bot.command(name='tc2')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_clan_console_mix_1v1_elo_list_command(ctx):
-    await clan_console_mix_1v1_elo_list(await load_clan_v2(TEST_SERVER_ID), bot)
+    await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER_ID), bot)
 
 @bot.command(name='ts2')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
-    await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(TEST_SERVER_ID), bot)
+    await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.M30W_SERVER_ID), bot)
 
 def run_ranknir():
     bot.run(env_variable("RANKNIR_BOT_TOKEN"))
