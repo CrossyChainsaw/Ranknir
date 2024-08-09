@@ -6,7 +6,7 @@ from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 # Try to document what functions this exactly tests
 async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
-    clan = await load_clan_v2(ServerIDs.TEST_SERVER_ID)
+    clan = await load_clan_v2(ServerIDs.TEST_SERVER)
     console_player_objects = PLAYER_OBJECT_DATA[-5:]
     clan_player_objects = PLAYER_OBJECT_DATA[:5]
 

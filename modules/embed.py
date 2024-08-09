@@ -1,6 +1,6 @@
 import discord
 import asyncio
-from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis
+from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis, CountryFlagEmojis
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
@@ -65,68 +65,27 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
         if count <= 20:
             if server.flag_type is not FlagType.NONE.value: # ideally if show_flags = true, append to msg, and later again append to msg
                 flag_source = __get_flag_source(server, player)
-
-                if server.id == ServerIDs.BHNL_SERVER_ID:
-                    if flag_source == "NL":
-                        flag = "<:NL:1225603278927040613>"
-                    elif flag_source == "BE":
-                        flag = "<:BE:1225603306752315392>"
-                    elif flag_source == "TR":
-                        flag = "<:TR:1225869099477762058>"
-                    elif flag_source == "MA":
-                        flag = "<:MA:1225869638869454971>"
-                    elif flag_source == "ES":
-                        flag = "<:ES:1225876346090164325>"
-                    elif flag_source == "IQ":
-                        flag = "<:IQ:1225876351781961728>"
-                    elif flag_source == "VN":
-                        flag = "<:VN:1225876347629342771>"
-                    elif flag_source == "DO":
-                        flag = "<:DO:1225876344269705347>"
-                    elif flag_source == "DZ":
-                        flag = "<:DZ:1225876350418812948>"
-                    elif flag_source == "SR":
-                        flag = "<:SR:1225957555545571432>"
-                    elif flag_source == "JP":
-                        flag = "<:JP:1225969115915751464>"
-                    elif flag_source == "IT":
-                        flag = "<:IT:1225970111698046976>"
-                    elif flag_source == "CW":
-                        flag = "<:CW:1226200567450435704>"
-                    elif flag_source == "ID":
-                        flag = "<:ID:1226368641985941504>"
-                    elif flag_source == "DE":
-                        flag = "<:DE:1228355548810842212>"
-                    elif flag_source == "SY":
-                        flag = "<:SY:1235349190993907722>"
-                    else:
-                        flag = "<:NL:1225603278927040613>"
+                # Set Default Flag
+                if server.id == ServerIDs.BHNL:
+                    default_flag = CountryFlagEmojis.NL.value
+                elif server.id == ServerIDs.M30W:
+                    default_flag = RegionFlagEmojis.USE.value
+                # Set Flag Emoji and add player
+                if server.flag_type is FlagType.COUNTRY.value or server.flag_type is FlagType.ETHNICITY.value:
+                    flag = default_flag
+                    for CountryFlagEmoji in CountryFlagEmojis:
+                        if flag_source == CountryFlagEmoji.name:
+                            flag = CountryFlagEmoji.value
                     embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-                elif server.id == ServerIDs.M30W_SERVER_ID:
-                    if flag_source == "EU":
-                        flag = RegionFlagEmojis.EU_FLAG.value
-                    elif flag_source == "USE":
-                        flag = RegionFlagEmojis.USE_FLAG.value
-                    elif flag_source == "USW":
-                        flag = RegionFlagEmojis.USW_FLAG.value
-                    elif flag_source == "BRS":
-                        flag = RegionFlagEmojis.BRS_FLAG.value
-                    elif flag_source == "JPN":
-                        flag = RegionFlagEmojis.JPN_FLAG.value
-                    elif flag_source == "SEA":
-                        flag = RegionFlagEmojis.SEA_FLAG.value
-                    elif flag_source == "AUS":
-                        flag = RegionFlagEmojis.AUS_FLAG.value
-                    elif flag_source == "MDE":
-                        flag = RegionFlagEmojis.MDE_FLAG.value
-                    elif flag_source == "SAF":
-                        flag = RegionFlagEmojis.SAF_FLAG.value
+                elif server.flag_type is FlagType.REGION.value:
+                    flag = default_flag
+                    for RegionFlagEmoji in RegionFlagEmojis:
+                        if flag_source == RegionFlagEmoji.name:
+                            flag = RegionFlagEmoji.value
                     embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
                 else:
                     if flag_source == "":
                         flag = ""
-                    else:
-                        flag = f":flag_{flag_source.lower()}:"
                     embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
             else:
                 embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"

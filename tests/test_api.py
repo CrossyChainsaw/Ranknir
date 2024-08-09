@@ -8,7 +8,7 @@ class APITestCase(unittest.IsolatedAsyncioTestCase):
     async def test_request_clan_data_from_dadabase(self):
         """Tests if `request_clan_data_from_dadabase(id: int)` returns a valid dict of json data"""
         # Arrange
-        test_server_id = ServerIDs.TEST_SERVER_ID
+        test_server_id = ServerIDs.TEST_SERVER
         # Act
         data = await request_clan_data_from_dadabase(test_server_id)
         # Assert
@@ -17,7 +17,7 @@ class APITestCase(unittest.IsolatedAsyncioTestCase):
     async def test_request_server_data_from_dadabase(self):
         """Tests if `request_server_data_from_dadabase(id: int)` returns a valid dict of json data"""
         # Arrange
-        test_server_id = ServerIDs.TEST_SERVER_ID
+        test_server_id = ServerIDs.TEST_SERVER
         # Act
         data = await request_server_data_from_dadabase(test_server_id)
         # Assert

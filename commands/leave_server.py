@@ -2,8 +2,8 @@ import random as rnd
 
 async def leave_server(bot, ctx, server_id):
   author_id = ctx.author.id
-  CrossyChainsaw_id = 413070742591373314
-  if author_id == CrossyChainsaw_id:
+  CrossyChainsaw_discord_id = 413070742591373314
+  if author_id == CrossyChainsaw_discord_id:
     guild = bot.get_guild(int(server_id))
     await ctx.channel.send(f"leaving {guild.name} *(Ranknir sd'd by slide charging {get_random_sig()} for too long)*")
     await guild.leave()
