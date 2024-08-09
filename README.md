@@ -1,6 +1,6 @@
 <h1 align="center"><b>R A N K N I R</b></h1>
 
-![Ranknir_Thumbnail](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/a315d9f5-db70-4b7f-9228-02527249fd6d)
+![with lush](https://github.com/user-attachments/assets/2af5233a-9e8e-462a-a872-125361c7e717)
 
 
 <h1 align="center"><b>WHAT IS RANKNIR?</b></h1>
