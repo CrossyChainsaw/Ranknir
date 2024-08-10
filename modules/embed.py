@@ -71,13 +71,14 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
                 elif server.id == ServerIDs.M30W:
                     default_flag = RegionFlagEmojis.USE.value
                 # Set Flag Emoji and add player
-                if server.flag_type is FlagType.COUNTRY.value or server.flag_type is FlagType.ETHNICITY.value:
+                if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
+                    print('calory')
                     flag = default_flag
                     for CountryFlagEmoji in CountryFlagEmojis:
                         if flag_source == CountryFlagEmoji.name:
                             flag = CountryFlagEmoji.value
                     embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-                elif server.flag_type is FlagType.REGION.value:
+                elif server.flag_type == FlagType.REGION.value:
                     flag = default_flag
                     for RegionFlagEmoji in RegionFlagEmojis:
                         if flag_source == RegionFlagEmoji.name:
