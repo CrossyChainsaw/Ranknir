@@ -1,4 +1,4 @@
-from Ranknir.classes.Dadabase_Clan import Clan # fic this shit
+from Ranknir.classes.Clan import Clan # fic this shit
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
@@ -233,7 +233,7 @@ def __check_if_elo_is_zero(clan:Clan, player_object:Player):
         return False
 
 
-def __check_if_name_is_blank(clan:Clan, player_object:Player):
+def __check_if_name_is_blank(player_object:Player):
     # if you wanna add the thing for, if clan configs "dont show no elo players" etc etc put another if checking that
     if player_object.name == 'N/A' or player_object.name == "":
         return True
