@@ -8,7 +8,8 @@ BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
 DADABASE_API_KEY = env_variable("DADABASE_API_KEY")
 HOST_PORT = env_variable("HOST_PORT")
 HOST_IP = env_variable("HOST_IP")
-API_WAIT_TIME = 10  # 8 possible if only ranknir
+LOCAL_IP = env_variable("LOCAL_IP")
+API_WAIT_TIME = 9.9  # 8 possible if only ranknir
 
 
 async def fetch_clan(clan_id):
