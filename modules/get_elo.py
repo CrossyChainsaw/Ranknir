@@ -24,11 +24,11 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
-        if __check_if_name_is_blank(clan, player_object) or __check_if_name_is_blank(clan, team_object):
+        if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object):
             if is_console_players: # fix console players' blank names
-                if __check_if_name_is_blank(clan, player_object):
+                if __check_if_name_is_blank(player_object):
                     player_object.name = player['brawlhalla_name']
-                if __check_if_name_is_blank(clan, team_object):
+                if __check_if_name_is_blank(team_object):
                     team_object.name = player['brawlhalla_name']
         player_object_array.append(player_object)
         team_object_array.append(team_object)
@@ -55,7 +55,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
         rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player)
-        if __check_if_name_is_blank(clan, player_object) and __check_if_name_is_blank(clan, team_object) and __check_if_name_is_blank(clan, rotating_object):
+        if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
             _ = None  # some bs code for no crash
             # continue # uncomment for hide elo players
         player_object_array.append(player_object)
