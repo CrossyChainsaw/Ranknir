@@ -79,16 +79,10 @@ async def on_ready():
 async def ping_command(ctx):
     await ping(ctx)
 
-
 @bot.command(name='spit')
 @has_permissions(manage_roles=True, ban_members=True)
 async def spit_fire_command(ctx, server_id):
     await spit_fire(bot, server_id)
-
-@bot.command(name='leave')
-@has_permissions(manage_roles=True, ban_members=True)
-async def leave_server_command(ctx, server_id):
-    await leave_server(bot, ctx, server_id)
 
 @bot.command(name='tc')
 @has_permissions(manage_roles=True, ban_members=True)
