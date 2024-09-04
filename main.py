@@ -1,4 +1,5 @@
 import asyncio
+from asyncio import tasks
 import discord
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions, Context
@@ -20,60 +21,60 @@ intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 
 
+@tasks.loop(hours=48)
+async def leaderboards_loop():
+    try:
+        # get turn
+        print('getting turn...')
+        turn = get_turn()
+        print("current turn: " + str(turn))
 
+        # Clans / Servers
+        if turn == 0:
+            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.PANDATION), bot)
+        elif turn == 1:
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
+        elif turn == 2:
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.FROST), bot)
+        elif turn == 3:
+            await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.M30W), bot)
+        elif turn == 4:
+            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEWS), bot)
+        elif turn == 5:
+            await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.EMPIRE_UNITED), bot)
+        elif turn == 6:
+            await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.BHNL), bot)
+        elif turn == 7:
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.GRANT), bot)
+        elif turn == 8:        
+            await server_1v1_and_2v2_elo_list(await load_server_v2(ServerIDs.BRAWL_HUNGARY), bot)
+        elif turn == 9:
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.DIVISION_9), bot)    
+        elif turn == 10:
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
+        # Test Clan
+        elif turn == 69:
+            await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot)
+            prev_turn
+        elif turn == 420:
+            await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.TEST_SERVER), bot)
+            prev_turn
+        # Debugging
+        elif turn == 101:
+            print("Debugging doesn't work anymore")
+        # Reset Q
+        else:
+            reset_turn()
+            await send_all_legends_elo(PlayerIDs.CROSSYCHAINSAW, 1165233774305493012, bot)
+        next_turn()
+    except Exception as e:
+        print(e)
+        await asyncio.sleep(3)
+                
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-
-    while True:
-        try:
-            # get turn
-            print('getting turn...')
-            turn = get_turn()
-            print("current turn: " + str(turn))
-
-            # Clans / Servers
-            if turn == 0:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.PANDATION), bot)
-            elif turn == 1:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
-            elif turn == 2:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.FROST), bot)
-            elif turn == 3:
-                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.M30W), bot)
-            elif turn == 4:
-                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEWS), bot)
-            elif turn == 5:
-                await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.EMPIRE_UNITED), bot)
-            elif turn == 6:
-                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.BHNL), bot)
-            elif turn == 7:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.GRANT), bot)
-            elif turn == 8:        
-                await server_1v1_and_2v2_elo_list(await load_server_v2(ServerIDs.BRAWL_HUNGARY), bot)
-            elif turn == 9:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.DIVISION_9), bot)    
-            elif turn == 10:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
-            # Test Clan
-            elif turn == 69:
-                await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot)
-                prev_turn
-            elif turn == 420:
-                await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.TEST_SERVER), bot)
-                prev_turn
-            # Debugging
-            elif turn == 101:
-                print("Entered Debugging")
-                break
-            # Reset Q
-            else:
-                reset_turn()
-                await send_all_legends_elo(PlayerIDs.CROSSYCHAINSAW, 1165233774305493012, bot)
-            next_turn()
-        except Exception as e:
-            print(e)
-            await asyncio.sleep(3)
+    leaderboards_loop.start()
 
 
 @bot.command(name='ping')
