@@ -42,9 +42,9 @@ async def on_ready():
             elif turn == 3:
                 await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.M30W), bot)
             elif turn == 4:
-                await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEWS), bot)
+                await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEWS), bot)
             elif turn == 5:
-                await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.EMPIRE_UNITED), bot)
+                await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.EMPIRE_UNITED), bot)
             elif turn == 6:
                 await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.BHNL), bot)
             elif turn == 7:
