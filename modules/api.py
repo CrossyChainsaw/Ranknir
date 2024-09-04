@@ -9,6 +9,8 @@ DADABASE_API_KEY = env_variable("DADABASE_API_KEY")
 HOST_PORT = env_variable("HOST_PORT")
 HOST_IP = env_variable("HOST_IP")
 LOCAL_IP = env_variable("LOCAL_IP")
+ACTIVE_IP = LOCAL_IP
+
 API_WAIT_TIME = 9.9  # 8 possible if only ranknir
 
 
@@ -28,12 +30,12 @@ async def fetch_player_ranked_stats(brawlhalla_id):
             return await response.json()
         
 async def request_clan_data_from_dadabase(id: int):
-    json_object = requests.get(f"http://{HOST_IP}:{HOST_PORT}/get_clan_data?api_key={DADABASE_API_KEY}&id={id}")      
+    json_object = requests.get(f"http://{ACTIVE_IP}:{HOST_PORT}/get_clan_data?api_key={DADABASE_API_KEY}&id={id}")      
     data = json.loads(json_object.content)
     return data
 
 async def request_server_data_from_dadabase(id: int):
-    json_object = requests.get(f"http://{HOST_IP}:{HOST_PORT}/get_server_data?api_key={DADABASE_API_KEY}&id={id}")      
+    json_object = requests.get(f"http://{ACTIVE_IP}:{HOST_PORT}/get_server_data?api_key={DADABASE_API_KEY}&id={id}")      
     data = json.loads(json_object.content)
     return data
 
