@@ -1,7 +1,6 @@
 import asyncio
-from asyncio import tasks
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord.ext.commands import has_permissions, MissingPermissions, Context
 from Ranknir.modules.data_management import ServerIDs, load_clan_v2, load_server_v2
 from Ranknir.commands.ping import ping
