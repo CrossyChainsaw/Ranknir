@@ -20,7 +20,7 @@ intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 
 
-@tasks.loop(hours=48)
+@tasks.loop(minutes=2)
 async def leaderboards_loop():
     try:
         # get turn
