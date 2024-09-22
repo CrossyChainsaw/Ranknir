@@ -5,7 +5,7 @@
 <h1 align="center"><b>WHAT IS RANKNIR?</b></h1>
 <p align="center"><b>Ranknir is a discord bot which creates an elo leaderboard out of a Brawlhalla clan or Brawl organisation data.</b></p>
 <h1 align="center";size="500px"><b>CURRENTLY ACTIVE IN</b></h1>
-<p align="center"><b><i>Pandation (4 clans), Tews (3 clans), Brawlhalla Netherlands, Frost, Empire United, M30W Organisation, Grant, Brawlhalla Hungary, Division 9, Lush (ranknir-manual), VCNTY, Asakai (ranknir-manual)</i></b></p>
+<p align="center"><b><i>Pandation (4 clans), Tews (3 clans), Brawlhalla Netherlands, Frost, Empire United, M30W Organisation, Grant, Brawlhalla Hungary, Division 9, Lush (ranknir-manual), VCNTY, Asakai (ranknir-manual), RISK (ranknir-manual)</i></b></p>
 <h1 align="center";size="500px"><b>1V1 LEADERBOARD EXAMPLE</b></h1>
 <p align="center">
   <img src="https://github.com/CrossyChainsaw/Ranknir/assets/74303221/96634680-4f3d-4899-8d04-05d279352de5" />
