@@ -2,6 +2,7 @@ from Ranknir.classes.Clan import Clan # fic this shit
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
+import sys
 
 
 # There are different functions for 1v1, 2v2 and 1v1&2v2. I made an extra one for 1v1&2v2 because it halves the api requests.
@@ -9,17 +10,20 @@ from Ranknir.modules.api import fetch_player_ranked_stats
 #################### GET ALL PLAYERS ELO ######################
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
-async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_players=False, x=0):
+async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_players=False, x=0, log_method='C'):
     """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
-    print("Entered: get_players_elo_1v1_and_2v2()")
-
-    if x == 0:
-        x = len(players)  # Set x to the length of players if x is 0
-
-    print(f"Player Amount: {x}")
+    #print("Entered: get_players_elo_1v1_and_2v2()")
 
     player_object_array = []
     team_object_array = []
+
+    if x == 0:
+        x = len(players)  # Set x to the length of players if x is 0
+    if len(players) == 0:
+        print('No Console Players')
+        return player_object_array, team_object_array
+    
+    print('Starting...')
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
@@ -32,24 +36,25 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
                     team_object.name = player['brawlhalla_name']
         player_object_array.append(player_object)
         team_object_array.append(team_object)
-        print('%s %s/%s' % (subclan_name, str(i + 1), str(len(players))))
-        print('1s: ' + player_object.name)
-        print('2s: ' + team_object.name)
+        __log(log_method, subclan_name, players, player_object, team_object, i, len(players))
+    print(f' - Completed!')
     return player_object_array, team_object_array
 
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False, x=0):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False, x=0, log_method="C"):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
-    print("Entered: get_players_elo_1v1_and_2v2_and_rotating()")
+    #print("Entered: get_players_elo_1v1_and_2v2_and_rotating()")
 
-    if x == 0:
-        x = len(players)  # Set x to the length of players if x is 0
-
-    print(f"Player Amount: {x}")
-    
     player_object_array = []
     team_object_array = []
     rotating_object_array = []
+
+    if x == 0:
+        x = len(players)  # Set x to the length of players if x is 0
+    if len(players) == 0:
+        print('No Console Players')
+        return player_object_array, team_object_array, rotating_object_array
+    
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
@@ -61,10 +66,8 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         rotating_object_array.append(rotating_object)
-        print(f'{subclan_name} {i+1}/{len(players)}')
-        print('1s: ' + player_object.name)
-        print('2s: ' + team_object.name)
-        print('rr: ' + rotating_object.name)
+        __log(log_method, subclan_name, players, player_object, team_object, i, len(players), rotating_object=rotating_object)
+    print(f' - Completed!')
     return player_object_array, team_object_array, rotating_object_array
 
 
@@ -119,7 +122,23 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
 ############################ USEFUL FUNCTIONS #########################
 
 
-# testse
+def __log(log_method, subclan_name, players, player_object, team_object, i, bar_length, rotating_object=None):
+    if log_method == 'A':
+        print(f'{subclan_name} {i + 1}/{len(players)}')
+        print('1s: ' + player_object.name)
+        print('2s: ' + team_object.name) 
+    elif log_method == 'B':
+        print(f'{subclan_name} {i+1}/{len(players)}')
+        print('1s: ' + player_object.name)
+        print('2s: ' + team_object.name)
+        print('rr: ' + rotating_object.name) 
+    elif log_method == 'C':
+        filled_length = int(bar_length * i // bar_length)
+        bar = '█' * filled_length + '-' * (bar_length - filled_length)
+        sys.stdout.write(f"\r |{bar}| {subclan_name} {i + 1}/{len(players)}")
+        sys.stdout.flush()
+
+
 def __try_decode(name):
     """Tries to decode unicode symbols"""
     # print('Entered: __try_decode()')

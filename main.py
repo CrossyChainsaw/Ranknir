@@ -24,7 +24,6 @@ bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 async def leaderboards_loop():
     try:
         # get turn
-        print('getting turn...')
         turn = get_turn()
         print("current turn: " + str(turn))
 
@@ -32,7 +31,8 @@ async def leaderboards_loop():
         if turn == 0:
             await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.PANDATION), bot)
         elif turn == 1:
-            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
+            pass
+            #await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
         elif turn == 2:
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.FROST), bot)
         elif turn == 3:
@@ -60,7 +60,7 @@ async def leaderboards_loop():
             prev_turn
         # Debugging
         elif turn == 101:
-            print("Debugging doesn't work anymore")
+            print("Debugging doesn't work anymore :p")
         # Reset Q
         else:
             reset_turn()
