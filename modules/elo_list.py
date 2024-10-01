@@ -30,8 +30,10 @@ async def clan_console_mix_1v1_elo_list(clan:Clan, bot):
         rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
         clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
+        print("Starting")
         clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
         all_player_objects_array.append(clan_player_objects)
+        print('Completed!')
     # Restructure the array with all players
     all_player_objects_array_restructured = __fix_structure(all_player_objects_array)
     all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
