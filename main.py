@@ -32,7 +32,8 @@ async def leaderboards_loop():
         if turn == 0:
             await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.PANDATION), bot)
         elif turn == 1:
-            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
+            pass
+            #await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
         elif turn == 2:
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.FROST), bot)
         elif turn == 3:
