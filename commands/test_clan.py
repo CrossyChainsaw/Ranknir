@@ -2,7 +2,11 @@ from Ranknir.modules.data_management import ServerIDs, load_clan_v2
 from Ranknir.modules.test_data import CLAN_DATA, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
+from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list
+import sys
 
+# try to generalize the function so that i can use the function for testing instead.
+# still, this is usefull for fast paced testing for for example testing formatting in the elo list or checking flags emojis etc.
 # Try to document what functions this exactly tests
 async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
@@ -14,14 +18,14 @@ async def test_clan_console_mix_1v1_elo_list(bot):
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
     all_player_objects_array = []
     # Get Console Players
-    #console_players = get_console_players(clan)
-    #console_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)")
+    ###  console_players = get_console_players(clan)
+    ###  console_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)")
     all_player_objects_array.append(console_player_objects)
     # Get Clan
     clan_data_array = []
     for i in range(len(clan.id_array)):
         # Get Clan Data
-        #clan_data = await get_clan_data(clan.id_array[i])
+        ###  clan_data = await get_clan_data(clan.id_array[i])
         clan_data = CLAN_DATA
         clan_data_array.append(clan_data)
         # Get Clan Players
@@ -30,7 +34,7 @@ async def test_clan_console_mix_1v1_elo_list(bot):
         rm_players = clan.account_linkers
         clan_players = [p for p in clan_players if p['brawlhalla_id'] not in rm_players]
         # Get Elo
-        #clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
+        ###  clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
         all_player_objects_array.append(clan_player_objects)
     # Restructure the array with all players
     all_player_objects_array_restructured = __fix_structure(all_player_objects_array)
@@ -39,7 +43,7 @@ async def test_clan_console_mix_1v1_elo_list(bot):
         clan,
         all_player_objects_array_sorted,
         clan_data_array,
-        #console_player_amount=len(console_players))
+        ###  console_player_amount=len(console_players))
         console_player_amount=len(console_player_objects))
     await send_embeds(embed_title, embed_array, bot, clan, clan.channel_1v1_id)
 

@@ -9,7 +9,7 @@ DADABASE_API_KEY = env_variable("DADABASE_API_KEY")
 HOST_PORT = env_variable("HOST_PORT")
 HOST_IP = env_variable("HOST_IP")
 LOCAL_IP = env_variable("LOCAL_IP")
-ACTIVE_IP = LOCAL_IP
+ACTIVE_IP = HOST_IP
 
 API_WAIT_TIME = 9.9  # 8 possible if only ranknir
 

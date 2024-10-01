@@ -4,6 +4,7 @@ TURN_SWITCH_JSON_LOCATION = '../Global/turn_switch.json'
 
 
 def get_turn():
+    #print('getting turn...')
     try:
         with open(TURN_SWITCH_JSON_LOCATION, 'r') as file:
             return json.load(file)['turn']

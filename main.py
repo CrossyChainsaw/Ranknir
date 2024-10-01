@@ -24,7 +24,6 @@ bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 async def leaderboards_loop():
     try:
         # get turn
-        print('getting turn...')
         turn = get_turn()
         print("current turn: " + str(turn))
 
@@ -61,7 +60,7 @@ async def leaderboards_loop():
             prev_turn
         # Debugging
         elif turn == 101:
-            print("Debugging doesn't work anymore")
+            print("Debugging doesn't work anymore :p")
         # Reset Q
         else:
             reset_turn()
