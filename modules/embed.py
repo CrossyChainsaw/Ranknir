@@ -72,7 +72,6 @@ def prepare_embeds_server(server:Server, players_sorted: list[Player]):
                     default_flag = RegionFlagEmojis.USE.value
                 # Set Flag Emoji and add player
                 if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
-                    print('calory')
                     flag = default_flag
                     for CountryFlagEmoji in CountryFlagEmojis:
                         if flag_source == CountryFlagEmoji.name:

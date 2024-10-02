@@ -2,7 +2,7 @@ from Ranknir.classes.Clan import Clan # fic this shit
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
-import sys
+from datetime import datetime
 
 
 # There are different functions for 1v1, 2v2 and 1v1&2v2. I made an extra one for 1v1&2v2 because it halves the api requests.
@@ -20,10 +20,10 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     if x == 0:
         x = len(players)  # Set x to the length of players if x is 0
     if len(players) == 0:
-        print('No Console Players')
+        print(f"{subclan_name} doesn't have Console Players")
         return player_object_array, team_object_array
     
-    print('Starting...')
+    print(f'Starting at {get_current_time_hours_minutes()}')
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
@@ -37,9 +37,8 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         __log(log_method, subclan_name, players, player_object, team_object, i, len(players))
-    print(f' - Completed!')
+    __log_complete(subclan_name, players)
     return player_object_array, team_object_array
-
 
 async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False, x=0, log_method="C"):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
@@ -52,9 +51,10 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
     if x == 0:
         x = len(players)  # Set x to the length of players if x is 0
     if len(players) == 0:
-        print('No Console Players')
+        print(f"{subclan_name} doesn't have Console Players")
         return player_object_array, team_object_array, rotating_object_array
     
+    print(f'Starting at {get_current_time_hours_minutes()}')
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
@@ -67,7 +67,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         team_object_array.append(team_object)
         rotating_object_array.append(rotating_object)
         __log(log_method, subclan_name, players, player_object, team_object, i, len(players), rotating_object=rotating_object)
-    print(f' - Completed!')
+    __log_complete(subclan_name, players)
     return player_object_array, team_object_array, rotating_object_array
 
 
@@ -133,10 +133,22 @@ def __log(log_method, subclan_name, players, player_object, team_object, i, bar_
         print('2s: ' + team_object.name)
         print('rr: ' + rotating_object.name) 
     elif log_method == 'C':
-        filled_length = int(bar_length * i // bar_length)
+        # prevent bar from being too long
+        if bar_length > 50:
+            bar_length = 50
+        filled_length = int(bar_length * i // bar_length) + 1 # +1 for nice looking bar
         bar = '█' * filled_length + '-' * (bar_length - filled_length)
-        sys.stdout.write(f"\r |{bar}| {subclan_name} {i + 1}/{len(players)}")
-        sys.stdout.flush()
+        print(f"|{bar}| {subclan_name} {i + 1}/{len(players)}", end='\r')
+
+
+def __log_complete(subclan_name, players):
+    print(f'{subclan_name} ({len(players)}) completed at {get_current_time_hours_minutes()}')
+
+
+def get_current_time_hours_minutes():
+    current_time = datetime.now()
+    formatted_time = current_time.strftime('%H:%M')
+    return formatted_time
 
 
 def __try_decode(name):
