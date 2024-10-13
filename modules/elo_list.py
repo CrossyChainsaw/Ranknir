@@ -237,7 +237,6 @@ async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot):
     server_players = server.links
     # Get Elo
     all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, server_players, server.name)
-    print('test')
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
