@@ -147,7 +147,7 @@ def __log(log_method, subclan_name, players, player_object, team_object, i, bar_
             bar_length = 50
         filled_length = int(bar_length * i // bar_length) + 1 # +1 for nice looking bar
         bar = '█' * filled_length + '-' * (bar_length - filled_length)
-        print(f"|{bar}| {subclan_name} {i + 1}/{len(players)}", end='\r', flush=True)
+        print(f"|{bar}| {subclan_name} {i + 1}/{len(players)}")
 
 
 def __log_complete(subclan_name, players):
