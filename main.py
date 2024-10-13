@@ -52,7 +52,7 @@ async def leaderboards_loop():
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
         # Test Clan
         elif turn == 69:
-            await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot)
+            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot)
             prev_turn
         elif turn == 420:
             await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.TEST_SERVER), bot)

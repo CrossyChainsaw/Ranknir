@@ -160,19 +160,13 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot):
         all_team_objects_array.append(clan_team_objects)
         all_rotating_objects_array.append(clan_rotating_objects)
     # Restructure Players and Teams
-    all_player_objects_array_restructured = __fix_structure(
-        all_player_objects_array)
-    all_team_objects_array_restructured = __fix_structure(
-        all_team_objects_array)
-    all_rotating_objects_array_restructured = __fix_structure(
-        all_rotating_objects_array)
+    all_player_objects_array_restructured = __fix_structure(all_player_objects_array)
+    all_team_objects_array_restructured = __fix_structure(all_team_objects_array)
+    all_rotating_objects_array_restructured = __fix_structure(all_rotating_objects_array)
     # Sort Players and Teams
-    all_player_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_player_objects_array_restructured)
-    all_team_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_team_objects_array_restructured)
-    all_rotating_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_rotating_objects_array_restructured)
+    all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
+    all_team_objects_array_sorted = sort_elo(clan.sorting_method, all_team_objects_array_restructured)
+    all_rotating_objects_array_sorted = sort_elo(clan.sorting_method, all_rotating_objects_array_restructured)
     # Send 1v1 Elo List
     embed_title, embed_array = prepare_embeds_clan_mix_console(
         clan,
@@ -243,7 +237,6 @@ async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot):
     server_players = server.links
     # Get Elo
     all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, server_players, server.name)
-    print('test')
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)

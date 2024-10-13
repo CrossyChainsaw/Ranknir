@@ -10,7 +10,7 @@ SEND_ELO_EMBEDS_WAIT_TIME = 4.9
 BOT_WAIT_TIME = 2.9
 
 
-def prepare_embeds_clan_mix_console(clan:Clan, players_sorted, clan_data_array, console_player_amount):
+def prepare_embeds_clan_mix_console(clan:Clan, players_sorted:list[Player], clan_data_array, console_player_amount):
 
     # OPTIONAL ADD ONS
     embed_title = discord.Embed(title='', description='', color=clan.color)
@@ -33,9 +33,11 @@ def prepare_embeds_clan_mix_console(clan:Clan, players_sorted, clan_data_array, 
             count = 0
         if count == 0:
             embed = discord.Embed(description="", color=clan.color)
-        if count <= 20:
-            embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (
-                str(rank), player.name, str(player.current), str(player.peak))
+        if count < 20:
+            if clan.show_win_loss == True:
+                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}** **[**{player.total_wins}W**/**{player.total_losses}L**]**\n"
+            else:
+                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
         rank += 1
         count += 1
     embed_array.append(embed)

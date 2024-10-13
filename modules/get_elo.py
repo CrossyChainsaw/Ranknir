@@ -73,13 +73,14 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
 
 ###################### PUT PLAYER DATA IN PYTHON OBJECTS #######################
 
-
 def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Player):
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
     player_object = Player(name=player_ranked_stats['name'], 
                            current=player_ranked_stats['rating'],
                            peak=player_ranked_stats['peak_rating'],
+                           total_wins=player_ranked_stats['wins'],
+                           total_losses=player_ranked_stats['games'] - player_ranked_stats['wins'],
                            region=player.get('region'),
                            country=player.get('country'),
                            ethnicity=player.get('ethnicity'))
@@ -103,14 +104,22 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
     rotating_stats = player_ranked_stats['rotating_ranked']
     if rotating_stats == []:
-        name = ""
+        name = player_ranked_stats['name']
         rating = 0
         peak = 0
+        wins=0
+        losses=0
     else:
         name = rotating_stats['name']
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
-    rotating_object = Player(name, rating, peak, 
+        wins = rotating_stats['wins']
+        losses = rotating_stats['games'] - rotating_stats['wins']
+    rotating_object = Player(name=name, 
+                             current=rating, 
+                             peak=peak, 
+                             total_wins=wins,
+                             total_losses=losses,
                              region=player.get('region'),
                              country=player.get('country'),
                              ethnicity=player.get('ethnicity'))
@@ -200,11 +209,13 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
     """Finds the best team of the player using `sorting_method` and returns a `Team` object"""
     all_my_2v2_teams = player_ranked_stats['2v2']
     best_team = None
-    best_team_name = player_ranked_stats["name"]
+    best_team_name = player_ranked_stats["name"] # use profile name as placeholder. if someone didnt play 2s, it will show this name
     brawl_id_one = player_ranked_stats["brawlhalla_id"]
-    brawl_id_two = 0
-    best_current = 0
-    best_peak = 0
+    brawl_id_two = 0 
+    best_current = 0 # placeholder if didnt play 2s
+    best_peak = 0 # placeholder if didnt play 2s
+    wins = 0 # placeholder if didnt play 2s
+    losses = 0 # placeholder if didnt play 2s
     # Find best team
     if clan.sorting_method == "current":
         # FIND BEST TEAM CURRENT ELO
@@ -226,13 +237,20 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
         best_team_name = best_team["teamname"]
         best_current = best_team["rating"]
         best_peak = best_team["peak_rating"]
+        wins = best_team['wins']
+        losses = best_team['games'] - best_team['wins']
         brawl_id_one = best_team["brawlhalla_id_one"]
         brawl_id_two = best_team["brawlhalla_id_two"]
 
-    team_obj = Team(best_team_name, best_current, best_peak, 
-                        region=player.get('region'),
-                        country=player.get('country'),
-                        ethnicity=player.get('ethnicity'))
+
+    team_obj = Team(name=best_team_name, 
+                    current=best_current, 
+                    peak=best_peak, 
+                    total_wins=wins,
+                    total_losses=losses,
+                    region=player.get('region'),
+                    country=player.get('country'),
+                    ethnicity=player.get('ethnicity'))
     team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two,
                                        team_obj)
 
