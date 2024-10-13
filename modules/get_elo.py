@@ -118,13 +118,13 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
         peak = rotating_stats['peak_rating']
         wins = rotating_stats['wins']
         losses = rotating_stats['games'] - rotating_stats['wins']
-        best_legend=find_best_legend(player_ranked_stats),
+        best_legend=find_best_legend(player_ranked_stats)
     rotating_object = Player(name=name, 
                              current=rating, 
                              peak=peak, 
                              total_wins=wins,
                              total_losses=losses,
-                             best_legend=best_legend
+                             best_legend=best_legend,
                              region=player.get('region'),
                              country=player.get('country'),
                              ethnicity=player.get('ethnicity'))
@@ -242,7 +242,7 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
         best_team_name = best_team["teamname"]
         best_current = best_team["rating"]
         best_peak = best_team["peak_rating"]
-        wins = best_team['wins']
+        wins = best_team["wins"]
         losses = best_team['games'] - best_team['wins']
         brawl_id_one = best_team["brawlhalla_id_one"]
         brawl_id_two = best_team["brawlhalla_id_two"]
