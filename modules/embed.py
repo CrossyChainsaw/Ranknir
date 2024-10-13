@@ -1,6 +1,6 @@
 import discord
 import asyncio
-from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis, CountryFlagEmojis
+from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis, CountryFlagEmojis, LegendEmojis
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
@@ -8,6 +8,7 @@ from Ranknir.classes.Server import Server
 PURGE_LIMIT = 12  # 12
 SEND_ELO_EMBEDS_WAIT_TIME = 4.9
 BOT_WAIT_TIME = 2.9
+PLAYERS_PER_EMBED = 20
 
 
 def prepare_embeds_clan_mix_console(clan:Clan, players_sorted:list[Player], clan_data_array, console_player_amount):
@@ -28,14 +29,17 @@ def prepare_embeds_clan_mix_console(clan:Clan, players_sorted:list[Player], clan
 
     # Format Embeds
     for player in players_sorted:
-        if count == 21:
+        if count == PLAYERS_PER_EMBED:
             embed_array.append(embed)
             count = 0
         if count == 0:
             embed = discord.Embed(description="", color=clan.color)
-        if count < 20:
-            if clan.show_win_loss == True:
-                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}** **[**{player.total_wins}W**/**{player.total_losses}L**]**\n"
+        if count < PLAYERS_PER_EMBED:
+            if clan.show_win_loss == True and clan.show_legends == True:
+                print(player.best_legend)
+                legend_emoji = getattr(LegendEmojis, player.best_legend).value
+                print(legend_emoji)
+                embed.description += f"{legend_emoji} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}** **[**{player.total_wins}W**/**{player.total_losses}L**]**\n"
             else:
                 embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
         rank += 1
