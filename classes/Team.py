@@ -3,7 +3,7 @@ class Team:
         self.name = name
         self.current = current
         self.peak = peak
-        self.total_wins = total_wins,
+        self.total_wins = total_wins
         self.total_losses = total_losses
         self.best_legend = best_legend
         self.region = region
