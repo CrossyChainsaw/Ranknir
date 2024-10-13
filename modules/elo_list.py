@@ -160,19 +160,13 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot):
         all_team_objects_array.append(clan_team_objects)
         all_rotating_objects_array.append(clan_rotating_objects)
     # Restructure Players and Teams
-    all_player_objects_array_restructured = __fix_structure(
-        all_player_objects_array)
-    all_team_objects_array_restructured = __fix_structure(
-        all_team_objects_array)
-    all_rotating_objects_array_restructured = __fix_structure(
-        all_rotating_objects_array)
+    all_player_objects_array_restructured = __fix_structure(all_player_objects_array)
+    all_team_objects_array_restructured = __fix_structure(all_team_objects_array)
+    all_rotating_objects_array_restructured = __fix_structure(all_rotating_objects_array)
     # Sort Players and Teams
-    all_player_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_player_objects_array_restructured)
-    all_team_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_team_objects_array_restructured)
-    all_rotating_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_rotating_objects_array_restructured)
+    all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
+    all_team_objects_array_sorted = sort_elo(clan.sorting_method, all_team_objects_array_restructured)
+    all_rotating_objects_array_sorted = sort_elo(clan.sorting_method, all_rotating_objects_array_restructured)
     # Send 1v1 Elo List
     embed_title, embed_array = prepare_embeds_clan_mix_console(
         clan,
