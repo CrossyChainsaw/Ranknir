@@ -1,5 +1,5 @@
 class Clan:
-    def __init__(self, server_name:str, clan_names: str, channel_1v1_id:int, channel_2v2_id:int, id_array:str, color:str, image:str, server_id:str, sorting_method:str='current', show_member_count:bool=True, show_xp:bool=False, show_no_elo_players:bool=False, channel_rotating_id:str = None, show_win_loss = True, account_linkers=[], console_players=[]):
+    def __init__(self, server_name:str, clan_names: str, channel_1v1_id:int, channel_2v2_id:int, id_array:str, color:str, image:str, server_id:str, sorting_method:str='current', show_member_count:bool=True, show_xp:bool=False, show_no_elo_players:bool=False, channel_rotating_id:str = None, show_win_loss = True, show_legends = True, account_linkers=[], console_players=[]):
         # Required
         self.server_name = server_name
         self.clan_names = clan_names
@@ -17,6 +17,7 @@ class Clan:
         self.show_xp = show_xp
         self.show_no_elo_players = show_no_elo_players
         self.show_win_loss = show_win_loss
+        self.show_legends = show_legends
 
         # Empty Arrays
         self.account_linkers = account_linkers

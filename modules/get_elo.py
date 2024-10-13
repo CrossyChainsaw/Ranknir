@@ -2,6 +2,7 @@ from Ranknir.classes.Clan import Clan # fic this shit
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
+from Ranknir.modules.find_best_legend import find_best_legend
 from datetime import datetime
 
 
@@ -81,6 +82,7 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Pl
                            peak=player_ranked_stats['peak_rating'],
                            total_wins=player_ranked_stats['wins'],
                            total_losses=player_ranked_stats['games'] - player_ranked_stats['wins'],
+                           best_legend=find_best_legend(player_ranked_stats),
                            region=player.get('region'),
                            country=player.get('country'),
                            ethnicity=player.get('ethnicity'))
@@ -109,17 +111,20 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
         peak = 0
         wins=0
         losses=0
+        best_legend='random'
     else:
         name = rotating_stats['name']
         rating = rotating_stats['rating']
         peak = rotating_stats['peak_rating']
         wins = rotating_stats['wins']
         losses = rotating_stats['games'] - rotating_stats['wins']
+        best_legend=find_best_legend(player_ranked_stats),
     rotating_object = Player(name=name, 
                              current=rating, 
                              peak=peak, 
                              total_wins=wins,
                              total_losses=losses,
+                             best_legend=best_legend
                              region=player.get('region'),
                              country=player.get('country'),
                              ethnicity=player.get('ethnicity'))
