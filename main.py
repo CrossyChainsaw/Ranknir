@@ -20,7 +20,7 @@ intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 
 
-@tasks.loop(minutes=2)
+@tasks.loop(seconds=30)
 async def leaderboards_loop():
     try:
         # get turn
@@ -59,7 +59,9 @@ async def leaderboards_loop():
             prev_turn
         # Debugging
         elif turn == 101:
-            print("Debugging doesn't work anymore :p")
+            print("Entered Debugging")
+            prev_turn()
+            leaderboards_loop.stop()
         # Reset Q
         else:
             reset_turn()
@@ -97,7 +99,7 @@ async def test_server_command(ctx):
 @bot.command(name='tc2')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_clan_console_mix_1v1_elo_list_command(ctx):
-    await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot)
+    await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot, x=1)
 
 @bot.command(name='ts2')
 @has_permissions(manage_roles=True, ban_members=True)

@@ -71,7 +71,6 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         __log(log_method, subclan_name, players, player_object, team_object, i, len(players), rotating_object=rotating_object)
         team_dict_array.append(team_object.__dict__)
     __log_complete(subclan_name, players)
-    write_array_to_json('array.json', team_dict_array)
     return player_object_array, team_object_array, rotating_object_array
 
 
