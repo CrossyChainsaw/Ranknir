@@ -145,19 +145,26 @@ class LegendEmojis(Enum):
 async def load_clan_v2(server_id):
     clan_data = await request_clan_data_from_dadabase(server_id)
     clan = Clan(
+        # Required
         server_name=clan_data['server_name'],
         clan_names=clan_data['clan_names'],
-        channel_1v1_id=clan_data['channel_1v1_id'],
-        channel_2v2_id=clan_data['channel_2v2_id'],
+        server_id=clan_data['discord_server_id'],
         id_array=clan_data['id_array'],
         color=int(clan_data['color'], 16),
         image=clan_data['image'],
-        server_id=clan_data['discord_server_id'],
+        channel_1v1_id=clan_data['channel_1v1_id'],
+        channel_2v2_id=clan_data['channel_2v2_id'],
+
+        # Optional
+        channel_rotating_id=clan_data['channel_rotating_id'],
         sorting_method=clan_data['sorting_method'],
         show_member_count=clan_data['show_member_count'],
         show_xp=clan_data['show_xp'],
         show_no_elo_players=clan_data['show_no_elo_players'],
-        channel_rotating_id=clan_data['channel_rotating_id'],
+        show_win_loss=clan_data['show_win_loss'],
+        show_legends=clan_data['show_legends'],
+
+        # Arrays
         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
         console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS]
     )
