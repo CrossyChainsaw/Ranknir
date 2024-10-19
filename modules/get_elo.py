@@ -3,6 +3,7 @@ from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
 from Ranknir.modules.find_best_legend import find_best_legend
+from Ranknir.modules.data_management import write_array_to_json
 from datetime import datetime
 
 
@@ -44,10 +45,10 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
 async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False, x=0, log_method="C"):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
     #print("Entered: get_players_elo_1v1_and_2v2_and_rotating()")
-
     player_object_array = []
     team_object_array = []
     rotating_object_array = []
+    team_dict_array = []
 
     if x == 0:
         x = len(players)  # Set x to the length of players if x is 0
@@ -68,7 +69,9 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         team_object_array.append(team_object)
         rotating_object_array.append(rotating_object)
         __log(log_method, subclan_name, players, player_object, team_object, i, len(players), rotating_object=rotating_object)
+        team_dict_array.append(team_object.__dict__)
     __log_complete(subclan_name, players)
+    write_array_to_json('array.json', team_dict_array)
     return player_object_array, team_object_array, rotating_object_array
 
 
@@ -82,7 +85,7 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Pl
                            peak=player_ranked_stats['peak_rating'],
                            total_wins=player_ranked_stats['wins'],
                            total_losses=player_ranked_stats['games'] - player_ranked_stats['wins'],
-                           best_legend=find_best_legend(player_ranked_stats),
+                           legend=find_best_legend(player_ranked_stats),
                            region=player.get('region'),
                            country=player.get('country'),
                            ethnicity=player.get('ethnicity'))
@@ -91,9 +94,9 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Pl
     return player_object
 
 
-def __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player):
+def __extract_player_stats_into_team_object_2v2(clan:Clan, player_ranked_stats, player):
     """Takes player data and turns it into a `Team` object"""
-    # print('Entered: __extract_player_stats_into_team_object_2v2()')
+    print('Entered: __extract_player_stats_into_team_object_2v2()')
     team_object = __find_best_team(clan, player_ranked_stats, player)
     team_object.name = __format_teamname(player_ranked_stats, team_object)
     team_object.name = __fill_in_empty_name(team_object.name, player_ranked_stats)
@@ -124,7 +127,7 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
                              peak=peak, 
                              total_wins=wins,
                              total_losses=losses,
-                             best_legend=best_legend,
+                             legend=best_legend,
                              region=player.get('region'),
                              country=player.get('country'),
                              ethnicity=player.get('ethnicity'))
@@ -247,20 +250,25 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
         brawl_id_one = best_team["brawlhalla_id_one"]
         brawl_id_two = best_team["brawlhalla_id_two"]
 
-
     team_obj = Team(name=best_team_name, 
                     current=best_current, 
                     peak=best_peak, 
+                    brawlhalla_id_one=brawl_id_one,
+                    brawlhalla_id_two=brawl_id_two,
                     total_wins=wins,
                     total_losses=losses,
                     region=player.get('region'),
                     country=player.get('country'),
                     ethnicity=player.get('ethnicity'))
-    team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two,
-                                       team_obj)
-
+    team_obj.legend = __find_2v2_legend(clan, player, default_legend_value=team_obj.legend)
+    team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two, team_obj)
     return team_obj
 
+def __find_2v2_legend(clan:Clan, player, default_legend_value):
+    for entry in clan.legends_for_2v2:
+        if str(entry['brawlhalla_id']) == str(player['brawlhalla_id']):
+            return entry['legend_key']
+    return default_legend_value
 
 def __fill_in_empty_name(player_name, player):
     # print('Entered: __give_empty_name_a_placeholder_name()')

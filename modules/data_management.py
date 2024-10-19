@@ -11,6 +11,7 @@ DADABASE_CLAN_DATA_PATH = f"{DADABASE_PATH}data/clans/"
 # Data Keys
 DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove players / crossplayers
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
+DATA_KEY_FOR_LEGENDS_FOR_2V2 = 'legends_for_2v2' # 2v2 legends
 DATA_KEY_FOR_FLAG_TYPE = 'flag_type'
 # Flag Type Values
 class FlagType(Enum):
@@ -166,7 +167,8 @@ async def load_clan_v2(server_id):
 
         # Arrays
         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
-        console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS]
+        console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS],
+        legends_for_2v2=clan_data[DATA_KEY_FOR_LEGENDS_FOR_2V2]
     )
     return clan
 
@@ -193,3 +195,8 @@ def load_json_file(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
     return data
+
+def write_array_to_json(json_file, array):
+    with open('array.json', 'w') as json_file:
+    # Write the array to the file in JSON format
+        json.dump(array, json_file, indent=4)
