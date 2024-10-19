@@ -6,4 +6,5 @@ def find_best_legend(player_ranked_stats):
         if legend_data['rating'] > best_legend_rating:
             best_legend_rating = legend_data['rating']
             best_legend = legend_data['legend_name_key']
+    best_legend = best_legend.replace(" ", "")
     return best_legend
