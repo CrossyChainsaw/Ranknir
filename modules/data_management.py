@@ -11,6 +11,7 @@ DADABASE_CLAN_DATA_PATH = f"{DADABASE_PATH}data/clans/"
 # Data Keys
 DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove players / crossplayers
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
+DATA_KEY_FOR_LEGENDS_FOR_2V2 = 'legends_for_2v2' # 2v2 legends
 DATA_KEY_FOR_FLAG_TYPE = 'flag_type'
 # Flag Type Values
 class FlagType(Enum):
@@ -166,7 +167,8 @@ async def load_clan_v2(server_id):
 
         # Arrays
         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
-        console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS]
+        console_players=clan_data[DATA_KEY_FOR_CONSOLE_PLAYERS],
+        legends_for_2v2=clan_data[DATA_KEY_FOR_LEGENDS_FOR_2V2]
     )
     return clan
 
@@ -189,7 +191,31 @@ async def load_server_v2(server_id):
     )
     return server
 
+async def load_combined(server_id):
+    server_data = await request_server_data_from_dadabase(server_id)
+    server = Server(
+        id=server_data['id'],
+        name=server_data['name'],
+        leaderboard_title=server_data['leaderboard_title'],
+        sorting_method=server_data['sorting_method'],
+        show_member_count=server_data['show_member_count'],
+        show_no_elo_players=server_data['show_no_elo_players'],
+        channel_1v1_id=server_data['channel_1v1_id'],
+        channel_2v2_id=server_data['channel_2v2_id'],
+        channel_rotating_id=server_data['channel_rotating_id'],
+        color=int(server_data['color'], 16),
+        image=server_data['image'],
+        flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
+        links=server_data['links']
+    )
+    return server
+
 def load_json_file(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
     return data
+
+def write_array_to_json(json_file, array):
+    with open('array.json', 'w') as json_file:
+    # Write the array to the file in JSON format
+        json.dump(array, json_file, indent=4)

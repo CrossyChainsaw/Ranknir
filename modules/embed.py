@@ -35,9 +35,9 @@ def prepare_embeds_clan_mix_console(clan:Clan, players_sorted:list[Player], clan
         if count == 0:
             embed = discord.Embed(description="", color=clan.color)
         if count < PLAYERS_PER_EMBED:
-            if clan.show_win_loss == True and clan.show_legends == True:
-                print(player.best_legend)
-                legend_emoji = getattr(LegendEmojis, player.best_legend).value
+            if clan.show_win_loss == True and clan.show_legends == True and player.legend != "":
+                print(player.legend)
+                legend_emoji = getattr(LegendEmojis, player.legend).value
                 print(legend_emoji)
                 embed.description += f"{legend_emoji} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}** **[**{player.total_wins}W**/**{player.total_losses}L**]**\n"
             else:
