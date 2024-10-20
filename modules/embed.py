@@ -2,6 +2,7 @@ import discord
 import asyncio
 from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis, CountryFlagEmojis, LegendEmojis
 from Ranknir.classes.Player import Player
+from Ranknir.classes.Team import Team
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
@@ -11,42 +12,90 @@ BOT_WAIT_TIME = 2.9
 PLAYERS_PER_EMBED = 20
 
 
-def prepare_embeds_clan_mix_console(clan:Clan, players_sorted:list[Player], clan_data_array, console_player_amount):
+def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list, clan_data_array, console_player_amount):
+
+    # for entity in entities_sorted:
+    #     if isinstance(entity, Player):
+    #         entities_sorted:list[Player] = entities_sorted
+    #     elif isinstance(entity, Team):
+    #         entities_sorted:list[Team] = entities_sorted
+
+
 
     # OPTIONAL ADD ONS
     embed_title = discord.Embed(title='', description='', color=clan.color)
     embed_title = __add_title(clan_data_array, embed_title)
     if clan.show_member_count:
-        embed_title = __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted)
+        embed_title = __add_member_count(clan_data_array, embed_title, console_player_amount, entities_sorted)
     if clan.show_xp:
         embed_title = __add_xp(clan_data_array, embed_title)
     # Variables
     embed_array = []
-    global rank
     rank = 1
     count = 0
-    embed = discord.Embed(description="", color=clan.color)
-
     # Format Embeds
-    for player in players_sorted:
+    # if isinstance(entity, Player):
+    for team in entities_sorted:
         if count == PLAYERS_PER_EMBED:
             embed_array.append(embed)
             count = 0
         if count == 0:
             embed = discord.Embed(description="", color=clan.color)
         if count < PLAYERS_PER_EMBED:
-            if clan.show_win_loss == True and clan.show_legends == True and player.legend != "":
-                print(player.legend)
-                legend_emoji = getattr(LegendEmojis, player.legend).value
-                print(legend_emoji)
-                embed.description += f"{legend_emoji} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}** **[**{player.total_wins}W**/**{player.total_losses}L**]**\n"
-            else:
-                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
+            # Add Legend
+            if clan.show_legends:
+                if isinstance(team, Player):
+                    player:Player = team
+                    legend_emoji = getattr(LegendEmojis, player.legend).value
+                    embed.description += f"{legend_emoji} "
+                elif isinstance(team, Team):
+                    legend_emoji = getattr(LegendEmojis, team.legend).value
+                    mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
+                    embed.description += f"{legend_emoji}{mate_legend_emoji} "
+            # Player Information
+            embed.description += __add_rank_name_current_peak(rank, team)
+            
+            # Add Win Loss
+            if clan.show_win_loss:
+                embed.description += __add_player_win_loss(team)
+            
+            embed.description += "\n"
         rank += 1
         count += 1
     embed_array.append(embed)
+    # elif isinstance(entity, Team):
+    #     for team in entities_sorted:
+    #         if count == PLAYERS_PER_EMBED:
+    #             embed_array.append(embed)
+    #             count = 0
+    #         if count == 0:
+    #             embed = discord.Embed(description="", color=clan.color)
+    #         if count < PLAYERS_PER_EMBED:
+    #             # Add Own Legend and Teammate Legend 
+    #             if clan.show_legends:
+    #                 legend_emoji = getattr(LegendEmojis, team.legend).value
+    #                 mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
+    #                 embed.description += f"{legend_emoji}{mate_legend_emoji} "
+                
+    #             # Player Information
+    #             embed.description += __add_rank_name_current_peak(team)
+                
+    #             # Add Win Loss
+    #             if clan.show_win_loss:
+    #                 embed.description += __add_player_win_loss(team)
+                
+    #             embed.description += "\n"
+    #         rank += 1
+    #         count += 1
+    #     embed_array.append(embed)
+
 
     return embed_title, embed_array
+
+def __add_player_win_loss(player:Player):
+    return f" **[**{player.total_wins}W**/**{player.total_losses}L**]**"
+def __add_rank_name_current_peak(rank, player:Player):
+    return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
 
 
 def prepare_embeds_server(server:Server, players_sorted: list[Player]):

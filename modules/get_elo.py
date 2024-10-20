@@ -3,7 +3,7 @@ from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
 from Ranknir.modules.find_best_legend import find_best_legend
-from Ranknir.modules.data_management import write_array_to_json
+from Ranknir.modules.data_management import write_array_to_json, DATA_KEY_FOR_OWN_2V2_LEGEND, DATA_KEY_FOR_MATE_2V2_LEGEND
 from datetime import datetime
 
 
@@ -259,15 +259,15 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
                     region=player.get('region'),
                     country=player.get('country'),
                     ethnicity=player.get('ethnicity'))
-    team_obj.legend = __find_2v2_legend(clan, player, default_legend_value=team_obj.legend)
+    team_obj.legend, team_obj.mate_legend = __find_2v2_legends(clan, player, default_legend_value=team_obj.legend)
     team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two, team_obj)
     return team_obj
 
-def __find_2v2_legend(clan:Clan, player, default_legend_value):
+def __find_2v2_legends(clan:Clan, player, default_legend_value:str) -> tuple[str, str]:
     for entry in clan.legends_for_2v2:
         if str(entry['brawlhalla_id']) == str(player['brawlhalla_id']):
-            return entry['legend_key']
-    return default_legend_value
+            return entry[DATA_KEY_FOR_OWN_2V2_LEGEND], entry[DATA_KEY_FOR_MATE_2V2_LEGEND]
+    return default_legend_value, default_legend_value
 
 def __fill_in_empty_name(player_name, player):
     # print('Entered: __give_empty_name_a_placeholder_name()')
