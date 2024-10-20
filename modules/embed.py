@@ -7,8 +7,8 @@ from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
-SEND_ELO_EMBEDS_WAIT_TIME = 4.9
-BOT_WAIT_TIME = 2.9
+SEND_ELO_EMBEDS_WAIT_TIME = 4.8
+BOT_WAIT_TIME = 2.8
 PLAYERS_PER_EMBED = 20
 
 
@@ -63,33 +63,6 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list, clan_data_a
         rank += 1
         count += 1
     embed_array.append(embed)
-    # elif isinstance(entity, Team):
-    #     for team in entities_sorted:
-    #         if count == PLAYERS_PER_EMBED:
-    #             embed_array.append(embed)
-    #             count = 0
-    #         if count == 0:
-    #             embed = discord.Embed(description="", color=clan.color)
-    #         if count < PLAYERS_PER_EMBED:
-    #             # Add Own Legend and Teammate Legend 
-    #             if clan.show_legends:
-    #                 legend_emoji = getattr(LegendEmojis, team.legend).value
-    #                 mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
-    #                 embed.description += f"{legend_emoji}{mate_legend_emoji} "
-                
-    #             # Player Information
-    #             embed.description += __add_rank_name_current_peak(team)
-                
-    #             # Add Win Loss
-    #             if clan.show_win_loss:
-    #                 embed.description += __add_player_win_loss(team)
-                
-    #             embed.description += "\n"
-    #         rank += 1
-    #         count += 1
-    #     embed_array.append(embed)
-
-
     return embed_title, embed_array
 
 def __add_player_win_loss(player:Player):
