@@ -7,8 +7,8 @@ from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
-SEND_ELO_EMBEDS_WAIT_TIME = 4.8
-BOT_WAIT_TIME = 2.8
+SEND_ELO_EMBEDS_WAIT_TIME = 4.8 # 4.9 works
+BOT_WAIT_TIME = 2.8 # 2.9 works
 PLAYERS_PER_EMBED = 20
 
 

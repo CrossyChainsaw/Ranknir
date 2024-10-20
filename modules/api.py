@@ -11,7 +11,7 @@ HOST_IP = env_variable("HOST_IP")
 LOCAL_IP = env_variable("LOCAL_IP")
 ACTIVE_IP = HOST_IP
 
-API_WAIT_TIME = 9.9  # 8 possible if only ranknir
+API_WAIT_TIME = 9.8  # 9.9 works // 8 possible if only ranknir
 
 
 async def fetch_clan(clan_id):
