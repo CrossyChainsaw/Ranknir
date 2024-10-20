@@ -13,6 +13,8 @@ DATA_KEY_FOR_ACCOUNT_LINKERS = 'account_linkers' # account linkers / remove play
 DATA_KEY_FOR_CONSOLE_PLAYERS = 'console_players' # console players
 DATA_KEY_FOR_LEGENDS_FOR_2V2 = 'legends_for_2v2' # 2v2 legends
 DATA_KEY_FOR_FLAG_TYPE = 'flag_type'
+DATA_KEY_FOR_OWN_2V2_LEGEND = 'own_legend'
+DATA_KEY_FOR_MATE_2V2_LEGEND = 'mate_legend'
 # Flag Type Values
 class FlagType(Enum):
     NONE = None
