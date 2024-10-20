@@ -28,21 +28,19 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     print(f'Starting at {get_current_time_hours_minutes()}')
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
-        team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
-        if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object):
-            if is_console_players: # fix console players' blank names
-                if __check_if_name_is_blank(player_object):
-                    player_object.name = player['brawlhalla_name']
-                if __check_if_name_is_blank(team_object):
-                    team_object.name = player['brawlhalla_name']
+        player_object:Player = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
+        team_object:Team = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
+        if clan.show_no_elo_players == False:
+            if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
+                continue
+        __try_fill_in_emmpty_name_1v1_and_2v2(player_object, team_object, player, is_console_players)
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         __log(log_method, subclan_name, players, player_object, team_object, i, len(players))
     __log_complete(subclan_name, players)
     return player_object_array, team_object_array
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, is_console_players=False, x=0, log_method="C"):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan:Clan, players, subclan_name, is_console_players=False, x=0, log_method="C"):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
     #print("Entered: get_players_elo_1v1_and_2v2_and_rotating()")
     player_object_array = []
@@ -62,9 +60,10 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
         team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
         rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player)
-        if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
-            _ = None  # some bs code for no crash
-            # continue # uncomment for hide elo players
+        if clan.show_no_elo_players == False:
+            if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
+                continue
+        __try_fill_in_empty_name_with_other_name_all_modes(player_object, team_object, rotating_object, player, is_console_players)
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         rotating_object_array.append(rotating_object)
@@ -72,7 +71,6 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan, players, subclan_name, 
         team_dict_array.append(team_object.__dict__)
     __log_complete(subclan_name, players)
     return player_object_array, team_object_array, rotating_object_array
-
 
 ###################### PUT PLAYER DATA IN PYTHON OBJECTS #######################
 
@@ -276,8 +274,43 @@ def __fill_in_empty_name(player_name, player):
     if player_name == "":
         return 'N/A'
     else:
-        return player_name
+        return 
     
+def __try_fill_in_empty_name_with_other_name_all_modes(player_object:Player, team_object:Team, rotating_object:Player, player, is_console_players:bool):
+    if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object) or __check_if_name_is_blank(rotating_object):
+        if is_console_players: # fix console players' blank names
+            if __check_if_name_is_blank(player_object):
+                player_object.name = player['brawlhalla_name']
+            if __check_if_name_is_blank(team_object):
+                team_object.name = player['brawlhalla_name']
+            if __check_if_name_is_blank(rotating_object):
+                rotating_object.name = player['brawlhalla_name']
+        else:
+            if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(rotating_object):
+                player_object.name = team_object.name.split(' + ')[0]
+                rotating_object.name = team_object.name.split(' + ')[0]
+            elif __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
+                player_object.name = rotating_object.name
+                team_object.name = rotating_object.name
+            elif __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
+                team_object.name = player_object.name
+                rotating_object.name = player_object.name
+            elif __check_if_name_is_blank(player_object):
+                player_object.name = rotating_object.name
+            elif __check_if_name_is_blank(rotating_object):
+                rotating_object.name = player_object.name    
+
+def __try_fill_in_emmpty_name_1v1_and_2v2(player_object:Player, team_object:Team, player, is_console_players:bool):
+    if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object):
+        if is_console_players: # fix console players' blank names
+            if __check_if_name_is_blank(player_object):
+                player_object.name = player['brawlhalla_name']
+            if __check_if_name_is_blank(team_object):
+                team_object.name = player['brawlhalla_name']
+        else:
+            if __check_if_name_is_blank(player_object):
+                player_object.name = team_object.name.split(' + ')[0]
+
 def __try_get_discord_name(player, player_name):
     if "discord_name" in player:
         return player["discord_name"]
