@@ -13,15 +13,6 @@ PLAYERS_PER_EMBED = 20
 
 
 def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list, clan_data_array, console_player_amount):
-
-    # for entity in entities_sorted:
-    #     if isinstance(entity, Player):
-    #         entities_sorted:list[Player] = entities_sorted
-    #     elif isinstance(entity, Team):
-    #         entities_sorted:list[Team] = entities_sorted
-
-
-
     # OPTIONAL ADD ONS
     embed_title = discord.Embed(title='', description='', color=clan.color)
     embed_title = __add_title(clan_data_array, embed_title)
@@ -43,15 +34,17 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list, clan_data_a
             embed = discord.Embed(description="", color=clan.color)
         if count < PLAYERS_PER_EMBED:
             # Add Legend
-            if clan.show_legends:
-                if isinstance(team, Player):
+            if isinstance(team, Player):
+                if clan.show_legends:
                     player:Player = team
                     legend_emoji = getattr(LegendEmojis, player.legend).value
                     embed.description += f"{legend_emoji} "
-                elif isinstance(team, Team):
+            elif isinstance(team, Team):
+                if clan.show_legends:    
                     legend_emoji = getattr(LegendEmojis, team.legend).value
                     mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
                     embed.description += f"{legend_emoji}{mate_legend_emoji} "
+                team.name = __format_teamname(team)
             # Player Information
             embed.description += __add_rank_name_current_peak(rank, team)
             
@@ -237,3 +230,16 @@ def __get_flag_source(server:Server, player:Player):
         return player.region
     else:
         return ""
+    
+def __format_teamname(team_object:Team):
+    """Puts 2 asterisks after name 1, and 2 asterisks before name 2. Necessary for making the names bold when sending the embed (consider putting this in embed.py)"""
+    best_team_name = team_object.name
+    if '+' in best_team_name:
+        name_plus_index = best_team_name.find('+')
+        name_length = len(best_team_name)
+        name_1 = best_team_name[0:name_plus_index]
+        name_2 = best_team_name[name_plus_index + 1:name_length]
+        new_name = name_1 + '** + **' + name_2
+        return new_name
+    else:
+        return best_team_name

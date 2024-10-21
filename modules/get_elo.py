@@ -33,7 +33,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
         if clan.show_no_elo_players == False:
             if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
                 continue
-        __try_fill_in_emmpty_name_1v1_and_2v2(player_object, team_object, player, is_console_players)
+        __try_fill_in_empty_name_1v1_and_2v2(player_object, team_object, player, is_console_players)
         player_object_array.append(player_object)
         team_object_array.append(team_object)
         __log(log_method, subclan_name, players, player_object, team_object, i, len(players))
@@ -95,7 +95,6 @@ def __extract_player_stats_into_team_object_2v2(clan:Clan, player_ranked_stats, 
     """Takes player data and turns it into a `Team` object"""
     print('Entered: __extract_player_stats_into_team_object_2v2()')
     team_object = __find_best_team(clan, player_ranked_stats, player)
-    team_object.name = __format_teamname(player_ranked_stats, team_object)
     team_object.name = __fill_in_empty_name(team_object.name, player_ranked_stats)
     team_object.name = __try_decode(team_object.name)
     return team_object
@@ -189,20 +188,6 @@ def __change_order_team_name(team_object:Team):
         return team_object
 
 
-def __format_teamname(player:Player, team_object:Team):
-    """Puts 2 asterisks after name 1, and 2 asterisks before name 2. Necessary for making the names bold when sending the embed (consider putting this in embed.py)"""
-    best_team_name = team_object.name
-    if '+' in best_team_name:
-        name_plus_index = best_team_name.find('+')
-        name_length = len(best_team_name)
-        name_1 = best_team_name[0:name_plus_index]
-        name_2 = best_team_name[name_plus_index + 1:name_length]
-        new_name = name_1 + '** + **' + name_2
-        return new_name
-    else:
-        return best_team_name
-
-
 def __check_order_team_name(player, brawl_id_one, brawl_id_two, team_obj):
     if player["brawlhalla_id"] == brawl_id_one:
         return team_obj
@@ -285,22 +270,25 @@ def __try_fill_in_empty_name_with_other_name_all_modes(player_object:Player, tea
                     team_object.name = player['brawlhalla_name']
                 if __check_if_name_is_blank(rotating_object):
                     rotating_object.name = player['brawlhalla_name']
-            # else:
-            #     if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(rotating_object):
-            #         player_object.name = team_object.name.split(' + ')[0]
-            #         rotating_object.name = team_object.name.split(' + ')[0]
-            #     elif __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
-            #         player_object.name = rotating_object.name
-            #         team_object.name = rotating_object.name
-            #     elif __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
-            #         team_object.name = player_object.name
-            #         rotating_object.name = player_object.name
-            #     elif __check_if_name_is_blank(player_object):
-            #         player_object.name = rotating_object.name
-            #     elif __check_if_name_is_blank(rotating_object):
-            #         rotating_object.name = player_object.name  
+            else:
+                if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(rotating_object) and __check_if_name_is_blank(team_object):
+                    return # if all empty just break out
+                else:
+                    if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(rotating_object):
+                        player_object.name = team_object.name.split('+')[0]
+                        rotating_object.name = team_object.name.split('+')[0]
+                    elif __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
+                        player_object.name = rotating_object.name
+                        team_object.name = rotating_object.name
+                    elif __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
+                        team_object.name = player_object.name
+                        rotating_object.name = player_object.name
+                    elif __check_if_name_is_blank(player_object):
+                        player_object.name = rotating_object.name
+                    elif __check_if_name_is_blank(rotating_object):
+                        rotating_object.name = player_object.name  
 
-def __try_fill_in_emmpty_name_1v1_and_2v2(player_object:Player, team_object:Team, player, is_console_players:bool):
+def __try_fill_in_empty_name_1v1_and_2v2(player_object:Player, team_object:Team, player, is_console_players:bool):
     if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object):
         if is_console_players: # fix console players' blank names
             if __check_if_name_is_blank(player_object):
@@ -310,7 +298,7 @@ def __try_fill_in_emmpty_name_1v1_and_2v2(player_object:Player, team_object:Team
         else:
             try:            
                 if __check_if_name_is_blank(player_object):
-                    player_object.name = team_object.name.split('** + **')[0]
+                    player_object.name = team_object.name.split('+')[0]
             except:
                 pass
 
