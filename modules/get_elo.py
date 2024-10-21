@@ -310,7 +310,7 @@ def __try_fill_in_emmpty_name_1v1_and_2v2(player_object:Player, team_object:Team
         else:
             try:            
                 if __check_if_name_is_blank(player_object):
-                    player_object.name = team_object.name.split(' + ')[0]
+                    player_object.name = team_object.name.split('** + **')[0]
             except:
                 pass
 
