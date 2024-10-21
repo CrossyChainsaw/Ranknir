@@ -274,31 +274,31 @@ def __fill_in_empty_name(player_name, player):
     if player_name == "":
         return 'N/A'
     else:
-        return 
+        return player_name
     
 def __try_fill_in_empty_name_with_other_name_all_modes(player_object:Player, team_object:Team, rotating_object:Player, player, is_console_players:bool):
-    if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object) or __check_if_name_is_blank(rotating_object):
-        if is_console_players: # fix console players' blank names
-            if __check_if_name_is_blank(player_object):
-                player_object.name = player['brawlhalla_name']
-            if __check_if_name_is_blank(team_object):
-                team_object.name = player['brawlhalla_name']
-            if __check_if_name_is_blank(rotating_object):
-                rotating_object.name = player['brawlhalla_name']
-        else:
-            if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(rotating_object):
-                player_object.name = team_object.name.split(' + ')[0]
-                rotating_object.name = team_object.name.split(' + ')[0]
-            elif __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
-                player_object.name = rotating_object.name
-                team_object.name = rotating_object.name
-            elif __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
-                team_object.name = player_object.name
-                rotating_object.name = player_object.name
-            elif __check_if_name_is_blank(player_object):
-                player_object.name = rotating_object.name
-            elif __check_if_name_is_blank(rotating_object):
-                rotating_object.name = player_object.name    
+        if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object) or __check_if_name_is_blank(rotating_object):
+            if is_console_players: # fix console players' blank names
+                if __check_if_name_is_blank(player_object):
+                    player_object.name = player['brawlhalla_name']
+                if __check_if_name_is_blank(team_object):
+                    team_object.name = player['brawlhalla_name']
+                if __check_if_name_is_blank(rotating_object):
+                    rotating_object.name = player['brawlhalla_name']
+            # else:
+            #     if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(rotating_object):
+            #         player_object.name = team_object.name.split(' + ')[0]
+            #         rotating_object.name = team_object.name.split(' + ')[0]
+            #     elif __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
+            #         player_object.name = rotating_object.name
+            #         team_object.name = rotating_object.name
+            #     elif __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
+            #         team_object.name = player_object.name
+            #         rotating_object.name = player_object.name
+            #     elif __check_if_name_is_blank(player_object):
+            #         player_object.name = rotating_object.name
+            #     elif __check_if_name_is_blank(rotating_object):
+            #         rotating_object.name = player_object.name  
 
 def __try_fill_in_emmpty_name_1v1_and_2v2(player_object:Player, team_object:Team, player, is_console_players:bool):
     if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object):
@@ -308,8 +308,11 @@ def __try_fill_in_emmpty_name_1v1_and_2v2(player_object:Player, team_object:Team
             if __check_if_name_is_blank(team_object):
                 team_object.name = player['brawlhalla_name']
         else:
-            if __check_if_name_is_blank(player_object):
-                player_object.name = team_object.name.split(' + ')[0]
+            try:            
+                if __check_if_name_is_blank(player_object):
+                    player_object.name = team_object.name.split(' + ')[0]
+            except:
+                pass
 
 def __try_get_discord_name(player, player_name):
     if "discord_name" in player:
