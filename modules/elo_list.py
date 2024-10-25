@@ -214,12 +214,12 @@ async def server_2v2_elo_list(server:Server, bot):
     await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
 
 
-async def server_1v1_and_2v2_elo_list(server:Server, bot):
+async def server_1v1_and_2v2_elo_list(server:Server, bot, x=0):
     print("Server 1v1 and 2v2 elo list for " + server.name)
     print(f"Amount of players in {server.name}: {len(server.links)}")
     brawlhalla_nl_players = server.links
     # Get Elo
-    all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name)
+    all_players_array, all_teams_array = await get_players_elo_1v1_and_2v2(server, brawlhalla_nl_players, server.name, x=x)
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
