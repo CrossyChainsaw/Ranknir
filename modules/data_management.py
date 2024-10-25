@@ -139,7 +139,7 @@ class LegendEmojis(Enum):
     seven = "<:seven:1295145169716379763>"
     vivi = "<:vivi:1295145176221745265>"
     imugi = "<:imugi:1295145187903012884>"
-    kingzuva = "(i didnt add king zuva yet x crossy)"
+    kingzuva = "<:kingzuva:1297246006731345990"
 
 
 
@@ -191,7 +191,8 @@ async def load_server_v2(server_id):
         flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
         show_win_loss=server_data['show_win_loss'],
         show_legends=server_data['show_legends'],
-        links=server_data['links']
+        links=server_data['links'],
+        legends_for_2v2=server_data[DATA_KEY_FOR_LEGENDS_FOR_2V2]
     )
     return server
 
