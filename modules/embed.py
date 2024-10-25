@@ -37,7 +37,7 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
             
             # Add Legend Emoji
             if clan.show_legends:
-                embed.description += __add_legend_emoji()
+                embed.description += __add_legend_emoji(entity, clan)
             
             # Format Teamname
             if isinstance(entity, Team):
@@ -99,7 +99,7 @@ def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
             
             # Add Legend Emoji
             if server.show_legends:
-                embed.description += __add_legend_emoji()
+                embed.description += __add_legend_emoji(entity, server)
             
             # Format Teamname
             if isinstance(entity, Team):

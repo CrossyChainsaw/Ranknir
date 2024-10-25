@@ -262,8 +262,14 @@ def __find_2v2_legends_clan(clan:Clan, player, default_legend_value:str) -> tupl
 def __find_2v2_legends_server(server:Server, player, default_legend_value:str) -> tuple[str, str]:
     for link in server.links:
         if str(link['brawlhalla_id']) == str(player['brawlhalla_id']):
-            link_2v2_data = link[DATA_KEY_FOR_LEGENDS_FOR_2V2]
-            return link_2v2_data[DATA_KEY_FOR_OWN_2V2_LEGEND], link[DATA_KEY_FOR_MATE_2V2_LEGEND]
+            link_2v2_data = link.get(DATA_KEY_FOR_LEGENDS_FOR_2V2, None)
+            own_legend = link_2v2_data.get(DATA_KEY_FOR_OWN_2V2_LEGEND, 'random') if link_2v2_data else 'random'
+            mate_legend = link_2v2_data.get(DATA_KEY_FOR_MATE_2V2_LEGEND, 'random') if link_2v2_data else 'random'
+            return own_legend, mate_legend    
+    return default_legend_value, default_legend_value
+    
+    
+    
     return default_legend_value, default_legend_value
 
 def __fill_in_empty_name(player_name, player):
