@@ -73,21 +73,18 @@ def prepare_embeds_server(server:Server, entities_sorted:list):
         embed_title = __add_member_count([{"clan": []}], embed_title, 0, entities_sorted)
     # Variables
     embed_array = []
-    global rank
     rank = 1
     count = 0
-    embed = Embed(description="", color=color2)
-
     # Format Embeds
     for team in entities_sorted:
-        if count == 21:
+        if count == PLAYERS_PER_EMBED:
             embed_array.append(embed)
             count = 0
         if count == 0:
             embed = Embed(description="", color=color2)
-        if count <= 20:
+        if count < PLAYERS_PER_EMBED:
             if server.flag_type is not FlagType.NONE.value:
-                embed.description = __add_flag_emoji(server, embed, team)
+                embed.description += __add_flag_emoji(server, embed, team)
             # Add Legend - put this shit in a function and reuse it in both
             if isinstance(team, Player):
                 if server.show_legends:
@@ -101,6 +98,7 @@ def prepare_embeds_server(server:Server, entities_sorted:list):
                     embed.description += f"{legend_emoji}{mate_legend_emoji} "
                 team.name = __format_teamname(team)
             embed.description += __add_rank_name_current_peak(rank, team)
+            embed.description += "\n"
         rank += 1
         count += 1
     embed_array.append(embed)

@@ -93,7 +93,7 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Pl
 
 def __extract_player_stats_into_team_object_2v2(clan:Clan, player_ranked_stats, player):
     """Takes player data and turns it into a `Team` object"""
-    print('Entered: __extract_player_stats_into_team_object_2v2()')
+    #print('Entered: __extract_player_stats_into_team_object_2v2()')
     team_object = __find_best_team(clan, player_ranked_stats, player)
     team_object.name = __fill_in_empty_name(team_object.name, player_ranked_stats)
     team_object.name = __try_decode(team_object.name)
