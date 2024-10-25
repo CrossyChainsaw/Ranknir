@@ -1,7 +1,7 @@
 
 class Server:
     def __init__(self, id, name, leaderboard_title, sorting_method, show_member_count, show_no_elo_players, 
-                 channel_1v1_id="", channel_2v2_id="", channel_rotating_id="", color="", image="", flag_type:str = None, links=[], legends_for_2v2=[]):
+                 channel_1v1_id="", channel_2v2_id="", channel_rotating_id="", color="", image="", flag_type:str=None, show_win_loss=False, show_legends=False, links=[], legends_for_2v2=[]):
         # Required
         self.id = id
         self.name = name
@@ -17,5 +17,7 @@ class Server:
         self.image = image
         self.color = color
         self.flag_type = flag_type
+        self.show_win_loss = show_win_loss
+        self.show_legends = show_legends
         self.links = links
         self.legends_for_2v2 = legends_for_2v2

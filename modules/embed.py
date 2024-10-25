@@ -1,4 +1,5 @@
 import discord
+from discord import Embed
 import asyncio
 from Ranknir.modules.data_management import FlagType, ServerIDs, RegionFlagEmojis, CountryFlagEmojis, LegendEmojis
 from Ranknir.classes.Player import Player
@@ -7,19 +8,20 @@ from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
-SEND_ELO_EMBEDS_WAIT_TIME = 4.8 # 4.9 works
-BOT_WAIT_TIME = 2.8 # 2.9 works
+SEND_ELO_EMBEDS_WAIT_TIME = 4.8 # 4.8 works
+BOT_WAIT_TIME = 2.8 # 2.8 works
 PLAYERS_PER_EMBED = 20
 
 
 def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list, clan_data_array, console_player_amount):
     # OPTIONAL ADD ONS
-    embed_title = discord.Embed(title='', description='', color=clan.color)
+    embed_title = Embed(title='', description='', color=clan.color)
     embed_title = __add_title(clan_data_array, embed_title)
     if clan.show_member_count:
         embed_title = __add_member_count(clan_data_array, embed_title, console_player_amount, entities_sorted)
     if clan.show_xp:
         embed_title = __add_xp(clan_data_array, embed_title)
+    # more add ons later 
     # Variables
     embed_array = []
     rank = 1
@@ -31,7 +33,7 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list, clan_data_a
             embed_array.append(embed)
             count = 0
         if count == 0:
-            embed = discord.Embed(description="", color=clan.color)
+            embed = Embed(description="", color=clan.color)
         if count < PLAYERS_PER_EMBED:
             # Add Legend
             if isinstance(team, Player):
@@ -64,56 +66,69 @@ def __add_rank_name_current_peak(rank, player:Player):
     return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
 
 
-def prepare_embeds_server(server:Server, players_sorted: list[Player]):
+def prepare_embeds_server(server:Server, entities_sorted:list):
     color2 = server.color
-    embed_title = discord.Embed(title=server.leaderboard_title, description='', color=color2)
+    embed_title = Embed(title=server.leaderboard_title, description='', color=color2)
     if server.show_member_count:
-        embed_title = __add_member_count([{"clan": []}], embed_title, 0, players_sorted)
+        embed_title = __add_member_count([{"clan": []}], embed_title, 0, entities_sorted)
     # Variables
     embed_array = []
     global rank
     rank = 1
     count = 0
-    embed = discord.Embed(description="", color=color2)
+    embed = Embed(description="", color=color2)
 
     # Format Embeds
-    for player in players_sorted:
+    for team in entities_sorted:
         if count == 21:
             embed_array.append(embed)
             count = 0
         if count == 0:
-            embed = discord.Embed(description="", color=color2)
+            embed = Embed(description="", color=color2)
         if count <= 20:
-            if server.flag_type is not FlagType.NONE.value: # ideally if show_flags = true, append to msg, and later again append to msg
-                flag_source = __get_flag_source(server, player)
-                # Set Default Flag
-                if server.id == ServerIDs.BHNL:
-                    default_flag = CountryFlagEmojis.NL.value
-                elif server.id == ServerIDs.M30W:
-                    default_flag = RegionFlagEmojis.USE.value
-                # Set Flag Emoji and add player
-                if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
-                    flag = default_flag
-                    for CountryFlagEmoji in CountryFlagEmojis:
-                        if flag_source == CountryFlagEmoji.name:
-                            flag = CountryFlagEmoji.value
-                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-                elif server.flag_type == FlagType.REGION.value:
-                    flag = default_flag
-                    for RegionFlagEmoji in RegionFlagEmojis:
-                        if flag_source == RegionFlagEmoji.name:
-                            flag = RegionFlagEmoji.value
-                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-                else:
-                    if flag_source == "":
-                        flag = ""
-                    embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-            else:
-                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
+            if server.flag_type is not FlagType.NONE.value:
+                embed.description = __add_flag_emoji(server, embed, player)
+            # Add Legend - put this shit in a function and reuse it in both
+            if isinstance(team, Player):
+                if server.show_legends:
+                    player:Player = team
+                    legend_emoji = getattr(LegendEmojis, player.legend).value
+                    embed.description += f"{legend_emoji} "
+            elif isinstance(team, Team):
+                if server.show_legends:    
+                    legend_emoji = getattr(LegendEmojis, team.legend).value
+                    mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
+                    embed.description += f"{legend_emoji}{mate_legend_emoji} "
+                team.name = __format_teamname(team)
+            embed.description += __add_rank_name_current_peak(rank, player)
         rank += 1
         count += 1
     embed_array.append(embed)
     return embed_title, embed_array
+
+def __set_default_flag(server:Server) -> str:
+    # Set Default Flag
+    if server.id == ServerIDs.BHNL:
+        return CountryFlagEmojis.NL.value
+    elif server.id == ServerIDs.M30W:
+        return RegionFlagEmojis.USE.value
+def __add_flag_emoji(server:Server, embed:Embed, player:Player):
+    flag_source = __get_flag_source(server, player)
+    default_flag = __set_default_flag(server)
+    if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
+        flag = default_flag
+        for CountryFlagEmoji in CountryFlagEmojis:
+            if flag_source == CountryFlagEmoji.name:
+                flag = CountryFlagEmoji.value
+        return f"{flag} "
+    elif server.flag_type == FlagType.REGION.value:
+        flag = default_flag
+        for RegionFlagEmoji in RegionFlagEmojis:
+            if flag_source == RegionFlagEmoji.name:
+                flag = RegionFlagEmoji.value
+        return f"{flag} "
+    else:
+        return ""
 
 
 async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
