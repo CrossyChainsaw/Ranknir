@@ -63,16 +63,16 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
     return title_embed, embed_array
 
 
-def __add_legend_emoji(team, server:Server) -> str:
-    if isinstance(team, Player):
+def __add_legend_emoji(entity:Player|Team, server:Server) -> str:
+    if isinstance(entity, Player):
         if server.show_legends:
-            player:Player = team
+            player:Player = entity
             legend_emoji = getattr(LegendEmojis, player.legend).value
             return f"{legend_emoji} "
-    elif isinstance(team, Team):
+    elif isinstance(entity, Team):
         if server.show_legends:    
-            legend_emoji = getattr(LegendEmojis, team.legend).value
-            mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
+            legend_emoji = getattr(LegendEmojis, entity.legend).value
+            mate_legend_emoji = getattr(LegendEmojis, entity.mate_legend).value
             return f"{legend_emoji}{mate_legend_emoji} "
 
 
