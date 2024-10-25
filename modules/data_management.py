@@ -191,8 +191,7 @@ async def load_server_v2(server_id):
         flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
         show_win_loss=server_data['show_win_loss'],
         show_legends=server_data['show_legends'],
-        links=server_data['links'],
-        legends_for_2v2=server_data[DATA_KEY_FOR_LEGENDS_FOR_2V2]
+        links=server_data['links']
     )
     return server
 
