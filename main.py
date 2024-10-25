@@ -70,12 +70,19 @@ async def leaderboards_loop():
     except Exception as e:
         print(e)
         await asyncio.sleep(3)
-                
+
+#  ┌───────────────────┐
+#  │       EVENTS      │
+#  └───────────────────┘
+
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
     leaderboards_loop.start()
 
+#  ┌───────────────────┐
+#  │      COMMANDS     │
+#  └───────────────────┘
 
 @bot.command(name='ping')
 async def ping_command(ctx):

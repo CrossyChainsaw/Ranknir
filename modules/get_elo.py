@@ -19,6 +19,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     player_object_array = []
     team_object_array = []
 
+    # This allows for me to send a shorter version of the elo list cutting off players from the clan
     if x == 0:
         x = len(players)  # Set x to the length of players if x is 0
     if len(players) == 0:
