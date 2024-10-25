@@ -104,7 +104,7 @@ async def test_clan_console_mix_1v1_elo_list_command(ctx):
 @bot.command(name='ts2')
 @has_permissions(manage_roles=True, ban_members=True)
 async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
-    await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.M30W), bot)
+    await server_1v1_and_2v2_elo_list(await load_server_v2(ServerIDs.TEST_SERVER), bot, x=2)
 
 def run_ranknir():
     bot.run(env_variable("RANKNIR_BOT_TOKEN"))
