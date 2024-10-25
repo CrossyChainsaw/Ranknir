@@ -87,7 +87,7 @@ def prepare_embeds_server(server:Server, entities_sorted:list):
             embed = Embed(description="", color=color2)
         if count <= 20:
             if server.flag_type is not FlagType.NONE.value:
-                embed.description = __add_flag_emoji(server, embed, player)
+                embed.description = __add_flag_emoji(server, embed, team)
             # Add Legend - put this shit in a function and reuse it in both
             if isinstance(team, Player):
                 if server.show_legends:
