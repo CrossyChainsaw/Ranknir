@@ -1,9 +1,10 @@
-from Ranknir.classes.Clan import Clan # fic this shit
+from Ranknir.classes.Clan import Clan
+from Ranknir.classes.Server import Server
 from Ranknir.classes.Player import Player
 from Ranknir.classes.Team import Team
 from Ranknir.modules.api import fetch_player_ranked_stats
 from Ranknir.modules.find_best_legend import find_best_legend
-from Ranknir.modules.data_management import write_array_to_json, DATA_KEY_FOR_OWN_2V2_LEGEND, DATA_KEY_FOR_MATE_2V2_LEGEND
+from Ranknir.modules.data_management import write_array_to_json, DATA_KEY_FOR_OWN_2V2_LEGEND, DATA_KEY_FOR_MATE_2V2_LEGEND, DATA_KEY_FOR_LEGENDS_FOR_2V2
 from datetime import datetime
 
 
@@ -196,7 +197,7 @@ def __check_order_team_name(player, brawl_id_one, brawl_id_two, team_obj):
         return __change_order_team_name(team_obj)
 
 
-def __find_best_team(clan:Clan, player_ranked_stats, player):
+def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
     """Finds the best team of the player using `sorting_method` and returns a `Team` object"""
     all_my_2v2_teams = player_ranked_stats['2v2']
     best_team = None
@@ -208,14 +209,14 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
     wins = 0 # placeholder if didnt play 2s
     losses = 0 # placeholder if didnt play 2s
     # Find best team
-    if clan.sorting_method == "current":
+    if guild.sorting_method == "current":
         # FIND BEST TEAM CURRENT ELO
         for team in all_my_2v2_teams:
             rating = team["rating"]
             if rating > best_current:
                 best_team = team
                 best_current = rating
-    elif clan.sorting_method == "peak":
+    elif guild.sorting_method == "peak":
         # FIND BEST TEAM PEAK ELO
         for team in all_my_2v2_teams:
             peak = team["peak_rating"]
@@ -243,14 +244,26 @@ def __find_best_team(clan:Clan, player_ranked_stats, player):
                     region=player.get('region'),
                     country=player.get('country'),
                     ethnicity=player.get('ethnicity'))
-    team_obj.legend, team_obj.mate_legend = __find_2v2_legends(clan, player, default_legend_value=team_obj.legend)
+    
+    if isinstance(guild, Clan):
+        team_obj.legend, team_obj.mate_legend = __find_2v2_legends_clan(guild, player, default_legend_value=team_obj.legend)
+    elif isinstance(guild, Server):
+        team_obj.legend, team_obj.mate_legend = __find_2v2_legends_server(guild, player, default_legend_value=team_obj.legend)
+
     team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two, team_obj)
     return team_obj
 
-def __find_2v2_legends(clan:Clan, player, default_legend_value:str) -> tuple[str, str]:
+def __find_2v2_legends_clan(clan:Clan, player, default_legend_value:str) -> tuple[str, str]:
     for entry in clan.legends_for_2v2:
         if str(entry['brawlhalla_id']) == str(player['brawlhalla_id']):
             return entry[DATA_KEY_FOR_OWN_2V2_LEGEND], entry[DATA_KEY_FOR_MATE_2V2_LEGEND]
+    return default_legend_value, default_legend_value
+
+def __find_2v2_legends_server(server:Server, player, default_legend_value:str) -> tuple[str, str]:
+    for link in server.links:
+        if str(link['brawlhalla_id']) == str(player['brawlhalla_id']):
+            link_2v2_data = link[DATA_KEY_FOR_LEGENDS_FOR_2V2]
+            return link_2v2_data[DATA_KEY_FOR_OWN_2V2_LEGEND], link[DATA_KEY_FOR_MATE_2V2_LEGEND]
     return default_legend_value, default_legend_value
 
 def __fill_in_empty_name(player_name, player):
@@ -309,15 +322,12 @@ def __try_get_discord_name(player, player_name):
     else:
         return player_name
 
-
-
 def __check_if_elo_is_zero(clan:Clan, player_object:Player):
     if clan.show_no_elo_players == True:
         if player_object.current == 0 and player_object.peak == 0:
             return True
     else:
         return False
-
 
 def __check_if_name_is_blank(player_object:Player):
     # if you wanna add the thing for, if clan configs "dont show no elo players" etc etc put another if checking that
