@@ -100,7 +100,7 @@ def prepare_embeds_server(server:Server, entities_sorted:list):
                     mate_legend_emoji = getattr(LegendEmojis, team.mate_legend).value
                     embed.description += f"{legend_emoji}{mate_legend_emoji} "
                 team.name = __format_teamname(team)
-            embed.description += __add_rank_name_current_peak(rank, player)
+            embed.description += __add_rank_name_current_peak(rank, team)
         rank += 1
         count += 1
     embed_array.append(embed)

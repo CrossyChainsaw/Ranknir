@@ -189,6 +189,8 @@ async def load_server_v2(server_id):
         color=int(server_data['color'], 16),
         image=server_data['image'],
         flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
+        show_win_loss=server_data['show_win_loss'],
+        show_legends=server_data['show_legends'],
         links=server_data['links']
     )
     return server
