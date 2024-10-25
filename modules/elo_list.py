@@ -255,14 +255,6 @@ async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot):
 # --------------------------------------------------------------------------#
 
 
-# def __try_update_data(server):
-#     print("updating data...")
-#     try:
-#         server.update_data()
-#     except:
-#         print("couldn't update data, make sure Dadabase is running")
-
-
 def __fix_structure(all_players_array):
     # new structure -> restructured_player_array = [console players + clan1_players + clan2_players + clan3_players]
     restructured_player_array = []
