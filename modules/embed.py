@@ -10,7 +10,7 @@ from Ranknir.classes.Server import Server
 PURGE_LIMIT = 12  # 12
 SEND_ELO_EMBEDS_WAIT_TIME = 4.8 # 4.8 works
 BOT_WAIT_TIME = 2.8 # 2.8 works
-PLAYERS_PER_EMBED = 20
+PLAYERS_PER_EMBED = 20 #20 usually worked
 
 
 def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team], clan_data_array, console_player_amount):
