@@ -29,6 +29,10 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
     count = 0
     # PLAYER ITERATION
     for entity in entities_sorted:
+        # APPEND EMBED AND RESET LOOP
+        if count == PLAYERS_PER_EMBED:
+            embed_array.append(embed)
+            count = 0
         # CREATE NEW EMBED
         if count == 0:
             embed = Embed(description="", color=clan.color)
@@ -52,11 +56,6 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
 
             # Add Newline
             embed.description += "\n"
-
-        # APPEND EMBED AND RESET LOOP
-        if count == PLAYERS_PER_EMBED:
-            embed_array.append(embed)
-            count = 0
         rank += 1
         count += 1
     embed_array.append(embed)
@@ -89,6 +88,10 @@ def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
     count = 0
     # PLAYER ITERATION - entity is either type Player or Team
     for entity in entities_sorted:
+        # APPEND EMBED AND RESET LOOP
+        if count == PLAYERS_PER_EMBED:
+            embed_array.append(embed)
+            count = 0
         if count == 0:
             embed = Embed(description="", color=server.color)
         if count < PLAYERS_PER_EMBED:
@@ -114,11 +117,6 @@ def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
 
             # Add Newline
             embed.description += "\n"
-
-        # APPEND EMBED AND RESET LOOP
-        if count == PLAYERS_PER_EMBED:
-            embed_array.append(embed)
-            count = 0
         rank += 1
         count += 1
     embed_array.append(embed)
