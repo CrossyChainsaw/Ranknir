@@ -139,7 +139,7 @@ class LegendEmojis(Enum):
     seven = "<:seven:1295145169716379763>"
     vivi = "<:vivi:1295145176221745265>"
     imugi = "<:imugi:1295145187903012884>"
-    kingzuva = "<:kingzuva:1297246006731345990"
+    kingzuva = "<:kingzuva:1297246006731345990>"
 
 
 
