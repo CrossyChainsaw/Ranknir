@@ -49,7 +49,7 @@ async def leaderboards_loop():
         elif turn == 9:
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.DIVISION_9), bot)    
         elif turn == 10:
-            pass #await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
         # Test Clan
         elif turn == 69:
             await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot, x=1)
@@ -69,6 +69,7 @@ async def leaderboards_loop():
         next_turn()
     except Exception as e:
         print(e)
+        next_turn()
         await asyncio.sleep(3)
 
 #  ┌───────────────────┐
