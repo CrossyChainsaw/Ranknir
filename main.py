@@ -16,6 +16,10 @@ from Ranknir.commands.test_server import test_server
 from Ranknir.modules.env import env_variable
 import json
 import logging
+from Ranknir.modules.env import env_variable
+
+RANKNIR_ACTIVE = env_variable("RANKNIR_ACTIVE")
+RANKNIR_TESTING = env_variable("RANKNIR_TESTING")
 
 logging.basicConfig(level=logging.INFO)
 intents = discord.Intents().all()
@@ -128,6 +132,7 @@ async def test_server_1v1_and_2v2_and_rotating_elo_list_command(ctx):
     await server_1v1_and_2v2_elo_list(await load_server_v2(ServerIDs.TEST_SERVER), bot, x=2)
 
 def run_ranknir():
-    bot.run(env_variable("RANKNIR_BOT_TOKEN"))
-    #bot.run(env_variable("RANKNIR_TESTING_BOT_TOKEN"))
-    return
+    if RANKNIR_ACTIVE:
+        bot.run(env_variable("RANKNIR_BOT_TOKEN"))
+    if RANKNIR_TESTING:
+        bot.run(env_variable("RANKNIR_TESTING_BOT_TOKEN"))
