@@ -7,9 +7,7 @@ import requests
 BRAWLHALLA_API_KEY = env_variable("BRAWLHALLA_API_KEY")
 DADABASE_API_KEY = env_variable("DADABASE_API_KEY")
 HOST_PORT = env_variable("HOST_PORT")
-HOST_IP = env_variable("HOST_IP")
-LOCAL_IP = env_variable("LOCAL_IP")
-ACTIVE_IP = HOST_IP
+ACTIVE_IP = env_variable("ACTIVE_IP")
 
 API_WAIT_TIME = 9.8  # 9.9 works // 8 possible if only ranknir
 
@@ -38,17 +36,3 @@ async def request_server_data_from_dadabase(id: int):
     json_object = requests.get(f"http://{ACTIVE_IP}:{HOST_PORT}/get_server_data?api_key={DADABASE_API_KEY}&id={id}")      
     data = json.loads(json_object.content)
     return data
-
-# Deprecated
-
-
-# def fetch_console_players(id):
-#     json_object = requests.get(
-#         "http://game-node01.jetstax.com:27046//get_ps4_players/api_key="+os.environ[4]+'?id=' + str(id))
-#     data = json.loads(json_object.content)
-#     return data['ps4_players']
-
-
-# test api
-# https://api.brawlhalla.com/player/7364605/ranked?api_key=
-# https://api.brawlhalla.com/clan/84648/?api_key=
