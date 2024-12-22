@@ -15,7 +15,9 @@ from Ranknir.commands.test_clan import test_clan_console_mix_1v1_elo_list
 from Ranknir.commands.test_server import test_server
 from Ranknir.modules.env import env_variable
 import json
+import logging
 
+logging.basicConfig(level=logging.INFO)
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix=['r!', 'R!'], intents=intents)
 
@@ -49,7 +51,7 @@ async def leaderboards_loop():
         elif turn == 9:
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.DIVISION_9), bot)    
         elif turn == 10:
-            pass #await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)    
         # Test Clan
         elif turn == 69:
             await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot, x=1)
@@ -69,6 +71,7 @@ async def leaderboards_loop():
         next_turn()
     except Exception as e:
         print(e)
+        next_turn()
         await asyncio.sleep(3)
 
 #  ┌───────────────────┐
@@ -77,8 +80,19 @@ async def leaderboards_loop():
 
 @bot.event
 async def on_ready():
-    print(f'We have logged in as {bot.user}')
-    leaderboards_loop.start()
+    print(f"Bot reconnected as {bot.user}")
+    if not leaderboards_loop.is_running():
+        leaderboards_loop.start()
+
+@bot.event
+async def on_disconnect():
+    print("Bot disconnected. Attempting to reconnect...")
+
+@bot.event
+async def on_resumed():
+    print("Bot reconnected successfully!")
+    if not leaderboards_loop.is_running():
+        leaderboards_loop.start()
 
 #  ┌───────────────────┐
 #  │      COMMANDS     │
