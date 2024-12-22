@@ -165,7 +165,8 @@ async def load_clan_v2(server_id):
         show_xp=clan_data['show_xp'],
         show_no_elo_players=clan_data['show_no_elo_players'],
         show_win_loss=clan_data['show_win_loss'],
-        show_legends=clan_data['show_legends'],
+        show_1v1_legends=clan_data['show_1v1_legends'],
+        show_2v2_legends=clan_data['show_2v2_legends'],
 
         # Arrays
         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
@@ -190,7 +191,8 @@ async def load_server_v2(server_id):
         image=server_data['image'],
         flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
         show_win_loss=server_data['show_win_loss'],
-        show_legends=server_data['show_legends'],
+        show_1v1_legends=server_data['show_1v1_legends'],
+        show_2v2_legends=server_data['show_2v2_legends'],
         links=server_data['links']
     )
     return server

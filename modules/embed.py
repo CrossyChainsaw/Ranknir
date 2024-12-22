@@ -40,8 +40,12 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
         if count < PLAYERS_PER_EMBED:
             
             # Add Legend Emoji
-            if clan.show_legends:
-                embed.description += __add_legend_emoji(entity, clan)
+            if isinstance(entity, Team):
+                if clan.show_2v2_legends:
+                    embed.description += __add_legend_emoji(entity, clan) 
+            else:
+                if clan.show_1v1_legends:
+                    embed.description += __add_legend_emoji(entity, clan)
             
             # Format Teamname
             if isinstance(entity, Team):
@@ -64,12 +68,12 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
 
 def __add_legend_emoji(entity:Player|Team, server:Server) -> str:
     if isinstance(entity, Player):
-        if server.show_legends:
+        if server.show_1v1_legends:
             player:Player = entity
             legend_emoji = getattr(LegendEmojis, player.legend).value
             return f"{legend_emoji} "
     elif isinstance(entity, Team):
-        if server.show_legends:    
+        if server.show_1v1_legends:    
             legend_emoji = getattr(LegendEmojis, entity.legend).value
             mate_legend_emoji = getattr(LegendEmojis, entity.mate_legend).value
             return f"{legend_emoji}{mate_legend_emoji} "
@@ -101,7 +105,7 @@ def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
                 embed.description += __add_flag_emoji(server, embed, entity)
             
             # Add Legend Emoji
-            if server.show_legends:
+            if server.show_1v1_legends:
                 embed.description += __add_legend_emoji(entity, server)
             
             # Format Teamname
