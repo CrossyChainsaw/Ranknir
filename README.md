@@ -22,7 +22,7 @@ Would be nice if you credit this repository or me in any way :D
     "discord_server_id": "YOUR_DISCORD_SERVER_ID_YES_PUT_THE_ID_IN_A_STRING",
     "id_array": ["YOUR_BRAWLHALLA_CLAN_ID_THIS_IS_ALSO_A_STRING"],
     "color": "0x000000",
-    "image": "https://i.sstatic.net/xJida.png",
+    "image": "https://private-user-images.githubusercontent.com/74303221/331355856-a315d9f5-db70-4b7f-9228-02527249fd6d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQ5MDY1NTcsIm5iZiI6MTczNDkwNjI1NywicGF0aCI6Ii83NDMwMzIyMS8zMzEzNTU4NTYtYTMxNWQ5ZjUtZGI3MC00YjdmLTkyMjgtMDI1MjcyNDlmZDZkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjIyVDIyMjQxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQwNzhlM2NkNjQxNDA1MDMzYWRiZWRlY2IwZjAwZmYzYjZhNWRmNmYzYjhlMTdkZTkzYjg3OThkZjk2NTIyYjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.uSZccZFbAEoB61sjKSPq6ii8B_xrRVW0MRzl-NzOywM",
     "channel_1v1_id": 1234567890123456789,
     "channel_2v2_id": 1234567890123456789,
     "channel_rotating_id": 1234567890123456789,
