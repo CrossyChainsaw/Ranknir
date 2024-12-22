@@ -1,7 +1,6 @@
 <h1 align="center"><b>R A N K N I R</b></h1>
 
-![22-09-2024](https://github.com/user-attachments/assets/a299832d-a0fb-4647-a774-6959529ecba3)
-
+![Ranknir_Thumbnail](https://github.com/user-attachments/assets/4f4b49d1-9478-4ffd-adb0-8e4d6a16a5d8)
 
 <h1 align="center"><b>WHAT IS RANKNIR?</b></h1>
 <p align="center"><b>Ranknir is a discord bot which creates an elo leaderboard out of a Brawlhalla clan or Brawl organisation data.</b></p>
