@@ -37,6 +37,7 @@ class ServerIDs(IntEnum):
     CLIENT = 1244055902730981436
     VCNTY = 1222232229002870855
     AURA = 1271719485887479818
+    EISEN = 1263821655084630038
 # Player IDs
 class PlayerIDs(IntEnum):
     CROSSYCHAINSAW = 7364605
@@ -167,6 +168,7 @@ async def load_clan_v2(server_id):
         show_win_loss=clan_data['show_win_loss'],
         show_1v1_legends=clan_data['show_1v1_legends'],
         show_2v2_legends=clan_data['show_2v2_legends'],
+        show_average_elo=clan_data['show_average_elo'],
 
         # Arrays
         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],

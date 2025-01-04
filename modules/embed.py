@@ -22,6 +22,8 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
         title_embed = __add_member_count(clan_data_array, title_embed, console_player_amount, entities_sorted)
     if clan.show_xp:
         title_embed = __add_xp(clan_data_array, title_embed)
+    if clan.show_average_elo:
+        title_embed = __add_average_elo(clan, entities_sorted, title_embed)
     
     # LEADERBOARD EMBEDS
     embed_array = []
@@ -163,6 +165,13 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
         num += 1
 
 
+
+#######################
+### OTHER FUNCTIONS ###
+#######################
+
+
+
 def __add_player_win_loss(player:Player) -> str:
     return f" **[**{player.total_wins}W**/**{player.total_losses}L**]**"
 
@@ -259,6 +268,21 @@ def __add_xp(clan_data_array, embed):
         total_xp_reformatted = '{:,.0f}'.format(total_xp)
         embed.description += "\nTotal: " + str(total_xp_reformatted)
         return embed
+    
+def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed) -> Embed:
+    embed.description += "\n\n"
+    embed.description += '**Elo\n**'
+    total_current_elo = 0
+    total_peak_elo = 0
+    # Peak elo
+    total_peak_elo = sum(player.peak for player in players_sorted if hasattr(player, 'peak'))
+    embed.description += f"Average Peak Elo: {round(total_peak_elo / len(players_sorted))}\n"
+    # Current Elo
+    total_current_elo = sum(player.current for player in players_sorted if hasattr(player, 'current'))
+    embed.description += f"Average Current Elo: {round(total_current_elo / len(players_sorted))}\n"
+
+
+    return embed
 
 def __get_flag_source(server:Server, player:Player):
     if server.flag_type == FlagType.ETHNICITY.value:
