@@ -1,4 +1,4 @@
-from modules.api import fetch_player_ranked_stats_from_open_api
+from modules.api import fetch_player_ranked_stats_from_open_api_from_open_api
 from modules.sort_elo import sort_elo
 from modules.embed import send_embeds
 from classes.Clan import Clan
@@ -8,7 +8,7 @@ import asyncio
 
 
 async def send_all_legends_elo(brawlhalla_id, channel_id, bot):
-    ranked_stats = await fetch_player_ranked_stats_from_open_api(brawlhalla_id)
+    ranked_stats = await fetch_player_ranked_stats_from_open_api_from_open_api(brawlhalla_id)
     legends = ranked_stats['legends']
     legends_ranked_stats = []
     for legend in legends:

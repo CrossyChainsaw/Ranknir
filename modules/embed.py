@@ -1,120 +1,132 @@
 import discord
+from discord import Embed
 import asyncio
-from modules.data_management import FlagType
+from modules.data_management import FlagType, ServerIDs, RegionFlagEmojis, CountryFlagEmojis, LegendEmojis
 from classes.Player import Player
+from classes.Team import Team
 from classes.Clan import Clan
 from classes.Server import Server
 
 PURGE_LIMIT = 12  # 12
-SEND_ELO_EMBEDS_WAIT_TIME = 4.9
-BOT_WAIT_TIME = 2.9
+SEND_ELO_EMBEDS_WAIT_TIME = 4.8 # 4.8 works
+BOT_WAIT_TIME = 2.8 # 2.8 works
+PLAYERS_PER_EMBED = 20 #20 usually worked
 
 
-def prepare_embeds_clan_mix_console(clan:Clan, players_sorted, clan_data_array, console_player_amount):
-
-    # OPTIONAL ADD ONS
-    embed_title = discord.Embed(title='', description='', color=clan.color)
-    embed_title = __add_title(clan_data_array, embed_title)
+def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team], clan_data_array, console_player_amount):
+    
+    # TITLE EMBED
+    title_embed = Embed(title='', description='', color=clan.color)
+    title_embed = __add_title(clan_data_array, title_embed)
     if clan.show_member_count:
-        embed_title = __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted)
+        title_embed = __add_member_count(clan_data_array, title_embed, console_player_amount, entities_sorted)
     if clan.show_xp:
-        embed_title = __add_xp(clan_data_array, embed_title)
-    # Variables
+        title_embed = __add_xp(clan_data_array, title_embed)
+    if clan.show_average_elo:
+        title_embed = __add_average_elo(clan, entities_sorted, title_embed)
+    
+    # LEADERBOARD EMBEDS
     embed_array = []
-    global rank
     rank = 1
     count = 0
-    embed = discord.Embed(description="", color=clan.color)
-
-    # Format Embeds
-    for player in players_sorted:
-        if count == 21:
+    # PLAYER ITERATION
+    for entity in entities_sorted:
+        # APPEND EMBED AND RESET LOOP
+        if count == PLAYERS_PER_EMBED:
             embed_array.append(embed)
             count = 0
+        # CREATE NEW EMBED
         if count == 0:
-            embed = discord.Embed(description="", color=clan.color)
-        if count <= 20:
-            embed.description += "**%s.** **%s**: current: **%s** peak: **%s**\n" % (
-                str(rank), player.name, str(player.current), str(player.peak))
-        rank += 1
-        count += 1
-    embed_array.append(embed)
-
-    return embed_title, embed_array
-
-
-def prepare_embeds_server(server:Server, players_sorted: list[Player]):
-    color2 = server.color
-    embed_title = discord.Embed(title=server.leaderboard_title, description='', color=color2)
-    if server.show_member_count:
-        embed_title = __add_member_count([{"clan": []}], embed_title, 0, players_sorted)
-    # Variables
-    embed_array = []
-    global rank
-    rank = 1
-    count = 0
-    embed = discord.Embed(description="", color=color2)
-
-    # Format Embeds
-    for player in players_sorted:
-        if count == 21:
-            embed_array.append(embed)
-            count = 0
-        if count == 0:
-            embed = discord.Embed(description="", color=color2)
-        if count <= 20:
-            if server.flag_type is not FlagType.NONE.value: # ideally if show_flags = true, append to msg, and later again append to msg
-                
-                flag_source = __get_flag_source(server, player)
-
-                if server.id == 1047987261905584128:
-                    if flag_source == "NL":
-                        flag = "<:NL:1225603278927040613>"
-                    elif flag_source == "BE":
-                        flag = "<:BE:1225603306752315392>"
-                    elif flag_source == "TR":
-                        flag = "<:TR:1225869099477762058>"
-                    elif flag_source == "MA":
-                        flag = "<:MA:1225869638869454971>"
-                    elif flag_source == "ES":
-                        flag = "<:ES:1225876346090164325>"
-                    elif flag_source == "IQ":
-                        flag = "<:IQ:1225876351781961728>"
-                    elif flag_source == "VN":
-                        flag = "<:VN:1225876347629342771>"
-                    elif flag_source == "DO":
-                        flag = "<:DO:1225876344269705347>"
-                    elif flag_source == "DZ":
-                        flag = "<:DZ:1225876350418812948>"
-                    elif flag_source == "SR":
-                        flag = "<:SR:1225957555545571432>"
-                    elif flag_source == "JP":
-                        flag = "<:JP:1225969115915751464>"
-                    elif flag_source == "IT":
-                        flag = "<:IT:1225970111698046976>"
-                    elif flag_source == "CW":
-                        flag = "<:CW:1226200567450435704>"
-                    elif flag_source == "ID":
-                        flag = "<:ID:1226368641985941504>"
-                    elif flag_source == "DE":
-                        flag = "<:DE:1228355548810842212>"
-                    elif flag_source == "SY":
-                        flag = "<:SY:1235349190993907722>"
-                    else:
-                        flag = "<:NL:1225603278927040613>"
-                    embed.description += f"{flag} **{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
-                else:
-                    if flag_source == "":
-                        flag = ""
-                    else:
-                        flag = f":flag_{flag_source.lower()}:"
-                    embed.description += f"**{rank}.** {flag} **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
+            embed = Embed(description="", color=clan.color)
+        # FILL WITH PLAYERS/TEAMS
+        if count < PLAYERS_PER_EMBED:
+            
+            # Add Legend Emoji
+            if isinstance(entity, Team):
+                if clan.show_2v2_legends:
+                    embed.description += __add_legend_emoji(entity, clan) 
             else:
-                embed.description += f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**\n"
+                if clan.show_1v1_legends:
+                    embed.description += __add_legend_emoji(entity, clan)
+            
+            # Format Teamname
+            if isinstance(entity, Team):
+                entity.name = __format_teamname(entity)
+            
+            # Add Player Information
+            embed.description += __add_rank_name_current_peak(rank, entity)
+            
+            # Add Win Loss
+            if clan.show_win_loss:
+                embed.description += __add_player_win_loss(entity)
+
+            # Add Newline
+            embed.description += "\n"
         rank += 1
         count += 1
     embed_array.append(embed)
-    return embed_title, embed_array
+    return title_embed, embed_array
+
+
+def __add_legend_emoji(entity:Player|Team, server:Server) -> str:
+    if isinstance(entity, Player):
+        if server.show_1v1_legends:
+            player:Player = entity
+            legend_emoji = getattr(LegendEmojis, player.legend).value
+            return f"{legend_emoji} "
+    elif isinstance(entity, Team):
+        if server.show_1v1_legends:    
+            legend_emoji = getattr(LegendEmojis, entity.legend).value
+            mate_legend_emoji = getattr(LegendEmojis, entity.mate_legend).value
+            return f"{legend_emoji}{mate_legend_emoji} "
+
+
+def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
+    
+    # TITLE EMBED
+    title_embed = Embed(title=server.leaderboard_title, description='', color=server.color)
+    if server.show_member_count:
+        title_embed = __add_member_count([{"clan": []}], title_embed, 0, entities_sorted)
+    
+    # LEADERBOARD EMBEDS
+    embed_array = []
+    rank = 1
+    count = 0
+    # PLAYER ITERATION - entity is either type Player or Team
+    for entity in entities_sorted:
+        # APPEND EMBED AND RESET LOOP
+        if count == PLAYERS_PER_EMBED:
+            embed_array.append(embed)
+            count = 0
+        if count == 0:
+            embed = Embed(description="", color=server.color)
+        if count < PLAYERS_PER_EMBED:
+
+            # Add Flag
+            if server.flag_type is not FlagType.NONE.value:
+                embed.description += __add_flag_emoji(server, embed, entity)
+            
+            # Add Legend Emoji
+            if server.show_1v1_legends:
+                embed.description += __add_legend_emoji(entity, server)
+            
+            # Format Teamname
+            if isinstance(entity, Team):
+                entity.name = __format_teamname(entity)
+            
+            # Add Player Information
+            embed.description += __add_rank_name_current_peak(rank, entity)
+            
+            # Add Win Loss
+            if server.show_win_loss:
+                embed.description += __add_player_win_loss(entity)
+
+            # Add Newline
+            embed.description += "\n"
+        rank += 1
+        count += 1
+    embed_array.append(embed)
+    return title_embed, embed_array
 
 
 async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
@@ -153,6 +165,44 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
         num += 1
 
 
+
+#######################
+### OTHER FUNCTIONS ###
+#######################
+
+
+
+def __add_player_win_loss(player:Player) -> str:
+    return f" **[**{player.total_wins}W**/**{player.total_losses}L**]**"
+
+def __add_rank_name_current_peak(rank, player:Player) -> str:
+    return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
+
+def __set_default_flag(server:Server) -> str:
+    # Set Default Flag
+    if server.id == ServerIDs.BHNL:
+        return CountryFlagEmojis.NL.value
+    elif server.id == ServerIDs.M30W:
+        return RegionFlagEmojis.USE.value
+
+def __add_flag_emoji(server:Server, embed:Embed, player:Player) -> str:
+    flag_source = __get_flag_source(server, player)
+    default_flag = __set_default_flag(server)
+    if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
+        flag = default_flag
+        for CountryFlagEmoji in CountryFlagEmojis:
+            if flag_source == CountryFlagEmoji.name:
+                flag = CountryFlagEmoji.value
+        return f"{flag} "
+    elif server.flag_type == FlagType.REGION.value:
+        flag = default_flag
+        for RegionFlagEmoji in RegionFlagEmojis:
+            if flag_source == RegionFlagEmoji.name:
+                flag = RegionFlagEmoji.value
+        return f"{flag} "
+    else:
+        return ""
+
 def __add_title(clan_data_array, embed2):
     if len(clan_data_array) == 1:
         embed2.title += clan_data_array[0]['clan_name']
@@ -168,59 +218,71 @@ def __add_title(clan_data_array, embed2):
             count += 1
         return embed2
 
-
-def __add_member_count(clan_data_array, embed_title, console_player_amount, players_sorted: list[Player]):
-    embed_title.description += "\n\n"
+def __add_member_count(clan_data_array, title_embed, console_player_amount, players_sorted: list[Player]) -> Embed:
+    title_embed.description += "\n\n"
     if len(clan_data_array) == 1:
-        embed_title.description = '**Member Count\n**'
-        embed_title.description += "Total: %s" % (str(len(players_sorted)))
-        return embed_title
+        title_embed.description = '**Member Count\n**'
+        title_embed.description += "Total: %s" % (str(len(players_sorted)))
+        return title_embed
     if len(clan_data_array) > 1:
-        embed_title.description += '**Member Count\n**'
+        title_embed.description += '**Member Count\n**'
         count = 0
         total_member_count = 0
         for clan in clan_data_array:
             member_count = len(clan['clan'])
             total_member_count += member_count
             if count == 0:
-                embed_title.description += clan['clan_name'] + ": " + str(
+                title_embed.description += clan['clan_name'] + ": " + str(
                     member_count)
             else:
-                embed_title.description += "\n" + clan_data_array[count][
+                title_embed.description += "\n" + clan_data_array[count][
                     'clan_name'] + ": " + str(member_count)
             count += 1
         if console_player_amount > 0:
-            embed_title.description += "\n" + \
+            title_embed.description += "\n" + \
                 "Console: " + str(console_player_amount)
-        embed_title.description += "\nTotal: " + \
+        title_embed.description += "\nTotal: " + \
             str(total_member_count + console_player_amount)
-        return embed_title
+        return title_embed
 
-
-def __add_xp(clan_data_array, embed2):
-    embed2.description += "\n\n"
+def __add_xp(clan_data_array, embed):
+    embed.description += "\n\n"
     if len(clan_data_array) == 1:
-        embed2.description += '**Clan XP\n**'
+        embed.description += '**Clan XP\n**'
         clan_xp = int(clan_data_array[0]['clan_xp'])
         clan_xp_reformatted = '{:,.0f}'.format(clan_xp)
-        embed2.description += "Total: " + str(clan_xp_reformatted)
-        print(clan_xp_reformatted)
-        return embed2
+        embed.description += "Total: " + str(clan_xp_reformatted)
+        return embed
     if len(clan_data_array) > 1:
-        embed2.description += '**Clan XP\n**'
+        embed.description += '**Clan XP\n**'
         count = 0
         total_xp = 0
         for clan in clan_data_array:
             clan_xp = int(clan['clan_xp'])  
             total_xp += clan_xp
             if count == 0:
-                embed2.description += clan['clan_name'] + ": " + str('{:,.0f}'.format(clan_xp))
+                embed.description += clan['clan_name'] + ": " + str('{:,.0f}'.format(clan_xp))
             else:
-                embed2.description += "\n" + clan_data_array[count]['clan_name'] + ": " + str('{:,.0f}'.format(clan_xp))
+                embed.description += "\n" + clan_data_array[count]['clan_name'] + ": " + str('{:,.0f}'.format(clan_xp))
             count += 1
         total_xp_reformatted = '{:,.0f}'.format(total_xp)
-        embed2.description += "\nTotal: " + str(total_xp_reformatted)
-        return embed2
+        embed.description += "\nTotal: " + str(total_xp_reformatted)
+        return embed
+    
+def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed) -> Embed:
+    embed.description += "\n\n"
+    embed.description += '**Elo\n**'
+    total_current_elo = 0
+    total_peak_elo = 0
+    # Peak elo
+    total_peak_elo = sum(player.peak for player in players_sorted if hasattr(player, 'peak'))
+    embed.description += f"Average Peak Elo: {round(total_peak_elo / len(players_sorted))}\n"
+    # Current Elo
+    total_current_elo = sum(player.current for player in players_sorted if hasattr(player, 'current'))
+    embed.description += f"Average Current Elo: {round(total_current_elo / len(players_sorted))}\n"
+
+
+    return embed
 
 def __get_flag_source(server:Server, player:Player):
     if server.flag_type == FlagType.ETHNICITY.value:
@@ -231,3 +293,16 @@ def __get_flag_source(server:Server, player:Player):
         return player.region
     else:
         return ""
+    
+def __format_teamname(team_object:Team):
+    """Puts 2 asterisks after name 1, and 2 asterisks before name 2. Necessary for making the names bold when sending the embed (consider putting this in embed.py)"""
+    best_team_name = team_object.name
+    if '+' in best_team_name:
+        name_plus_index = best_team_name.find('+')
+        name_length = len(best_team_name)
+        name_1 = best_team_name[0:name_plus_index]
+        name_2 = best_team_name[name_plus_index + 1:name_length]
+        new_name = name_1 + '** + **' + name_2
+        return new_name
+    else:
+        return best_team_name
