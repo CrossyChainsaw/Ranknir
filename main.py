@@ -49,7 +49,7 @@ DISCORD_BOT_TOKEN = clan_data['bot_token']
 async def on_ready():
     print(f'We have logged in as {bot.user}')
     while True:
-        await clan_console_mix_1v1_and_2v2_elo_list(YOUR_CLAN, bot, x=1)
+        await clan_console_mix_1v1_and_2v2_elo_list(YOUR_CLAN, bot)
 
 # Run this command to check if Ranknir is running (r!ping)
 @bot.command(name='ping')
