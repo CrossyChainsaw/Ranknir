@@ -272,16 +272,19 @@ def __add_xp(clan_data_array, embed):
 def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed) -> Embed:
     embed.description += "\n\n"
     embed.description += '**Elo\n**'
-    total_current_elo = 0
-    total_peak_elo = 0
-    # Peak elo
-    total_peak_elo = sum(player.peak for player in players_sorted if hasattr(player, 'peak'))
-    embed.description += f"Average Peak Elo: {round(total_peak_elo / len(players_sorted))}\n"
-    # Current Elo
-    total_current_elo = sum(player.current for player in players_sorted if hasattr(player, 'current'))
-    embed.description += f"Average Current Elo: {round(total_current_elo / len(players_sorted))}\n"
-
-
+    
+    # Filter players with valid peak Elo
+    valid_peak_players = [player for player in players_sorted if hasattr(player, 'peak') and player.peak > 0]
+    total_peak_elo = sum(player.peak for player in valid_peak_players)
+    average_peak_elo = round(total_peak_elo / len(valid_peak_players)) if valid_peak_players else 0
+    embed.description += f"Average Peak Elo: {average_peak_elo}\n"
+    
+    # Filter players with valid current Elo
+    valid_current_players = [player for player in players_sorted if hasattr(player, 'current') and player.current > 0]
+    total_current_elo = sum(player.current for player in valid_current_players)
+    average_current_elo = round(total_current_elo / len(valid_current_players)) if valid_current_players else 0
+    embed.description += f"Average Current Elo: {average_current_elo}\n"
+    
     return embed
 
 def __get_flag_source(server:Server, player:Player):
