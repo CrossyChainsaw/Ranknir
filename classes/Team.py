@@ -4,7 +4,7 @@ class Team:
         self.name = name
         self.current = current
         self.peak = peak
-        self.brawlhalla_id_one = brawlhalla_id_one
+        self.brawlhalla_id = brawlhalla_id_one
         self.brawlhalla_id_two = brawlhalla_id_two
         # Optional
         self.total_wins = total_wins

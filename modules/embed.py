@@ -54,7 +54,7 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
                 entity.name = __format_teamname(entity)
             
             # Add Player Information
-            embed.description += __add_rank_name_current_peak(rank, entity)
+            embed.description += __add_rank_name_current_peak_corehalla_link(clan, rank, entity)
             
             # Add Win Loss
             if clan.show_win_loss:
@@ -115,7 +115,7 @@ def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
                 entity.name = __format_teamname(entity)
             
             # Add Player Information
-            embed.description += __add_rank_name_current_peak(rank, entity)
+            embed.description += __add_rank_name_current_peak_corehalla_link(server, rank, entity)
             
             # Add Win Loss
             if server.show_win_loss:
@@ -175,8 +175,11 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
 def __add_player_win_loss(player:Player) -> str:
     return f" **[**{player.total_wins}W**/**{player.total_losses}L**]**"
 
-def __add_rank_name_current_peak(rank, player:Player) -> str:
-    return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
+def __add_rank_name_current_peak_corehalla_link(guild:Clan|Server, rank, player:Player|Team) -> str:
+    if guild.corehalla_links:
+        return f"**{rank}.** **[{player.name}](https://corehalla.com/stats/player/{player.brawlhalla_id})**: current: **{player.current}** peak: **{player.peak}**" 
+    else:
+        return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
 
 def __set_default_flag(server:Server) -> str:
     # Set Default Flag

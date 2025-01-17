@@ -79,7 +79,8 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan:Clan, players, subclan_n
 def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Player):
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
-    player_object = Player(name=player_ranked_stats['name'], 
+    player_object = Player(brawlhalla_id=player_ranked_stats['brawlhalla_id'],
+                           name=player_ranked_stats['name'], 
                            current=player_ranked_stats['rating'],
                            peak=player_ranked_stats['peak_rating'],
                            total_wins=player_ranked_stats['wins'],
@@ -106,6 +107,8 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
     """Takes player data and turns it into a `Player` object (Rotating Ranked)"""
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
     rotating_stats = player_ranked_stats['rotating_ranked']
+    
+    id = player_ranked_stats['brawlhalla_id']
     if rotating_stats == []:
         name = player_ranked_stats['name']
         rating = 0
@@ -120,7 +123,8 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
         wins = rotating_stats['wins']
         losses = rotating_stats['games'] - rotating_stats['wins']
         best_legend=find_best_legend(player_ranked_stats)
-    rotating_object = Player(name=name, 
+    rotating_object = Player(brawlhalla_id=id,
+                             name=name, 
                              current=rating, 
                              peak=peak, 
                              total_wins=wins,

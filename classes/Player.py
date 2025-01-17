@@ -1,5 +1,6 @@
 class Player:
-    def __init__(self, name, current, peak, total_wins=0, total_losses=0, legend="random", region="", country="", ethnicity=""):
+    def __init__(self, brawlhalla_id, name, current, peak, total_wins=0, total_losses=0, legend="random", region="", country="", ethnicity=""):
+        self.brawlhalla_id = brawlhalla_id
         self.name = name
         self.current = current
         self.peak = peak

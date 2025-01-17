@@ -147,7 +147,7 @@ class LegendEmojis(Enum):
 
 
 async def load_clan_v2(server_id):
-    clan_data = await request_clan_data_from_dadabase(server_id)
+    clan_data:dict = await request_clan_data_from_dadabase(server_id)
     clan = Clan(
         # Required
         server_name=clan_data['server_name'],
@@ -169,6 +169,7 @@ async def load_clan_v2(server_id):
         show_1v1_legends=clan_data['show_1v1_legends'],
         show_2v2_legends=clan_data['show_2v2_legends'],
         show_average_elo=clan_data['show_average_elo'],
+        corehalla_links=clan_data.get('corehalla_links', True),
 
         # Arrays
         account_linkers=clan_data[DATA_KEY_FOR_ACCOUNT_LINKERS],
@@ -178,7 +179,7 @@ async def load_clan_v2(server_id):
     return clan
 
 async def load_server_v2(server_id):
-    server_data = await request_server_data_from_dadabase(server_id)
+    server_data:dict = await request_server_data_from_dadabase(server_id)
     server = Server(
         id=server_data['id'],
         name=server_data['name'],
@@ -195,6 +196,8 @@ async def load_server_v2(server_id):
         show_win_loss=server_data['show_win_loss'],
         show_1v1_legends=server_data['show_1v1_legends'],
         show_2v2_legends=server_data['show_2v2_legends'],
+        corehalla_links=server_data.get('corehalla_links', True),
+
         links=server_data['links']
     )
     return server
