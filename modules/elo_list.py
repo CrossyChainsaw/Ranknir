@@ -83,7 +83,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot, x=0):
     all_team_objects_array = []
     # Get Console Players
     console_players = clan.console_players
-    console_player_objects, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True)
+    console_player_objects, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True, x=x)
     all_player_objects_array.append(console_player_objects)
     all_team_objects_array.append(console_team_objects)
     # Foreach Clan...
