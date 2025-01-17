@@ -49,12 +49,15 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
                 if clan.show_1v1_legends:
                     embed.description += __add_legend_emoji(entity, clan)
             
-            # Format Teamname
+            # Format Teamname + Add Corehalla Links
             if isinstance(entity, Team):
-                entity.name = __format_teamname(entity)
+                entity.name = __format_teamname_and_add_corehalla_links(clan, entity)
+            # Add Corehalla Links    
+            elif isinstance(entity, Player) and clan.corehalla_links:
+                entity.name = __corehallify_name(entity)
             
             # Add Player Information
-            embed.description += __add_rank_name_current_peak_corehalla_link(clan, rank, entity)
+            embed.description += __add_rank_name_current_peak(rank, entity)
             
             # Add Win Loss
             if clan.show_win_loss:
@@ -110,12 +113,15 @@ def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
             if server.show_1v1_legends:
                 embed.description += __add_legend_emoji(entity, server)
             
-            # Format Teamname
+            # Format Teamname + Add Corehalla Links
             if isinstance(entity, Team):
-                entity.name = __format_teamname(entity)
+                entity.name = __format_teamname_and_add_corehalla_links(server, entity)
+            # Add Corehalla Links    
+            elif isinstance(entity, Player) and server.corehalla_links:
+                entity.name = __corehallify_name(entity)
             
             # Add Player Information
-            embed.description += __add_rank_name_current_peak_corehalla_link(server, rank, entity)
+            embed.description += __add_rank_name_current_peak(rank, entity)
             
             # Add Win Loss
             if server.show_win_loss:
@@ -172,14 +178,14 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
 
 
 
+def __corehallify_name(player:Player):
+    return f"[{player.name}](https://corehalla.com/stats/player/{player.brawlhalla_id})"
+
 def __add_player_win_loss(player:Player) -> str:
     return f" **[**{player.total_wins}W**/**{player.total_losses}L**]**"
 
-def __add_rank_name_current_peak_corehalla_link(guild:Clan|Server, rank, player:Player|Team) -> str:
-    if guild.corehalla_links:
-        return f"**{rank}.** **[{player.name}](https://corehalla.com/stats/player/{player.brawlhalla_id})**: current: **{player.current}** peak: **{player.peak}**" 
-    else:
-        return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
+def __add_rank_name_current_peak(rank, player:Player|Team) -> str:
+    return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
 
 def __set_default_flag(server:Server) -> str:
     # Set Default Flag
@@ -300,7 +306,7 @@ def __get_flag_source(server:Server, player:Player):
     else:
         return ""
     
-def __format_teamname(team_object:Team):
+def __format_teamname_and_add_corehalla_links(guild:Clan|Server, team_object:Team):
     """Puts 2 asterisks after name 1, and 2 asterisks before name 2. Necessary for making the names bold when sending the embed (consider putting this in embed.py)"""
     best_team_name = team_object.name
     if '+' in best_team_name:
@@ -308,7 +314,10 @@ def __format_teamname(team_object:Team):
         name_length = len(best_team_name)
         name_1 = best_team_name[0:name_plus_index]
         name_2 = best_team_name[name_plus_index + 1:name_length]
-        new_name = name_1 + '** + **' + name_2
+        if guild.corehalla_links:
+            new_name = f"[{name_1}](https://corehalla.com/stats/player/{team_object.brawlhalla_id})** + **[{name_2}](https://corehalla.com/stats/player/{team_object.brawlhalla_id_two})"
+        else:
+            new_name = name_1 + '** + **' + name_2
         return new_name
     else:
-        return best_team_name
+        return f"[{best_team_name}](https://corehalla.com/stats/player/{team_object.brawlhalla_id})"

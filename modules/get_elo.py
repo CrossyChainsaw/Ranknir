@@ -141,7 +141,7 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
 ############################ USEFUL FUNCTIONS #########################
 
 
-def __log(log_method, subclan_name, players, player_object, team_object, i, bar_length, rotating_object=None):
+def __log(log_method, subclan_name, players, player_object:Player, team_object:Team, i, bar_length, rotating_object=None):
     if log_method == 'A':
         print(f'{subclan_name} {i + 1}/{len(players)}')
         print('1s: ' + player_object.name)
@@ -180,25 +180,18 @@ def __try_decode(name):
         return name
 
 
-def __change_order_team_name(team_object:Team):
-    best_team_name = team_object.name
+def __change_order_team_name(team_name:str):
+    best_team_name = team_name
     if '+' in best_team_name:
         name_plus_index = best_team_name.find('+')
         team_name_length = len(best_team_name)
         name_1 = best_team_name[0:name_plus_index]
         name_2 = best_team_name[name_plus_index + 1:team_name_length]
         new_best_team_name = name_2 + '+' + name_1
-        team_object.name = new_best_team_name
-        return team_object
+        team_name = new_best_team_name
+        return team_name
     else:
-        return team_object
-
-
-def __check_order_team_name(player, brawl_id_one, brawl_id_two, team_obj):
-    if player["brawlhalla_id"] == brawl_id_one:
-        return team_obj
-    else:
-        return __change_order_team_name(team_obj)
+        return team_name
 
 
 def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
@@ -235,8 +228,12 @@ def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
         best_peak = best_team["peak_rating"]
         wins = best_team["wins"]
         losses = best_team['games'] - best_team['wins']
-        brawl_id_one = best_team["brawlhalla_id_one"]
-        brawl_id_two = best_team["brawlhalla_id_two"]
+        brawl_id_one = brawl_id_one
+        if brawl_id_one != best_team["brawlhalla_id_one"]:
+            brawl_id_two = best_team["brawlhalla_id_one"]
+            best_team_name = __change_order_team_name(best_team_name)
+        else:
+            brawl_id_two = best_team["brawlhalla_id_two"]
 
     team_obj = Team(name=best_team_name, 
                     current=best_current, 
@@ -254,7 +251,6 @@ def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
     elif isinstance(guild, Server):
         team_obj.legend, team_obj.mate_legend = __find_2v2_legends_server(guild, player, default_legend_value=team_obj.legend)
 
-    team_obj = __check_order_team_name(player_ranked_stats, brawl_id_one, brawl_id_two, team_obj)
     return team_obj
 
 def __find_2v2_legends_clan(clan:Clan, player, default_legend_value:str) -> tuple[str, str]:
