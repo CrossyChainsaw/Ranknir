@@ -1,5 +1,5 @@
 from Ranknir.modules.data_management import ServerIDs, load_clan_v2
-from Ranknir.modules.test_data import CLAN_DATA, PLAYER_OBJECT_DATA
+from Ranknir.modules._test_data import CLAN_DATA, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list
@@ -11,8 +11,8 @@ import sys
 async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
     clan = await load_clan_v2(ServerIDs.TEST_SERVER)
-    console_player_objects = PLAYER_OBJECT_DATA[-5:]
-    clan_player_objects = PLAYER_OBJECT_DATA[:5]
+    console_player_objects = PLAYER_OBJECT_DATA[-10:] # last ten
+    clan_player_objects = PLAYER_OBJECT_DATA[-10:] # last ten
 
 
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]

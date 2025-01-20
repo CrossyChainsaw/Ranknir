@@ -1,5 +1,5 @@
 from Ranknir.modules.data_management import ServerIDs, load_server_v2
-from Ranknir.modules.test_data import SERVER_PLAYER_OBJECT_DATA
+from Ranknir.modules._test_data import SERVER_PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import send_embeds, prepare_embeds_server
 from Ranknir.classes.Server import Server
