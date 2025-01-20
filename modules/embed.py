@@ -28,45 +28,46 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
     # LEADERBOARD EMBEDS
     embed_array = []
     rank = 1
-    count = 0
     # PLAYER ITERATION
     for entity in entities_sorted:
-        # APPEND EMBED AND RESET LOOP
-        if count == PLAYERS_PER_EMBED:
-            embed_array.append(embed)
-            count = 0
         # CREATE NEW EMBED
-        if count == 0:
+        if rank == 1:
             embed = Embed(description="", color=clan.color)
-        # FILL WITH PLAYERS/TEAMS
-        if count < PLAYERS_PER_EMBED:
-            
-            # Add Legend Emoji
-            if isinstance(entity, Team):
-                if clan.show_2v2_legends:
-                    embed.description += __add_legend_emoji(entity, clan) 
-            else:
-                if clan.show_1v1_legends:
-                    embed.description += __add_legend_emoji(entity, clan)
-            
-            # Format Teamname + Add Corehalla Links
-            if isinstance(entity, Team):
-                entity.name = __format_teamname_and_add_corehalla_links(clan, entity)
-            # Add Corehalla Links    
-            elif isinstance(entity, Player) and clan.corehalla_links:
-                entity.name = __corehallify_name(entity)
-            
-            # Add Player Information
-            embed.description += __add_rank_name_current_peak(rank, entity)
-            
-            # Add Win Loss
-            if clan.show_win_loss:
-                embed.description += __add_player_win_loss(entity)
 
-            # Add Newline
-            embed.description += "\n"
+        # FILL WITH PLAYERS/TEAMS
+        player_info = ''
+        # Add Legend Emoji
+        if isinstance(entity, Team):
+            if clan.show_2v2_legends:
+                player_info += __add_legend_emoji(entity, clan) 
+        else:
+            if clan.show_1v1_legends:
+                player_info += __add_legend_emoji(entity, clan)
+        
+        # Format Teamname + Add Corehalla Links
+        if isinstance(entity, Team):
+            entity.name = __format_teamname_and_add_corehalla_links(clan, entity)
+        # Add Corehalla Links    
+        elif isinstance(entity, Player) and clan.corehalla_links:
+            entity.name = __corehallify_name(entity)
+        
+        # Add Player Information
+        player_info += __add_rank_name_current_peak(rank, entity)
+        
+        # Add Win Loss
+        if clan.show_win_loss:
+            player_info += __add_player_win_loss(entity)
+
+        if len(player_info) + len(embed.description) > 4096:
+            embed_array.append(embed)
+            embed = Embed(description="", color=clan.color)
+            embed.description += player_info
+        else:
+            embed.description += player_info
+
+        # Add Newline
+        embed.description += "\n"
         rank += 1
-        count += 1
     embed_array.append(embed)
     return title_embed, embed_array
 
