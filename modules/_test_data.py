@@ -68,15 +68,15 @@ PLAYER_OBJECT_DATA = [
     Player(0, 'Firestorm', 2250, 2600),
     Player(0, 'Rainforest', 2150, 2500),
     Player(0, 'Moonstone', 2050, 2400),
-    Player(0, 'Sunflower Sunflower Sunflower Sunflower Sunflower Sunflower Sunflower Sunflower ', 2200, 2500),
-    Player(0, 'Stormcloud Stormcloud Stormcloud Stormcloud Stormcloud Stormcloud Stormcloud ', 2150, 2600),
-    Player(0, 'Skylight Skylight Skylight Skylight Skylight Skylight Skylight Skylight ', 2100, 2400),
-    Player(0, 'Riverbed Riverbed Riverbed Riverbed Riverbed Riverbed Riverbed Riverbed ', 2250, 2500),
-    Player(0, 'Whitewater Whitewater Whitewater Whitewater Whitewater Whitewater ', 2200, 2600),
-    Player(0, 'Sunset Sunset Sunset Sunset Sunset Sunset Sunset Sunset Sunset Sunset ', 2150, 2450),
-    Player(0, 'Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora ', 2050, 2400),
+    Player(0, 'Sunflower Sunflower Sunflower Sunflower Sunflower Sunflower Sunflower Sunflower', 2200, 2500),
+    Player(0, 'Stormcloud Stormcloud Stormcloud Stormcloud Stormcloud Stormcloud Stormcloud', 2150, 2600),
+    Player(0, 'Skylight Skylight Skylight Skylight Skylight Skylight Skylight Skylight', 2100, 2400),
+    Player(0, 'Riverbed Riverbed Riverbed Riverbed Riverbed Riverbed Riverbed Riverbed', 2250, 2500),
+    Player(0, 'Whitewater Whitewater Whitewater Whitewater Whitewater Whitewater', 2200, 2600),
+    Player(0, 'Sunset Sunset Sunset Sunset Sunset Sunset Sunset Sunset Sunset Sunset', 2150, 2450),
+    Player(0, 'Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora Aurora', 2050, 2400),
     Player(0, 'Canyon Canyon Canyon Canyon Canyon Canyon Canyon Canyon Canyon Canyon', 2100, 2550),
-    Player(0, 'Thunderhead Thunderhead Thunderhead Thunderhead Thunderhead Thunderhead Thunderhead ', 2250, 2500),
+    Player(0, 'Thunderhead Thunderhead Thunderhead Thunderhead Thunderhead Thunderhead Thunderhead', 2250, 2500),
     Player(0, 'Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst Starburst', 2200, 2450)
 ]
 
