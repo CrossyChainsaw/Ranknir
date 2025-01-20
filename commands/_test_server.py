@@ -8,8 +8,8 @@ from Ranknir.classes.Server import Server
 async def test_server(bot):
     # Set Test Variables
     server = await load_server_v2(ServerIDs.TEST_SERVER)
-    all_player_objects_array = SERVER_PLAYER_OBJECT_DATA[:20]
-    all_teams_array = SERVER_PLAYER_OBJECT_DATA[:20]
+    all_player_objects_array = SERVER_PLAYER_OBJECT_DATA[:4]
+    all_teams_array = SERVER_PLAYER_OBJECT_DATA[:1]
     # Logic - in best case this is the actual function, not a copy which is slightly modified
     await __test_server_2v2_elo_list(bot, server, all_player_objects_array)
     await __test_server_1v1_elo_list(bot, server, all_teams_array)

@@ -11,8 +11,8 @@ import sys
 async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
     clan = await load_clan_v2(ServerIDs.TEST_SERVER)
-    console_player_objects = PLAYER_OBJECT_DATA[-10:] # last ten
-    clan_player_objects = PLAYER_OBJECT_DATA[-10:] # last ten
+    console_player_objects = PLAYER_OBJECT_DATA[:0] # last ten
+    clan_player_objects = PLAYER_OBJECT_DATA[:4] # last ten
 
 
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]

@@ -7,23 +7,23 @@ from Ranknir.classes.Team import Team
 from Ranknir.classes.Clan import Clan
 from Ranknir.classes.Server import Server
 
-PURGE_LIMIT = 12  # 12
+PURGE_LIMIT = 0  # 12
 SEND_ELO_EMBEDS_WAIT_TIME = 4.8 # 4.8 works
 BOT_WAIT_TIME = 2.8 # 2.8 works
 PLAYERS_PER_EMBED = 20 #20 usually worked
 
 
-def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team], clan_data_array, console_player_amount):
+def prepare_embeds_clan_mix_console(guild:Clan, entities_sorted:list[Player|Team], clan_data_array, console_player_amount):
     
     # TITLE EMBED
-    title_embed = Embed(title='', description='', color=clan.color)
+    title_embed = Embed(title='', description='', color=guild.color)
     title_embed = __add_title(clan_data_array, title_embed)
-    if clan.show_member_count:
+    if guild.show_member_count:
         title_embed = __add_member_count(clan_data_array, title_embed, console_player_amount, entities_sorted)
-    if clan.show_xp:
+    if guild.show_xp:
         title_embed = __add_xp(clan_data_array, title_embed)
-    if clan.show_average_elo:
-        title_embed = __add_average_elo(clan, entities_sorted, title_embed)
+    if guild.show_average_elo:
+        title_embed = __add_average_elo(guild, entities_sorted, title_embed)
     
     # LEADERBOARD EMBEDS
     embed_array = []
@@ -32,39 +32,34 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
     for entity in entities_sorted:
         # CREATE NEW EMBED
         if rank == 1:
-            embed = Embed(description="", color=clan.color)
-
+            embed = Embed(description="", color=guild.color)
         # FILL WITH PLAYERS/TEAMS
         player_info = ''
         # Add Legend Emoji
         if isinstance(entity, Team):
-            if clan.show_2v2_legends:
-                player_info += __add_legend_emoji(entity, clan) 
+            if guild.show_2v2_legends:
+                player_info += __add_legend_emoji(entity, guild) 
         else:
-            if clan.show_1v1_legends:
-                player_info += __add_legend_emoji(entity, clan)
-        
+            if guild.show_1v1_legends:
+                player_info += __add_legend_emoji(entity, guild)
         # Format Teamname + Add Corehalla Links
         if isinstance(entity, Team):
-            entity.name = __format_teamname_and_add_corehalla_links(clan, entity)
+            entity.name = __format_teamname_and_add_corehalla_links(guild, entity)
         # Add Corehalla Links    
-        elif isinstance(entity, Player) and clan.corehalla_links:
+        elif isinstance(entity, Player) and guild.corehalla_links:
             entity.name = __corehallify_name(entity)
-        
         # Add Player Information
         player_info += __add_rank_name_current_peak(rank, entity)
-        
         # Add Win Loss
-        if clan.show_win_loss:
+        if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
-
+        # Check if the player fits in the current embed
         if len(player_info) + len(embed.description) > 4096:
             embed_array.append(embed)
-            embed = Embed(description="", color=clan.color)
+            embed = Embed(description="", color=guild.color)
             embed.description += player_info
         else:
             embed.description += player_info
-
         # Add Newline
         embed.description += "\n"
         rank += 1
@@ -72,66 +67,56 @@ def prepare_embeds_clan_mix_console(clan:Clan, entities_sorted:list[Player|Team]
     return title_embed, embed_array
 
 
-def __add_legend_emoji(entity:Player|Team, server:Server) -> str:
-    if isinstance(entity, Player):
-        if server.show_1v1_legends:
-            player:Player = entity
-            legend_emoji = getattr(LegendEmojis, player.legend).value
-            return f"{legend_emoji} "
-    elif isinstance(entity, Team):
-        if server.show_1v1_legends:    
-            legend_emoji = getattr(LegendEmojis, entity.legend).value
-            mate_legend_emoji = getattr(LegendEmojis, entity.mate_legend).value
-            return f"{legend_emoji}{mate_legend_emoji} "
-
-
-def prepare_embeds_server(server:Server, entities_sorted:list[Player|Team]):
+def prepare_embeds_server(guild:Server, entities_sorted:list[Player|Team]):
     
     # TITLE EMBED
-    title_embed = Embed(title=server.leaderboard_title, description='', color=server.color)
-    if server.show_member_count:
+    title_embed = Embed(title=guild.leaderboard_title, description='', color=guild.color)
+    if guild.show_member_count:
         title_embed = __add_member_count([{"clan": []}], title_embed, 0, entities_sorted)
     
     # LEADERBOARD EMBEDS
     embed_array = []
     rank = 1
-    count = 0
-    # PLAYER ITERATION - entity is either type Player or Team
+    # PLAYER ITERATION
     for entity in entities_sorted:
-        # APPEND EMBED AND RESET LOOP
-        if count == PLAYERS_PER_EMBED:
+        # CREATE NEW EMBED
+        if rank == 1:
+            embed = Embed(description="", color=guild.color)
+
+        # FILL WITH PLAYERS/TEAMS
+        player_info = ''
+        # Add Legend Emoji
+        if isinstance(entity, Team):
+            if guild.show_2v2_legends:
+                player_info += __add_legend_emoji(entity, guild) 
+        else:
+            if guild.show_1v1_legends:
+                player_info += __add_legend_emoji(entity, guild)
+        
+        # Format Teamname + Add Corehalla Links
+        if isinstance(entity, Team):
+            entity.name = __format_teamname_and_add_corehalla_links(guild, entity)
+        # Add Corehalla Links    
+        elif isinstance(entity, Player) and guild.corehalla_links:
+            entity.name = __corehallify_name(entity)
+        
+        # Add Player Information
+        player_info += __add_rank_name_current_peak(rank, entity)
+        
+        # Add Win Loss
+        if guild.show_win_loss:
+            player_info += __add_player_win_loss(entity)
+
+        if len(player_info) + len(embed.description) > 4096:
             embed_array.append(embed)
-            count = 0
-        if count == 0:
-            embed = Embed(description="", color=server.color)
-        if count < PLAYERS_PER_EMBED:
+            embed = Embed(description="", color=guild.color)
+            embed.description += player_info
+        else:
+            embed.description += player_info
 
-            # Add Flag
-            if server.flag_type is not FlagType.NONE.value:
-                embed.description += __add_flag_emoji(server, embed, entity)
-            
-            # Add Legend Emoji
-            if server.show_1v1_legends:
-                embed.description += __add_legend_emoji(entity, server)
-            
-            # Format Teamname + Add Corehalla Links
-            if isinstance(entity, Team):
-                entity.name = __format_teamname_and_add_corehalla_links(server, entity)
-            # Add Corehalla Links    
-            elif isinstance(entity, Player) and server.corehalla_links:
-                entity.name = __corehallify_name(entity)
-            
-            # Add Player Information
-            embed.description += __add_rank_name_current_peak(rank, entity)
-            
-            # Add Win Loss
-            if server.show_win_loss:
-                embed.description += __add_player_win_loss(entity)
-
-            # Add Newline
-            embed.description += "\n"
+        # Add Newline
+        embed.description += "\n"
         rank += 1
-        count += 1
     embed_array.append(embed)
     return title_embed, embed_array
 
@@ -177,7 +162,17 @@ async def send_embeds(embed_title, embed_array, bot, clan: Clan, channel_id):
 ### OTHER FUNCTIONS ###
 #######################
 
-
+def __add_legend_emoji(entity:Player|Team, server:Server) -> str:
+    if isinstance(entity, Player):
+        if server.show_1v1_legends:
+            player:Player = entity
+            legend_emoji = getattr(LegendEmojis, player.legend).value
+            return f"{legend_emoji} "
+    elif isinstance(entity, Team):
+        if server.show_1v1_legends:    
+            legend_emoji = getattr(LegendEmojis, entity.legend).value
+            mate_legend_emoji = getattr(LegendEmojis, entity.mate_legend).value
+            return f"{legend_emoji}{mate_legend_emoji} "
 
 def __corehallify_name(player:Player):
     return f"[{player.name}](https://corehalla.com/stats/player/{player.brawlhalla_id})"
