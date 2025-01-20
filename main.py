@@ -11,8 +11,8 @@ from Ranknir.modules.data_management import PlayerIDs
 from Ranknir.modules.turn import next_turn, get_turn, reset_turn, prev_turn
 from Ranknir.modules.all_legends_elo import send_all_legends_elo
 from Ranknir.modules.get_current_order import print_current_order
-from Ranknir.commands.test_clan import test_clan_console_mix_1v1_elo_list
-from Ranknir.commands.test_server import test_server
+from Ranknir.commands._test_clan import test_clan_console_mix_1v1_elo_list
+from Ranknir.commands._test_server import test_server
 from Ranknir.modules.env import env_variable
 import json
 import logging
