@@ -54,7 +54,7 @@ def prepare_embeds_clan_mix_console(guild:Clan, entities_sorted:list[Player|Team
         if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
         # Check if the player fits in the current embed
-        if len(player_info) + len(embed.description) > 4096:
+        if len(player_info) + len(embed.description) > 4096 or rank == 21:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
             embed.description += player_info
