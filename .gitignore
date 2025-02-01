@@ -6,3 +6,4 @@
 *.spec
 warn-main.txt
 xref-main.html
+/build
