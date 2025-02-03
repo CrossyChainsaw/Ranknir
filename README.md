@@ -1,5 +1,5 @@
 
-# Setup Ranknir (ranknir-manual v1.1.1)
+# Setup Ranknir (ranknir-manual v1.2.3)
 Would be nice if you credit this repository or me in any way :D
 1. Go to [this page](https://discord.com/developers/applications) and create a discord bot (Would be cool if you credit Ranknir in the bot name or image :D)
 2. Add the bot to your server and make sure to give it the following permissions
@@ -17,22 +17,37 @@ Would be nice if you credit this repository or me in any way :D
 *clan.json*
 ```json
 {
-    "server_name": "YOUR_DISCORD_SERVER_NAME",
-    "clan_names": ["YOUR_BRAWLHALLA_CLAN_CLAN"],
-    "discord_server_id": "YOUR_DISCORD_SERVER_ID_YES_PUT_THE_ID_IN_A_STRING",
-    "id_array": ["YOUR_BRAWLHALLA_CLAN_ID_THIS_IS_ALSO_A_STRING"],
+    "server_name": "EISEN",
+    "clan_names": ["Eisen"],
+    "discord_server_id": "705783420189671458",
+    "id_array": ["833565"],
     "color": "0x000000",
-    "image": "https://private-user-images.githubusercontent.com/74303221/331355856-a315d9f5-db70-4b7f-9228-02527249fd6d.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQ5MDY1NTcsIm5iZiI6MTczNDkwNjI1NywicGF0aCI6Ii83NDMwMzIyMS8zMzEzNTU4NTYtYTMxNWQ5ZjUtZGI3MC00YjdmLTkyMjgtMDI1MjcyNDlmZDZkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDEyMjIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMjIyVDIyMjQxN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQwNzhlM2NkNjQxNDA1MDMzYWRiZWRlY2IwZjAwZmYzYjZhNWRmNmYzYjhlMTdkZTkzYjg3OThkZjk2NTIyYjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.uSZccZFbAEoB61sjKSPq6ii8B_xrRVW0MRzl-NzOywM",
-    "channel_1v1_id": 1234567890123456789,
-    "channel_2v2_id": 1234567890123456789,
-    "channel_rotating_id": 1234567890123456789,
+    "image": "https://private-user-images.githubusercontent.com/74303221/383203281-4f4b49d1-9478-4ffd-adb0-8e4d6a16a5d8.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzYyOTA0MjQsIm5iZiI6MTczNjI5MDEyNCwicGF0aCI6Ii83NDMwMzIyMS8zODMyMDMyODEtNGY0YjQ5ZDEtOTQ3OC00ZmZkLWFkYjAtOGU0ZDZhMTZhNWQ4LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTAxMDclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwMTA3VDIyNDg0NFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTM1YTY4MzRjNjk2MmZhMGRlNzMyZWJkMGIyYjQ1YmVlN2Y5N2E1YWMyMTI1ZmM2ZjM4OTgwMjNmOTU1MGQ2NWMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.zan8WrmzqZDGzttpEh2w2Cob3WEqUpqUEWHvyh2NjIE",
+    "channel_1v1_id": 1131552899378466887,
+    "channel_2v2_id": 1131552899378466887,
+    "channel_rotating_id": null,
     "sorting_method": "peak",
     "show_member_count": true,
-    "show_xp": false,
-    "show_no_elo_players": false,
-    "account_linkers": [],
-    "console_players": [],
-    "bot_token": "PUT_YOUR_BOT_TOKEN_HERE_DONT_SHARE_WITH_ANYONE"
+    "show_xp": true,
+    "show_no_elo_players": true,
+    "show_win_loss": true,
+    "show_1v1_legends": false,
+    "show_2v2_legends": false,
+    "show_average_elo": true,
+    "account_linkers": [
+        {
+            "brawlhalla_id": "62051982",
+            "brawlhalla_name": "Heartbleat (PC)"
+        }
+    ],
+    "console_players": [
+        {
+            "brawlhalla_id": "12779207",
+            "brawlhalla_name": "Heartbleat (PS4)"
+        }
+    ],
+    "legends_for_2v2": [],
+    "bot_token": "YOUR_BOT_TOKEN"
 }
 ```
 
