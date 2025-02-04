@@ -2,7 +2,9 @@
 # Setup Ranknir (ranknir-manual v1.2.3)
 Would be nice if you credit this repository or me in any way :D
 1. Go to [this page](https://discord.com/developers/applications) and create a discord bot (Would be cool if you credit Ranknir in the bot name or image :D)
-2. Add the bot to your server and make sure to give it the following permissions
+2. Enable these 3 Intents for your bot
+![image](https://github.com/user-attachments/assets/db0f8433-65d1-4fbe-a66f-82dbe4a4e2fd)
+4. Add the bot to your server and make sure to give it the following permissions
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/aa3afa90-f8d1-4f00-82ed-dabba8c7d0c8)
 
 ![image](https://github.com/CrossyChainsaw/Ranknir/assets/74303221/f7789492-e48c-439c-93d1-93ba8538fabf)
@@ -13,6 +15,8 @@ Would be nice if you credit this repository or me in any way :D
 4. Download latest version of ranknir-manual [here](https://github.com/CrossyChainsaw/Ranknir/releases/download/manual-v1.1.1/ranknir.zip)
 5. Unzip the zip and open `clan.json`
 6. In `clan.json` change the variables to make them match your discord server and brawlhalla clan.
+
+**In this example the clan is called `Eisen` and has a clan id of `833565`. Edit all the fields to match your clans'*
 
 *clan.json*
 ```json
@@ -52,3 +56,4 @@ Would be nice if you credit this repository or me in any way :D
 ```
 
 7. Run ranknir.exe
+8. If this helped please leave a star on the repository ⭐
