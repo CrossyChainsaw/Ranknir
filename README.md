@@ -16,7 +16,7 @@ Would be nice if you credit this repository or me in any way :D
 5. Unzip the zip and open `clan.json`
 6. In `clan.json` change the variables to make them match your discord server and brawlhalla clan.
 
-**In this example the clan is called `Eisen` and has a clan id of `833565`. Edit all the fields to match your clans'*
+**💡 Note: In this example the clan is called `Eisen` and has a clan id of `833565`. Edit all the fields to match your clans'*
 
 *clan.json*
 ```json
