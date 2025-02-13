@@ -54,7 +54,7 @@ def prepare_embeds_clan_mix_console(guild:Clan, entities_sorted:list[Player|Team
         if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
         # Check if the player fits in the current embed
-        if len(player_info) + len(embed.description) > 4096 or rank == 21:
+        if len(player_info) + len(embed.description) > 4096 or rank % 21 == 0:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
             embed.description += player_info
@@ -85,6 +85,10 @@ def prepare_embeds_server(guild:Server, entities_sorted:list[Player|Team]):
 
         # FILL WITH PLAYERS/TEAMS
         player_info = ''
+        
+        # Add Flag
+        player_info += __add_flag_emoji(guild, entity)
+
         # Add Legend Emoji
         if isinstance(entity, Team):
             if guild.show_2v2_legends:
@@ -107,7 +111,7 @@ def prepare_embeds_server(guild:Server, entities_sorted:list[Player|Team]):
         if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
 
-        if len(player_info) + len(embed.description) > 4096:
+        if len(player_info) + len(embed.description) > 4096 or rank % 21 == 0:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
             embed.description += player_info
@@ -190,7 +194,7 @@ def __set_default_flag(server:Server) -> str:
     elif server.id == ServerIDs.M30W:
         return RegionFlagEmojis.USE.value
 
-def __add_flag_emoji(server:Server, embed:Embed, player:Player) -> str:
+def __add_flag_emoji(server:Server, player:Player) -> str:
     flag_source = __get_flag_source(server, player)
     default_flag = __set_default_flag(server)
     if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
