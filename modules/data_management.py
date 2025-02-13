@@ -141,6 +141,7 @@ class LegendEmojis(Enum):
     vivi = "<:vivi:1295145176221745265>"
     imugi = "<:imugi:1295145187903012884>"
     kingzuva = "<:kingzuva:1297246006731345990>"
+    priya = "<:priya:1337140967882625045>"
 
 
 
