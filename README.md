@@ -1,11 +1,11 @@
 <h1 align="center"><b>R A N K N I R</b></h1>
 
-![Ranknir_Thumbnail](https://github.com/user-attachments/assets/4f4b49d1-9478-4ffd-adb0-8e4d6a16a5d8)
+![Ranknir_Thumbnail (1)](https://github.com/user-attachments/assets/1af38385-8a10-4352-a01b-7714b3f96a75)
 
 <h1 align="center"><b>WHAT IS RANKNIR?</b></h1>
 <p align="center"><b>Ranknir is a discord bot which creates an elo leaderboard out of a Brawlhalla clan or Brawl organisation data.</b></p>
 <h1 align="center";size="500px"><b>CURRENTLY ACTIVE IN</b></h1>
-<p align="center"><b><i>Pandation (4 clans), Tews (3 clans), Brawlhalla Netherlands, Frost, Empire United, M30W Organisation, Brawlhalla Hungary, Division 9, Eisen, Aura, VCNTY, Lush (ranknir-manual), Asakai (ranknir-manual), Ascend Victory (ranknir-manual), Imperio Anonimo (ranknir-manual)</i></b></p>
+<p align="center"><b><i>Pandation (4 clans), Tews (3 clans), Brawlhalla Netherlands, Frost, Empire United, M30W Organisation, Brawlhalla Hungary, Division 9, Eisen, Aura, VCNTY, Lush (ranknir-manual), Asakai (ranknir-manual), Ascend Victory (ranknir-manual), Imperio Anonimo (ranknir-manual) Gypsy Org (ranknir-manual)</i></b></p>
 <h1 align="center";size="500px"><b>1V1 LEADERBOARD EXAMPLE</b></h1>
 <p align="center">
   <img src="https://github.com/CrossyChainsaw/Ranknir/assets/74303221/96634680-4f3d-4899-8d04-05d279352de5" />
