@@ -180,14 +180,14 @@ def __try_decode(name):
         return name
 
 
-def __change_order_team_name(team_name:str):
+def __change_order_team_name(team_name:str, original_name:str):
     best_team_name = team_name
     if '+' in best_team_name:
         name_plus_index = best_team_name.find('+')
         team_name_length = len(best_team_name)
         name_1 = best_team_name[0:name_plus_index]
-        name_2 = best_team_name[name_plus_index + 1:team_name_length]
-        new_best_team_name = name_2 + '+' + name_1
+        name_2 = best_team_name[name_plus_index + 1:team_name_length] # replace with original name to fix account linking bad name bug
+        new_best_team_name = original_name + '+' + name_1
         team_name = new_best_team_name
         return team_name
     else:
@@ -198,6 +198,7 @@ def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
     """Finds the best team of the player using `sorting_method` and returns a `Team` object"""
     all_my_2v2_teams = player_ranked_stats['2v2']
     best_team = None
+    original_name = player_ranked_stats["name"]
     best_team_name = player_ranked_stats["name"] # use profile name as placeholder. if someone didnt play 2s, it will show this name
     brawl_id_one = player_ranked_stats["brawlhalla_id"]
     brawl_id_two = 0 
@@ -231,7 +232,7 @@ def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
         brawl_id_one = brawl_id_one
         if brawl_id_one != best_team["brawlhalla_id_one"]:
             brawl_id_two = best_team["brawlhalla_id_one"]
-            best_team_name = __change_order_team_name(best_team_name)
+            best_team_name = __change_order_team_name(best_team_name, original_name)
         else:
             brawl_id_two = best_team["brawlhalla_id_two"]
 
