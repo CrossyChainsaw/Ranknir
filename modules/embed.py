@@ -28,6 +28,7 @@ def prepare_embeds_clan_mix_console(guild:Clan, entities_sorted:list[Player|Team
     # LEADERBOARD EMBEDS
     embed_array = []
     rank = 1
+    count = 1
     # PLAYER ITERATION
     for entity in entities_sorted:
         # CREATE NEW EMBED
@@ -54,15 +55,17 @@ def prepare_embeds_clan_mix_console(guild:Clan, entities_sorted:list[Player|Team
         if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
         # Check if the player fits in the current embed
-        if len(player_info) + len(embed.description) > 4096 or rank % 21 == 0:
+        if len(player_info) + len(embed.description) > 4096 or count % 21 == 0:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
             embed.description += player_info
+            count = 0
         else:
             embed.description += player_info
         # Add Newline
         embed.description += "\n"
         rank += 1
+        count += 1
     embed_array.append(embed)
     return title_embed, embed_array
 
@@ -77,7 +80,7 @@ def prepare_embeds_server(guild:Server, entities_sorted:list[Player|Team]):
     # LEADERBOARD EMBEDS
     embed_array = []
     rank = 1
-    count = 0
+    count = 1
     # PLAYER ITERATION
     for entity in entities_sorted:
         # CREATE NEW EMBED
@@ -112,11 +115,11 @@ def prepare_embeds_server(guild:Server, entities_sorted:list[Player|Team]):
         if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
 
-        if len(player_info) + len(embed.description) > 4096 or count % 17 == 0:
+        if len(player_info) + len(embed.description) > 4096 or count % 21 == 0:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
             embed.description += player_info
-            count = -1
+            count = 0
         else:
             embed.description += player_info
 
