@@ -98,8 +98,14 @@ def __extract_player_stats_into_team_object_2v2(clan:Clan, player_ranked_stats, 
     """Takes player data and turns it into a `Team` object"""
     #print('Entered: __extract_player_stats_into_team_object_2v2()')
     team_object = __find_best_team(clan, player_ranked_stats, player)
+    print("team obj name1")
+    print(team_object.name)
     team_object.name = __fill_in_empty_name(team_object.name, player_ranked_stats)
+    print("team obj name2")
+    print(team_object.name)
     team_object.name = __try_decode(team_object.name)
+    print("team obj name3")
+    print(team_object.name)
     return team_object
 
 
@@ -123,6 +129,7 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
         wins = rotating_stats['wins']
         losses = rotating_stats['games'] - rotating_stats['wins']
         best_legend=find_best_legend(player_ranked_stats)
+
     rotating_object = Player(brawlhalla_id=id,
                              name=name, 
                              current=rating, 
@@ -133,6 +140,7 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
                              region=player.get('region'),
                              country=player.get('country'),
                              ethnicity=player.get('ethnicity'))
+    
     rotating_object.name = __fill_in_empty_name(rotating_object.name, player_ranked_stats)
     rotating_object.name = __try_decode(rotating_object.name)
     return rotating_object
@@ -181,28 +189,51 @@ def __try_decode(name):
 
 
 def __change_order_team_name(team_name:str, original_name:str):
-    print("change", original_name)
+    print("change:")
+    print(team_name)
+    print(original_name)
     best_team_name = team_name
     if '+' in best_team_name:
         name_plus_index = best_team_name.find('+')
         team_name_length = len(best_team_name)
         name_1 = best_team_name[0:name_plus_index]
         name_2 = best_team_name[name_plus_index + 1:team_name_length] # replace with original name to fix account linking bad name bug
-        new_best_team_name = original_name + '+' + name_1
+        print("orgy name")
+        print(original_name)
+        if original_name == "":
+            print('its empty')
+            new_best_team_name = name_2 + '+' + name_1
+        else:
+            print('it aint empty')
+            new_best_team_name = original_name + '+' + name_1
         team_name = new_best_team_name
+        print('teamname')
+        print(team_name)
         return team_name
     else:
         return team_name
     
 def __reformat_team_name(team_name:str, original_name:str):
-    print("change", original_name)
+    print("change:")
+    print(team_name)
+    print(original_name)
     best_team_name = team_name
     if '+' in best_team_name:
         name_plus_index = best_team_name.find('+')
         team_name_length = len(best_team_name)
-        teammate_name = best_team_name[name_plus_index + 1:team_name_length] # replace with original name to fix account linking bad name bug
-        new_best_team_name = original_name + '+' + teammate_name
+        name_1 = best_team_name[0:name_plus_index]
+        name_2 = best_team_name[name_plus_index + 1:team_name_length] # replace with original name to fix account linking bad name bug
+        print("orgy name")
+        print(original_name)
+        if original_name == "":
+            print('its empty')
+            new_best_team_name = name_1 + '+' + name_2
+        else:
+            print('it aint empty')
+            new_best_team_name = original_name + '+' + name_2
         team_name = new_best_team_name
+        print('teamname')
+        print(team_name)
         return team_name
     else:
         return team_name
@@ -246,8 +277,12 @@ def __find_best_team(guild:Clan|Server, player_ranked_stats, player):
         brawl_id_one = brawl_id_one
         if brawl_id_one != best_team["brawlhalla_id_one"]:
             brawl_id_two = best_team["brawlhalla_id_one"]
+            print("best1")
+            print(best_team_name)
             best_team_name = __change_order_team_name(best_team_name, original_name)
         elif best_team_name.count('+') == 1:
+            print("best2")
+            print(best_team_name)
             best_team_name = __reformat_team_name(team_name=best_team_name, original_name=original_name)
         else:
             brawl_id_two = best_team["brawlhalla_id_two"]
@@ -325,19 +360,37 @@ def __try_fill_in_empty_name_with_other_name_all_modes(player_object:Player, tea
                     elif __check_if_name_is_blank(rotating_object):
                         rotating_object.name = player_object.name  
 
-def __try_fill_in_empty_name_1v1_and_2v2(player_object:Player, team_object:Team, player, is_console_players:bool):
+def __try_fill_in_empty_name_1v1_and_2v2(player_object: Player, team_object: Team, player, is_console_players: bool):
+    print(f"Initial player_object.name: {player_object.name}")
+    print(f"Initial team_object.name: {team_object.name}")
+    print(f"Is console player: {is_console_players}")
+
     if __check_if_name_is_blank(player_object) or __check_if_name_is_blank(team_object):
-        if is_console_players: # fix console players' blank names
+        print("Detected blank name in either player_object or team_object.")
+
+        if is_console_players:  # Fix console players' blank names
+            print("Processing console players...")
+
             if __check_if_name_is_blank(player_object):
+                print("Player object name is blank. Setting it to player['brawlhalla_name']")
                 player_object.name = player['brawlhalla_name']
+            
             if __check_if_name_is_blank(team_object):
+                print("Team object name is blank. Setting it to player['brawlhalla_name']")
                 team_object.name = player['brawlhalla_name']
+        
         else:
-            try:            
+            try:
+                print("Processing non-console players...")
+
                 if __check_if_name_is_blank(player_object):
+                    print("Player object name is blank. Attempting to extract from team_object.name")
                     player_object.name = team_object.name.split('+')[0]
-            except:
-                pass
+                    print(f"Updated player_object.name: {player_object.name}")
+            
+            except Exception as e:
+                print(f"Exception occurred while setting player_object.name: {e}")
+
 
 def __try_get_discord_name(player, player_name):
     if "discord_name" in player:
