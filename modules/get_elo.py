@@ -154,15 +154,14 @@ def __log(log_method, subclan_name, players, player_object:Player, team_object:T
         print('2s: ' + team_object.name)
         print('rr: ' + rotating_object.name) 
     elif log_method == 'C':
-        # prevent bar from being too long
-        if bar_length > 50:
-            bar_length = 50
-        progress = (i + 1) / len(players)  # value between 0 and 1
-        filled_length = int(bar_length * progress)
-        bar = '█' * filled_length + '-' * (bar_length - filled_length)
-        percent = int(progress * 100)
+        bar_length = 50  # Always fixed length
 
-        print(f"|{bar}| {subclan_name} {percent}%")
+        progress = (i + 1) / len(players)
+        filled_length = int(bar_length * progress)
+
+        bar = '█' * filled_length + '-' * (bar_length - filled_length)
+        print(f"|{bar}| {subclan_name} {i + 1}/{len(players)}")
+
 
 
 def __log_complete(subclan_name, players):
