@@ -229,12 +229,12 @@ async def server_1v1_and_2v2_elo_list(server:Server, bot, x=0):
     await send_embeds(embed_title, embed_array, bot, server, server.channel_2v2_id)
 
 
-async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot):
+async def server_1v1_and_2v2_and_rotating_elo_list(server: Server, bot, x=0):
     print("Server 1v1 and 2v2 and rotating elo list for " + server.name)
     print(f"Amount of players in {server.name}: {len(server.links)}")
     server_players = server.links
     # Get Elo
-    all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, server_players, server.name)
+    all_players_array, all_teams_array, all_rotating_array = await get_players_elo_1v1_and_2v2_and_rotating(server, server_players, server.name, x=x)
     # Sort Elo
     all_players_sorted = sort_elo(server.sorting_method, all_players_array)
     all_teams_sorted = sort_elo(server.sorting_method, all_teams_array)
