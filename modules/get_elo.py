@@ -157,9 +157,12 @@ def __log(log_method, subclan_name, players, player_object:Player, team_object:T
         # prevent bar from being too long
         if bar_length > 50:
             bar_length = 50
-        filled_length = int(bar_length * i // bar_length) + 1 # +1 for nice looking bar
+        progress = (i + 1) / len(players)  # value between 0 and 1
+        filled_length = int(bar_length * progress)
         bar = '█' * filled_length + '-' * (bar_length - filled_length)
-        print(f"|{bar}| {subclan_name} {i + 1}/{len(players)}")
+        percent = int(progress * 100)
+
+        print(f"|{bar}| {subclan_name} {percent}%")
 
 
 def __log_complete(subclan_name, players):
