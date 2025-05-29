@@ -6,7 +6,7 @@ from Ranknir.modules.api import fetch_player_ranked_stats
 from Ranknir.modules.find_best_legend import find_best_legend
 from Ranknir.modules.data_management import write_array_to_json, DATA_KEY_FOR_OWN_2V2_LEGEND, DATA_KEY_FOR_MATE_2V2_LEGEND, DATA_KEY_FOR_LEGENDS_FOR_2V2
 from datetime import datetime
-
+from zoneinfo import ZoneInfo
 
 # There are different functions for 1v1, 2v2 and 1v1&2v2. I made an extra one for 1v1&2v2 because it halves the api requests.
 
@@ -169,9 +169,8 @@ def __log_complete(subclan_name, players):
 
 
 def get_current_time_hours_minutes():
-    current_time = datetime.now()
-    formatted_time = current_time.strftime('%H:%M')
-    return formatted_time
+    current_time = datetime.now(ZoneInfo("Europe/Amsterdam"))
+    return current_time.strftime('%H:%M')
 
 
 def __try_decode(name):
