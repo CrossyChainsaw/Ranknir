@@ -37,7 +37,7 @@ async def leaderboards_loop():
         if turn == 0:
             await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.PANDATION), bot)
         elif turn == 1:
-            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.VCNTY), bot)
+            await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.LEGION), bot)
         elif turn == 2:
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.FROST), bot)
         elif turn == 3:
@@ -45,7 +45,7 @@ async def leaderboards_loop():
         elif turn == 4:
             await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEWS), bot)
         elif turn == 5:
-            await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.EMPIRE_UNITED), bot)
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.CLIENT), bot)
         elif turn == 6:
             await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.BHNL), bot)
         elif turn == 7:        
@@ -56,9 +56,11 @@ async def leaderboards_loop():
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.AURA), bot)  
         elif turn == 10:
             await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.EISEN), bot) 
+        elif turn == 11:
+            await clan_console_mix_1v1_and_2v2_elo_list(await load_clan_v2(ServerIDs.HAMM3R), bot) 
         # Test Clan
         elif turn == 69:
-            await clan_console_mix_1v1_and_2v2_and_rotating_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot, x=1)
+            await clan_console_mix_1v1_elo_list(await load_clan_v2(ServerIDs.TEST_SERVER), bot, x=1)
             prev_turn
         elif turn == 420:
             await server_1v1_and_2v2_and_rotating_elo_list(await load_server_v2(ServerIDs.TEST_SERVER), bot)
