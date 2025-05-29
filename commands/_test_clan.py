@@ -1,18 +1,36 @@
 from Ranknir.modules.data_management import ServerIDs, load_clan_v2
-from Ranknir.modules._test_data import CLAN_DATA, PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list
+from Ranknir.classes.Player import Player
 import sys
+import os
+import json
 
 # try to generalize the function so that i can use the function for testing instead.
 # still, this is usefull for fast paced testing for for example testing formatting in the elo list or checking flags emojis etc.
 # Try to document what functions this exactly tests
 async def test_clan_console_mix_1v1_elo_list(bot):
+    
     # Set Test Variables
+
+    # Load Clan
     clan = await load_clan_v2(ServerIDs.TEST_SERVER)
-    console_player_objects = PLAYER_OBJECT_DATA # last ten
-    clan_player_objects = PLAYER_OBJECT_DATA # last ten [:4]
+    _clan_data = ...
+    clan_json_path = "./Ranknir/data/clan_mock.json"
+    with open(clan_json_path, "r") as f:
+        _clan_data = json.load(f)
+
+    # Load player object data from JSON file
+    json_path = "./Ranknir/data/player_object_mock.json"
+    with open(json_path, "r") as f:
+        player_data_list = json.load(f)
+
+    # Convert JSON objects to Player instances
+    console_player_objects = [Player(**data) for data in player_data_list]
+    clan_player_objects = [Player(**data) for data in player_data_list]
+    
+
 
 
     # structure -> all_players_array = [[console_players], [clan1_players], [clan2_players], [clan3_players]]
@@ -26,7 +44,7 @@ async def test_clan_console_mix_1v1_elo_list(bot):
     for i in range(len(clan.id_array)):
         # Get Clan Data
         ###  clan_data = await get_clan_data(clan.id_array[i])
-        clan_data = CLAN_DATA
+        clan_data = _clan_data
         clan_data_array.append(clan_data)
         # Get Clan Players
         clan_players = clan_data['clan']

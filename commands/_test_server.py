@@ -1,15 +1,24 @@
 from Ranknir.modules.data_management import ServerIDs, load_server_v2
-from Ranknir.modules._test_data import SERVER_PLAYER_OBJECT_DATA
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import send_embeds, prepare_embeds_server
 from Ranknir.classes.Server import Server
+from Ranknir.classes.Player import Player
+import json
+
 
 
 async def test_server(bot):
     # Set Test Variables
     server = await load_server_v2(ServerIDs.TEST_SERVER)
-    all_player_objects_array = SERVER_PLAYER_OBJECT_DATA
-    all_teams_array = SERVER_PLAYER_OBJECT_DATA
+    # Load player object data from JSON file
+    json_path = "./Ranknir/data/server_object_mock.json"
+    with open(json_path, "r") as f:
+        player_data_list = json.load(f)
+    # Convert JSON objects to Player instances
+    all_player_objects_array = [Player(**data) for data in player_data_list]
+    all_teams_array = [Player(**data) for data in player_data_list]
+
+
     # Logic - in best case this is the actual function, not a copy which is slightly modified
     await __test_server_2v2_elo_list(bot, server, all_player_objects_array)
     await __test_server_1v1_elo_list(bot, server, all_teams_array)
