@@ -9,7 +9,7 @@ DADABASE_API_KEY = env_variable("DADABASE_API_KEY")
 HOST_PORT = env_variable("HOST_PORT")
 ACTIVE_IP = env_variable("ACTIVE_IP")
 
-API_WAIT_TIME = 9.8  # 9.9 works // 8 possible if only ranknir
+API_WAIT_TIME = 9.9  # 9.9 works // 8 possible if only ranknir
 
 
 async def fetch_clan(clan_id):
