@@ -1,0 +1,22 @@
+{
+    "clan_id": 84648,
+    "clan_name": "Skyward",
+    "clan_create_date": 1469763610,
+    "clan_xp": "16278123",
+    "clan": [
+        {
+            "brawlhalla_id": 74662063,
+            "name": "Courteous Crocodile 001163",
+            "rank": "Leader",
+            "join_date": 1647024356,
+            "xp": 45981
+        },
+        {
+            "brawlhalla_id": 9317622,
+            "name": "Hitaku",
+            "rank": "Officer",
+            "join_date": 1653661551,
+            "xp": 13368
+        }
+    ]
+}

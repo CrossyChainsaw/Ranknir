@@ -10,3 +10,17 @@ class Player:
         self.region = region
         self.country = country
         self.ethnicity = ethnicity
+
+    def to_dict(self):
+        return {
+            "brawlhalla_id": self.brawlhalla_id,
+            "name": self.name,
+            "current": self.current,
+            "peak": self.peak,
+            "total_wins": self.total_wins,
+            "total_losses": self.total_losses,
+            "legend": self.legend,
+            "region": self.region,
+            "country": self.country,
+            "ethnicity": self.ethnicity,
+        }
