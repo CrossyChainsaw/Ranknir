@@ -58,10 +58,10 @@ def prepare_embeds_clan_mix_console(guild:Clan, entities_sorted:list[Player|Team
         if len(player_info) + len(embed.description) > 4096 or count % 21 == 0:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
-            embed.description += player_info
-            count = 0
-        else:
-            embed.description += player_info
+            count = 1
+
+        # add player data
+        embed.description += player_info
         # Add Newline
         embed.description += "\n"
         rank += 1
@@ -115,14 +115,14 @@ def prepare_embeds_server(guild:Server, entities_sorted:list[Player|Team]):
         if guild.show_win_loss:
             player_info += __add_player_win_loss(entity)
 
+        # check if we should save embed and create new one
         if len(player_info) + len(embed.description) > 4096 or count % 21 == 0:
             embed_array.append(embed)
             embed = Embed(description="", color=guild.color)
-            embed.description += player_info
-            count = 0
-        else:
-            embed.description += player_info
+            count = 1
 
+        # add data to embed
+        embed.description += player_info
         # Add Newline
         embed.description += "\n"
         rank += 1
