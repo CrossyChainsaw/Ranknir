@@ -220,16 +220,20 @@ def __add_flag_emoji(server:Server, player:Player) -> str:
 
 def __add_title(clan_data_array, embed2):
     if len(clan_data_array) == 1:
-        embed2.title += clan_data_array[0]['clan_name']
+        clan_name = clan_data_array[0]['clan_name']
+        clan_id = clan_data_array[0]['clan_id']
+        embed2.title += f"[{clan_name}](https://corehalla.com/stats/clan/{clan_id})"
         return embed2
     if len(clan_data_array) > 1:
         # Title
         count = 0
         for clan in clan_data_array:
+            clan_name = clan['clan_name']
+            clan_id = clan['clan_id']
             if count == 0:
-                embed2.title += clan['clan_name']
+                embed2.title += f"[{clan_name}](https://corehalla.com/stats/clan/{clan_id})"
             else:
-                embed2.title += " & " + clan_data_array[count]['clan_name']
+                embed2.title += f" & [{clan_name}](https://corehalla.com/stats/clan/{clan_id})"
             count += 1
         return embed2
 
