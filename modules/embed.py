@@ -222,7 +222,8 @@ def __add_title(clan_data_array, embed2):
     if len(clan_data_array) == 1:
         clan_name = clan_data_array[0]['clan_name']
         clan_id = clan_data_array[0]['clan_id']
-        embed2.title += f"[{clan_name}](https://corehalla.com/stats/clan/{clan_id})"
+        embed2.title = clan_name  # Just set the visible title text
+        embed2.url = f"https://corehalla.com/stats/clan/{clan_id}"  # This makes the title clickable
         return embed2
     if len(clan_data_array) > 1:
         # Title
@@ -231,9 +232,9 @@ def __add_title(clan_data_array, embed2):
             clan_name = clan['clan_name']
             clan_id = clan['clan_id']
             if count == 0:
-                embed2.title += f"[{clan_name}](https://corehalla.com/stats/clan/{clan_id})"
+                embed2.title += f"{clan_name}"
             else:
-                embed2.title += f" & [{clan_name}](https://corehalla.com/stats/clan/{clan_id})"
+                embed2.title += f" & {clan_name}"
             count += 1
         return embed2
 
@@ -250,12 +251,12 @@ def __add_member_count(clan_data_array, title_embed, console_player_amount, play
         for clan in clan_data_array:
             member_count = len(clan['clan'])
             total_member_count += member_count
+            clan_name = clan['clan_name']
+            clan_id = clan['clan_id']
             if count == 0:
-                title_embed.description += clan['clan_name'] + ": " + str(
-                    member_count)
+                title_embed.description += f"[{clan_name}](https://corehalla.com/stats/clan/{clan_id}): {member_count}"
             else:
-                title_embed.description += "\n" + clan_data_array[count][
-                    'clan_name'] + ": " + str(member_count)
+                title_embed.description += "\n" + f"[{clan_name}](https://corehalla.com/stats/clan/{clan_id}): {member_count}"
             count += 1
         if console_player_amount > 0:
             title_embed.description += "\n" + \
