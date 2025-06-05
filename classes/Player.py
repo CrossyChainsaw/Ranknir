@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, brawlhalla_id, name, current, peak, total_wins=0, total_losses=0, legend="random", region="", country="", ethnicity=""):
+    def __init__(self, brawlhalla_id, name, current, peak, total_wins=0, total_losses=0, legend="random", region="", country="", ethnicity="", group="", group_index=-1):
         self.brawlhalla_id = brawlhalla_id
         self.name = name
         self.current = current
@@ -10,6 +10,8 @@ class Player:
         self.region = region
         self.country = country
         self.ethnicity = ethnicity
+        self.group = group
+        self.clan_index = group_index
 
     def to_dict(self):
         return {
@@ -23,4 +25,6 @@ class Player:
             "region": self.region,
             "country": self.country,
             "ethnicity": self.ethnicity,
+            "group": self.group,
+            "clan_index": self.clan_index,
         }

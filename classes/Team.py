@@ -1,5 +1,5 @@
 class Team:
-    def __init__(self, name, current, peak, brawlhalla_id_one, brawlhalla_id_two, total_wins=0, total_losses=0, legend="random", mate_legend="random", region="", country="", ethnicity=""):
+    def __init__(self, name, current, peak, brawlhalla_id_one, brawlhalla_id_two, total_wins=0, total_losses=0, legend="random", mate_legend="random", region="", country="", ethnicity="", group="", clan_index=-1):
         # Required
         self.name = name
         self.current = current
@@ -14,3 +14,5 @@ class Team:
         self.region = region
         self.country = country
         self.ethnicity = ethnicity
+        self.group = group
+        self.clan_index = clan_index

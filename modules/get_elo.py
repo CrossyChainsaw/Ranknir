@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 #################### GET ALL PLAYERS ELO ######################
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
-async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_players=False, x=0, log_method='C'):
+async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, clan_index, is_console_players=False, x=0, log_method='C'):
     """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
     #print("Entered: get_players_elo_1v1_and_2v2()")
 
@@ -30,8 +30,8 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     print(f'Starting at {get_current_time_hours_minutes()}')
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-        player_object:Player = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
-        team_object:Team = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
+        player_object:Player = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player, subclan_name, clan_index)
+        team_object:Team = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player, subclan_name, clan_index)
         if clan.show_no_elo_players == False:
             if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object):
                 continue
@@ -42,7 +42,7 @@ async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, is_console_pl
     __log_complete(subclan_name, players)
     return player_object_array, team_object_array
 
-async def get_players_elo_1v1_and_2v2_and_rotating(clan:Clan, players, subclan_name, is_console_players=False, x=0, log_method="C"):
+async def get_players_elo_1v1_and_2v2_and_rotating(clan:Clan, players, subclan_name, clan_index=-1, is_console_players=False, x=0, log_method="C"):
     """Gets the personal elo, best-team and rotating ranked elo for each player and `returns` an array of `Player` objects, `Team` objects and `Player` (Rotating Ranked) objects"""
     #print("Entered: get_players_elo_1v1_and_2v2_and_rotating()")
     player_object_array = []
@@ -59,9 +59,9 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan:Clan, players, subclan_n
     print(f'Starting at {get_current_time_hours_minutes()}')
     for i, player in enumerate(players[:x]):
         player_ranked_stats = await fetch_player_ranked_stats(player['brawlhalla_id'])
-        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player)
-        team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player)
-        rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player)
+        player_object = __extract_player_stats_into_player_object_1v1(player_ranked_stats, player, subclan_name, clan_index)
+        team_object = __extract_player_stats_into_team_object_2v2(clan, player_ranked_stats, player, subclan_name, clan_index)
+        rotating_object = __extract_player_stats_into_player_object_rotating(player_ranked_stats, player, subclan_name, clan_index)
         if clan.show_no_elo_players == False:
             if __check_if_name_is_blank(player_object) and __check_if_name_is_blank(team_object) and __check_if_name_is_blank(rotating_object):
                 continue
@@ -76,7 +76,7 @@ async def get_players_elo_1v1_and_2v2_and_rotating(clan:Clan, players, subclan_n
 
 ###################### PUT PLAYER DATA IN PYTHON OBJECTS #######################
 
-def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Player):
+def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Player, group:str, group_index=-1):
     """Takes player data and turns it into a `Player` object"""
     # print('Entered: __extract_player_stats_into_player_object_1v1()')
     player_object = Player(brawlhalla_id=player_ranked_stats['brawlhalla_id'],
@@ -88,22 +88,26 @@ def __extract_player_stats_into_player_object_1v1(player_ranked_stats, player:Pl
                            legend=find_best_legend(player_ranked_stats),
                            region=player.get('region'),
                            country=player.get('country'),
-                           ethnicity=player.get('ethnicity'))
+                           ethnicity=player.get('ethnicity'),
+                           group=group,
+                           group_index=group_index)
     player_object.name = __fill_in_empty_name(player_object.name, player)
     player_object.name = __try_decode(player_object.name)
     return player_object
 
 
-def __extract_player_stats_into_team_object_2v2(clan:Clan, player_ranked_stats, player):
+def __extract_player_stats_into_team_object_2v2(clan:Clan, player_ranked_stats, player, subclan_name:str, group_index):
     """Takes player data and turns it into a `Team` object"""
     #print('Entered: __extract_player_stats_into_team_object_2v2()')
-    team_object = __find_best_team(clan, player_ranked_stats, player)
+    team_object:Team = __find_best_team(clan, player_ranked_stats, player)
+    team_object.group = subclan_name
+    team_object.clan_index = group_index
     team_object.name = __fill_in_empty_name(team_object.name, player_ranked_stats)
     team_object.name = __try_decode(team_object.name)
     return team_object
 
 
-def __extract_player_stats_into_player_object_rotating(player_ranked_stats, player):
+def __extract_player_stats_into_player_object_rotating(player_ranked_stats, player, group:str, group_index):
     """Takes player data and turns it into a `Player` object (Rotating Ranked)"""
     # print('Entered: __extract_player_stats_into_player_object_rotating()')
     rotating_stats = player_ranked_stats['rotating_ranked']
@@ -133,7 +137,9 @@ def __extract_player_stats_into_player_object_rotating(player_ranked_stats, play
                              legend=best_legend,
                              region=player.get('region'),
                              country=player.get('country'),
-                             ethnicity=player.get('ethnicity'))
+                             ethnicity=player.get('ethnicity'),
+                             group=group,
+                             group_index=group_index)
     
     rotating_object.name = __fill_in_empty_name(rotating_object.name, player_ranked_stats)
     rotating_object.name = __try_decode(rotating_object.name)

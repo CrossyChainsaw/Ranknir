@@ -15,7 +15,7 @@ async def clan_console_mix_1v1_elo_list(clan:Clan, bot, x=0):
     all_player_objects_array = []
     # Get Console Players
     console_players = clan.console_players
-    console_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True, x=x)
+    console_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", clan_index=-1, is_console_players=True, x=x)
     all_player_objects_array.append(console_player_objects)
     # Get Clan
     clan_data_array = []
@@ -30,16 +30,12 @@ async def clan_console_mix_1v1_elo_list(clan:Clan, bot, x=0):
         rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
         clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
-        clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i], x=x)
+        clan_player_objects, _ = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i], clan_index=i, x=x)
         all_player_objects_array.append(clan_player_objects)
     # Restructure the array with all players
     all_player_objects_array_restructured = __fix_structure(all_player_objects_array)
     all_player_objects_array_sorted = sort_elo(clan.sorting_method, all_player_objects_array_restructured)
-    embed_title, embed_array = prepare_embeds_clan_mix_console(
-        clan,
-        all_player_objects_array_sorted,
-        clan_data_array,
-        console_player_amount=len(console_players))
+    embed_title, embed_array = prepare_embeds_clan_mix_console(clan, all_player_objects_array_sorted, clan_data_array, console_player_amount=len(console_players))
     await send_embeds(embed_title, embed_array, bot, clan, clan.channel_1v1_id)
 
 
@@ -48,7 +44,7 @@ async def clan_console_mix_2v2_elo_list(clan:Clan, bot):
     all_team_objects_array = []
     # Get Console Players
     console_players = clan.console_players
-    _, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True)
+    _, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", clan_index=-1, is_console_players=True)
     all_team_objects_array.append(console_team_objects)
     # Get Clan
     clan_data_array = []
@@ -63,18 +59,12 @@ async def clan_console_mix_2v2_elo_list(clan:Clan, bot):
         rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
         clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
-        _, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i])
+        _, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i], clan_index=i)
         all_team_objects_array.append(clan_team_objects)
     # Restructure the array with all players
-    all_team_objects_array_restructured = __fix_structure(
-        all_team_objects_array)
-    all_team_objects_array_sorted = sort_elo(
-        clan.sorting_method, all_team_objects_array_restructured)
-    embed_title, embed_array = prepare_embeds_clan_mix_console(
-        clan,
-        all_team_objects_array_sorted,
-        clan_data_array,
-        console_player_amount=len(console_players))
+    all_team_objects_array_restructured = __fix_structure(all_team_objects_array)
+    all_team_objects_array_sorted = sort_elo(clan.sorting_method, all_team_objects_array_restructured)
+    embed_title, embed_array = prepare_embeds_clan_mix_console(clan, all_team_objects_array_sorted, clan_data_array, console_player_amount=len(console_players))
     await send_embeds(embed_title, embed_array, bot, clan, clan.channel_2v2_id)
 
 
@@ -83,7 +73,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot, x=0):
     all_team_objects_array = []
     # Get Console Players
     console_players = clan.console_players
-    console_player_objects, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True, x=x)
+    console_player_objects, console_team_objects = await get_players_elo_1v1_and_2v2(clan, console_players, f"{clan.server_name} (Console)", clan_index=-1, is_console_players=True, x=x)
     all_player_objects_array.append(console_player_objects)
     all_team_objects_array.append(console_team_objects)
     # Foreach Clan...
@@ -99,7 +89,7 @@ async def clan_console_mix_1v1_and_2v2_elo_list(clan:Clan, bot, x=0):
         rm_player_ids = [player['brawlhalla_id'] for player in rm_players]
         clan_players = [player for player in clan_players if str(player['brawlhalla_id']) not in rm_player_ids]
         # Get Elo
-        clan_player_objects, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i], x=x)
+        clan_player_objects, clan_team_objects = await get_players_elo_1v1_and_2v2(clan, clan_players, clan.clan_names[i], clan_index=i, x=x)
         all_player_objects_array.append(clan_player_objects)
         all_team_objects_array.append(clan_team_objects)
     # Restructure Players and Teams
@@ -135,7 +125,7 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot, x=0
     # Get Console Players
     console_players = clan.console_players
     # p1
-    console_player_objects, console_team_objects, console_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, console_players, f"{clan.server_name} (Console)", is_console_players=True, x=x)
+    console_player_objects, console_team_objects, console_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, console_players, f"{clan.server_name} (Console)", clan_index=-1, is_console_players=True, x=x)
     all_player_objects_array.append(console_player_objects)
     all_team_objects_array.append(console_team_objects)
     all_rotating_objects_array.append(console_rotating_objects)
@@ -153,7 +143,7 @@ async def clan_console_mix_1v1_and_2v2_and_rotating_elo_list(clan:Clan, bot, x=0
         clan_players = [player for player in clan_players if player['brawlhalla_id'] not in rm_player_ids]
         # Get Elo
         # p2
-        clan_player_objects, clan_team_objects, clan_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, clan_players, clan.clan_names[i], x=x)
+        clan_player_objects, clan_team_objects, clan_rotating_objects = await get_players_elo_1v1_and_2v2_and_rotating(clan, clan_players, clan.clan_names[i], clan_index=i, x=x)
         all_player_objects_array.append(clan_player_objects)
         all_team_objects_array.append(clan_team_objects)
         all_rotating_objects_array.append(clan_rotating_objects)
