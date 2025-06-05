@@ -342,7 +342,7 @@ def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed, cl
     embed.description += f"Average Current Elo: **{average_current_elo}**\n"
     
     if len(clan_data_array) > 1:
-        embed.set_footer("This is an experimental feature, feedback appreciated @CrossyChainsaw / @Clan Leader")
+        embed.set_footer(text="This is an experimental feature, feedback appreciated @CrossyChainsaw / @Clan Leader")
 
     return embed
 
