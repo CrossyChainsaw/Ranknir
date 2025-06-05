@@ -343,7 +343,6 @@ def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed, cl
     average_current_elo = round(total_current_elo / len(valid_current_players)) if valid_current_players else 0
     embed.description += f"Average Current Elo: **{average_current_elo}**\n"
     
-
     return embed
 
 def __get_flag_source(server:Server, player:Player):
