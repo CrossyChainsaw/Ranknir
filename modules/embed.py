@@ -309,7 +309,7 @@ def __add_average_elo_old(clan: Clan, players_sorted: list[Player], embed: Embed
 
 def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed, clan_data_array) -> Embed:
     embed.description += "\n\n"
-    embed.description += '**Elo\n**'
+    embed.description += '**Elo**\n'
     
     for i, clan in enumerate(clan_data_array):
         # Filter players belonging to the current clan index
@@ -327,7 +327,7 @@ def __add_average_elo(clan: Clan, players_sorted: list[Player], embed: Embed, cl
         total_current_elo = sum(player.current for player in valid_current_players)
         average_current_elo = round(total_current_elo / len(valid_current_players)) if valid_current_players else 0
 
-        embed.description += f"**[{clan_name}](https://corehalla.com/stats/clan/{clan_id})** Average Current Elo: **{average_current_elo}** Average Peak Elo: **{average_peak_elo}**\n"
+        embed.description += f"**[{clan_name}](https://corehalla.com/stats/clan/{clan_id})** Average Current: **{average_current_elo}** Average Peak: **{average_peak_elo}**\n"
     
     # Filter players with valid peak Elo
     valid_peak_players = [player for player in players_sorted if hasattr(player, 'peak') and player.peak > 0]
