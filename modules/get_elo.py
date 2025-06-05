@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo
 #################### GET ALL PLAYERS ELO ######################
 
 # maybe use this function always and leave out 1s or 2s if not wanted, configure if wanted or not in clan_data.py. so you don't have to change everything here and in 1v1 and in 2v2
-async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, clan_index, is_console_players=False, x=0, log_method='C'):
+async def get_players_elo_1v1_and_2v2(clan, players, subclan_name, clan_index=-1, is_console_players=False, x=0, log_method='C'):
     """Gets the personal elo and best-team for each player and `returns` an array of `Player` objects and `Team` objects"""
     #print("Entered: get_players_elo_1v1_and_2v2()")
 
