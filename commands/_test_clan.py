@@ -1,4 +1,4 @@
-from Ranknir.modules.data_management import ServerIDs, load_clan_v2
+from Ranknir.modules.data_management import ServerIDs, load_clan
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import prepare_embeds_clan_mix_console, send_embeds
 from Ranknir.modules.elo_list import clan_console_mix_1v1_elo_list
@@ -15,7 +15,7 @@ async def test_clan_console_mix_1v1_elo_list(bot):
     # Set Test Variables
 
     # Load Clan
-    clan = await load_clan_v2(ServerIDs.TEST_SERVER)
+    clan = await load_clan(ServerIDs.TEST_SERVER)
     _clan_data = ...
     clan_json_path = "./Ranknir/data/clan_mock.json"
     with open(clan_json_path, "r") as f:
