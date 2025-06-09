@@ -1,11 +1,11 @@
 from Ranknir.classes.Clan import Clan
-from Ranknir.modules.data_management import load_clan_v2
+from Ranknir.modules.data_management import load_clan
 
 PURGE_LIMIT = 5
 
 async def spit_fire(bot, ctx, server_id):
     msg = ('🔥')
-    clan:Clan = await load_clan_v2(server_id)
+    clan:Clan = await load_clan(server_id)
     
     # 1v1 Channel
     try:
