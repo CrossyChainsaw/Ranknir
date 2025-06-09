@@ -1,4 +1,4 @@
-from Ranknir.modules.data_management import ServerIDs, load_server_v2
+from Ranknir.modules.data_management import ServerIDs, load_server
 from Ranknir.modules.sort_elo import sort_elo
 from Ranknir.modules.embed import send_embeds, prepare_embeds_server
 from Ranknir.classes.Server import Server
@@ -9,9 +9,9 @@ import json
 
 async def test_server(bot):
     # Set Test Variables
-    server = await load_server_v2(ServerIDs.TEST_SERVER)
+    server = await load_server(ServerIDs.TEST_SERVER)
     # Load player object data from JSON file
-    json_path = "./Ranknir/data/server_object_mock.json"
+    json_path = "./Ranknir/data/server_player_mock.json"
     with open(json_path, "r") as f:
         player_data_list = json.load(f)
     # Convert JSON objects to Player instances
