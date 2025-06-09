@@ -79,6 +79,7 @@ class CountryFlagEmojis(Enum):
     AU = "<:AU:1270785838883536926>"
     BH = "<:BH:1270786197341470762>"
     AZ = "<:AZ:1358535675040895037>"
+    HU = "<:HU:1381765725005549719>"
 class LegendEmojis(Enum):
     random = "<:random:1295156657747132476>"
     bodvar = "<:bodvar:1295142317044400140>"
