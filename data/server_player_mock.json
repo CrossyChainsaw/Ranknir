@@ -583,9 +583,9 @@
         "total_wins": 0,
         "total_losses": 0,
         "legend": "random",
-        "region": "EU",
-        "country": "ID",
-        "ethnicity": "BR"
+        "region": "",
+        "country": "",
+        "ethnicity": ""
     },
     {
         "brawlhalla_id": 0,
@@ -595,8 +595,20 @@
         "total_wins": 0,
         "total_losses": 0,
         "legend": "random",
-        "region": "SAF",
-        "country": "SY",
-        "ethnicity": "AU"
+        "region": "",
+        "country": "",
+        "ethnicity": ""
+    },
+    {
+        "brawlhalla_id": 0,
+        "name": "I DON HAVE FLAG HIHI",
+        "current": 3100,
+        "peak": 3225,
+        "total_wins": 200,
+        "total_losses": 2,
+        "legend": "random",
+        "region": "",
+        "country": "",
+        "ethnicity": ""
     }
 ]

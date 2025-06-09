@@ -151,7 +151,7 @@ class LegendEmojis(Enum):
 
 
 
-async def load_clan_v2(server_id):
+async def load_clan(server_id):
     clan_data:dict = await request_clan_data_from_dadabase(server_id)
     clan = Clan(
         # Required
@@ -183,7 +183,7 @@ async def load_clan_v2(server_id):
     )
     return clan
 
-async def load_server_v2(server_id):
+async def load_server(server_id):
     server_data:dict = await request_server_data_from_dadabase(server_id)
     server = Server(
         id=server_data['id'],
@@ -198,6 +198,7 @@ async def load_server_v2(server_id):
         color=int(server_data['color'], 16),
         image=server_data['image'],
         flag_type=server_data[DATA_KEY_FOR_FLAG_TYPE],
+        default_flag=server_data["default_flag"],
         show_win_loss=server_data['show_win_loss'],
         show_1v1_legends=server_data['show_1v1_legends'],
         show_2v2_legends=server_data['show_2v2_legends'],

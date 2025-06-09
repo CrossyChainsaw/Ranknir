@@ -194,11 +194,15 @@ def __add_rank_name_current_peak(rank, player:Player|Team) -> str:
     return f"**{rank}.** **{player.name}**: current: **{player.current}** peak: **{player.peak}**"
 
 def __set_default_flag(server:Server) -> str:
-    # Set Default Flag
-    if server.id == ServerIDs.BHNL:
-        return CountryFlagEmojis.NL.value
-    elif server.id == ServerIDs.M30W:
-        return RegionFlagEmojis.USE.value
+    flag_code:str = server.default_flag
+    if server.flag_type == FlagType.COUNTRY.value or server.flag_type == FlagType.ETHNICITY.value:
+        for item in CountryFlagEmojis:
+            if item.name == flag_code:
+                return item.value
+    elif server.flag_type == FlagType.REGION.value:
+        for item in RegionFlagEmojis:
+            if item.name == flag_code:
+                return item.value
 
 def __add_flag_emoji(server:Server, player:Player) -> str:
     flag_source = __get_flag_source(server, player)
