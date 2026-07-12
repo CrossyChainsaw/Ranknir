@@ -1,3 +1,7 @@
+> **IMPORTANT**: Ranknir has been discontinued as of 12 July 2026. The source code is still available. 
+
+---
+
 <h1 align="center"><b>R A N K N I R</b></h1>
 
 <img width="4144" height="1783" alt="image (1)" src="https://github.com/user-attachments/assets/4915e678-a092-431d-b96f-de9d5bb45eb8" />
